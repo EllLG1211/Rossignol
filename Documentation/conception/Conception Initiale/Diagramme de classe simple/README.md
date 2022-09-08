@@ -1,9 +1,26 @@
-# Diagramme de classes avec Mermaid
-Dans ce dossier se trouve le diagramme de classes généré avec Mermaid:
+# Mermaid-generated simple class diagram
+You'll find in this directory a class diagram generated with the help of gitea:
 
-![](diagram.svg)
+```mermaid
+classDiagram
+class Session
+class KeyStore
+class Credential{
+    Category
+    WebsiteName
+    Url
+}
+class LoginPasswordCredential{
+    Login
+    Password
+}
+class OtpCredential{
+    OtpCode
+    - _expirationTimer
+}
+Credential <|-- LoginPasswordCredential
+Credential <|-- OtpCredential
+KeyStore *-- Credential
+```
 
-Ce fichier a été généré sur le site [https://mermaid.live](mermaid.live), l'éditeur en ligne pour Mermaid.
-Le code source a été sauvegardé dans `source.mermaid`.
-
-*Note : `.mermaid` n'est pas une extension de fichier reconnue, mais utilisons-la entre nous pour nos sources Mermaid.*
+This is the source code. You can modify it in a text editor, and regenerate an svg or png thanks to [mermaid.live](https://mermaid.live)

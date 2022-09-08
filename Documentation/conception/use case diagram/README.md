@@ -1,4 +1,6 @@
-This directory contains the basic use case diagram for this project. Writtent in Plantuml.
+This directory contains the basic use case diagram for this project. Written in Plantuml.
+
+<img src="./use case.svg">
 
 ```plantuml
 @startuml

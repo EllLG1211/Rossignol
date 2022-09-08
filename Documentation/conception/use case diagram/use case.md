@@ -1,3 +1,4 @@
+```plantuml
 @startuml
 left to right direction
 actor Guest as g
@@ -16,3 +17,4 @@ g --> UC1
 g --> UC2
 g --> UC3
 @enduml
+```

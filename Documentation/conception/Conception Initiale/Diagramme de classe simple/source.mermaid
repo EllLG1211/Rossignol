@@ -1,0 +1,19 @@
+classDiagram
+class Session
+class KeyStore
+class Credential{
+    Category
+    WebsiteName
+    Url
+}
+class LoginPasswordCredential{
+    Login
+    Password
+}
+class OtpCredential{
+    OtpCode
+    - _expirationTimer
+}
+Credential <|-- LoginPasswordCredential
+Credential <|-- OtpCredential
+KeyStore *-- Credential

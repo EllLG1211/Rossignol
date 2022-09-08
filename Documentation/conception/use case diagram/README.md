@@ -1,3 +1,5 @@
+This directory contains the basic use case diagram for this project. Writtent in Plantuml.
+
 ```plantuml
 @startuml
 left to right direction

@@ -25,7 +25,7 @@ Credential <|-- LoginPasswordCredential
 Credential <|-- OtpCredential
 
 class KeyStore
-KeyStore *-- Credential : Credentials
+KeyStore *--> Credential : Credentials
 
 class Authenticator
 class EncryptionManager{

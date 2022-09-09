@@ -3,8 +3,9 @@ This simple class diagram is here to give a quick idea of our business classes. 
 
 ```mermaid
 classDiagram
+
 class Session
-class KeyStore
+
 class Credential{
     <<abstract>>
     UID
@@ -20,29 +21,33 @@ class LoginPasswordCredential{
 class OtpCredential{
     OtpCode
 }
+Credential <|-- LoginPasswordCredential
+Credential <|-- OtpCredential
+
+class KeyStore
+KeyStore *-- Credential : Credentials
 
 class Authenticator
 class EncryptionManager{
-    Encrypt(str)
-    Decrypt(str)
+    string Encrypt(string)
+    string Decrypt(string)
 }
 class CredentialAdder
+CredentialAdder ..> Credential
 
 class EntryFilter{
     <<abstract>>
     Credential* Filter(Credential*)
 }
+EntryFilter..> Credential
+
 class FilterByTags
 EntryFilter <|-- FilterByTags
 
 class SettingsManager
 SettingsManager --> SettingsManager : Instance$
 
-Credential <|-- LoginPasswordCredential
-Credential <|-- OtpCredential
-KeyStore *-- Credential : Credentials
-CredentialAdder ..> Credential
-EntryFilter..> Credential
+class InputSanitizer{
+    string Sanitize(string)
+}
 ```
-
-KeyStore is our applicato

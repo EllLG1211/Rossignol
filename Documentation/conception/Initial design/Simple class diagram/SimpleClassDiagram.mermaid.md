@@ -19,7 +19,6 @@ class LoginPasswordCredential{
 }
 class OtpCredential{
     OtpCode
-    ExpirationTimer
 }
 
 class Authenticator
@@ -31,10 +30,13 @@ class CredentialAdder
 
 class EntryFilter{
     <<abstract>>
-    Filter(Credential*): Credential*
+    Credential* Filter(Credential*)
 }
 class FilterByTags
 EntryFilter <|-- FilterByTags
+
+class SettingsManager
+SettingsManager --> SettingsManager : Instance$
 
 Credential <|-- LoginPasswordCredential
 Credential <|-- OtpCredential

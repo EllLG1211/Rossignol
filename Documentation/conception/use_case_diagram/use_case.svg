@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="837px" preserveAspectRatio="none" style="width:1287px;height:837px;background:#FFFFFF;" version="1.1" viewBox="0 0 1287 837" width="1287px" zoomAndPan="magnify"><defs/><g><!--MD5=[ad6bf287b243445dbd914d311a319f91]
+cluster Rossignol--><g id="cluster_Rossignol"><path d="M186.5,6 L266.5,6 A3.75,3.75 0 0 1 269,8.5 L276,28.2969 L1277.5,28.2969 A2.5,2.5 0 0 1 1280,30.7969 L1280,490.5 A2.5,2.5 0 0 1 1277.5,493 L186.5,493 A2.5,2.5 0 0 1 184,490.5 L184,8.5 A2.5,2.5 0 0 1 186.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="184" x2="276" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="79" x="188" y="20.9951">Rossignol</text></g><g id="elem_UC1"><ellipse cx="276.2722" cy="56.0369" fill="#F1F1F1" rx="36.2722" ry="14.5369" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="35" x="257.6457" y="59.2741">login</text></g><g id="elem_UC0"><ellipse cx="533.8343" cy="316.1669" fill="#F1F1F1" rx="73.8343" ry="17.1669" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="479.3343" y="319.9144">view password</text></g><g id="elem_UCVE"><ellipse cx="835.2248" cy="393.145" fill="#F1F1F1" rx="63.7248" ry="15.145" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="794.7248" y="396.8925">view entry</text></g><g id="elem_UC3"><ellipse cx="834.834" cy="315.8668" fill="#F1F1F1" rx="119.834" ry="26.3668" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="207" x="731.334" y="318.7135">View unprotected passwords</text></g><g id="elem_UC4"><ellipse cx="835.1701" cy="230.134" fill="#F1F1F1" rx="108.6701" ry="24.134" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="183" x="743.6701" y="232.9807">View protected password</text></g><g id="elem_UCE"><ellipse cx="276.6868" cy="394.9374" fill="#F1F1F1" rx="72.6868" ry="16.9374" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="223.6868" y="398.6849">Edit password</text></g><g id="elem_UCD"><ellipse cx="835.1952" cy="459.839" fill="#F1F1F1" rx="69.6952" ry="16.339" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="786.1952" y="463.5866">Delete entry</text></g><g id="elem_UCP"><ellipse cx="534.2349" cy="440.947" fill="#F1F1F1" rx="62.7349" ry="14.947" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="495.2349" y="444.6945">Edit entry</text></g><g id="elem_UCAE"><ellipse cx="276.4096" cy="461.8819" fill="#F1F1F1" rx="62.4096" ry="14.8819" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="237.9096" y="465.6295">Add entry</text></g><g id="elem_UCX"><ellipse cx="276.3913" cy="120.1302" fill="#F1F1F1" rx="44.3913" ry="14.6302" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="250.3913" y="123.8777">logout</text></g><g id="elem_USS"><ellipse cx="276.5612" cy="187.2122" fill="#F1F1F1" rx="76.5612" ry="17.7122" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="218.5612" y="190.9598">share password</text></g><g id="elem_USCP"><ellipse cx="276.4948" cy="256.899" fill="#F1F1F1" rx="74.9948" ry="17.399" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="220.4948" y="260.6465">copy password</text></g><g id="elem_UPE"><ellipse cx="276.6952" cy="325.839" fill="#F1F1F1" rx="69.6952" ry="16.339" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="227.6952" y="329.5866">edit settings</text></g><g id="elem_MPE"><ellipse cx="1162.8822" cy="317.0764" fill="#F1F1F1" rx="100.8822" ry="22.5764" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="1079.8822" y="319.9231">enter master password</text></g><!--MD5=[e2f4bdca111d15b90f9f394898a9089b]
+entity duser--><g id="elem_duser"><ellipse cx="71.5" cy="34" fill="#F1F1F1" rx="16" ry="16" style="stroke:#181818;stroke-width:1.5;"/><path d="M71.5,54 C75.5,54 78.5,54 82.5,50 C90.5,50 98.5,58 98.5,66 L98.5,70 C98.5,74 94.5,78 90.5,78 L52.5,78 C48.5,78 44.5,74 44.5,70 L44.5,66 C44.5,58 52.5,50 60.5,50 C64.5,54 67.5,54 71.5,54 " fill="#F1F1F1" style="stroke:#181818;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="6" y="92.4951">disconnected user</text></g><!--MD5=[d9fa82b4da6254db7b0455fc1039ed56]
+entity luser--><g id="elem_luser"><ellipse cx="71.5" cy="410" fill="#F1F1F1" rx="16" ry="16" style="stroke:#181818;stroke-width:1.5;"/><path d="M71.5,430 C75.5,430 78.5,430 82.5,426 C90.5,426 98.5,434 98.5,442 L98.5,446 C98.5,450 94.5,454 90.5,454 L52.5,454 C48.5,454 44.5,450 44.5,446 L44.5,442 C44.5,434 52.5,426 60.5,426 C64.5,430 67.5,430 71.5,430 " fill="#F1F1F1" style="stroke:#181818;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="21.5" y="468.4951">logged in user</text></g><!--MD5=[e023401f880a0e23099614764d0a9b20]
+link duser to UC1--><g id="link_duser_UC1"><path d="M137.009,56 C171.026,56 211.463,56 239.833,56 " fill="none" id="duser-UC1" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8507301e6bd0367ae67fe457910eb5b4]
+link luser to UCX--><g id="link_luser_UCX"><path d="M76.306,392.191 C84.1814,331.87 107.701,217.429 176,152 C191.724,136.937 214.569,128.964 234.405,124.744 " fill="none" id="luser-UCX" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5fd05f3b40267dfa64a5ec93f0b23dfb]
+link luser to UC0--><g id="link_luser_UC0"><path d="M121.511,469.341 C137.949,479.749 156.961,489.661 176,495 C251.745,516.24 280.28,525.003 353,495 C394.657,477.813 484.623,373.86 519.135,332.731 " fill="none" id="luser-UC0" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d975f50bf120396351dee4ac001ed188]
+reverse link UC0 to UC3--><g id="link_UC0_UC3"><path d="M628.406,316 C655.745,316 686.013,316 714.727,316 " fill="none" id="UC0-backto-UC3" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="628.144,323,608.144,316,628.144,309,628.144,323" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[40e47d1f6cc7f6d855bdcc68f47d4237]
+reverse link UC0 to UC4--><g id="link_UC0_UC4"><path d="M600.482,297.165 C650.227,282.858 718.349,263.264 768.177,248.932 " fill="none" id="UC0-backto-UC4" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="602.219,303.95,581.063,302.751,598.349,290.495,602.219,303.95" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a1de2755fd3af9b6333c8334bb051899]
+link luser to UCD--><g id="link_luser_UCD"><path d="M73.2973,471.935 C76.9253,532.575 93.7331,646.276 167,697.9998 C355.077,830.7759 483.596,809.5283 685,697.9998 C773.918,648.761 816.834,521.854 829.698,476.455 " fill="none" id="luser-UCD" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7eb363a2d3bec9b1ff5dbfab87fb9d99]
+link luser to UCE--><g id="link_luser_UCE"><path d="M121.641,423.043 C150.858,417.718 188.047,410.939 218.544,405.381 " fill="none" id="luser-UCE" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f5ee5668ffe45ec8a735127bfdb7cbfd]
+link luser to UCP--><g id="link_luser_UCP"><path d="M90.3943,471.596 C106.007,500.857 131.708,538.523 167,556 C271.749,607.871 323.279,603.683 430,556 C476.25,535.335 510.35,482.501 525.031,456.262 " fill="none" id="luser-UCP" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9f743ff93258ae1e769369a7275f62a1]
+link luser to USS--><g id="link_luser_USS"><path d="M82.1917,392.348 C95.6267,345.411 124.306,267.85 176,222 C188.056,211.307 203.58,203.83 218.765,198.621 " fill="none" id="luser-USS" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[10bd41f04d369df0e56054e6306ed722]
+link luser to UCAE--><g id="link_luser_UCAE"><path d="M121.641,439.262 C152.267,443.788 191.65,449.608 222.905,454.227 " fill="none" id="luser-UCAE" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0408d0fc3503692a207b7e593e352273]
+link luser to USCP--><g id="link_luser_USCP"><path d="M93.0074,392.464 C111.047,361.218 140.017,318.579 176,292 C189.698,281.881 206.575,274.496 222.513,269.192 " fill="none" id="luser-USCP" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6f0bf84d30387d29c62b4bf7155d3034]
+link luser to UCVE--><g id="link_luser_UCVE"><path d="M84.1825,471.854 C98.4919,512.571 127.074,573.591 176,601 C244.631,639.447 274.851,610.013 353,601 C530.526,580.526 549.514,493.447 715,426 C738.427,416.452 765.541,408.694 787.965,403.106 " fill="none" id="luser-UCVE" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[70538797bd90aa99a09394c480c28a48]
+link UC0 to UCVE--><g id="link_UC0_UCVE"><path d="M584.039,328.629 C640.005,343.041 730.93,366.457 786.321,380.721 " fill="none" id="UC0-to-UCVE" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="791.238,381.987,783.5203,375.8684,786.3961,380.7397,781.5247,383.6155,791.238,381.987" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="639" y="339.0669">include</text></g><!--MD5=[5c791a74faaecb34d589f0a44d07c420]
+link UCP to UCVE--><g id="link_UCP_UCVE"><path d="M591.043,434.794 C619.286,431.44 654.028,426.97 685,422 C717.335,416.811 753.386,409.827 781.927,404.012 " fill="none" id="UCP-to-UCVE" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="787.167,402.941,777.5476,400.8274,782.2686,403.9438,779.1521,408.6648,787.167,402.941" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="639" y="418.0669">include</text></g><!--MD5=[7efd95c41df55e06bb099b0944462dcd]
+link UCE to UC0--><g id="link_UCE_UC0"><path d="M321.132,381.509 C366.375,367.52 436.956,345.696 484.067,331.13 " fill="none" id="UCE-to-UC0" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="489.121,329.567,479.341,328.4042,484.3441,331.0441,481.7043,336.0472,489.121,329.567" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="384" y="344.0669">include</text></g><!--MD5=[271e2a51521cb88a06c7c08a1d1b9422]
+link USCP to UC0--><g id="link_USCP_UC0"><path d="M330.44,269.225 C372.944,279.04 432.508,292.794 476.042,302.847 " fill="none" id="USCP-to-UC0" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="481.002,303.993,473.1317,298.072,476.13,302.8689,471.3331,305.8672,481.002,303.993" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="384" y="279.0669">include</text></g><!--MD5=[d7e6784e31f5cec126ecfc13d3203e90]
+link USS to UC0--><g id="link_USS_UC0"><path d="M311.336,202.657 C324.364,208.693 339.378,215.658 353,222 C387.248,237.944 396.406,240.719 430,258 C454.431,270.567 481.478,285.852 501.723,297.575 " fill="none" id="USS-to-UC0" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="506.196,300.171,500.4202,292.1935,501.8717,297.661,496.4042,299.1124,506.196,300.171" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="384" y="232.0669">include</text></g><!--MD5=[0a5c9ff9c9cb0cc589edafb989494a6c]
+link luser to UPE--><g id="link_luser_UPE"><path d="M121.655,394.378 C138.33,382.692 157.444,370.42 176,361 C193.471,352.13 213.72,344.561 231.372,338.754 " fill="none" id="luser-UPE" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[744e60add0c3aa6ab06a798300dd4ee0]
+link UC4 to MPE--><g id="link_UC4_MPE"><path d="M905.136,248.45 C960.381,263.193 1037.45,283.76 1092.73,298.513 " fill="none" id="UC4-to-MPE" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="1097.67,299.833,1090.0014,293.653,1092.8382,298.5472,1087.944,301.384,1097.67,299.833" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="986" y="267.0669">include</text></g><!--MD5=[7b009f2fdd06bf5507d83e7eb9aba269]
+link UCD to MPE--><g id="link_UCD_MPE"><path d="M884.817,448.487 C906.639,442.723 932.466,435.039 955,426 C1015.74,401.635 1082.02,364.76 1122.81,340.775 " fill="none" id="UCD-to-MPE" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="1127.16,338.206,1117.3763,339.337,1122.8544,340.748,1121.4434,346.226,1127.16,338.206" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="986" y="387.0669">include</text></g><!--MD5=[c95b87065624d67440feda87a50924fe]
+@startuml
+left to right direction
+skinparam actorStyle awesome
+actor "disconnected user" as duser
+actor "logged in user" as luser
+
+package Rossignol{
+  usecase "login" as UC1
+  usecase "view password" as UC0
+  usecase "view entry" as UCVE
+  usecase "View unprotected passwords" as UC3
+  usecase "View protected password" as UC4
+  usecase "Edit password" as UCE
+  usecase "Delete entry" as UCD
+  usecase "Edit entry" as UCP
+  usecase "Add entry" as UCAE
+  usecase "logout" as UCX
+  usecase "share password" as USS
+  usecase "copy password" as USCP
+  usecase "edit settings" as UPE
+  usecase "enter master password" as MPE
+}
+duser - - UC1
+luser - - UCX
+luser - - UC0
+UC0 <|- - UC3
+UC0 <|- - UC4
+luser - - UCD
+luser - - UCE
+luser - - UCP
+luser - - USS
+luser - - UCAE
+luser - - USCP
+luser - - UCVE
+UC0 ..> UCVE : include
+UCP ..> UCVE : include
+UCE ..> UC0 : include
+USCP ..> UC0 : include
+USS ..> UC0 : include
+luser - - UPE
+UC4 ..> MPE : include
+UCD ..> MPE : include
+@enduml
+
+PlantUML version 1.2022.8beta2(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

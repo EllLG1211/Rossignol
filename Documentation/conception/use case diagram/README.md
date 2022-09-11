@@ -2,7 +2,7 @@ This directory contains the basic use case diagram for this project. Written in 
 
 <img src="./use case.svg">
 
-#Description:
+Description:
 We have two users present in this use case diagram of the rossignol app:
 - the disconnected user, who has very limited access to the app's features and can only login to be any allowed further access.
 - the connected user, who has entered their credentials and has access to a much larger number of features.

@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+actor "disconnected user" as duser
+actor "logged in user" as luser
+
+package Rossignol{
+  usecase "Enter login, master password and OTP" as UC1
+  usecase "view password" as UC0
+  usecase "view entry" as UCVE
+  usecase "View unprotected passwords" as UC3
+  usecase "View protected password" as UC4
+  usecase "Edit password" as UCE
+  usecase "Delete entry" as UCD
+  usecase "Edit entry" as UCP
+  usecase "Add entry" as UCAE
+  usecase "logout" as UCX
+  usecase "share password" as USS
+  usecase "copy password" as USCP
+}
+duser -- UC1
+luser -- UCX
+luser -- UC0
+UC0 <|-- UC3
+UC0 <|-- UC4
+luser -- UCD
+luser -- UCE
+luser -- UCP
+luser -- USS
+luser -- UCAE
+luser -- USCP
+luser -- UCVE
+UC0 ..> UCVE : include
+UCP ..> UCVE : include
+UCE ..> UC0 : include
+@enduml

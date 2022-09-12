@@ -17,6 +17,7 @@ package Rossignol{
   usecase "logout" as UCX
   usecase "share password" as USS
   usecase "copy password" as USCP
+  usecase "generate password" as UPG
 }
 duser -- UC1
 luser -- UCX
@@ -33,4 +34,5 @@ luser -- UCVE
 UC0 ..> UCVE : include
 UCP ..> UCVE : include
 UCE ..> UC0 : include
+UCAE ..> UPG : extends
 @enduml

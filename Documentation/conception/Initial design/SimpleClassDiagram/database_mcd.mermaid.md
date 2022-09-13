@@ -1,7 +1,7 @@
 ```mermaid
 classDiagram
 
-class Profile{
+class User{
     email PRIMARY_KEY
     master_password NOT_NULL ENCRYPTED
 }
@@ -12,7 +12,7 @@ class Entry{
     login NOT_NULL
     note
 }
-Entry "1"<--"0..n" Profile : Owns
-Entry "0..n"--"0..n" Profile : Shared
+Entry "1"<--"0..n" User : Owns
+Entry "0..n"--"0..n" User : Shared
 
 ```

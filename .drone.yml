@@ -26,22 +26,19 @@ steps:
       - dotnet test Console_Rossignol.sln --no-restore
     depends_on: [build]
 
- - name: code-analysis
-     image: pubhub.codefirst.ddns.net/thbellem/codefirst-dronesonarplugin-dotnet5
-     commands:
- - name: code-analysis
-     image: pubhub.codefirst.ddns.net/thbellem/codefirst-dronesonarplugin-dotnet5
-     commands:
-       - cd Sources/
-       - dotnet restore Console_Rossignol.sln
-       - dotnet sonarscanner begin /k:Rossignol /d:sonar.hoprojectsst.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
-       - dotnet build Console_Rossignol.sln -c Release --no-restore
-       - dotnet test Console_Rossignol.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
-       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
-       - dotnet publish Console_Rossignol.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
-       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
-     secrets: [ SECRET_SONAR_LOGIN ]
-     settings:
+  - name: code-analysis
+    image: pubhub.codefirst.ddns.net/thbellem/codefirst-dronesonarplugin-dotnet5
+    commands:
+      - cd Sources/
+      - dotnet restore Console_Rossignol.sln
+      - dotnet sonarscanner begin /k:Rossignol /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
+      - dotnet build Console_Rossignol.sln -c Release --no-restore
+      - dotnet test Console_Rossignol.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
+      - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
+      - dotnet publish Console_Rossignol.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+      - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
+    secrets: [ SECRET_SONAR_LOGIN ]
+    settings:
       # accessible en ligne de commande par ${PLUGIN_SONAR_HOST}
       sonar_host: https://codefirst.ddns.net/sonar/
       # accessible en ligne de commande par ${PLUGIN_SONAR_TOKEN}
@@ -66,37 +63,3 @@ steps:
 volumes:
 - name: docs
   temp: {}
-       - cd Sources/
-       - dotnet restore Console_Rossignol.sln
-       - dotnet sonarscanner begin /k:Rossignol /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
-       - dotnet build Console_Rossignol.sln -c Release --no-restore
-       - dotnet test Console_Rossignol.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
-       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
-       - dotnet publish Console_Rossignol.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
-       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
-     secrets: [ SECRET_SONAR_LOGIN ]
-     settings:
-       # accessible en ligne de commande par ${PLUGIN_SONAR_HOST}
-      sonar_host: https://codefirst.ddns.net/sonar/
-      # accessible en ligne de commande par ${PLUGIN_SONAR_TOKEN}
-      sonar_token:
-        from_secret: SECRET_SONAR_LOGIN
-     depends_on: [tests]
- 
-   - name: generate-and-deploy-docs
-    image: pubhub.codefirst.ddns.net/thbellem/codefirst-docdeployer
-     volumes:
-       - name: docs
-         path: /docs
-     commands:
-      - cd Documentation/doxygen
-       - doxygen Doxyfile
-       - /entrypoint.sh
-     when:
-       branch:
-         - master
-     depends_on: [ build ]
- 
- volumes:
- - name: docs
-   temp: {}

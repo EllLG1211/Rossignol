@@ -27,7 +27,7 @@ steps:
     depends_on: [build]
 
   - name: code-analysis
-    image: pubhub.codefirst.ddns.net/thbellem/codefirst-dronesonarplugin-dotnet5
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dronesonarplugin-dotnet6
     commands:
       - cd Sources/
       - dotnet restore Console_Rossignol.sln
@@ -40,14 +40,14 @@ steps:
     secrets: [ SECRET_SONAR_LOGIN ]
     settings:
       # accessible en ligne de commande par ${PLUGIN_SONAR_HOST}
-      sonar_host: https://codefirst.ddns.net/sonar/
+      sonar_host: https://codefirst.iut.uca.fr/sonar/
       # accessible en ligne de commande par ${PLUGIN_SONAR_TOKEN}
       sonar_token:
         from_secret: SECRET_SONAR_LOGIN
     depends_on: [tests]
 
   - name: generate-and-deploy-docs
-    image: pubhub.codefirst.ddns.net/thbellem/codefirst-docdeployer
+    image: https://hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
     volumes:
       - name: docs
         path: /docs

@@ -8,15 +8,24 @@ namespace Model
 {
     public class ProprietaryEntry : Entry
     {
-        protected long Uid { get; init; }
 
-        public string Login { get; set; }
+        public string Login 
+        { 
+            get => base.Login;
+            set => base.Login = value; 
+        }
 
-        protected string Password { get; set; }
+        public string Website
+        {
+            get => base.Website;
+            set => base.Website = value;
+        }
 
-        public string Website { get; set; }
-
-        public string Note { get; set; }
+        public string Note
+        { 
+            get => base.Note; 
+            set => base.Note = value; 
+        }
 
         public ProprietaryEntry(long uid, string login, string password, string website, string note)
         {

@@ -31,11 +31,11 @@ namespace Model_Tests
             Assert.Equal(string.Empty, entry.Note);
         }
 
-        /*[Fact]
+        [Fact]
         public void Label_ShouldReturnLoginAndWebsite()
         {
             ProprietaryEntry entry = new(42, "loremipsum@gmail.com", "rickroll", "Discord");
             Assert.Equal("Discord - loremipsum@gmail.com", entry.Label);
-        }*/
+        }
     }
 }

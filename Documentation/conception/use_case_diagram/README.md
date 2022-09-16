@@ -1,6 +1,6 @@
 This directory contains the basic use case diagram for this project. Written in Plantuml.
 
-<img src="./use case.svg">
+<img src="./use_case.svg">
 
 Description:
 We have two users present in this use case diagram of the rossignol app:

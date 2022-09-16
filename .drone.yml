@@ -13,7 +13,7 @@ steps:
       - name: docs
         path: /docs
     commands:
-      - cd Sources/
+      - cd Sources/Console_Rossignol/
       - dotnet restore Console_Rossignol.sln
       - dotnet build Console_Rossignol.sln -c Release --no-restore
       - dotnet publish Console_Rossignol.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
@@ -21,7 +21,7 @@ steps:
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:5.0
     commands:
-      - cd Sources/
+      - cd Sources/Console_Rossignol/
       - dotnet restore Console_Rossignol.sln
       - dotnet test Console_Rossignol.sln --no-restore
     depends_on: [build]
@@ -29,7 +29,7 @@ steps:
   - name: code-analysis
     image: pubhub.codefirst.ddns.net/thbellem/codefirst-dronesonarplugin-dotnet5
     commands:
-      - cd Sources/
+      - cd Sources/Console_Rossignol/
       - dotnet restore Console_Rossignol.sln
       - dotnet sonarscanner begin /k:Rossignol /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
       - dotnet build Console_Rossignol.sln -c Release --no-restore

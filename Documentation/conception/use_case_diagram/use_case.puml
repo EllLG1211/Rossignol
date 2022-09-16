@@ -1,4 +1,4 @@
-@startuml
+```puml
 left to right direction
 skinparam actorStyle awesome
 actor "disconnected user" as duser
@@ -35,4 +35,4 @@ UC0 ..> UCVE : include
 UCP ..> UCVE : include
 UCE ..> UC0 : include
 UCAE ..> UPG : extends
-@enduml
+```

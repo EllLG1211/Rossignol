@@ -1,4 +1,4 @@
-```puml
+```plantuml
 left to right direction
 skinparam actorStyle awesome
 actor "disconnected user" as duser

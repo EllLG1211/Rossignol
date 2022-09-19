@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E7E1D41B-D495-442A-A1F2-6D7E9ECC4ADD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model_Tests", "Model_Tests\Model_Tests.csproj", "{F4B72DA9-9F6B-41D9-9983-0BFAFE2C068A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model_Tests", "Tests\Model_Tests\Model_Tests.csproj", "{F4B72DA9-9F6B-41D9-9983-0BFAFE2C068A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

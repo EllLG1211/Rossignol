@@ -46,20 +46,6 @@ steps:
         from_secret: SECRET_SONAR_LOGIN
     depends_on: [tests]
 
-  - name: generate-and-deploy-docs
-    image: https://hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
-    volumes:
-      - name: docs
-        path: /docs
-    commands:
-      - cd Documentation/doxygen
-      - doxygen Doxyfile
-      - /entrypoint.sh
-    when:
-      branch:
-        - master
-    depends_on: [ build ]
-
 volumes:
 - name: docs
   temp: {}

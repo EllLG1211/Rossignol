@@ -19,7 +19,7 @@ namespace Model_Tests
         {
             ProprietaryEntry entry = new(42, login, "lorem ipsum", website, note);
             Assert.Equal(login, entry.Login);
-            Assert.Equal(website, entry.Website);
+            Assert.Equal(website, entry.App);
             if (noteSuccessExpected) Assert.Equal(note, entry.Note);
             else Assert.NotEqual(note, entry.Note);
         }

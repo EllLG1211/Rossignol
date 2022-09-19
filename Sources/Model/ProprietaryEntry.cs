@@ -9,19 +9,19 @@ namespace Model
     public class ProprietaryEntry : Entry
     {
 
-        public string Login 
+        public new string Login 
         { 
             get => base.Login;
             set => base.Login = value; 
         }
 
-        public string Website
+        public new string App
         {
-            get => base.Website;
-            set => base.Website = value;
+            get => base.App;
+            set => base.App = value;
         }
 
-        public string Note
+        public new string? Note
         { 
             get => base.Note; 
             set => base.Note = value; 
@@ -32,7 +32,7 @@ namespace Model
             Uid = uid;
             Login = login;
             Password = password;
-            Website = website;
+            App = website;
             Note = note ?? string.Empty;
         }
 

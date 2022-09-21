@@ -1,5 +1,5 @@
 [![Build Status](https://codefirst.iut.uca.fr/api/badges/valentin.clergue/Rossignol/status.svg)](https://codefirst.iut.uca.fr/valentin.clergue/Rossignol)  
-[![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=$valentin.clergue/Rossignol&metric=alert_status)](https://codefirst.iut.uca.fr/sonar/dashboard?id=$Rossignol)
+[![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=$/Rossignol&metric=alert_status)](https://codefirst.iut.uca.fr/sonar/dashboard?id=$Rossignol)
 [![Bugs](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=$Rossignol&metric=bugs)](https://codefirst.iut.uca.fr/sonar/dashboard?id=$Rossignol)
 [![Code Smells](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=$Rossignol&metric=code_smells)](https://codefirst.iut.uca.fr/sonar/dashboard?id=$Rossignol)
 [![Coverage](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=$Rossignol&metric=coverage)](https://codefirst.iut.uca.fr/sonar/dashboard?id=$Rossignol)  

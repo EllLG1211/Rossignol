@@ -18,17 +18,18 @@ namespace Model
         /// Login's app
         /// It can be nickname, email,...
         /// </summary>
-        protected string Login { get; set; } = "machin";
+        public string Login { get; protected set; }
 
         /// <summary>
-        /// Password used on the app
+        /// Password used on the app.
+        /// This property will have to be redifined; encrypted, it will not be of type string. Probably a byte[]
         /// </summary>
         protected string Password { get; set; }
 
         /// <summary>
         /// Password's App/Website
         /// </summary>
-        protected string App { get; set; } = "truc";
+        public string App { get; protected set; }
 
         /// <summary>
         /// Label 
@@ -41,6 +42,6 @@ namespace Model
         /// <summary>
         /// Note about the entry.
         /// </summary>
-        protected string? Note { get; set; }
+        public string? Note { get; protected set; }
     }
 }

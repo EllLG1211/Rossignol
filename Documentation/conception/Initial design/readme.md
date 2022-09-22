@@ -1,0 +1,5 @@
+[Sequence diagram - add entry](./Add_entry_sequence.mermaid.md)  
+[Explanation](./Explication.md)  
+[MCD - database](./database_mcd.mermaid.md)  
+[Class diagram - V1](./v1.mermaid.md)  
+[Class diagram - V2](./v2.mermaid.md)  

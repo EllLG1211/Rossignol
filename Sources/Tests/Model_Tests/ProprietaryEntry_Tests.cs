@@ -42,6 +42,7 @@ namespace Model_Tests
         [InlineData(null, "Lorem ipsum", "abracadabra", true)]
         [InlineData("schtroumpf", null, "abracadabra", true)]
         [InlineData("schtroumpf", "Lorem ipsum", null, true)]
+        [InlineData(null, null, null, true)]
         [InlineData("schtroumpf", "Lorem ipsum", "Avadra kevadra", false)]
         public void Constructor_ShouldThrowArgumentNullException(string login, string password, string app, bool throwSuccessExpected)
         {

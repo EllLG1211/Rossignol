@@ -12,7 +12,7 @@ namespace Model
         /// <summary>
         /// Unique identifier
         /// </summary>
-        protected long Uid { get; init; }
+        protected Guid Uid { get; init; }
 
         /// <summary>
         /// Login's app
@@ -43,5 +43,27 @@ namespace Model
         /// Note about the entry.
         /// </summary>
         public string? Note { get; protected set; }
+
+        public Entry(string login, string password, string app, string? note)
+        {
+            if (String.IsNullOrEmpty(login))
+            {
+                throw new ArgumentNullException(nameof(login));
+            }
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new ArgumentNullException(nameof(password));
+            }
+            if (String.IsNullOrEmpty(app))
+            {
+                throw new ArgumentNullException(nameof(app));
+            }
+
+            Uid = Guid.NewGuid();
+            Login = login;
+            Password = password;
+            App = app;
+            Note = note ?? string.Empty;
+        }
     }
 }

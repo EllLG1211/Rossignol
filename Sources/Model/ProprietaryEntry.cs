@@ -27,16 +27,10 @@ namespace Model
             set => base.Note = value; 
         }
 
-        public ProprietaryEntry(long uid, string login, string password, string website, string note)
-        {
-            Uid = uid;
-            Login = login;
-            Password = password;
-            App = website;
-            Note = note ?? string.Empty;
-        }
+        public ProprietaryEntry(string login, string password, string app, string note) 
+            : base(login, password, app, note){}
 
-        public ProprietaryEntry(long uid, string login, string password, string website)
-            : this(uid, login, password, website, string.Empty) { }
+        public ProprietaryEntry(string login, string password, string app)
+            : this(login, password, app, string.Empty) { }
     }
 }

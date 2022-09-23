@@ -49,7 +49,7 @@ namespace Model_Tests
             {
                 ProprietaryEntry entry = new(login, password, app);
                 Assert.False(throwSuccessExpected);
-            } catch (ArgumentNullException e)
+            } catch 
             {
                 Assert.True(throwSuccessExpected);
             }

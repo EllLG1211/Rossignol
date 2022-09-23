@@ -44,7 +44,7 @@ namespace Model
         /// </summary>
         public string? Note { get; protected set; }
 
-        public Entry(string login, string password, string app, string? note)
+        protected Entry(string login, string password, string app, string? note)
         {
             if (String.IsNullOrEmpty(login))
             {

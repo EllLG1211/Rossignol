@@ -69,7 +69,7 @@ namespace Model_Tests
         /// Test the label getter. 
         /// </summary>
         [Fact]
-        public void Label_ShouldReturnLoginAndWebsite()
+        public void Label_ShouldReturnLoginAndApp()
         {
             ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
             Assert.Equal("Discord - loremipsum@gmail.com", entry.Label);

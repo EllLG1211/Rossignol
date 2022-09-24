@@ -80,7 +80,7 @@ namespace Model
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        bool IEquatable<Entry>.Equals(Entry? other)
+        public bool Equals(Entry? other)
         {
             if (other is null)
                 return false;

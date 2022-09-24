@@ -170,7 +170,7 @@ namespace Model_Tests
         [Fact]
         public void EqualsUid_testWithNull()
         {
-            Assert.False(new ProprietaryEntry("Login", "1234", "Discord").Equals(null));
+            Assert.False(new ProprietaryEntry("Login", "1234", "Discord").EqualsUid(null));
         }
     }
 }

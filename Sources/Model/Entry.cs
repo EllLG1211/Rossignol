@@ -82,7 +82,7 @@ namespace Model
         /// <returns></returns>
         bool IEquatable<Entry>.Equals(Entry? other)
         {
-            if (other == null)
+            if (other is null)
                 return false;
             if (!Login.Equals(other.Login) || !Password.Equals(other.Password) || !App.Equals(other.App))
                 return false;
@@ -97,7 +97,7 @@ namespace Model
         /// <returns></returns>
         public bool EqualsUid(Entry? other)
         {
-            if(other == null ) return false;
+            if(other is null ) return false;
             return Uid.Equals(other.Uid);
         }
     }

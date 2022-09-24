@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Model;
+using System.Diagnostics;
 
 namespace Model_Tests
 {
@@ -18,11 +19,11 @@ namespace Model_Tests
         /// <param name="note"></param>
         /// <param name="noteSuccessExpected"></param>
         [Theory]
-        [InlineData("schtroumpf", "truc", "abracadabra", true)]
-        [InlineData("lorem.ipsum@mail.com", "Lorem Ipsum", "abracadabra", true)]
-        [InlineData("schtroumpf", "truc", null, false)]
-        [InlineData("korè@bidule", "Wikipédia", "abracadabra", true)]
-        public void Constructor_ShouldAssignValues(string login, string app, string note, bool noteSuccessExpected)
+        [InlineData(true, "schtroumpf", "truc", "abracadabra")]
+        [InlineData(true, "lorem.ipsum@mail.com", "Lorem Ipsum", "abracadabra")]
+        [InlineData(false, "schtroumpf", "truc", null)]
+        [InlineData(true, "korè@bidule", "Wikipédia", "abracadabra")]
+        public void Constructor_ShouldAssignValues(bool noteSuccessExpected, string login, string app, string note)
         {
             ProprietaryEntry entry = new(login, "lorem ipsum", app, note);
             Assert.Equal(login, entry.Login);
@@ -39,12 +40,12 @@ namespace Model_Tests
         /// <param name="app"></param>
         /// <param name="throwSuccessExpected"></param>
         [Theory]
-        [InlineData(null, "Lorem ipsum", "abracadabra", true)]
-        [InlineData("schtroumpf", null, "abracadabra", true)]
-        [InlineData("schtroumpf", "Lorem ipsum", null, true)]
-        [InlineData(null, null, null, true)]
-        [InlineData("schtroumpf", "Lorem ipsum", "Avadra kevadra", false)]
-        public void Constructor_ShouldThrowArgumentNullException(string login, string password, string app, bool throwSuccessExpected)
+        [InlineData(true, null, "Lorem ipsum", "abracadabra")]
+        [InlineData(true, "schtroumpf", null, "abracadabra")]
+        [InlineData(true, "schtroumpf", "Lorem ipsum", null)]
+        [InlineData(true, null, null, null)]
+        [InlineData(false, "schtroumpf", "Lorem ipsum", "Avadra kevadra")]
+        public void Constructor_ShouldThrowArgumentNullException(bool throwSuccessExpected, string login, string password, string app)
         {
             try
             {
@@ -74,6 +75,90 @@ namespace Model_Tests
         {
             ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
             Assert.Equal("Discord - loremipsum@gmail.com", entry.Label);
+        }
+
+        /// <summary>
+        /// Create data for the <i>Equals</i> test.
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<Object[]> Equals_test_data()
+        {
+            yield return new Object[]
+            {
+                true,
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord")
+            }; 
+            
+            yield return new Object[]
+            {
+                false,
+                new ProprietaryEntry("login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord")
+            };
+
+            yield return new Object[]
+            {
+                false,
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1235", "Discord")
+            };
+
+            yield return new Object[]
+            {
+                false,
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "discord")
+            };
+        }
+
+        /// <summary>
+        /// Test the <i>Equals</i> method.
+        /// </summary>
+        /// <param name="equalsExpected"></param>
+        /// <param name="one"></param>
+        /// <param name="two"></param>
+        [Theory]
+        [MemberData(nameof(Equals_test_data))]
+        public void Equals_test(bool equalsExpected, Entry one, Entry two)
+        {
+            Assert.Equal(equalsExpected, one.Equals(two));
+        }
+
+        /// <summary>
+        /// Create data for the <i>EqualsUid</i> test.
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<Object[]> EqualsUid_test_data()
+        {
+            Entry instance = new ProprietaryEntry("Login", "1234", "Discord");
+
+            yield return new Object[]
+            {
+                true,
+                instance,
+                instance
+            };
+
+            yield return new Object[]
+            {
+                false,
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord")
+            };
+        }
+
+        /// <summary>
+        /// Test the <i>EqualsUid</i> method.
+        /// </summary>
+        /// <param name="equalsExpected"></param>
+        /// <param name="one"></param>
+        /// <param name="two"></param>
+        [Theory]
+        [MemberData(nameof(EqualsUid_test_data))]
+        public void EqualsUid_test(bool equalsExpected, Entry one, Entry two)
+        {
+            Assert.Equal(equalsExpected, one.EqualsUid(two));
         }
     }
 }

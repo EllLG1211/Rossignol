@@ -44,6 +44,14 @@ namespace Model
         /// </summary>
         public string? Note { get; protected set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <param name="app"></param>
+        /// <param name="note"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         protected Entry(string login, string password, string app, string? note)
         {
             if (String.IsNullOrEmpty(login))
@@ -64,6 +72,32 @@ namespace Model
             Password = password;
             App = app;
             Note = note ?? string.Empty;
+        }
+
+        /// <summary>
+        /// Verify if <i>this</i> is equal than <i>other</i>. 
+        /// This method donc take care of the Uid or the referance and test only with Login, Password and App.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Entry other)
+        {
+            if (other == null)
+                return false;
+            if (!Login.Equals(other.Login) || !Password.Equals(other.Password) || !App.Equals(other.App))
+                return false;
+            return true;
+            
+        }
+
+        /// <summary>
+        /// Verify if <i>this</i> <i>Uid</i> is equal than <i>other</i> one.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool EqualsUid(Entry other)
+        {
+            return Uid.Equals(other.Uid);
         }
     }
 }

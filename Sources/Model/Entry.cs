@@ -80,7 +80,7 @@ namespace Model
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool Equals(Entry other)
+        bool IEquatable<Entry>.Equals(Entry? other)
         {
             if (other == null)
                 return false;
@@ -95,7 +95,7 @@ namespace Model
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool EqualsUid(Entry other)
+        public bool EqualsUid(Entry? other)
         {
             if(other == null ) return false;
             return Uid.Equals(other.Uid);

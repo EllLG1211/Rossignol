@@ -110,13 +110,6 @@ namespace Model_Tests
                 new ProprietaryEntry("Login", "1234", "Discord"),
                 new ProprietaryEntry("Login", "1234", "discord")
             };
-
-            yield return new Object[]
-            {
-                false,
-                new ProprietaryEntry("Login", "1234", "Discord"),
-                null
-            };
         }
 
         /// <summary>
@@ -129,7 +122,7 @@ namespace Model_Tests
         [MemberData(nameof(Equals_test_data))]
         public void Equals_test(bool equalsExpected, Entry one, Entry two)
         {
-            Assert.Equal(equalsExpected, one.Equals(two));
+            Assert.Equal(equalsExpected, ((IEquatable<Entry>)one).Equals(two));
         }
 
         /// <summary>
@@ -153,13 +146,6 @@ namespace Model_Tests
                 new ProprietaryEntry("Login", "1234", "Discord"),
                 new ProprietaryEntry("Login", "1234", "Discord")
             };
-
-            yield return new Object[]
-            {
-                false,
-                new ProprietaryEntry("Login", "1234", "Discord"),
-                null
-            };
         }
 
         /// <summary>
@@ -173,6 +159,18 @@ namespace Model_Tests
         public void EqualsUid_test(bool equalsExpected, Entry one, Entry two)
         {
             Assert.Equal(equalsExpected, one.EqualsUid(two));
+        }
+
+        [Fact]
+        public void Equals_testWithNull()
+        {
+            Assert.False(new ProprietaryEntry("Login", "1234", "Discord").Equals(null));
+        }
+
+        [Fact]
+        public void EqualsUid_testWithNull()
+        {
+            Assert.False(new ProprietaryEntry("Login", "1234", "Discord").Equals(null));
         }
     }
 }

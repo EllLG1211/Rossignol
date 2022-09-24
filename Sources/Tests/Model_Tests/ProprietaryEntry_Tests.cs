@@ -68,6 +68,42 @@ namespace Model_Tests
         }
 
         /// <summary>
+        /// Test if <i>Login</i> setter reassign it.
+        /// </summary>
+        [Fact]
+        public void LoginSetter_ShouldReassignLogin()
+        {
+            string newLogin = "Test";
+            ProprietaryEntry entry = new ProprietaryEntry("Ines", "1234", "Photoshop", "Complexe");
+            entry.Login = newLogin;
+            Assert.Equal(newLogin, entry.Login);
+        }
+
+        /// <summary>
+        /// Test if <i>App</i> setter reassign it.
+        /// </summary>
+        [Fact]
+        public void AppSetter_ShouldReassignApp()
+        {
+            string newApp = "Lightroom";
+            ProprietaryEntry entry = new ProprietaryEntry("Ines", "1234", "Photoshop", "Complexe");
+            entry.App = newApp;
+            Assert.Equal(newApp, entry.App);
+        }
+
+        /// <summary>
+        /// Test if <i>Note</i> setter reassign it.
+        /// </summary>
+        [Fact]
+        public void NoteSetter_ShouldReassignNote()
+        {
+            string newNote = "Efficace";
+            ProprietaryEntry entry = new ProprietaryEntry("Ines", "1234", "Photoshop", "Complexe");
+            entry.Note = newNote;
+            Assert.Equal(newNote, entry.Note);
+        }
+
+        /// <summary>
         /// Test the label getter. 
         /// </summary>
         [Fact]

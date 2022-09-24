@@ -110,6 +110,13 @@ namespace Model_Tests
                 new ProprietaryEntry("Login", "1234", "Discord"),
                 new ProprietaryEntry("Login", "1234", "discord")
             };
+
+            yield return new Object[]
+            {
+                false,
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                null
+            };
         }
 
         /// <summary>
@@ -145,6 +152,13 @@ namespace Model_Tests
                 false,
                 new ProprietaryEntry("Login", "1234", "Discord"),
                 new ProprietaryEntry("Login", "1234", "Discord")
+            };
+
+            yield return new Object[]
+            {
+                false,
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                null
             };
         }
 

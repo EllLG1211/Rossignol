@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public abstract class Entry
+    public abstract class Entry : IEquatable<Entry>
     {
         /// <summary>
         /// Unique identifier
@@ -97,6 +97,7 @@ namespace Model
         /// <returns></returns>
         public bool EqualsUid(Entry other)
         {
+            if(other == null ) return false;
             return Uid.Equals(other.Uid);
         }
     }

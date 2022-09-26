@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace Model.User
 {
@@ -11,7 +12,7 @@ namespace Model.User
         /// <summary>
         /// The user's email
         /// </summary>
-        public string? email { get; protected set; }
+        public MailAddress email { get; protected set; }
 
 
         /// <summary>
@@ -38,8 +39,7 @@ namespace Model.User
             {
                 throw new ArgumentNullException(nameof(email));
             }
-
-            this.email = email;
+            this.email = new MailAddress(email);
         }
     }
 }

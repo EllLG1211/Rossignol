@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Model.User
 {
-    public class User : AbstractUser
+    public class OnlineUser : AbstractUser
     {
-        public string MasterPassword { get; protected set; }
-        public User(string email) : base(email)
+        public string? MasterPassword { get; protected set; }
+        public OnlineUser(string email) : base(email)
         {
-            
+
         }
 
         /// <summary>

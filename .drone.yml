@@ -11,7 +11,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:6.0
     volumes:
       - name: docs
-        path: /docs
+        path: /docsprojects
     commands:
       - cd Sources/
       - dotnet restore Console_Rossignol.sln

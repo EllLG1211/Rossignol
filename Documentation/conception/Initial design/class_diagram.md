@@ -10,31 +10,26 @@ class Entry{
     #/Note: String
 }
 class AbstractUser{
-    -Email: String
-
-    +GetEmail()
-    +SetEmail(email: String)
+    #/Email: String
 }
-Entry "* #entries"<-- AbstractUser
+Entry <-- AbstractUser :#entries *
 class ProprietaryEntry{
-    -SharedWith*: AbstractUser
-
     +GetSharedWith()
     +AddSharedUser(user: abstractUser)
     +RemoveSharedUser(user: abstractUser)
 }
 Entry <|-- ProprietaryEntry
-
+AbstractUser <-- ProprietaryEntry :-SharedWith*
 class SharedEntry{
-    +/Owner: final abstractUser
+     
 }
-Sharer <-- SharedEntry
+Sharer <-- SharedEntry :#owner ❬❬readOnly❭❭
 Entry <|-- SharedEntry
 
 %%classes that use ProprietaryEntry
 
 class User{
-    +/MasterPassword: String
+    #/MasterPassword: String
 
     +GetEntries()
     +AddEntry(entry Entry)
@@ -43,7 +38,7 @@ class User{
 AbstractUser <|-- User
 
 class Sharer{
-    
+    ❬❬readOnly❭❭ +/Email: String
 }
 AbstractUser <|-- Sharer
 
@@ -53,7 +48,7 @@ class EntryFactory{
 }
 Entry <.. EntryFactory
 ```
-
+---
 ```mermaid
 classDiagram
 
@@ -66,8 +61,7 @@ class Manager{
 User "* userLogged"<-- Manager
 
 ```
-
-
+---
 
 ```mermaid
 classDiagram
@@ -90,6 +84,9 @@ class Decrypter{
     <<interface>>
     string Decrypt(key: String, entry: Entry)
 }
+
+Encrypter <|-- AESEncrypter
+Decrypter <|-- AESDecrypter
 ```
 
 note: add autocompletion

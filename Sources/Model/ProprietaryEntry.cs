@@ -9,34 +9,28 @@ namespace Model
     public class ProprietaryEntry : Entry
     {
 
-        public string Login 
+        public new string Login 
         { 
             get => base.Login;
             set => base.Login = value; 
         }
 
-        public string Website
+        public new string App
         {
-            get => base.Website;
-            set => base.Website = value;
+            get => base.App;
+            set => base.App = value;
         }
 
-        public string Note
+        public new string? Note
         { 
             get => base.Note; 
             set => base.Note = value; 
         }
 
-        public ProprietaryEntry(long uid, string login, string password, string website, string note)
-        {
-            Uid = uid;
-            Login = login;
-            Password = password;
-            Website = website;
-            Note = note ?? string.Empty;
-        }
+        public ProprietaryEntry(string login, string password, string app, string note) 
+            : base(login, password, app, note){}
 
-        public ProprietaryEntry(long uid, string login, string password, string website)
-            : this(uid, login, password, website, string.Empty) { }
+        public ProprietaryEntry(string login, string password, string app)
+            : this(login, password, app, string.Empty) { }
     }
 }

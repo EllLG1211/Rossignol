@@ -43,6 +43,7 @@ namespace Model_Tests.User
         [InlineData(true, "pete@totallyreal")]
         [InlineData(true, "zabuk@machina/../../index.php")]
         [InlineData(true, "grineerzrodak.skp")]
+        [InlineData(true, null)]
         public void Constructor_ShouldAssignValuesOrThrow(bool shouldThrow,string email)
         {
             try
@@ -92,6 +93,22 @@ namespace Model_Tests.User
                 "sortak@moko.com",
                 new ProprietaryEntry("Login", "1234", "Discord"),
                 new ProprietaryEntry("Login", "1234", "discord")
+            };
+
+            yield return new Object[]
+            {
+                true,
+                "sortak@moko.com",
+                null,
+                new ProprietaryEntry("Login", "1234", "discord")
+            };
+
+            yield return new Object[]
+            {
+                true,
+                "sortak@moko.com",
+                new ProprietaryEntry("Login", "1234", "discord"),
+                null
             };
         }
 

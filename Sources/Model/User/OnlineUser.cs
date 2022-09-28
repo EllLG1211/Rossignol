@@ -9,10 +9,7 @@ namespace Model.User
     public class OnlineUser : AbstractUser
     {
         public string? MasterPassword { get; protected set; }
-        public OnlineUser(string email) : base(email)
-        {
-
-        }
+        public OnlineUser(string email) : base(email){}
 
         /// <summary>
         /// Adds an entry to the user's entries

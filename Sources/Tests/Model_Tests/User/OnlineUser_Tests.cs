@@ -56,20 +56,54 @@ namespace Model_Tests.User
                 Assert.True(shouldThrow);
             }
         }
+        /// <summary>
+        /// Create data for the AddEntry test.
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<Object[]> Equals_test_data()
+        {
+            yield return new Object[]
+            {
+                false,
+                "sortak@moko.com",
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord")
+            };
+
+            yield return new Object[]
+            {
+                true,
+                "sortak@moko.com",
+                new ProprietaryEntry("login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord")
+            };
+
+            yield return new Object[]
+            {
+                true,
+                "sortak@moko.com",
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1235", "Discord")
+            };
+
+            yield return new Object[]
+            {
+                true,
+                "sortak@moko.com",
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "discord")
+            };
+        }
+
         [Theory]
-        [InlineData(false, "kon@foxmail.cn", "schtroumpf", "Lorem ipsum", "Avadra kevadra",false)]
-        [InlineData(true, "kon@foxmail.cn", "schtroumpf", "Lorem ipsum", "Avadra kevadra", true)]
-        public void AddAndRemoveEntry(bool shouldThrow, string email, string login, string password, string app, bool noEntry)
+        [MemberData(nameof(Equals_test_data))]
+        public void AddAndRemoveEntry(bool shouldThrow, string email, ProprietaryEntry pe, ProprietaryEntry pe2)
         {
             try
             {
                 OnlineUser user = new OnlineUser(email);
-                ProprietaryEntry pe = new ProprietaryEntry(login, password, app);
                 user.AddEntry(pe);
-                if(noEntry)
-                    user.RemoveEntry(new ProprietaryEntry(login, password, "nothinghere"));
-                else
-                    user.RemoveEntry(pe);
+                user.RemoveEntry(pe2);
             }
             catch
             {

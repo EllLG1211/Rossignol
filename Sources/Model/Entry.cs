@@ -100,5 +100,28 @@ namespace Model
             if(other is null ) return false;
             return Uid.Equals(other.Uid);
         }
+
+        /// <summary>
+        /// Verify if <i>this</i> is equal than <i>other</i>. 
+        /// This method doesn't take into account Uid or referance; tests only with Login, Password and App.
+        /// </summary>
+        /// <param name="obj">Another object. Expects an Entry.</param>
+        /// <returns></returns>
+        public override bool Equals(object? obj)
+        {
+            if (obj is Entry other)
+            {
+                return Login.Equals(other.Login) && Password.Equals(other.Password) && App.Equals(other.App);
+            }
+            else return false;
+        }
+
+        /// <summary>
+        /// Get a hash code. 
+        /// This method doesn't take into account Uid or referance; tests only with Login, Password and App.
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        => Login.GetHashCode() * 17 + Password.GetHashCode() * 17 * 17 + App.GetHashCode();
     }
 }

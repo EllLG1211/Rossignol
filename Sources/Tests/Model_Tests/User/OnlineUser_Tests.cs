@@ -56,5 +56,25 @@ namespace Model_Tests.User
                 Assert.True(shouldThrow);
             }
         }
+        [Theory]
+        [InlineData(false, "kon@foxmail.cn", "schtroumpf", "Lorem ipsum", "Avadra kevadra",false)]
+        [InlineData(true, "kon@foxmail.cn", "schtroumpf", "Lorem ipsum", "Avadra kevadra", true)]
+        public void AddAndRemoveEntry(bool shouldThrow, string email, string login, string password, string app, bool noEntry)
+        {
+            try
+            {
+                OnlineUser user = new OnlineUser(email);
+                ProprietaryEntry pe = new ProprietaryEntry(login, password, app);
+                user.AddEntry(pe);
+                if(noEntry)
+                    user.RemoveEntry(new ProprietaryEntry(login, password, "nothinghere"));
+                else
+                    user.RemoveEntry(pe);
+            }
+            catch
+            {
+                Assert.True(shouldThrow);
+            }
+        }
     }
 }

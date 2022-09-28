@@ -23,9 +23,9 @@ namespace Model.User
         /// <summary>
         /// Checks if two users are equal
         /// </summary>
-        public bool Equals(AbstractUser? other)
+        bool IEquatable<AbstractUser>.Equals(AbstractUser? other)
         {
-            return email == other?.email;
+            return email.Equals(other?.email);
         }
 
         /// <summary>

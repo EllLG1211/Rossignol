@@ -17,7 +17,7 @@ namespace Model_Tests.Business.Entries
             Assert.Equal(expected, x.Equals(y));
         }
 
-        public static object[] Equals_TestData_Nullable
+        public static readonly object[] Equals_TestData_Nullable
             = new object[] { false, new SharedEntry("Login", "1234", "Discord"), null };
 
         [Theory]

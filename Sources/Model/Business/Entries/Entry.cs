@@ -80,9 +80,9 @@ namespace Model.Business.Entries
 
         public bool Equals(Entry? other) => Comparer.Equals(this, other);
 
-        public override int GetHashCode() => Comparer.GetHashCode(this);
-
-        public override bool Equals(object obj) 
+        public override bool Equals(object? obj)
             => obj is Entry entry && Comparer.Equals(this, entry);
+
+        public override int GetHashCode() => Comparer.GetHashCode(this);
     }
 }

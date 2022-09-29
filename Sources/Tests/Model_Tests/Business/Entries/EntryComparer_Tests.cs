@@ -14,6 +14,7 @@ namespace Model_Tests.Business.Entries
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
+        [MemberData(nameof(Equals_TestData_Nullable))]
         public void Equals_Tests(bool expected, Entry? x, Entry? y)
         {
             Assert.Equal(expected, _entryComparer.Equals(x, y));
@@ -106,6 +107,18 @@ namespace Model_Tests.Business.Entries
             };
             #endregion
 
+            #region Objects of different types
+            yield return new object?[]
+            {
+                false,
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new SharedEntry("Login", "1234", "Discord")
+            };
+            #endregion
+        }
+
+        public static IEnumerable<object?[]> Equals_TestData_Nullable()
+        {
             #region Null objects
             yield return new object?[]
             {
@@ -122,15 +135,6 @@ namespace Model_Tests.Business.Entries
             };
 
             yield return new object?[] { true, null, null };
-            #endregion
-
-            #region Objects of different types
-            yield return new object?[]
-            {
-                false,
-                new ProprietaryEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Discord")
-            };
             #endregion
         }
 

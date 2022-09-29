@@ -78,7 +78,7 @@ namespace Model.Business.Entries
             Note = note ?? string.Empty;
         }
 
-        public bool Equals(Entry? other) => Comparer.Equals(this, other);
+        public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 
         public override bool Equals(object? obj)
             => obj is Entry entry && Comparer.Equals(this, entry);

@@ -1,24 +1,24 @@
-# Explication des diagrammes
+# Diagram explanation
 
-## Diagramme de données
+## Data diagram
 
-Le modèle repose sur le fait qu'un mot de passe peut être partagé par plusieurs personne. Nous avons donc des *Entry* qui appartiennent à un *User* (utilisateur). Le *User* connait son détenteur. Les autres *User* qui connaissent le mot de passe ne pourront ni l'éditer, ni le repartager à nouveau.
+The model is absed on the principle that a single password can be shared among multiple users. We have *Entry* classes which belong to a *User*. The *Entry* know their owner. The other *User*(s) which know the password won't be able to edit or re-share it.
 
 [MCD](./MCD/database_mcd.mermaid.md)
 
 ----
 
-## Diagramme de classe
+## Class diagram
 
-### Les entrées
-Les *Entry* représente donc chaque entrée dans l'application. Elle contient un *unique identifier*, le *Password* qu'on enregistre, un *Label*, l'*Url* du site dont on enregistre le mot de passe, et une *Note* pour des détails supplémentaires.
+### The entries
+The *Entry* represents each entry in the app. It contains a *unique identifier*, the *Password* we save, a *Label*, the *Url* of the website that the password belongs to, and a *Note* for additionnal information.
 
-*Entry* est abstrait car on va différencier, via les filles *ProprietaryEntry* et *SharedEntry* si l'entrée nous appartient ou si c'est une entrée partagée avec nous. Une entrée ne peut pas être partagée ou éditer par une personne autre que le propriétaire.
+*Entry* is abstract because its inheriting classes *ProprietaryEntry* and *SharedEntry* will enable us to check if we possess said *Entry* or not, based on its type. An *Entry* cannot be shared or edited by anyone other than the owner.
 
-### Les utilisateurs
-Les utilisateurs ont aussi besoin d'une abstraction, car on doit là aussi faire la différence entre un *User* qui peut être édité, et un *Sharer* qui ne donne accès qu'à son mail.
+### The users
+The users also need a layer of abstraction, because we must differenciate between a *User* which can be edited, and a *Sharer* which only gives access to its mail.
 
-### Le manager
-Le manager contiendra simplement l'utilisateur connecté, qui contiendra les mots de passes.
+### The manager
+The manager will simply contain the currently logged in user, which will in turn contain the password, as Entries.
 
-[Diagramme de classe](./Class/v2.mermaid.md)
+[Class diagram](./Class/v2.mermaid.md)

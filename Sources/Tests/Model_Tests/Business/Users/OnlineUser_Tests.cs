@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Model.User;
+using Model.Business.Users;
 using Model;
 using System.Net.Mail;
+using Model.Business.Entries;
 
-namespace Model_Tests.User
+namespace Model_Tests.Business.Users
 {
     public class OnlineUser_Tests
     {

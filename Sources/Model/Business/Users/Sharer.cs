@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.User
+namespace Model.Business.Users
 {
     public class Sharer : AbstractUser
     {

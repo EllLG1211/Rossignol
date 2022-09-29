@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using Model.Business.Entries;
 
-namespace Model.User
+namespace Model.Business.Users
 {
     public abstract class AbstractUser : IEquatable<AbstractUser>
     {

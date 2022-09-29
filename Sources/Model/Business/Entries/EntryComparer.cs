@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Entries
 {
+    /// <summary>
+    /// Equality comparer for the Entry class and subclasses.
+    /// Defined as an external class because Entry is derived and that causes problem in equality protocol.
+    /// <see cref="Entry.Equals(Entry?)"/> and <see cref="Entry.GetHashCode" call these methods/>
+    /// </summary>
     public class EntryComparer : IEqualityComparer<Entry>
     {
         public bool Equals(Entry? x, Entry? y)
@@ -17,6 +22,8 @@ namespace Model.Business.Entries
         }
 
         public int GetHashCode([DisallowNull] Entry obj) 
-            => obj.Label.GetHashCode() * 17 + obj.Password.GetHashCode() * 17^2 + obj.GetType().GetHashCode();
+            => obj.Label.GetHashCode() * 17 
+             + obj.Password.GetHashCode() * 17^2 
+             + obj.GetType().GetHashCode();
     }
 }

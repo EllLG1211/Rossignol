@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Entries
 {
-    public abstract class Entry
+    public abstract class Entry : IEquatable<Entry>
     {
+        private static EntryComparer? _comparer;
+        private static EntryComparer Comparer => _comparer ??= new EntryComparer();
+
         /// <summary>
         /// Unique identifier
         /// </summary>
@@ -75,15 +78,11 @@ namespace Model.Business.Entries
             Note = note ?? string.Empty;
         }
 
-        /// <summary>
-        /// Verify if <i>this</i> <i>Uid</i> is equal than <i>other</i> one.
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool EqualsUid(Entry? other)
-        {
-            if (other is null) return false;
-            return Uid.Equals(other.Uid);
-        }
+        public bool Equals(Entry? other) => Comparer.Equals(this, other);
+
+        public override int GetHashCode() => Comparer.GetHashCode(this);
+
+        public override bool Equals(object obj) 
+            => obj is Entry entry && Comparer.Equals(this, entry);
     }
 }

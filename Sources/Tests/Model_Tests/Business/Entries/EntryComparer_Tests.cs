@@ -19,7 +19,7 @@ namespace Model_Tests.Business.Entries
             Assert.Equal(expected, _entryComparer.Equals(x, y));
         }
 
-        static IEnumerable<object?[]> Equals_TestData()
+        public static IEnumerable<object?[]> Equals_TestData()
         {
             #region Identical values
             yield return new object?[]
@@ -143,7 +143,7 @@ namespace Model_Tests.Business.Entries
             Assert.Equal(equals, hashEquals);
         }
 
-        static IEnumerable<Entry[]> GetHashCode_TestData()
+        public static IEnumerable<Entry[]> GetHashCode_TestData()
         {
             #region Identical values
             yield return new Entry[] {

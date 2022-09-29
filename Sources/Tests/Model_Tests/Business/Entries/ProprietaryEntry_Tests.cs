@@ -143,7 +143,7 @@ namespace Model_Tests.Business.Entries
         /// <param name="equalsExpected"></param>
         /// <param name="one"></param>
         /// <param name="two"></param>
-        [Theory]
+        /*[Theory]
         [MemberData(nameof(EqualsUid_test_data))]
         public void EqualsUid_test(bool equalsExpected, Entry one, Entry two)
         {
@@ -154,6 +154,6 @@ namespace Model_Tests.Business.Entries
         public void EqualsUid_testWithNull()
         {
             Assert.False(new ProprietaryEntry("Login", "1234", "Discord").EqualsUid(null));
-        }
+        }*/
     }
 }

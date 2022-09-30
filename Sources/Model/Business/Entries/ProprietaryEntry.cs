@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Model.Business.Entries
 {
     public class ProprietaryEntry : Entry
     {

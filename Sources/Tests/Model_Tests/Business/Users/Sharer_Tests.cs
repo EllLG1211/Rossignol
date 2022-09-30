@@ -1,4 +1,4 @@
-﻿using Model.User;
+﻿using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Model_Tests.User
+namespace Model_Tests.Business.Users
 {
     public class Sharer_Tests
     {

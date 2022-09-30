@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Model.Business.Entries
 {
     public abstract class Entry : IEquatable<Entry>
     {
+        private static EntryComparer? _comparer;
+        private static EntryComparer Comparer => _comparer ??= new EntryComparer();
+
         /// <summary>
         /// Unique identifier
         /// </summary>
@@ -24,7 +28,7 @@ namespace Model
         /// Password used on the app.
         /// This property will have to be redifined; encrypted, it will not be of type string. Probably a byte[]
         /// </summary>
-        protected string Password { get; set; }
+        public string Password { get; protected set; }
 
         /// <summary>
         /// Password's App/Website
@@ -74,32 +78,11 @@ namespace Model
             Note = note ?? string.Empty;
         }
 
-        /// <summary>
-        /// Verify if <i>this</i> is equal than <i>other</i>. 
-        /// This method donc take care of the Uid or the referance and test only with Login, Password and App.
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool Equals(Entry? other)
-        {
-            if (other is null)
-                return false;
-            if (!Login.Equals(other.Login) || !Password.Equals(other.Password) || !App.Equals(other.App))
-                return false;
-            return true;
-            
-        }
+        public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 
-        /// <summary>
-        /// Verify if <i>this</i> <i>Uid</i> is equal than <i>other</i> one.
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool EqualsUid(Entry? other)
-        {
-            if(other is null ) return false;
-            return Uid.Equals(other.Uid);
-        }
+        public override bool Equals(object? obj)
+            => obj is Entry entry && Equals(this, entry);
 
+        public override int GetHashCode() => Comparer.GetHashCode(this);
     }
 }

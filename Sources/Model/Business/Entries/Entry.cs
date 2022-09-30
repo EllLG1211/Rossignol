@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Entries
 {
-    public abstract class Entry : IEquatable<Entry>
+    public abstract class Entry : IEquatable<Entry>, IEqualityComparer<Entry>
     {
-        private static EntryComparer? _comparer;
-        private static EntryComparer Comparer => _comparer ??= new EntryComparer();
+        /*private static EntryComparer? _comparer;
+        private static EntryComparer Comparer => _comparer ??= new EntryComparer();*/
 
         /// <summary>
         /// Unique identifier
@@ -81,8 +81,19 @@ namespace Model.Business.Entries
         public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 
         public override bool Equals(object? obj)
-            => obj is Entry entry && Comparer.Equals(this, entry);
+            => obj is Entry entry && Equals(this, entry);
 
-        public override int GetHashCode() => Comparer.GetHashCode(this);
+        public bool Equals(Entry? x, Entry? y)
+        {
+            if (x == null || y == null) return x == null && y == null; //must return true if both members are null
+            if (x.GetType() != y.GetType()) return false;
+            return x.Label.Equals(y.Label) && x.Password.Equals(y.Password);
+        }
+
+        public override int GetHashCode() => GetHashCode(this);
+        public int GetHashCode([DisallowNull] Entry obj)
+            => obj.Label.GetHashCode() * 17
+             + obj.Password.GetHashCode() * 17 ^ 2
+             + obj.GetType().GetHashCode();
     }
 }

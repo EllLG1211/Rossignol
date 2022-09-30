@@ -67,5 +67,35 @@ namespace Model_Tests.Business.Users
             loUser.AddEntry(null);
             Assert.Equal(0, loUser.Entries.Count());
         }
+
+        [Theory]
+        [MemberData(nameof(RemoveEntry_Tests_Data))]
+        public void RemoveEntry_Tests(bool expected, Entry entry)
+        {
+            AbstractUser loUser = new LocalUser("1234");
+            loUser.AddEntry(entry);
+
+            loUser.RemoveEntry(entry);
+            Assert.Equal(expected, loUser.Entries.Contains(entry));
+        }
+
+        public static IEnumerable<Object[]> RemoveEntry_Tests_Data()
+        {
+            #region Add ProprietaryEntry
+            yield return new Object[]
+            {
+                false,
+                new ProprietaryEntry("admin","1234","discord")
+            };
+            #endregion
+
+            #region Add SharedEntry
+            yield return new Object[]
+            {
+                false,
+                new SharedEntry("admin","1234","discord")
+            };
+            #endregion
+        }
     }
 }

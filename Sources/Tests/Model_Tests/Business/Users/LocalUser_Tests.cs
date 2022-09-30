@@ -81,7 +81,7 @@ namespace Model_Tests.Business.Users
 
         public static IEnumerable<Object[]> RemoveEntry_Tests_Data()
         {
-            #region Add ProprietaryEntry
+            #region Remove ProprietaryEntry
             yield return new Object[]
             {
                 false,
@@ -89,7 +89,7 @@ namespace Model_Tests.Business.Users
             };
             #endregion
 
-            #region Add SharedEntry
+            #region Remove SharedEntry
             yield return new Object[]
             {
                 false,

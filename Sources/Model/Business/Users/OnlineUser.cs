@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Users
 {
-    public class OnlineUser : AbstractUser
+    /*public class OnlineUser : AbstractUser
     {
+        
         public string? MasterPassword { get; protected set; }
         public OnlineUser(string email) : base(email){}
 
@@ -35,5 +36,5 @@ namespace Model.Business.Users
             if(!entries.Contains(entry)) throw new ArgumentException("The entry "+nameof(entry)+" is not part of this user's entries.");
             entries.Remove(entry);
         }
-    }
+    }*/
 }

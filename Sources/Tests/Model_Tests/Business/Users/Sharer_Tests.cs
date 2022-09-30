@@ -10,7 +10,7 @@ namespace Model_Tests.Business.Users
 {
     public class Sharer_Tests
     {
-        [Theory]
+        /*[Theory]
         [InlineData(false, "sarmat@torba.com")]
         [InlineData(false, "kon@foxmail.cn")]
         [InlineData(true, "pete@totallyreal")]
@@ -28,6 +28,6 @@ namespace Model_Tests.Business.Users
             {
                 Assert.True(shouldThrow);
             }
-        }
+        }*/
     }
 }

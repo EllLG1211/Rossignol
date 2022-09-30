@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Users
 {
-    public class Sharer : AbstractUser
+    /*public class Sharer : AbstractUser
     {
         public Sharer(string email) : base(email)
         {
         }
-    }
+    }*/
 }

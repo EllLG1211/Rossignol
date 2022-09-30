@@ -13,7 +13,7 @@ namespace Model_Tests.Business.Users
 {
     public class OnlineUser_Tests
     {
-        [Fact]
+        /*[Fact]
         public void EmailSetter_ShouldAssignValue()
         {
             AbstractUser user = new OnlineUser("kaman.zok@organs.com");
@@ -127,6 +127,6 @@ namespace Model_Tests.Business.Users
             {
                 Assert.True(shouldThrow);
             }
-        }
+        }*/
     }
 }

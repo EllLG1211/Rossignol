@@ -65,7 +65,7 @@ namespace Model_Tests.Business.Users
         {
             AbstractUser loUser = new LocalUser("1234");
             loUser.AddEntry(null);
-            Assert.Equal(0, loUser.Entries.Count());
+            Assert.Empty(loUser.Entries);
         }
 
         [Theory]

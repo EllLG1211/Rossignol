@@ -14,7 +14,7 @@ namespace Model.Business.Users
         /// <summary>
         /// The user's entries
         /// </summary>
-        private List<Entry> _entries = new List<Entry>();
+        private readonly List<Entry> _entries = new List<Entry>();
         public IEnumerable<Entry> Entries => new ReadOnlyCollection<Entry>(_entries);
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Model.Business.Users
         /// </summary>
         public String Password { get; protected set; }
 
-        public AbstractUser(string password)
+        protected AbstractUser(string password)
         {
             Password = password;
         }

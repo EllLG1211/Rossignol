@@ -11,7 +11,11 @@ namespace Utils_Tests
         {
             Entry myEntry = new ProprietaryEntry("kanken","motDePasseSuperSecurisé","codefirst");
             IEncrypter encrypter = new AESEncrypter();
-            string crypted = encrypter.Encrypt("leMasterPassword",myEntry);
+            string key = "leMasterPassword";
+            byte[] crypted = encrypter.Encrypt(key, myEntry);
+
+            IDecrypter decrypter = new AESDecrypter();
+            string deciphered = decrypter.Decrypt(key, crypted);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Utils
 {
     public class AESEncrypter : IEncrypter
     {
-        public string Encrypt(string key, Entry entry)
+        public byte[] Encrypt(string key, Entry entry)
         {
             if (key == null)
                 throw new ArgumentNullException("key");
@@ -23,9 +23,11 @@ namespace Utils
 
             using (Aes aes = Aes.Create())
             {
+                aes.Padding = PaddingMode.PKCS7;
                 if (aes.IV == null)
                     throw new ArgumentNullException("IV");
                 aes.Key = byteKey;
+                aes.IV = Encoding.UTF8.GetBytes("nopepperforiv01561564896")[0..(aes.BlockSize/8)];
                 ICryptoTransform cryptic = aes.CreateEncryptor(aes.Key, aes.IV);
 
                 using (MemoryStream msEncrypt = new MemoryStream())
@@ -34,11 +36,11 @@ namespace Utils
                     {
                         using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                         {
-                            swEncrypt.Write(entry);
+                            swEncrypt.Write(entry.Login);
                         }
                         encrypted = msEncrypt.ToArray();
                     }
-                    return Encoding.UTF8.GetString(encrypted);
+                    return encrypted;
                 }
             }
         }

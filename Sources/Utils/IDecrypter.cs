@@ -9,6 +9,6 @@ namespace Utils
 {
     public interface IDecrypter
     {
-        string Decrypt(string key, Entry entry);
+        string Decrypt(string key, byte[] entry);
     }
 }

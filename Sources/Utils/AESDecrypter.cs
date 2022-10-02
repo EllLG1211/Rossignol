@@ -25,9 +25,9 @@ namespace Utils
             {
                 aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
-                if (aes.IV == null)
-                    throw new NullReferenceException(nameof(aes.IV));
                 aes.IV = Encoding.UTF8.GetBytes("nopepperforiv01561564896")[0..(aes.BlockSize / 8)];
+                if (aes.IV == null)
+                    throw new CryptographicUnexpectedOperationException(nameof(aes.IV));
                 aes.Key = byteKey;
 
                 // Create a decryptor to perform the stream transform.

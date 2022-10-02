@@ -25,10 +25,10 @@ namespace Utils
             {
                 aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
+                aes.IV = Encoding.UTF8.GetBytes("nopepperforiv01561564896")[0..(aes.BlockSize / 8)];
                 if (aes.IV == null)
-                    throw new NullReferenceException(nameof(aes.IV));
+                    throw new CryptographicUnexpectedOperationException(nameof(aes.IV));
                 aes.Key = byteKey;
-                aes.IV = Encoding.UTF8.GetBytes("nopepperforiv01561564896")[0..(aes.BlockSize/8)];
                 ICryptoTransform cryptic = aes.CreateEncryptor(aes.Key, aes.IV);
 
                 using (MemoryStream msEncrypt = new MemoryStream())

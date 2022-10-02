@@ -26,7 +26,7 @@ namespace Utils
                 aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
                 if (aes.IV == null)
-                    throw new ArgumentNullException(nameof(aes.IV));
+                    throw new NullReferenceException(nameof(aes.IV));
                 aes.Key = byteKey;
                 aes.IV = Encoding.UTF8.GetBytes("nopepperforiv01561564896")[0..(aes.BlockSize/8)];
                 ICryptoTransform cryptic = aes.CreateEncryptor(aes.Key, aes.IV);

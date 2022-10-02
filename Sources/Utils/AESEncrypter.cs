@@ -9,23 +9,24 @@ using System.Security.Cryptography;
 
 namespace Utils
 {
-    public class AESEncrypter : IEncrypter
+    public class AesEncrypter : IEncrypter
     {
         public byte[] Encrypt(string key, Entry entry)
         {
             if (key == null)
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
             if (entry == null)
-                throw new ArgumentNullException("Entry");
+                throw new ArgumentNullException(nameof(entry));
 
             byte[] byteKey = Encoding.UTF8.GetBytes(key);
             byte[] encrypted;
 
             using (Aes aes = Aes.Create())
             {
+                aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
                 if (aes.IV == null)
-                    throw new ArgumentNullException("IV");
+                    throw new ArgumentNullException(nameof(aes.IV));
                 aes.Key = byteKey;
                 aes.IV = Encoding.UTF8.GetBytes("nopepperforiv01561564896")[0..(aes.BlockSize/8)];
                 ICryptoTransform cryptic = aes.CreateEncryptor(aes.Key, aes.IV);
@@ -36,7 +37,7 @@ namespace Utils
                     {
                         using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                         {
-                            swEncrypt.Write(entry.Login);
+                            swEncrypt.Write(entry);
                         }
                         encrypted = msEncrypt.ToArray();
                     }

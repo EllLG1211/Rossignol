@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
-    public class AESDecrypter : IDecrypter
+    public class AesDecrypter : IDecrypter
     {
         public string Decrypt(string key, byte[] entry)
         {
             if (key == null)
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
             if (entry == null)
-                throw new ArgumentNullException("Entry");
+                throw new ArgumentNullException(nameof(entry));
 
             byte[] byteKey = Encoding.UTF8.GetBytes(key);
             byte[] ciphered = entry;
@@ -23,9 +23,10 @@ namespace Utils
 
             using (Aes aes = Aes.Create())
             {
+                aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
                 if (aes.IV == null)
-                    throw new ArgumentNullException("IV");
+                    throw new ArgumentNullException(nameof(aes.IV));
                 aes.IV = Encoding.UTF8.GetBytes("nopepperforiv01561564896")[0..(aes.BlockSize / 8)];
                 aes.Key = byteKey;
 

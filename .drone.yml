@@ -52,6 +52,9 @@ steps:
     volumes:
       - name: docs
         path: /docs
+    when:
+      branch:
+        - master
     commands:
       - cd Documentation/doxygen
       - doxygen Doxyfile

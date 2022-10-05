@@ -15,10 +15,11 @@ namespace Model_Tests.Business.Users
         /// Test if the LocalUser is instanciated.
         /// </summary>
         [Fact]
-        public void Constructor_InstantiateUser()
+        public void Constructor_ShouldAssignPassword()
         {
-            AbstractUser loUser = new LocalUser("1234");
-            Assert.NotNull(loUser);
+            string password = "1234";
+            AbstractUser loUser = new LocalUser(password);
+            Assert.Equal(password, loUser.Password);
         }
 
         /// <summary>

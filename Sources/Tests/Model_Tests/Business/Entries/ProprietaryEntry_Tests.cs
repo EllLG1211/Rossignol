@@ -7,6 +7,8 @@ using Xunit;
 using Model;
 using System.Diagnostics;
 using Model.Business.Entries;
+using Newtonsoft.Json.Linq;
+using Model.Business.Users;
 
 namespace Model_Tests.Business.Entries
 {
@@ -114,46 +116,60 @@ namespace Model_Tests.Business.Entries
             Assert.Equal("Discord - loremipsum@gmail.com", entry.Label);
         }
 
-        /// <summary>
-        /// Create data for the <i>EqualsUid</i> test.
-        /// </summary>
-        /// <returns></returns>
-        public static IEnumerable<Object[]> EqualsUid_test_data()
-        {
-            Entry instance = new ProprietaryEntry("Login", "1234", "Discord");
-
-            yield return new Object[]
-            {
-                true,
-                instance,
-                instance
-            };
-
-            yield return new Object[]
-            {
-                false,
-                new ProprietaryEntry("Login", "1234", "Discord"),
-                new ProprietaryEntry("Login", "1234", "Discord")
-            };
-        }
-
-        /// <summary>
-        /// Test the <i>EqualsUid</i> method.
-        /// </summary>
-        /// <param name="equalsExpected"></param>
-        /// <param name="one"></param>
-        /// <param name="two"></param>
-        /*[Theory]
-        [MemberData(nameof(EqualsUid_test_data))]
-        public void EqualsUid_test(bool equalsExpected, Entry one, Entry two)
-        {
-            Assert.Equal(equalsExpected, one.EqualsUid(two));
-        }
-
         [Fact]
-        public void EqualsUid_testWithNull()
+        public void GetSharedWith_ShouldReturnAIReadOnlyList()
         {
-            Assert.False(new ProprietaryEntry("Login", "1234", "Discord").EqualsUid(null));
-        }*/
+            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            // Je ne sais pas comment faire ce test.
+        }
+
+        /// <summary>
+        /// Test if SharedToUser add user in the entry
+        /// </summary>
+        /// <param name="user"></param>
+        [Theory]
+        [MemberData(nameof(SharedToUser_ShouldAddUserToSharedWith_Data))]
+        public void SharedToUser_ShouldAddUserToSharedWith(MailedUser user)
+        {
+            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            entry.ShareToUser(user);
+            Assert.Contains(user, entry.GetSharedWith());
+        }
+
+        public static IEnumerable<Object[]> SharedToUser_ShouldAddUserToSharedWith_Data()
+        {
+            yield return new Object[]
+            {
+                new ConnectedUser("loremipsum@gmail.com","1234")
+            };
+
+            yield return new Object[]
+            {
+                new SharerUser("loremipsum@gmail.com","1234")
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(UnsharedToUser_ShouldUserUserFromSharedWith_Data))]
+        public void UnsharedToUser_ShouldUserUserFromSharedWith(MailedUser user)
+        {
+            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            entry.ShareToUser(user);
+            entry.UnshareToUser(user);
+            Assert.DoesNotContain(user, entry.GetSharedWith());
+        }
+
+        public static IEnumerable<Object[]> UnsharedToUser_ShouldUserUserFromSharedWith_Data()
+        {
+            yield return new Object[]
+            {
+                new ConnectedUser("loremipsum@gmail.com","1234")
+            };
+
+            yield return new Object[]
+            {
+                new SharerUser("loremipsum@gmail.com","1234")
+            };
+        }
     }
 }

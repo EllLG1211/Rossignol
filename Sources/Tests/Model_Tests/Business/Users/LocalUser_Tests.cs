@@ -32,6 +32,11 @@ namespace Model_Tests.Business.Users
             Assert.NotNull(loUser.Entries);
         }
 
+        /// <summary>
+        /// Test if add Entry work well
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="entry"></param>
         [Theory]
         [MemberData(nameof(AddEntry_Tests_Data))]
         public void AddEntry_Tests(bool expected, Entry entry)
@@ -61,6 +66,9 @@ namespace Model_Tests.Business.Users
             #endregion
         }
 
+        /// <summary>
+        /// AddEntry should not add null value.
+        /// </summary>
         [Fact]
         public void AddEntry_AddNullShouldNotWork()
         {
@@ -69,6 +77,11 @@ namespace Model_Tests.Business.Users
             Assert.Empty(loUser.Entries);
         }
 
+        /// <summary>
+        /// Test if RemoveEntry work well.
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="entry"></param>
         [Theory]
         [MemberData(nameof(RemoveEntry_Tests_Data))]
         public void RemoveEntry_Tests(bool expected, Entry entry)

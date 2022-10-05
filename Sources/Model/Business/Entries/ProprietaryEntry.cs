@@ -29,7 +29,7 @@ namespace Model.Business.Entries
             set => base.Note = value; 
         }
 
-        private List<MailedUser> _sharedWith = new List<MailedUser>();
+        private readonly List<MailedUser> _sharedWith = new List<MailedUser>();
         public IEnumerable<MailedUser> SharedWith => new ReadOnlyCollection<MailedUser>(_sharedWith);
 
         public ProprietaryEntry(string login, string password, string app, string? note) 

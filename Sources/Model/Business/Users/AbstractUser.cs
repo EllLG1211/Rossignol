@@ -46,7 +46,10 @@ namespace Model.Business.Users
         /// <param name="entry">Entry to delete</param>
         public void RemoveEntry(Entry? entry)
         {
-            _entries.Remove(entry);
+            if(entry != null)
+            { 
+                _entries.Remove(entry);
+            }
         }
 
 

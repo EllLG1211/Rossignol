@@ -116,13 +116,6 @@ namespace Model_Tests.Business.Entries
             Assert.Equal("Discord - loremipsum@gmail.com", entry.Label);
         }
 
-        [Fact]
-        public void GetSharedWith_ShouldReturnAIReadOnlyList()
-        {
-            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
-            // Je ne sais pas comment faire ce test.
-        }
-
         /// <summary>
         /// Test if SharedToUser add user in the entry
         /// </summary>
@@ -149,6 +142,10 @@ namespace Model_Tests.Business.Entries
             };
         }
 
+        /// <summary>
+        /// Test if UnshareToUser work well.
+        /// </summary>
+        /// <param name="user"></param>
         [Theory]
         [MemberData(nameof(UnsharedToUser_ShouldUserUserFromSharedWith_Data))]
         public void UnsharedToUser_ShouldUserUserFromSharedWith(MailedUser user)
@@ -161,15 +158,19 @@ namespace Model_Tests.Business.Entries
 
         public static IEnumerable<Object[]> UnsharedToUser_ShouldUserUserFromSharedWith_Data()
         {
+            #region Test with ConnectedUser
             yield return new Object[]
             {
                 new ConnectedUser("loremipsum@gmail.com","1234")
             };
+            #endregion
 
+            #region Test with SharerUser
             yield return new Object[]
             {
                 new SharerUser("loremipsum@gmail.com","1234")
             };
+            #endregion
         }
     }
 }

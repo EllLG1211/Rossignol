@@ -28,7 +28,7 @@ namespace Model.Business.Entries
             set => base.Note = value; 
         }
 
-        public readonly List<MailedUser> sharedWith;
+        public List<MailedUser> sharedWith;
 
         public ProprietaryEntry(string login, string password, string app, string note) 
             : base(login, password, app, note)

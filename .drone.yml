@@ -11,7 +11,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:6.0
     volumes:
       - name: docs
-        path: /docsprojects
+        path: /docs
     commands:
       - cd Sources/
       - dotnet restore Console_Rossignol.sln
@@ -45,6 +45,17 @@ steps:
       sonar_token:
         from_secret: SECRET_SONAR_LOGIN
     depends_on: [tests]
+
+- name: generate-and-deploy-docs
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
+    failure: ignore
+    volumes:
+      - name: docs
+        path: /docs
+    commands:
+      - cd Documentation/doxygen
+      - doxygen Doxyfile
+    depends_on: [ build ]
 
 volumes:
 - name: docs

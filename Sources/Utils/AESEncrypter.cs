@@ -11,14 +11,20 @@ namespace Utils
 {
     public class AesEncrypter : IEncrypter
     {
-        public byte[] Encrypt(string key, Entry entry)
+        public byte[] Encrypt(string key, string toEncrypt)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
-            if (entry == null)
-                throw new ArgumentNullException(nameof(entry));
+            if (toEncrypt == null)
+                throw new ArgumentNullException(nameof(toEncrypt));
 
-            byte[] byteKey = Encoding.UTF8.GetBytes(key);
+            byte[] byteKey = new byte[16];
+
+            using (var md5Hasher = MD5.Create())
+            {
+                byteKey = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(key));
+            }
+
             byte[] encrypted;
 
             using (Aes aes = Aes.Create())
@@ -37,7 +43,7 @@ namespace Utils
                     {
                         using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                         {
-                            swEncrypt.Write(entry);
+                            swEncrypt.Write(toEncrypt);
                         }
                         encrypted = msEncrypt.ToArray();
                     }

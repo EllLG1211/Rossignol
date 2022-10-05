@@ -9,6 +9,6 @@ namespace Utils
 {
     public interface IEncrypter
     {
-        byte[] Encrypt(string key, Entry entry);
+        byte[] Encrypt(string key, string toEncrypt);
     }
 }

@@ -17,7 +17,13 @@ namespace Utils
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
 
-            byte[] byteKey = Encoding.UTF8.GetBytes(key);
+            byte[] byteKey = new byte[16];
+
+            using (var md5Hasher = MD5.Create())
+            {
+                byteKey = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(key));
+            }
+
             byte[] ciphered = entry;
             string deciphered = "";
 

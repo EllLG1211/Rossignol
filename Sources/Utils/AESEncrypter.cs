@@ -18,7 +18,7 @@ namespace Utils
             if (toEncrypt == null)
                 throw new ArgumentNullException(nameof(toEncrypt));
 
-            byte[] byteKey = new byte[16];
+            byte[] byteKey;
 
             using (var md5Hasher = MD5.Create())
             {

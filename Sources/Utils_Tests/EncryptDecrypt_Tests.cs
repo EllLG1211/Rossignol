@@ -46,6 +46,26 @@ namespace Utils_Tests
         }
 
         [Theory]
+        [InlineData(new byte[] { 160, 9, 5, 187, 70, 109, 189, 243, 234, 224, 213, 125, 82, 56, 204, 44, 162, 182, 110, 39, 245, 77, 219, 0, 38, 36, 161, 168, 218, 64, 93, 236 }, "mysupersecretpassword", "password$withspécialchâracters:)", false)]
+        [InlineData(new byte[] { 160, 9, 5, 187, 70, 109, 189, 243, 234, 224, 213, 125, 82, 56, 204, 44, 162, 182, 110, 39, 245, 77, 219, 0, 38, 36, 161, 168, 218, 64, 93, 236 }, "mysupersecretpassword", null, true)]
+        [InlineData(null, "mysupersecretpassword", "password$withspécialchâracters:)", true)]
+        [InlineData(null, "mysupersecretpassword", null, true)]
+        public void Decrypt(byte[] toDecrypt, string secret, string key, bool shouldThrow)
+        {
+            try
+            {
+                IDecrypter decrypter = new AesDecrypter();
+                string deciphered = decrypter.Decrypt(key, toDecrypt);
+                Assert.Equal(secret, deciphered);
+                Assert.False(shouldThrow);
+            }
+            catch
+            {
+                Assert.True(shouldThrow);
+            }
+        }
+
+        [Theory]
         [InlineData("mysupersecretpassword", "leMasterPassword", false)]
         [InlineData("averylongpasswordforaesencryptionwithmorethan16bytes", "leMasterPassword", false)]
         [InlineData("shortpass", "leMasterPassword", false)]

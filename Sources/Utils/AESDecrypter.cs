@@ -17,7 +17,7 @@ namespace Utils
             if (entry == null)
                 throw new ArgumentNullException(nameof(entry));
 
-            byte[] byteKey = new byte[16];
+            byte[] byteKey;
 
             using (var md5Hasher = MD5.Create())
             {

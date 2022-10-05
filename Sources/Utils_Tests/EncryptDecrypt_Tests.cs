@@ -1,4 +1,4 @@
-using Model;
+using NLog;
 using Utils;
 using Xunit;
 
@@ -56,6 +56,16 @@ namespace Utils_Tests
             {
                 IDecrypter decrypter = new AesDecrypter();
                 string deciphered = decrypter.Decrypt(key, toDecrypt);
+                if (!secret.Equals(deciphered))
+                {
+                    Logger log = LogManager.GetCurrentClassLogger();
+
+                    IEncrypter encrypter = new AesEncrypter();
+                    byte[] crypted = encrypter.Encrypt(key, secret);
+                    log.Debug(toDecrypt);
+                    log.Debug(crypted);
+                    Assert.False(shouldThrow);
+                }
                 Assert.Equal(secret, deciphered);
                 Assert.False(shouldThrow);
             }

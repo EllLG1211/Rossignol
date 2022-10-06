@@ -1,4 +1,5 @@
-using Utils;
+using Encryption;
+using Encryption.AESEncryption;
 using Xunit;
 
 namespace Utils_Tests

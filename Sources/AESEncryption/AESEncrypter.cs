@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
 
-namespace Utils
+namespace Encryption.AESEncryption
 {   /// <summary>
     /// implementation of the IEncrypter which uses AES-128 to encrypt strings
     /// </summary>

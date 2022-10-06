@@ -9,9 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E7E1D41B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model_Tests", "Tests\Model_Tests\Model_Tests.csproj", "{F4B72DA9-9F6B-41D9-9983-0BFAFE2C068A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{F5341D01-6A24-4CFA-B44D-002FC58BE173}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encryption", "Utils\Encryption.csproj", "{F5341D01-6A24-4CFA-B44D-002FC58BE173}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils_Tests", "Utils_Tests\Utils_Tests.csproj", "{11F4883F-3353-4C53-AB2E-C7281DAD4902}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils_Tests", "Utils_Tests\Utils_Tests.csproj", "{11F4883F-3353-4C53-AB2E-C7281DAD4902}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AESEncryption", "AESEncryption\AESEncryption.csproj", "{0D84B023-992D-481F-8032-E68D46AA6C6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{11F4883F-3353-4C53-AB2E-C7281DAD4902}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11F4883F-3353-4C53-AB2E-C7281DAD4902}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11F4883F-3353-4C53-AB2E-C7281DAD4902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D84B023-992D-481F-8032-E68D46AA6C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D84B023-992D-481F-8032-E68D46AA6C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D84B023-992D-481F-8032-E68D46AA6C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D84B023-992D-481F-8032-E68D46AA6C6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

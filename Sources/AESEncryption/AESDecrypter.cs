@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Utils
+namespace Encryption.AESEncryption
 {
     /// <summary>
     /// Implementation of the IDecrypter which can decrypt AES-128-encrypted strings
@@ -24,7 +24,7 @@ namespace Utils
 
             byte[] ciphered = entry;
             string deciphered = "";
-
+                
             using (Aes aes = Aes.Create())
             {
                 aes.Mode = CipherMode.CBC;

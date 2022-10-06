@@ -1,4 +1,4 @@
-﻿namespace Utils
+﻿namespace Encryption
 {
     public interface IDecrypter
     {

@@ -28,5 +28,32 @@ namespace Model_Tests.Business.Entries
             bool hashEquals = x.GetHashCode() == y.GetHashCode();
             Assert.Equal(equals, hashEquals);
         }
+
+        private readonly Entry entry = new ProprietaryEntry("lorem", "ipsum", "dolore");
+
+        [Theory]
+        [MemberData(nameof(NonEntryEquals_TestData))]
+        public void Equals_Tests_NonEntryObjects(object? o)
+        {
+            Assert.False(entry.Equals(o));
+        }
+
+        public static IEnumerable<object?[]> NonEntryEquals_TestData()
+        {
+            yield return new object?[] { null };
+            yield return new object[] { 1 };
+            yield return new object[] { 'a' };
+            yield return new object[] { new Exception() };
+            yield return new object[] { new List<float>() };
+            yield return new object[] { DateTime.Now };
+        }
+
+        [Fact]
+        public void Equals_ObjectCastedEntry_ShouldReturnTrue()
+        {
+            Entry a = new SharedEntry("lorem", "ipsum", "dolore");
+            object b = new SharedEntry("lorem", "ipsum", "dolore");
+            Assert.True(a.Equals(b));
+        }
     }
 }

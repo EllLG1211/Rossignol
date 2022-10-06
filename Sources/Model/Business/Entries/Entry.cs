@@ -58,15 +58,15 @@ namespace Model.Business.Entries
         /// <exception cref="ArgumentNullException"></exception>
         protected Entry(string login, string password, string app, string? note)
         {
-            if (String.IsNullOrEmpty(login))
+            if (string.IsNullOrEmpty(login))
             {
                 throw new ArgumentNullException(nameof(login));
             }
-            if (String.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
             {
                 throw new ArgumentNullException(nameof(password));
             }
-            if (String.IsNullOrEmpty(app))
+            if (string.IsNullOrEmpty(app))
             {
                 throw new ArgumentNullException(nameof(app));
             }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EF_Model.Entities
+﻿namespace EF_Model.Entities
 {
     public class ProprietaryEntryEntity
     {

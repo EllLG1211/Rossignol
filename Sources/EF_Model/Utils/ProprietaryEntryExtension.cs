@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model
+using EF_Model.Entities;
+using Model.Business.Entries;
 
 namespace EF_Model.Utils
 {
-    public static class ProprietaryEntryExtensions
+    public static class ProprietaryEntryExtension
     {
         public static ProprietaryEntry ToModel(this ProprietaryEntityEntity entity)
-            => new ProprietaryEntry
-            {
-                Uid = entity.Uid;
-                Login = entity.Login;
-                Password = entity.Password;
-                App = entity.App;
-                Note = entity.Note;
-			};
+            => new ProprietaryEntry(entity.Uid, entity.Login, entity.Password, entity.App, entity.Note);
 
         public static IEnumerable<ProprietaryEntry> ToModels(this IEnumerable<ProprietaryEntryEntity> entities)
             => entities.Select(e => e.ToModel());

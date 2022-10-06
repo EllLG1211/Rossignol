@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Utils\ProprietaryEntryExtensions.cs" />
+    <Compile Remove="Utils\ProprietaryEntryExtension.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Utils\ProprietaryEntryExtensions.cs" />
+    <None Include="Utils\ProprietaryEntryExtension.cs" />
   </ItemGroup>
 
   <ItemGroup>

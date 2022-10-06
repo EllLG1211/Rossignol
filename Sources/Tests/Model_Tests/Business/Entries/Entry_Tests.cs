@@ -46,6 +46,7 @@ namespace Model_Tests.Business.Entries
             yield return new object[] { new Exception() };
             yield return new object[] { new List<float>() };
             yield return new object[] { DateTime.Now };
+            yield return new object[] { "azerty " };
         }
 
         [Fact]

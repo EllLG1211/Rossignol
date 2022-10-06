@@ -98,15 +98,18 @@ namespace Utils_Tests
 
 
         [Theory]
-        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "password$withspécialchâracters:)", false)]
-        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "notthesamepassword°-°", true)]
-        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", null, true)]
-        public void TryWrongPassword(string toEncrypt, string encryptionKey, string decryptionKey, bool shouldThrow)
+        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "password$withspécialchâracters:)", false,false)]
+        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "notthesamepassword°-°", true, false)]
+        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", null, true, false)]
+        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "password$withspécialchâracters:)", true, true)]
+        public void TryWrongPassword(string toEncrypt, string encryptionKey, string decryptionKey, bool shouldThrow, bool nullEntry)
         {
             try
             {
                 IEncrypter encrypter = new AesEncrypter();
                 byte[] crypted = encrypter.Encrypt(encryptionKey, toEncrypt);
+                if (nullEntry)
+                    crypted = null;
                 IDecrypter decrypter = new AesDecrypter();
                 string deciphered = decrypter.Decrypt(decryptionKey, crypted);
                 Assert.Equal(toEncrypt, deciphered);

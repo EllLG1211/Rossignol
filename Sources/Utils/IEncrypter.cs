@@ -16,7 +16,6 @@ namespace Utils
         /// <param name="toEncrypt">the string to encrypt</param>
         /// <returns>an array of bytes containing the encrypted string</returns>
         /// <exception cref="ArgumentNullException">Thrown if one of either arguments given is null</exception>
-        /// <exception cref="CryptographicUnexpectedOperationException">Shouldn't be thrown, indicates a grave issue with the AES encryption engine (null IV)</exception>
         byte[] Encrypt(string key, string toEncrypt);
     }
 }

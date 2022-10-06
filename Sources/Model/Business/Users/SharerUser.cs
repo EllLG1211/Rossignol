@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Users
 {
-    public class Sharer : AbstractUser
+    public class SharerUser : MailedUser
     {
-        public Sharer(string email) : base(email)
+        public SharerUser(string mail, string password) : base(mail, password)
         {
         }
     }

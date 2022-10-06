@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Model.Business.Users;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,10 +29,28 @@ namespace Model.Business.Entries
             set => base.Note = value; 
         }
 
-        public ProprietaryEntry(string login, string password, string app, string note) 
+        private List<MailedUser> _sharedWith = new List<MailedUser>();
+        public IEnumerable<MailedUser> SharedWith => new ReadOnlyCollection<MailedUser>(_sharedWith);
+
+        public ProprietaryEntry(string login, string password, string app, string? note) 
             : base(login, password, app, note){}
 
         public ProprietaryEntry(string login, string password, string app)
             : this(login, password, app, string.Empty) { }
+
+        public IReadOnlyList<MailedUser> GetSharedWith()
+        {
+            return _sharedWith.AsReadOnly();
+        }
+
+        public void ShareToUser(MailedUser user)
+        {
+            _sharedWith.Add(user);
+        }
+
+        public void UnshareToUser(MailedUser user)
+        {
+            _sharedWith.Remove(user);
+        }
     }
 }

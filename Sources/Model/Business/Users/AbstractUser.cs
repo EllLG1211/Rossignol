@@ -5,42 +5,50 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using Model.Business.Entries;
+using System.Collections.ObjectModel;
 
 namespace Model.Business.Users
 {
-    public abstract class AbstractUser : IEquatable<AbstractUser>
+    public abstract class AbstractUser
     {
-        /// <summary>
-        /// The user's email
-        /// </summary>
-        public MailAddress email { get; protected set; }
-
-
         /// <summary>
         /// The user's entries
         /// </summary>
-        public List<Entry> entries { get; protected set; } = new List<Entry>();
+        private readonly List<Entry> _entries = new List<Entry>();
+        public IEnumerable<Entry> Entries => new ReadOnlyCollection<Entry>(_entries);
 
         /// <summary>
-        /// Checks if two users are equal
+        /// Master password of the user.
         /// </summary>
-        bool IEquatable<AbstractUser>.Equals(AbstractUser? other)
+        public String Password { get; protected set; }
+
+        protected AbstractUser(string password)
         {
-            return email.Equals(other?.email);
+            Password = password;
         }
 
+
         /// <summary>
-        /// Constructor
+        /// Add an entry to the user.
         /// </summary>
-        /// <param name="email">the user's email</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        protected AbstractUser(string email)
+        /// <param name="entry">Entry to add</param>
+        public void AddEntry(Entry? entry)
         {
-            if (String.IsNullOrEmpty(email))
+            if(entry != null)
             {
-                throw new ArgumentNullException(nameof(email));
-            }
-            this.email = new MailAddress(email);
+                _entries.Add(entry);
+            } 
         }
+
+        /// <summary>
+        /// Remove an entry of the user.
+        /// </summary>
+        /// <param name="entry">Entry to delete</param>
+        public void RemoveEntry(Entry? entry)
+        {
+            _entries.Remove(entry);
+        }
+
+
     }
 }

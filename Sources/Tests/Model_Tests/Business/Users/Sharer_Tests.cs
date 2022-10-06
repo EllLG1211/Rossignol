@@ -10,24 +10,21 @@ namespace Model_Tests.Business.Users
 {
     public class Sharer_Tests
     {
-        [Theory]
-        [InlineData(false, "sarmat@torba.com")]
-        [InlineData(false, "kon@foxmail.cn")]
-        [InlineData(true, "pete@totallyreal")]
-        [InlineData(true, "zabuk@machina/../../index.php")]
-        [InlineData(true, "grineerzrodak.skp")]
-        public void Constructor_ShouldAssignValuesOrThrow(bool shouldThrow, string email)
+        [Fact]
+        public void Constructor_ShouldAssignEmail()
         {
-            try
-            {
-                Sharer user = new Sharer(email);
-                Assert.Equal(email, user.email.Address);
+            string mail = "test@test.com";
+            SharerUser user = new(mail, "1234");
+            Assert.True(mail.Equals(user.Mail));
+        }
 
-            }
-            catch
-            {
-                Assert.True(shouldThrow);
-            }
+        [Fact]
+        public void Constructor_ShouldAssignPassword()
+        {
+            string mail = "test@test.com";
+            string password = "1234";
+            SharerUser user = new(mail, password);
+            Assert.True(password.Equals(user.Password));
         }
     }
 }

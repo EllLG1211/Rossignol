@@ -1,5 +1,3 @@
-using NLog;
-using System.Security.Cryptography;
 using Utils;
 using Xunit;
 

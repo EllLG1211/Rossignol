@@ -8,7 +8,9 @@ using System.IO;
 using System.Security.Cryptography;
 
 namespace Utils
-{
+{   /// <summary>
+    /// implementation of the IEncrypter which uses AES-128 to encrypt strings
+    /// </summary>
     public class AesEncrypter : IEncrypter
     {
         public byte[] Encrypt(string key, string toEncrypt)

@@ -1,4 +1,5 @@
 using NLog;
+using System.Security.Cryptography;
 using Utils;
 using Xunit;
 
@@ -64,6 +65,8 @@ namespace Utils_Tests
             }
         }*/
 
+
+
         [Theory]
         [InlineData("mysupersecretpassword", "leMasterPassword", false)]
         [InlineData("averylongpasswordforaesencryptionwithmorethan16bytes", "leMasterPassword", false)]
@@ -84,6 +87,28 @@ namespace Utils_Tests
                 byte[] crypted = encrypter.Encrypt(key, toEncrypt);
                 IDecrypter decrypter = new AesDecrypter();
                 string deciphered = decrypter.Decrypt(key, crypted);
+                Assert.Equal(toEncrypt, deciphered);
+                Assert.False(shouldThrow);
+            }
+            catch
+            {
+                Assert.True(shouldThrow);
+            }
+        }
+
+
+        [Theory]
+        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "password$withspécialchâracters:)", false)]
+        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "notthesamepassword°-°", true)]
+        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", null, true)]
+        public void TryWrongPassword(string toEncrypt, string encryptionKey, string decryptionKey, bool shouldThrow)
+        {
+            try
+            {
+                IEncrypter encrypter = new AesEncrypter();
+                byte[] crypted = encrypter.Encrypt(encryptionKey, toEncrypt);
+                IDecrypter decrypter = new AesDecrypter();
+                string deciphered = decrypter.Decrypt(decryptionKey, crypted);
                 Assert.Equal(toEncrypt, deciphered);
                 Assert.False(shouldThrow);
             }

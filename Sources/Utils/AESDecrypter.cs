@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
+    /// <summary>
+    /// Implementation of the IDecrypter which can decrypt AES-128-encrypted strings
+    /// </summary>
     public class AesDecrypter : IDecrypter
     {
         public string Decrypt(string key, byte[] entry)

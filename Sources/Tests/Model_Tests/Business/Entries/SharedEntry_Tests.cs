@@ -67,5 +67,30 @@ namespace Model_Tests.Business.Entries
             SharedEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
             Assert.Equal(string.Empty, entry.Note);
         }
+
+        #region Test constructor with Guid
+        [Theory]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        public void Constructor_Guid_ShouldThrowArgumentNullException(bool throwSuccessExpected, bool useGuid)
+        {
+            if (throwSuccessExpected)
+            {
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    if (useGuid)
+                    {
+                        SharedEntry entry = new(Guid.NewGuid(), "login", "1234", "app");
+                    }
+                    else
+                    {
+                        SharedEntry entry = new(null, "login", "1234", "app");
+                    }
+                });
+                return;
+            }
+            Assert.False(throwSuccessExpected);
+        }
+        #endregion
     }
 }

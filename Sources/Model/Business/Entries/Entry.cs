@@ -84,6 +84,8 @@ namespace Model.Business.Entries
 
         protected Entry(string login, string password, string app, string? note): this(Guid.NewGuid(), login,password, app, note) { }
 
+        protected Entry(string login, string password, string app) : this(Guid.NewGuid(), login, password, app, null) { }
+
         public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 
         public override bool Equals(object? obj)

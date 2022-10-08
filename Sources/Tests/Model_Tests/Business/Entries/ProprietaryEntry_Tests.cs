@@ -43,8 +43,12 @@ namespace Model_Tests.Business.Entries
         /// <param name="app"></param>
         /// <param name="throwSuccessExpected"></param>
         [Theory]
-        [MemberData(nameof(Constructor_ShouldThrowArgumentNullException_data))]
-        public void Constructor_ShouldThrowArgumentNullException(bool throwSuccessExpected, Guid uid, string login, string password, string app)
+        [InlineData(true, null, "Lorem ipsum", "abracadabra")]
+        [InlineData(true, "schtroumpf", null, "abracadabra")]
+        [InlineData(true, "schtroumpf", "Lorem ipsum", null)]
+        [InlineData(true, null, null, null)]
+        [InlineData(false, "schtroumpf", "Lorem ipsum", "Avadra kevadra")]
+        public void Constructor_ShouldThrowArgumentNullException(bool throwSuccessExpected, string login, string password, string app)
         {
             if (throwSuccessExpected)
             {
@@ -54,74 +58,42 @@ namespace Model_Tests.Business.Entries
             Assert.False(throwSuccessExpected);
         }
 
-        public static IEnumerable<Object[]> Constructor_ShouldThrowArgumentNullException_data()
+        #region Test constructor with Guid
+        [Theory]
+        [InlineData(true,false)]
+        [InlineData(false, true)]
+        public void Constructor_Guid_ShouldThrowArgumentNullException(bool throwSuccessExpected, bool useGuid)
         {
-            #region true with uid null
-            yield return new Object[]
+            if (throwSuccessExpected)
             {
-                true,
-                null,
-                "schtroumpf",
-                "Lorem ipsum",
-                "Avada kevadra"
-            };
-            #endregion
+                Assert.Throws<ArgumentNullException>(() => 
+                {
+                    if (useGuid)
+                    {
+                        ProprietaryEntry entry = new(Guid.NewGuid(), "login", "1234", "app");
+                    } else
+                    {
+                        ProprietaryEntry entry = new(null, "login", "1234", "app");
+                    }
+                });
+                return;
+            }
+            Assert.False(throwSuccessExpected);
+        }
+        #endregion
 
-            #region true with login null
-            yield return new Object[]
-            {
-                true,
-                Guid.NewGuid(),
-                null,
-                "Lorem ipsum",
-                "Avada kevadra"
-            };
-            #endregion
-
-            #region true with password null
-            yield return new Object[]
-            {
-                true,
-                Guid.NewGuid(),
-                "schtroumpf",
-                null,
-                "Avada kevadra"
-            };
-            #endregion
-
-            #region true with app null
-            yield return new Object[]
-            {
-                true,
-                Guid.NewGuid(),
-                "schtroumpf",
-                "Lorem ipsum",
-                null
-            };
-            #endregion
-
-            #region true with all null
+        /*public static IEnumerable<Object[]> Constructor_ShouldThrowArgumentNullException_data()
+        {
             yield return new Object[]
             {
                 true,
                 null,
-                null,
-                null,
-                null
-            };
-            #endregion
-
-            #region false with no null
-            yield return new Object[]
-            {
-                true,
-                Guid.NewGuid(),
                 "schtroumpf",
                 "Lorem ipsum",
                 "Avadra kevadra"
             };
-            #endregion
-        }
+
+        }*/
 
         /// <summary>
         /// Test if note is reassign when the parameter is not passed.

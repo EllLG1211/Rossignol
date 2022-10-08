@@ -40,7 +40,7 @@ namespace Model.Business
         ///     The exception contains name of the null field (<i>mail</i>, <i>password</i>, <i>confirmPassword</i>).
         /// </exception>
         /// <exception cref="ArgumentException">Throwed when <i>password</i> and <i>confirmPassword</i> are not equal.</exception>
-        public void Signin(string mail, string password, string confirmPassword)
+        public AbstractUser Signin(string mail, string password, string confirmPassword)
         {
             if(String.IsNullOrEmpty(mail))
             {
@@ -59,7 +59,32 @@ namespace Model.Business
                 throw new ArgumentException("Password does not equal confirmPassword");
             }
 
-            ConnectedUser = new ConnectedUser(mail, password);
+            return new ConnectedUser(mail, password);
+        }
+
+        /// <summary>
+        /// Register the user for <i>LocalUser</i>.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        public AbstractUser Signin(string password, string confirmPassword)
+        {
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new ArgumentNullException("password");
+            }
+            else if (String.IsNullOrEmpty(confirmPassword))
+            {
+                throw new ArgumentNullException("confirmPassword");
+            }
+            else if (!password.Equals(confirmPassword))
+            {
+                throw new ArgumentException("Password does not equal confirmPassword");
+            }
+
+            return new LocalUser(password);
         }
     }
 }

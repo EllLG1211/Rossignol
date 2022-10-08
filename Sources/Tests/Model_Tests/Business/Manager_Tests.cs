@@ -1,4 +1,5 @@
 ﻿using Model.Business;
+using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Model_Tests.Business
 {
     public class Manager_Tests
     {
+        #region Signin a ConnectedUser
         [Theory]
         [InlineData(true, null, "1234", "1234")]
         [InlineData(true, "test@test.com", null, "1234")]
@@ -19,7 +21,7 @@ namespace Model_Tests.Business
         [InlineData(true, "test@test.com", "1234", "")]
         [InlineData(false, "test@test.com", "1234", "1234")]
         [InlineData(false, "test@test.com", "1234", "12345")]
-        public void Signin_ShouldThrowArgumentNullException(bool expected, string mail, string password, string confirmPassword)
+        public void SigninConnectedUser_ShouldThrowArgumentNullException(bool expected, string mail, string password, string confirmPassword)
         {
             Manager manager = new Manager();
             if (expected)
@@ -48,7 +50,7 @@ namespace Model_Tests.Business
         [InlineData(false, "test@test.com", "1234", "")]
         [InlineData(false, "test@test.com", "1234", "1234")]
         [InlineData(true, "test@test.com", "1234", "12345")]
-        public void Signin_ShouldThrowArgumentException(bool expected, string mail, string password, string confirmPassword)
+        public void SigninConnectedUser_ShouldThrowArgumentException(bool expected, string mail, string password, string confirmPassword)
         {
             Manager manager = new Manager();
             if (expected)
@@ -70,11 +72,82 @@ namespace Model_Tests.Business
         }
 
         [Fact]
-        public void Signin_ShouldInstantiateConnectedUserInManager()
+        public void SigninConnectedUser_ShouldReturnConnectedUser()
         {
             Manager manager = new Manager();
-            manager.Signin("test@test.com", "1234", "1234");
-            Assert.NotNull(manager.ConnectedUser);
+            AbstractUser user = manager.Signin("test@test.com", "1234", "1234");
+            Assert.IsType<ConnectedUser>(user);
         }
+        #endregion
+
+        #region Signin a LocalUser
+        [Theory]
+        [InlineData(true, null, "1234")]
+        [InlineData(true, "1234", null)]
+        [InlineData(true, "", "1234")]
+        [InlineData(true, "1234", "")]
+        [InlineData(false, "1234", "1234")]
+        [InlineData(false, "1234", "12345")]
+        public void SigninLocalUser_ShouldThrowArgumentNullException(bool expected, string password, string confirmPassword)
+        {
+            Manager manager = new Manager();
+            if (expected)
+            {
+                Assert.Throws<ArgumentNullException>(() => { manager.Signin(password, confirmPassword); });
+                return;
+            }
+            else
+            {
+                try
+                {
+                    manager.Signin(password, confirmPassword);
+                }
+                catch (Exception)
+                {
+                    Assert.False(expected);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(false, "1234", "1234")]
+        [InlineData(false,  null, "1234")]
+        [InlineData(false, "1234", null)]
+        [InlineData(false, "", "1234")]
+        [InlineData(false, "1234", "")]
+        [InlineData(true, "1234", "12345")]
+        public void SigninLocalUser_ShouldThrowArgumentException(bool expected, string password, string confirmPassword)
+        {
+            Manager manager = new Manager();
+            if (expected)
+            {
+                Assert.Throws<ArgumentException>(() => { manager.Signin(password, confirmPassword); });
+                return;
+            }
+            else
+            {
+                try
+                {
+                    manager.Signin(password, confirmPassword);
+                }
+                catch (Exception e)
+                {
+                    Assert.False(expected);
+                }
+            }
+        }
+
+        [Fact]
+        public void SigninLocalUser_ShouldReturnConnectedUser()
+        {
+            Manager manager = new Manager();
+            AbstractUser user = manager.Signin("1234", "1234");
+            Assert.IsType<LocalUser>(user);
+        }
+        #endregion
+
+        #region Login ConnectedUser
+
+        #endregion
     }
 }

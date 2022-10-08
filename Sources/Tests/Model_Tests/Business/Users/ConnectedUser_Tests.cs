@@ -36,6 +36,23 @@ namespace Model_Tests.Business.Users
             Assert.Equal(user.Password, password);
         }
 
+        [Fact]
+        public void Constructor_ShouldInstantiateEntries()
+        {
+            AbstractUser user = new ConnectedUser("test@test.com", "1234");
+            Assert.NotNull(user.Entries);
+        }
+
+        [Fact]
+        public void Constructor_ShouldGiveListInstance()
+        {
+            List<Entry> entries = new List<Entry>();
+            Entry entry = new ProprietaryEntry("test", "1234", "app");
+            entries.Add(entry);
+            AbstractUser user = new ConnectedUser("test@test.com", "1234", entries);
+            Assert.Contains(entry, user.Entries);
+        }
+
         /// <summary>
         /// Test if Mail's setter set the value of Mail.
         /// </summary>

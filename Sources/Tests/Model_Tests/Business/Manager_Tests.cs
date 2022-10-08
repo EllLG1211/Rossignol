@@ -1,7 +1,9 @@
 ﻿using Model.Business;
+using Model.Business.Entries;
 using Model.Business.Users;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +23,7 @@ namespace Model_Tests.Business
         [InlineData(true, "test@test.com", "1234", "")]
         [InlineData(false, "test@test.com", "1234", "1234")]
         [InlineData(false, "test@test.com", "1234", "12345")]
-        public void SigninConnectedUser_ShouldThrowArgumentNullException(bool expected, string mail, string password, string confirmPassword)
+        public void Signin_ConnectedUser_ShouldThrowArgumentNullException(bool expected, string mail, string password, string confirmPassword)
         {
             Manager manager = new Manager();
             if (expected)
@@ -50,7 +52,7 @@ namespace Model_Tests.Business
         [InlineData(false, "test@test.com", "1234", "")]
         [InlineData(false, "test@test.com", "1234", "1234")]
         [InlineData(true, "test@test.com", "1234", "12345")]
-        public void SigninConnectedUser_ShouldThrowArgumentException(bool expected, string mail, string password, string confirmPassword)
+        public void Signin_ConnectedUser_ShouldThrowArgumentException(bool expected, string mail, string password, string confirmPassword)
         {
             Manager manager = new Manager();
             if (expected)
@@ -64,7 +66,7 @@ namespace Model_Tests.Business
                 {
                     manager.Signin(mail, password, confirmPassword);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Assert.False(expected);
                 }
@@ -72,7 +74,7 @@ namespace Model_Tests.Business
         }
 
         [Fact]
-        public void SigninConnectedUser_ShouldReturnConnectedUser()
+        public void Signin_ConnectedUser_ShouldReturnConnectedUser()
         {
             Manager manager = new Manager();
             AbstractUser user = manager.Signin("test@test.com", "1234", "1234");
@@ -88,7 +90,7 @@ namespace Model_Tests.Business
         [InlineData(true, "1234", "")]
         [InlineData(false, "1234", "1234")]
         [InlineData(false, "1234", "12345")]
-        public void SigninLocalUser_ShouldThrowArgumentNullException(bool expected, string password, string confirmPassword)
+        public void Signin_LocalUser_ShouldThrowArgumentNullException(bool expected, string password, string confirmPassword)
         {
             Manager manager = new Manager();
             if (expected)
@@ -116,7 +118,7 @@ namespace Model_Tests.Business
         [InlineData(false, "", "1234")]
         [InlineData(false, "1234", "")]
         [InlineData(true, "1234", "12345")]
-        public void SigninLocalUser_ShouldThrowArgumentException(bool expected, string password, string confirmPassword)
+        public void Signin_LocalUser_ShouldThrowArgumentException(bool expected, string password, string confirmPassword)
         {
             Manager manager = new Manager();
             if (expected)
@@ -130,7 +132,7 @@ namespace Model_Tests.Business
                 {
                     manager.Signin(password, confirmPassword);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Assert.False(expected);
                 }
@@ -138,7 +140,7 @@ namespace Model_Tests.Business
         }
 
         [Fact]
-        public void SigninLocalUser_ShouldReturnConnectedUser()
+        public void Signin_LocalUser_ShouldReturnConnectedUser()
         {
             Manager manager = new Manager();
             AbstractUser user = manager.Signin("1234", "1234");
@@ -147,7 +149,57 @@ namespace Model_Tests.Business
         #endregion
 
         #region Login ConnectedUser
+        [Fact]
+        public void Login_ConnectedUser_ShouldInstantiateAConnectedUserInManager()
+        {
+            Manager manager = new Manager();
+            manager.Login("test@test.com", "1234");
+            Assert.IsType<ConnectedUser>(manager.ConnectedUser);
+        }
+        #endregion
 
+        #region Login LocalUser
+        [Fact]
+        public void Login_LocalUser_ShouldInstantiateALocalUserInManager()
+        {
+            Manager manager = new Manager();
+            manager.Login("1234");
+            Assert.IsType<LocalUser>(manager.ConnectedUser);
+        }
+        #endregion
+
+        #region CreateEntryToConnectedUser
+        [Fact]
+        public void CreateEntryToConnectedUser_ShouldAddProprietaryEntryToConnectedUser()
+        {
+            var manager = new Manager();
+            manager.Login("1234");
+            manager.CreateEntryToConnectedUser("test", "1234", "discord", null);
+            if (manager.ConnectedUser.Entries.Count() == 1)
+            {
+                foreach (Entry entry in manager.ConnectedUser.Entries)
+                {
+                    Assert.IsType<ProprietaryEntry>(entry);
+                }
+            }
+        }
+        #endregion
+
+        #region GiveEntryToConnectedUser
+        [Fact]
+        public void GiveEntryToConnectedUser_ShouldAddSharedEntryToConnectedUser()
+        {
+            var manager = new Manager();
+            manager.Login("1234");
+            manager.GiveEntryToConnectedUser("test", "1234", "discord", null);
+            if (manager.ConnectedUser.Entries.Count() == 1)
+            {
+                foreach (Entry entry in manager.ConnectedUser.Entries)
+                {
+                    Assert.IsType<SharedEntry>(entry);
+                }
+            }
+        }
         #endregion
     }
 }

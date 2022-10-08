@@ -24,5 +24,9 @@ namespace Model.Business.Users
         public ConnectedUser(string mail, string password) : base(mail, password)
         {
         }
+
+        public ConnectedUser(string mail, string password, List<Entry> entries) : base(mail, password, entries)
+        {
+        }
     }
 }

@@ -32,6 +32,23 @@ namespace Model_Tests.Business.Users
             Assert.NotNull(loUser.Entries);
         }
 
+        [Fact]
+        public void Constructor_ShouldInstantiateEntries()
+        {
+            AbstractUser user = new LocalUser("1234");
+            Assert.NotNull(user.Entries);
+        }
+
+        [Fact]
+        public void Constructor_ShouldGiveListInstance()
+        {
+            List<Entry> entries = new List<Entry>();
+            Entry entry = new ProprietaryEntry("test", "1234", "app");
+            entries.Add(entry);
+            AbstractUser user = new LocalUser("1234", entries);
+            Assert.Contains(entry, user.Entries);
+        }
+
         /// <summary>
         /// Test if add Entry work well
         /// </summary>

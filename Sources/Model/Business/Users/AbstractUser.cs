@@ -15,17 +15,21 @@ namespace Model.Business.Users
         /// The user's entries
         /// </summary>
         private readonly List<Entry> _entries = new List<Entry>();
-        public IEnumerable<Entry> Entries => new ReadOnlyCollection<Entry>(_entries);
+        public IEnumerable<Entry> Entries;
 
         /// <summary>
         /// Master password of the user.
         /// </summary>
         public String Password { get; protected set; }
-
-        protected AbstractUser(string password)
+        
+        protected AbstractUser(string password, List<Entry> entries)
         {
             Password = password;
+            _entries = entries;
+            Entries = new ReadOnlyCollection<Entry>(_entries);
         }
+
+        protected AbstractUser(string password) : this(password, new List<Entry>()) { }
 
 
         /// <summary>

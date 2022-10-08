@@ -205,6 +205,13 @@ namespace Model_Tests.Business
                 }
             }
         }
+
+        [Fact]
+        public void CreateEntryToConnectedUser_ShouldThrowNullReferenceException()
+        {
+            var manager = new Manager();
+            Assert.Throws<NullReferenceException>(() => { manager.CreateEntryToConnectedUser("login", "password", "app", "note"); });
+        }
         #endregion
 
         #region GiveEntryToConnectedUser
@@ -221,6 +228,13 @@ namespace Model_Tests.Business
                     Assert.IsType<SharedEntry>(entry);
                 }
             }
+        }
+
+        [Fact]
+        public void GiveEntryToConnectedUser_ShouldThrowNullReferenceException()
+        {
+            var manager = new Manager();
+            Assert.Throws<NullReferenceException>(() => { manager.GiveEntryToConnectedUser("login", "password", "app", "note"); });
         }
         #endregion
     }

@@ -48,7 +48,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 true,
-                new ProprietaryEntry("admin","1234","discord")
+                new SharedEntry("admin","1234","discord")
             };
             #endregion
 
@@ -56,7 +56,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 true,
-                new SharedEntry("admin","1234","discord")
+                new ProprietaryEntry("admin","1234","discord")
             };
             #endregion
         }
@@ -86,7 +86,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 false,
-                new ProprietaryEntry("admin","1234","discord")
+                new SharedEntry("admin","1234","discord")
             };
             #endregion
 
@@ -94,7 +94,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 false,
-                new SharedEntry("admin","1234","discord")
+                new ProprietaryEntry("admin","1234","discord")
             };
             #endregion
         }

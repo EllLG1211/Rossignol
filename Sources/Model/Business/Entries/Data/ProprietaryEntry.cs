@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Entries
 {
-    public class SharedEntry : Entry
+    public class ProprietaryEntry : Entry
     {
-        public SharedEntry(string login, string password, string app, string? note) : base(login, password, app, note)
+        public ProprietaryEntry(string login, string password, string app, string? note) : base(login, password, app, note)
         {
         }
 
-        public SharedEntry(string login, string password, string app)
+        public ProprietaryEntry(string login, string password, string app)
             : this(login, password, app, string.Empty) { }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Entries
 {
-    public class ProprietaryEntry : Entry
+    public class SharedEntry : Entry
     {
 
         public new string Login 
@@ -32,10 +32,10 @@ namespace Model.Business.Entries
         private List<MailedUser> _sharedWith = new List<MailedUser>();
         public IEnumerable<MailedUser> SharedWith => new ReadOnlyCollection<MailedUser>(_sharedWith);
 
-        public ProprietaryEntry(string login, string password, string app, string? note) 
+        public SharedEntry(string login, string password, string app, string? note) 
             : base(login, password, app, note){}
-
-        public ProprietaryEntry(string login, string password, string app)
+        
+        public SharedEntry(string login, string password, string app)
             : this(login, password, app, string.Empty) { }
 
         public IReadOnlyList<MailedUser> GetSharedWith()

@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Model.Business.Entries.Serialized
+{
+    public class EncryptedSharedEntry : EncryptedEntry
+    {
+        public byte[] EncryptedSharedWith { get; set; }
+    }
+}

@@ -18,7 +18,7 @@ namespace Model_Tests.Business.Entries
         }
 
         public static readonly object?[] Equals_TestData_Nullable
-            = new object?[] { false, new SharedEntry("Login", "1234", "Discord"), null };
+            = new object?[] { false, new ProprietaryEntry("Login", "1234", "Discord"), null };
 
         [Theory]
         [MemberData(nameof(EntryComparer_Tests.GetHashCode_TestData), MemberType = typeof(EntryComparer_Tests))]

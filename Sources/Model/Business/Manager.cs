@@ -19,7 +19,7 @@ namespace Model.Business
         /// <param name="password"></param>
         public void Login(string mail, string password, List<Entry> entries)
         {
-            ConnectedUser = new ConnectedUser(mail, password);
+            ConnectedUser = new ConnectedUser(mail, password, entries);
         }
 
         public void Login(string mail, string password)

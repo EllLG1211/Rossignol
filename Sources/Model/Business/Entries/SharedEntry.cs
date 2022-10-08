@@ -17,5 +17,9 @@ namespace Model.Business.Entries
 
         public SharedEntry(string login, string password, string app)
             : this(login, password, app, string.Empty) { }
+
+        public SharedEntry(Guid uid, string login, string password, string app, string? note) : base(uid, login, password, app, note)
+        {
+        }
     }
 }

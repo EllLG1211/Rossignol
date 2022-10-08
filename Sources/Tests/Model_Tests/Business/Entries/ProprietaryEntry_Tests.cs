@@ -43,21 +43,84 @@ namespace Model_Tests.Business.Entries
         /// <param name="app"></param>
         /// <param name="throwSuccessExpected"></param>
         [Theory]
-        [InlineData(true, null, "Lorem ipsum", "abracadabra")]
-        [InlineData(true, "schtroumpf", null, "abracadabra")]
-        [InlineData(true, "schtroumpf", "Lorem ipsum", null)]
-        [InlineData(true, null, null, null)]
-        [InlineData(false, "schtroumpf", "Lorem ipsum", "Avadra kevadra")]
-        public void Constructor_ShouldThrowArgumentNullException(bool throwSuccessExpected, string login, string password, string app)
+        [MemberData(nameof(Constructor_ShouldThrowArgumentNullException_data))]
+        public void Constructor_ShouldThrowArgumentNullException(bool throwSuccessExpected, Guid uid, string login, string password, string app)
         {
-            try
+            if (throwSuccessExpected)
             {
-                ProprietaryEntry entry = new(login, password, app);
-                Assert.False(throwSuccessExpected);
-            } catch 
-            {
-                Assert.True(throwSuccessExpected);
+                Assert.Throws<ArgumentNullException>(() => { ProprietaryEntry entry = new(login, password, app); });
+                return;
             }
+            Assert.False(throwSuccessExpected);
+        }
+
+        public static IEnumerable<Object[]> Constructor_ShouldThrowArgumentNullException_data()
+        {
+            #region true with uid null
+            yield return new Object[]
+            {
+                true,
+                null,
+                "schtroumpf",
+                "Lorem ipsum",
+                "Avada kevadra"
+            };
+            #endregion
+
+            #region true with login null
+            yield return new Object[]
+            {
+                true,
+                Guid.NewGuid(),
+                null,
+                "Lorem ipsum",
+                "Avada kevadra"
+            };
+            #endregion
+
+            #region true with password null
+            yield return new Object[]
+            {
+                true,
+                Guid.NewGuid(),
+                "schtroumpf",
+                null,
+                "Avada kevadra"
+            };
+            #endregion
+
+            #region true with app null
+            yield return new Object[]
+            {
+                true,
+                Guid.NewGuid(),
+                "schtroumpf",
+                "Lorem ipsum",
+                null
+            };
+            #endregion
+
+            #region true with all null
+            yield return new Object[]
+            {
+                true,
+                null,
+                null,
+                null,
+                null
+            };
+            #endregion
+
+            #region false with no null
+            yield return new Object[]
+            {
+                true,
+                Guid.NewGuid(),
+                "schtroumpf",
+                "Lorem ipsum",
+                "Avadra kevadra"
+            };
+            #endregion
         }
 
         /// <summary>

@@ -156,6 +156,17 @@ namespace Model_Tests.Business
             manager.Login("test@test.com", "1234");
             Assert.IsType<ConnectedUser>(manager.ConnectedUser);
         }
+
+        [Fact]
+        public void Login_Entry_ConnectedUser_ShouldGiveList()
+        {
+            Manager manager = new Manager();
+            List<Entry> entries = new List<Entry>();
+            Entry entry = new ProprietaryEntry("test", "1234", "test");
+            entries.Add(entry);
+            manager.Login("test@test.com", "1234", entries);
+            Assert.Contains(entry, manager.ConnectedUser.Entries);
+        }
         #endregion
 
         #region Login LocalUser
@@ -166,6 +177,17 @@ namespace Model_Tests.Business
             manager.Login("1234");
             Assert.IsType<LocalUser>(manager.ConnectedUser);
         }
+
+        [Fact]
+        public void Login_Entry_LocalUser_ShouldGiveList()
+        {
+            Manager manager = new Manager();
+            List<Entry> entries = new List<Entry>();
+            Entry entry = new ProprietaryEntry("test", "1234", "test");
+            entries.Add(entry);
+            manager.Login("1234", entries);
+            Assert.Contains(entry, manager.ConnectedUser.Entries);
+        }
         #endregion
 
         #region CreateEntryToConnectedUser
@@ -175,7 +197,7 @@ namespace Model_Tests.Business
             var manager = new Manager();
             manager.Login("1234");
             manager.CreateEntryToConnectedUser("test", "1234", "discord", null);
-            if (manager.ConnectedUser.Entries.Count() == 1)
+            if (manager.ConnectedUser?.Entries.Count() == 1)
             {
                 foreach (Entry entry in manager.ConnectedUser.Entries)
                 {
@@ -192,7 +214,7 @@ namespace Model_Tests.Business
             var manager = new Manager();
             manager.Login("1234");
             manager.GiveEntryToConnectedUser("test", "1234", "discord", null);
-            if (manager.ConnectedUser.Entries.Count() == 1)
+            if (manager.ConnectedUser?.Entries.Count() == 1)
             {
                 foreach (Entry entry in manager.ConnectedUser.Entries)
                 {

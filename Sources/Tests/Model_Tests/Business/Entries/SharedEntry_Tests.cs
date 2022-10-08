@@ -84,7 +84,7 @@ namespace Model_Tests.Business.Entries
                     }
                     else
                     {
-                        SharedEntry entry = new(null, "login", "1234", "app");
+                        SharedEntry entry = new(Guid.Empty, "login", "1234", "app");
                     }
                 });
                 return;

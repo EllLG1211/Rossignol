@@ -73,7 +73,7 @@ namespace Model_Tests.Business.Entries
                         ProprietaryEntry entry = new(Guid.NewGuid(), "login", "1234", "app");
                     } else
                     {
-                        ProprietaryEntry entry = new(null, "login", "1234", "app");
+                        ProprietaryEntry entry = new(Guid.Empty, "login", "1234", "app");
                     }
                 });
                 return;

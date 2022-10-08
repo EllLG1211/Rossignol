@@ -11,10 +11,24 @@ namespace Model.Business
     {
         public AbstractUser ConnectedUser { get; private set; }
 
-        /*public void Login(string mail, string password)
+        /// <summary>
+        /// Login a <i>ConnectedUser</i>.
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <param name="password"></param>
+        public void Login(string mail, string password)
         {
+            ConnectedUser = new ConnectedUser(mail, password);
+        }
 
-        }*/
+        /// <summary>
+        /// Login a <i>LocalUser</i>.
+        /// </summary>
+        /// <param name="password"></param>
+        public void Login(string password)
+        {
+            ConnectedUser = new LocalUser(password);
+        }
 
         /// <summary>
         /// Register the user for <i>ConnectedUser</i>.

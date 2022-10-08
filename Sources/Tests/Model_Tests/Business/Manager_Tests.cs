@@ -28,8 +28,14 @@ namespace Model_Tests.Business
                 return;
             } else
             {
-                manager.Signin(mail, password, confirmPassword);
-                Assert.False(expected);
+                try
+                {
+                    manager.Signin(mail, password, confirmPassword);
+                }
+                catch (Exception)
+                {
+                    Assert.False(expected);
+                }
             }
         }
 
@@ -45,19 +51,22 @@ namespace Model_Tests.Business
         public void Signin_ShouldThrowArgumentException(bool expected, string mail, string password, string confirmPassword)
         {
             Manager manager = new Manager();
-            try
+            if (expected)
             {
-                manager.Signin(mail, password, confirmPassword);
+                Assert.Throws<ArgumentException>(() => { manager.Signin(mail, password, confirmPassword); });
+                return;
             }
-            catch (ArgumentException e)
+            else
             {
-                Assert.True(expected);
+                try
+                {
+                    manager.Signin(mail, password, confirmPassword);
+                }
+                catch (Exception e)
+                {
+                    Assert.False(expected);
+                }
             }
-            catch (Exception e)
-            {
-                Assert.False(expected);
-            }
-            Assert.False(expected);
         }
 
         [Fact]

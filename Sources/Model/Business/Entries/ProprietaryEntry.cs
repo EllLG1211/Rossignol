@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Entries
 {
+    /// <summary>
+    /// Entry owner side
+    /// </summary>
     public class ProprietaryEntry : Entry
     {
 

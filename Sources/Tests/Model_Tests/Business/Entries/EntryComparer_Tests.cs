@@ -26,15 +26,15 @@ namespace Model_Tests.Business.Entries
             yield return new object?[]
             {
                 true,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Discord")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord")
             };
 
             yield return new object?[]
             {
                 true,
-                new ProprietaryEntry("Login", "1234", "Discord"),
-                new ProprietaryEntry("Login", "1234", "Discord")
+                new SharedEntry("Login", "1234", "Discord"),
+                new SharedEntry("Login", "1234", "Discord")
             };
             #endregion
 
@@ -42,22 +42,22 @@ namespace Model_Tests.Business.Entries
             yield return new object?[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("DefinitelyNot", "1234", "Discord")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("DefinitelyNot", "1234", "Discord")
             };
 
             yield return new object?[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "5678", "Discord")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "5678", "Discord")
             };
 
             yield return new object?[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Reddit")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Reddit")
             };
             #endregion
 
@@ -65,15 +65,15 @@ namespace Model_Tests.Business.Entries
             yield return new object?[]
             {
                 false,
-                new SharedEntry("login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Discord")
+                new ProprietaryEntry("login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord")
             };
 
             yield return new object?[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "discord")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "discord")
             };
             #endregion
 
@@ -81,29 +81,29 @@ namespace Model_Tests.Business.Entries
             yield return new object[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Discord", "1234", "Login")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Discord", "1234", "Login")
             };
 
             yield return new object[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Discord", "Login", "1234")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Discord", "Login", "1234")
             };
 
             yield return new object[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("1234", "Login", "Discord")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("1234", "Login", "Discord")
             };
 
             yield return new object[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "Discord", "1234")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "Discord", "1234")
             };
             #endregion
 
@@ -111,8 +111,8 @@ namespace Model_Tests.Business.Entries
             yield return new object?[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
-                new ProprietaryEntry("Login", "1234", "Discord")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new SharedEntry("Login", "1234", "Discord")
             };
             #endregion
         }
@@ -123,7 +123,7 @@ namespace Model_Tests.Business.Entries
             yield return new object?[]
             {
                 false,
-                new SharedEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord"),
                 null
             };
 
@@ -131,7 +131,7 @@ namespace Model_Tests.Business.Entries
             {
                 false,
                 null,
-                new SharedEntry("Login", "1234", "Discord")
+                new ProprietaryEntry("Login", "1234", "Discord")
             };
 
             yield return new object?[] { true, null, null };
@@ -151,27 +151,27 @@ namespace Model_Tests.Business.Entries
         {
             #region Identical values
             yield return new Entry[] {
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Discord")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "1234", "Discord")
             };
 
             yield return new Entry[] {
-                new ProprietaryEntry("Login", "1234", "Discord"),
-                new ProprietaryEntry("Login", "1234", "Discord")
+                new SharedEntry("Login", "1234", "Discord"),
+                new SharedEntry("Login", "1234", "Discord")
             };
             #endregion
 
             #region Different values
             yield return new Entry[] {
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "5869", "Reddit")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new ProprietaryEntry("Login", "5869", "Reddit")
             };
             #endregion
 
             #region Different types but same values
             yield return new Entry[] {
-                new SharedEntry("Login", "1234", "Discord"),
-                new ProprietaryEntry("Login", "1234", "Discord")
+                new ProprietaryEntry("Login", "1234", "Discord"),
+                new SharedEntry("Login", "1234", "Discord")
             };
             #endregion
         }

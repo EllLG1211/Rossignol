@@ -6,5 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Entries.Serialized
 {
-    public class EncryptedProprietaryEntry : EncryptedEntry{}
+    public class EncryptedProprietaryEntry : EncryptedEntry{
+        public byte[] EncryptedSharedWith { get; set; }
+    }
 }

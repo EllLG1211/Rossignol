@@ -8,19 +8,18 @@ namespace Model.Business.Users.UserDataUtilities
 {
     public static class UserExtensions
     {
-        public static byte[]? ToBytes(this List<MailedUser> list)
+        public static string? ToString(this List<MailedUser> list)
         {
             if (list == null) return null;
-            byte[] toreturn = list.SelectMany(str => Encoding.UTF8.GetBytes(str + "\t")).ToArray();
+            string? toreturn = list.SelectMany(user => user.Mail + "\t").ToArray().ToString();
             return toreturn;
         }
 
-        public static List<MailedUser> ToMailedUserList(this byte[] bytes)
+        public static List<MailedUser> ToMailedUserList(this string str)
         {
             List<MailedUser> toreturn = new List<MailedUser>();
-            if (bytes == null) return toreturn;
+            if (str == null) return toreturn;
 
-            String str = Encoding.UTF8.GetString(bytes);
             String[] arr = str.Split('\t');
 
             return toreturn;

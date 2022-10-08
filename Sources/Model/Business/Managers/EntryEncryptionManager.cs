@@ -3,6 +3,7 @@ using Encryption.AESEncryption;
 using Model.Business.Entries;
 using Model.Business.Entries.Serialized;
 using Model.Business.Users;
+using Model.Business.Users.UserDataUtilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +22,16 @@ namespace Model.Business.Managers
         /// <returns>the decryptes SharedEntry</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="CryptographicException"></exception>
-        public ProprietaryEntry EncryptedToSharedEntry(EncryptedSharedEntry encrypted, string password)
+        public SharedEntry EncryptedToSharedEntry(EncryptedSharedEntry encrypted, string password)
         {
             if (encrypted == null) throw new ArgumentNullException(nameof(encrypted));
 
             IDecrypter decrypter = new AesDecrypter();
 
-            ProprietaryEntry toReturn = new ProprietaryEntry(decrypter.Decrypt(password,encrypted.EncryptedLogin),
+            SharedEntry toReturn = new SharedEntry(decrypter.Decrypt(password,encrypted.EncryptedLogin),
                                                    decrypter.Decrypt(password, encrypted.EncryptedPassword),
                                                    decrypter.Decrypt(password, encrypted.EncryptedApp),
                                                    encrypted.EncryptedNote.Length == 0 ? string.Empty : decrypter.Decrypt(password, encrypted.EncryptedNote));
-
-
 
             return toReturn;
         }
@@ -44,16 +43,19 @@ namespace Model.Business.Managers
         /// <param name="password">password to use for encryption</param>
         /// <returns>ProprietaryEntry with the entry's data</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public SharedEntry EncryptedToProprietaryEntry(EncryptedSharedEntry entry, string password)
+        public ProprietaryEntry EncryptedToProprietaryEntry(EncryptedProprietaryEntry entry, string password)
         {
             if (entry == null) throw new ArgumentNullException(nameof(entry));
 
             IDecrypter decrypter = new AesDecrypter();
 
-            SharedEntry toReturn = new SharedEntry(decrypter.Decrypt(password, entry.EncryptedLogin),
+            ProprietaryEntry toReturn = new ProprietaryEntry(decrypter.Decrypt(password, entry.EncryptedLogin),
                                                    decrypter.Decrypt(password, entry.EncryptedPassword),
                                                    decrypter.Decrypt(password, entry.EncryptedApp),
                                                    entry.EncryptedNote.Length == 0 ? string.Empty : decrypter.Decrypt(password, entry.EncryptedNote));
+
+            if (entry.EncryptedSharedWith.Length > 0)
+                decrypter.Decrypt(password, entry.EncryptedSharedWith).ToMailedUserList().ForEach(user => toReturn.ShareToUser(user));
 
             return toReturn;
         }

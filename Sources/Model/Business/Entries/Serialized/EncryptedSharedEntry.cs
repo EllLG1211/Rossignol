@@ -8,6 +8,5 @@ namespace Model.Business.Entries.Serialized
 {
     public class EncryptedSharedEntry : EncryptedEntry
     {
-        public byte[] EncryptedSharedWith { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Encryption
 {
-    public interface IDecrypter : IEncryptionSpecifier
+    public interface IDecrypter : IEncryptionSpecifier, IDisposable
     {
         /// <summary>
         /// Method to decrypt a byte array containing an encrypted string

@@ -8,7 +8,7 @@ namespace Model.Business.Users.UserDataUtilities
 {
     public static class UserExtensions
     {
-        public static string? ToString(this List<MailedUser> list)
+        public static string? ConcatToString(this IEnumerable<MailedUser> list)
         {
             if (list == null) return null;
             string? toreturn = list.SelectMany(user => user.Mail + "\t").ToArray().ToString();

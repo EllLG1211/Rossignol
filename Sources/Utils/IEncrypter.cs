@@ -1,6 +1,6 @@
 ﻿namespace Encryption
 {
-    public interface IEncrypter : IEncryptionSpecifier
+    public interface IEncrypter : IEncryptionSpecifier, IDisposable
     {
         /// <summary>
         /// Method to cipher a string using a password key of any length

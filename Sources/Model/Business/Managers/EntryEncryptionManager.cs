@@ -21,6 +21,7 @@ namespace Model.Business.Managers
         /// <param name="password">The password that was used to Encrypt the given EncryptedSharedEntry</param>
         /// <returns>the decryptes SharedEntry</returns>
         /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         /// <exception cref="CryptographicException"></exception>
         public SharedEntry EncryptedToSharedEntry(EncryptedSharedEntry encrypted, string password)
         {
@@ -28,6 +29,9 @@ namespace Model.Business.Managers
             if(password == null) throw new ArgumentNullException(nameof(password));
 
             IDecrypter decrypter = new AesDecrypter();
+
+            if(encrypted.encryptionType != decrypter.EncryptionType()) throw new ArgumentException("Unexcpected Encryption type for this decrypter, excpected "+decrypter.EncryptionType()+
+                                                                                                   " got " + encrypted.encryptionType);
 
             SharedEntry toReturn = new SharedEntry(decrypter.Decrypt(password,encrypted.EncryptedLogin),
                                                    decrypter.Decrypt(password, encrypted.EncryptedPassword),
@@ -52,7 +56,8 @@ namespace Model.Business.Managers
 
             IEncrypter encrypter = new AesEncrypter();
 
-            EncryptedSharedEntry toReturn = new EncryptedSharedEntry("AES", new byte[10], encrypter.Encrypt(password, toEncrypt.Login),
+            EncryptedSharedEntry toReturn = new EncryptedSharedEntry(encrypter.EncryptionType(), new byte[10], //TODO: fix placeholder for UID
+                                                                                         encrypter.Encrypt(password, toEncrypt.Login),
                                                                                          encrypter.Encrypt(password, toEncrypt.Password),
                                                                                          encrypter.Encrypt(password, toEncrypt.App),
                                                                                          string.IsNullOrEmpty(toEncrypt.Note) ? Array.Empty<byte>() : encrypter.Encrypt(password, toEncrypt.Note));
@@ -60,29 +65,55 @@ namespace Model.Business.Managers
         }
 
         /// <summary>
-        /// Encrypts a SharedEntry to an EncryptedSharedEntry
+        /// Decrypts an EncryptedProprietaryEntry to a ProprietaryEntry
         /// </summary>
-        /// <param name="entry">Entry to encrypt</param>
-        /// <param name="password">password to use for encryption</param>
+        /// <param name="encrypted">Entry to decrypt</param>
+        /// <param name="password">password to use for decryption</param>
         /// <returns>ProprietaryEntry with the entry's data</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public ProprietaryEntry EncryptedToProprietaryEntry(EncryptedProprietaryEntry entry, string password)
+        public ProprietaryEntry EncryptedToProprietaryEntry(EncryptedProprietaryEntry encrypted, string password)
         {
-            if (entry == null) throw new ArgumentNullException(nameof(entry));
+            if (encrypted == null) throw new ArgumentNullException(nameof(encrypted));
             if (password == null) throw new ArgumentNullException(nameof(password));
 
             IDecrypter decrypter = new AesDecrypter();
 
-            ProprietaryEntry toReturn = new ProprietaryEntry(decrypter.Decrypt(password, entry.EncryptedLogin),
-                                                   decrypter.Decrypt(password, entry.EncryptedPassword),
-                                                   decrypter.Decrypt(password, entry.EncryptedApp),
-                                                   entry.EncryptedNote.Length <= 0 ? string.Empty : decrypter.Decrypt(password, entry.EncryptedNote));
+            if (encrypted.encryptionType != decrypter.EncryptionType()) throw new ArgumentException("Unexcpected Encryption type for this decrypter, excpected " + decrypter.EncryptionType() +
+                                                                                                    " got " + encrypted.encryptionType);
 
-            if (entry.EncryptedSharedWith.Length > 0)
-                decrypter.Decrypt(password, entry.EncryptedSharedWith).ToMailedUserList().ForEach(user => toReturn.ShareToUser(user));
+            ProprietaryEntry toReturn = new ProprietaryEntry(decrypter.Decrypt(password, encrypted.EncryptedLogin),
+                                                   decrypter.Decrypt(password, encrypted.EncryptedPassword),
+                                                   decrypter.Decrypt(password, encrypted.EncryptedApp),
+                                                   encrypted.EncryptedNote.Length <= 0 ? string.Empty : decrypter.Decrypt(password, encrypted.EncryptedNote));
+
+            if (encrypted.EncryptedSharedWith.Length > 0)
+                decrypter.Decrypt(password, encrypted.EncryptedSharedWith).ToMailedUserList().ForEach(user => toReturn.ShareToUser(user));
 
             return toReturn;
         }
 
+        /// <summary>
+        /// Encrypts a ProprietaryEntry to an EncryptedProprietaryEntry
+        /// </summary>
+        /// <param name="toEncrypt"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="CryptographicException"></exception>
+        public EncryptedProprietaryEntry SharedToEncryptedEntry(ProprietaryEntry toEncrypt, string password)
+        {
+            if (toEncrypt == null) throw new ArgumentNullException(nameof(toEncrypt));
+            if (password == null) throw new ArgumentNullException(nameof(password));
+
+            IEncrypter encrypter = new AesEncrypter();
+
+            EncryptedProprietaryEntry toReturn = new EncryptedProprietaryEntry(encrypter.EncryptionType(), new byte[10], //TODO: fix placeholder for UID
+                                                                                         encrypter.Encrypt(password, toEncrypt.Login),
+                                                                                         encrypter.Encrypt(password, toEncrypt.Password),
+                                                                                         encrypter.Encrypt(password, toEncrypt.App),
+                                                                                         string.IsNullOrEmpty(toEncrypt.Note) ? Array.Empty<byte>() : encrypter.Encrypt(password, toEncrypt.Note),
+                                                                                         encrypter.Encrypt(toEncrypt.SharedWith.ConcatToString(),password));
+            return toReturn;
+        }
     }
 }

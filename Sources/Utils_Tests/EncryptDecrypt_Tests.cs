@@ -119,5 +119,12 @@ namespace Utils_Tests
                 Assert.True(shouldThrow);
             }
         }
+
+        [Fact]
+        public void AESEncryptionType_Test()
+        {
+            IEncrypter encrypter = new AesEncrypter();
+            Assert.Equal("AES", encrypter.EncryptionType());
+        }
     }
 }

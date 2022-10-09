@@ -45,5 +45,10 @@ namespace Encryption.AESEncryption
                 }
             }
         }
+
+        public string EncryptionType()
+        {
+            return "AES";
+        }
     }
 }

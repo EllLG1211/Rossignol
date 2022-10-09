@@ -7,7 +7,6 @@ namespace Encryption.AESEncryption
     /// </summary>
     public class AesEncrypter : IEncrypter
     {
-        public void Dispose(){}
 
         public byte[] Encrypt(string key, string toEncrypt)
         {

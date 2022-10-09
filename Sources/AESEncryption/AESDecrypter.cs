@@ -51,8 +51,6 @@ namespace Encryption.AESEncryption
             return deciphered;
         }
 
-        public void Dispose(){}
-
         public string EncryptionType()
         {
             return "AES";

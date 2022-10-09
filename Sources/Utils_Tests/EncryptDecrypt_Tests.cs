@@ -23,11 +23,9 @@ namespace Utils_Tests
         {
             try
             {
-                using (IEncrypter encrypter = new AesEncrypter())
-                {
-                    byte[] crypted = encrypter.Encrypt(key, toEncrypt);
-                    Assert.False(shouldThrow);
-                }
+                IEncrypter encrypter = new AesEncrypter();
+                byte[] crypted = encrypter.Encrypt(key, toEncrypt);
+                Assert.False(shouldThrow);
             }
             catch
             {
@@ -53,12 +51,10 @@ namespace Utils_Tests
             {
                 IEncrypter encrypter = new AesEncrypter();
                 byte[] crypted = encrypter.Encrypt(key, toEncrypt);
-                using(IDecrypter decrypter = new AesDecrypter())
-                {
-                    string deciphered = decrypter.Decrypt(key, crypted);
-                    Assert.Equal(toEncrypt, deciphered);
-                    Assert.False(shouldThrow);
-                }
+                IDecrypter decrypter = new AesDecrypter();
+                string deciphered = decrypter.Decrypt(key, crypted);
+                Assert.Equal(toEncrypt, deciphered);
+                Assert.False(shouldThrow);
             }
             catch
             {

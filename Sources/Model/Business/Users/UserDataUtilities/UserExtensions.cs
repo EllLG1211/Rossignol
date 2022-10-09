@@ -8,19 +8,27 @@ namespace Model.Business.Users.UserDataUtilities
 {
     public static class UserExtensions
     {
-        public static string? ConcatToString(this IEnumerable<MailedUser> list)
+        public static string ConcatToString(this IEnumerable<MailedUser> list)
         {
-            if (list == null) return null;
-            string? toreturn = list.SelectMany(user => user.Mail + "\t").ToArray().ToString();
-            return toreturn;
+            string toReturn = "";
+            if (list == null) return toReturn;
+            foreach(MailedUser user in list)
+                toReturn += (user.Mail + "\t");
+            return toReturn;
         }
 
-        public static List<MailedUser> ToMailedUserList(this string str)
+        public static List<MailedUser> ToMailedUserList(this string input)
         {
             List<MailedUser> toreturn = new List<MailedUser>();
-            if (str == null) return toreturn;
+            if (input == null) return toreturn;
 
-            String[] arr = str.Split('\t');
+            String[] arr = input.Split('\t');
+            
+            foreach(string str in arr)
+            {
+                if(str != "" && str.Contains('@'))
+                    toreturn.Add(new MailedUser(str, ""));
+            }
 
             return toreturn;
         }

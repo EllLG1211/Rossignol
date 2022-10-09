@@ -112,7 +112,7 @@ namespace Model.Business.Managers
                                                                                          encrypter.Encrypt(password, toEncrypt.Password),
                                                                                          encrypter.Encrypt(password, toEncrypt.App),
                                                                                          string.IsNullOrEmpty(toEncrypt.Note) ? Array.Empty<byte>() : encrypter.Encrypt(password, toEncrypt.Note),
-                                                                                         encrypter.Encrypt(toEncrypt.SharedWith.ConcatToString(),password));
+                                                                                         encrypter.Encrypt(password,toEncrypt.SharedWith.ConcatToString()));
             return toReturn;
         }
     }

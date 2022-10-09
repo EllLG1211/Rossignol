@@ -100,7 +100,7 @@ namespace Model.Business.Managers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="CryptographicException"></exception>
-        public EncryptedProprietaryEntry SharedToEncryptedEntry(ProprietaryEntry toEncrypt, string password)
+        public EncryptedProprietaryEntry ProprietaryToEncryptedEntry(ProprietaryEntry toEncrypt, string password)
         {
             if (toEncrypt == null) throw new ArgumentNullException(nameof(toEncrypt));
             if (password == null) throw new ArgumentNullException(nameof(password));

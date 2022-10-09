@@ -19,12 +19,9 @@ namespace Model_Tests.Business.Managers
         {
             try
             {
+                EncryptedSharedEntry ese = EntryEncryptionManager.SharedToEncryptedEntry(totest, key);
 
-                EntryEncryptionManager eem = new EntryEncryptionManager();
-
-                EncryptedSharedEntry ese = eem.SharedToEncryptedEntry(totest, key);
-
-                SharedEntry se = eem.EncryptedToSharedEntry(ese, key);
+                SharedEntry se = EntryEncryptionManager.EncryptedToSharedEntry(ese, key);
 
                 Assert.False(shouldThrow);
                 //Assert.Equal(totest, se); //TODO: fix broken looping comparaison op
@@ -41,12 +38,9 @@ namespace Model_Tests.Business.Managers
         {
             try
             {
+                EncryptedProprietaryEntry ese = EntryEncryptionManager.ProprietaryToEncryptedEntry(totest, key);
 
-                EntryEncryptionManager eem = new EntryEncryptionManager();
-
-                EncryptedProprietaryEntry ese = eem.ProprietaryToEncryptedEntry(totest, key);
-
-                ProprietaryEntry se = eem.EncryptedToProprietaryEntry(ese, key);
+                ProprietaryEntry se = EntryEncryptionManager.EncryptedToProprietaryEntry(ese, key);
 
                 Assert.False(shouldThrow);
                 //Assert.Equal(totest, se); //TODO: fix broken looping comparaison op

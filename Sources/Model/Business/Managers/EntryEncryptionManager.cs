@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Model.Business.Managers
 {
-    public class EntryEncryptionManager
+    public static class EntryEncryptionManager
     {
         /// <summary>
         /// Decrypts an EncryptedSharedEntry to a SharedEntry
@@ -23,7 +23,7 @@ namespace Model.Business.Managers
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="CryptographicException"></exception>
-        public SharedEntry EncryptedToSharedEntry(EncryptedSharedEntry encrypted, string password)
+        public static SharedEntry EncryptedToSharedEntry(EncryptedSharedEntry encrypted, string password)
         {
             if (encrypted == null) throw new ArgumentNullException(nameof(encrypted));
             if(password == null) throw new ArgumentNullException(nameof(password));
@@ -49,7 +49,7 @@ namespace Model.Business.Managers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="CryptographicException"></exception>
-        public EncryptedSharedEntry SharedToEncryptedEntry(SharedEntry toEncrypt, string password)
+        public static EncryptedSharedEntry SharedToEncryptedEntry(SharedEntry toEncrypt, string password)
         {
             if (toEncrypt == null) throw new ArgumentNullException(nameof(toEncrypt));
             if (password == null) throw new ArgumentNullException(nameof(password));
@@ -71,7 +71,7 @@ namespace Model.Business.Managers
         /// <param name="password">password to use for decryption</param>
         /// <returns>ProprietaryEntry with the entry's data</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public ProprietaryEntry EncryptedToProprietaryEntry(EncryptedProprietaryEntry encrypted, string password)
+        public static ProprietaryEntry EncryptedToProprietaryEntry(EncryptedProprietaryEntry encrypted, string password)
         {
             if (encrypted == null) throw new ArgumentNullException(nameof(encrypted));
             if (password == null) throw new ArgumentNullException(nameof(password));
@@ -100,7 +100,7 @@ namespace Model.Business.Managers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="CryptographicException"></exception>
-        public EncryptedProprietaryEntry ProprietaryToEncryptedEntry(ProprietaryEntry toEncrypt, string password)
+        public static EncryptedProprietaryEntry ProprietaryToEncryptedEntry(ProprietaryEntry toEncrypt, string password)
         {
             if (toEncrypt == null) throw new ArgumentNullException(nameof(toEncrypt));
             if (password == null) throw new ArgumentNullException(nameof(password));

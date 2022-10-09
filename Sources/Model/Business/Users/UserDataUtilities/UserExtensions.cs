@@ -10,11 +10,14 @@ namespace Model.Business.Users.UserDataUtilities
     {
         public static string ConcatToString(this IEnumerable<MailedUser> list)
         {
-            string toReturn = "";
-            if (list == null) return toReturn;
-            foreach(MailedUser user in list)
-                toReturn += (user.Mail + "\t");
-            return toReturn;
+            if (list == null) return "";
+            StringBuilder sb = new StringBuilder();
+            foreach (MailedUser user in list)
+            {
+                sb.Append(user.Mail.ToString());
+                sb.Append("\t");
+            }
+            return sb.ToString();
         }
 
         public static List<MailedUser> ToMailedUserList(this string input)

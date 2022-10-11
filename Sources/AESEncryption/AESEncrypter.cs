@@ -7,6 +7,7 @@ namespace Encryption.AESEncryption
     /// </summary>
     public class AesEncrypter : IEncrypter
     {
+
         public byte[] Encrypt(string key, string toEncrypt)
         {
             if (key == null)
@@ -44,6 +45,11 @@ namespace Encryption.AESEncryption
                     return encrypted;
                 }
             }
+        }
+
+        public string EncryptionType()
+        {
+            return "AES";
         }
     }
 }

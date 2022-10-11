@@ -44,7 +44,7 @@ steps:
       # accessible en ligne de commande par ${PLUGIN_SONAR_TOKEN}
       sonar_token:
         from_secret: SECRET_SONAR_LOGIN
-    depends_on: [tests]
+    depends_on: [build]
 
   - name: generate-and-deploy-docs
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer

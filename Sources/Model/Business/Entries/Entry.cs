@@ -56,8 +56,12 @@ namespace Model.Business.Entries
         /// <param name="app"></param>
         /// <param name="note"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected Entry(string login, string password, string app, string? note)
+        protected Entry(Guid uid, string login, string password, string app, string? note)
         {
+            if(uid == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(uid));
+            }
             if (String.IsNullOrEmpty(login))
             {
                 throw new ArgumentNullException(nameof(login));
@@ -71,12 +75,16 @@ namespace Model.Business.Entries
                 throw new ArgumentNullException(nameof(app));
             }
 
-            Uid = Guid.NewGuid();
+            Uid = uid;
             Login = login;
             Password = password;
             App = app;
             Note = note ?? string.Empty;
         }
+
+        protected Entry(string login, string password, string app, string? note): this(Guid.NewGuid(), login,password, app, note) { }
+
+        protected Entry(string login, string password, string app) : this(Guid.NewGuid(), login, password, app, null) { }
 
         public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 

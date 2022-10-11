@@ -27,6 +27,6 @@ The users also need a layer of abstraction, because we must differenciate betwee
 *MailedUser* and his children is the class for a user registered on the server, with a mail and a password. *SharerUser* is the user who share a password with us, so we can edit it, and the *ConnectedUser* is the user logged in the app.
 
 ### Manager
-The manager will simply contain the currently logged in user, which will in turn contain the password, as Entries.
+The manager will manage all the app model.
 
 [Class diagram](./Class/v2.mermaid.md)

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="NLog" Version="5.0.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,8 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AESEncryption\AESEncryption.csproj" />
     <ProjectReference Include="..\..\EncryptedModel\EncryptedModel.csproj" />
-    <ProjectReference Include="..\..\Model\Model.csproj" />
+    <ProjectReference Include="..\..\Utils\Encryption.csproj" />
   </ItemGroup>
 
 </Project>

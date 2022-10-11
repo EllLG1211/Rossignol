@@ -214,9 +214,9 @@ namespace Model_Tests.Business
         }
         #endregion
 
-        #region GiveEntryToConnectedUser
+        #region ShareEntryWithConnectedUser
         [Fact]
-        public void GiveEntryToConnectedUser_ShouldAddSharedEntryToConnectedUser()
+        public void ShareEntryWithConnectedUser_ShouldAddSharedEntryToConnectedUser()
         {
             var manager = new Manager();
             manager.Login("1234");
@@ -231,7 +231,7 @@ namespace Model_Tests.Business
         }
 
         [Fact]
-        public void GiveEntryToConnectedUser_ShouldThrowNullReferenceException()
+        public void ShareEntryWithConnectedUser_ShouldThrowNullReferenceException()
         {
             var manager = new Manager();
             Assert.Throws<NullReferenceException>(() => { manager.ShareEntryWithConnectedUser("login", "password", "app", "note"); });

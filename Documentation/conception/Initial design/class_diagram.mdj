@@ -7577,7 +7577,7 @@
 											"width": 480.89208984375,
 											"height": 13,
 											"underline": true,
-											"text": "+ConcatToString(list:IEnumerable<MailedUser>): string()",
+											"text": "+ConcatToString(this:IEnumerable<MailedUser>): string()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7596,7 +7596,7 @@
 											"width": 480.89208984375,
 											"height": 13,
 											"underline": true,
-											"text": "+ToMailedUserList(input: string): List",
+											"text": "+ToMailedUserList(this:string): List<MailedUser>()",
 											"horizontalAlignment": 0
 										}
 									],
@@ -9672,7 +9672,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGDyHtcDoxgGTM="
 									},
-									"name": "ConcatToString(list:IEnumerable<MailedUser>): string",
+									"name": "ConcatToString(this:IEnumerable<MailedUser>): string",
 									"isStatic": true
 								},
 								{
@@ -9681,31 +9681,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGDyHtcDoxgGTM="
 									},
-									"name": "ToMailedUserList",
-									"stereotype": "",
-									"isStatic": true,
-									"parameters": [
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGDyHtcDoxlGN4=",
-											"_parent": {
-												"$ref": "AAAAAAGDyHtcDoxk3Ig="
-											},
-											"name": "input",
-											"type": "string"
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGDyHtcDoxmDl0=",
-											"_parent": {
-												"$ref": "AAAAAAGDyHtcDoxk3Ig="
-											},
-											"type": {
-												"$ref": "AAAAAAGDyHtcDoxoJW8="
-											},
-											"direction": "return"
-										}
-									]
+									"name": "ToMailedUserList(this:string): List<MailedUser>",
+									"isStatic": true
 								}
 							]
 						}

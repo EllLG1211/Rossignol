@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EncryptedModel\EncryptedModel.csproj" />
     <ProjectReference Include="..\..\Model\Model.csproj" />
   </ItemGroup>
 

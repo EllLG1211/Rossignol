@@ -50,5 +50,10 @@ namespace Encryption.AESEncryption
 
             return deciphered;
         }
+
+        public string EncryptionType()
+        {
+            return "AES";
+        }
     }
 }

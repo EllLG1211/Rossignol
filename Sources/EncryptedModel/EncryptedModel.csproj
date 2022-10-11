@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AESEncryption\AESEncryption.csproj" />
+    <ProjectReference Include="..\Model\Model.csproj" />
     <ProjectReference Include="..\Utils\Encryption.csproj" />
   </ItemGroup>
 

@@ -62,15 +62,15 @@ namespace Model.Business.Entries
             {
                 throw new ArgumentNullException(nameof(uid));
             }
-            if (String.IsNullOrEmpty(login))
+            if (string.IsNullOrEmpty(login))
             {
                 throw new ArgumentNullException(nameof(login));
             }
-            if (String.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
             {
                 throw new ArgumentNullException(nameof(password));
             }
-            if (String.IsNullOrEmpty(app))
+            if (string.IsNullOrEmpty(app))
             {
                 throw new ArgumentNullException(nameof(app));
             }
@@ -89,7 +89,7 @@ namespace Model.Business.Entries
         public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 
         public override bool Equals(object? obj)
-            => obj is Entry entry && Equals(this, entry);
+            => obj is Entry entry && Comparer.Equals(this, entry);
 
         public override int GetHashCode() => Comparer.GetHashCode(this);
     }

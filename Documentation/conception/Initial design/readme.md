@@ -3,3 +3,4 @@
 [MCD - database](./database_mcd.mermaid.md)  
 [Class diagram - V1](./Class/v1.mermaid.md)  
 [Class diagram - V2](./Class/v2.mermaid.md)
+[Package diagram](./package_diagram/package_diagram.md)

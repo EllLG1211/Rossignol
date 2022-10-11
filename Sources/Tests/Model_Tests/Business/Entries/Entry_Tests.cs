@@ -10,6 +10,12 @@ namespace Model_Tests.Business.Entries
 {
     public class Entry_Tests
     {
+        /// <summary>
+        /// Test the equality protocol
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         [Theory]
         [MemberData(nameof(EntryComparer_Tests.Equals_TestData), MemberType = typeof(EntryComparer_Tests))]
         public void Equals_Tests(bool expected, Entry x, Entry? y)
@@ -20,6 +26,11 @@ namespace Model_Tests.Business.Entries
         public static readonly object?[] Equals_TestData_Nullable
             = new object?[] { false, new SharedEntry("Login", "1234", "Discord"), null };
 
+        /// <summary>
+        /// Test the GetHashCode method.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         [Theory]
         [MemberData(nameof(EntryComparer_Tests.GetHashCode_TestData), MemberType = typeof(EntryComparer_Tests))]
         public void GetHashCode_Tests(Entry x, Entry y)

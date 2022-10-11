@@ -51,15 +51,38 @@ namespace Model_Tests.Business.Entries
         [InlineData(false, "schtroumpf", "Lorem ipsum", "Avadra kevadra")]
         public void Constructor_ShouldThrowArgumentNullException(bool throwSuccessExpected, string login, string password, string app)
         {
-            try
+            if (throwSuccessExpected)
             {
-                ProprietaryEntry entry = new(login, password, app);
-                Assert.False(throwSuccessExpected);
-            } catch 
-            {
-                Assert.True(throwSuccessExpected);
+                Assert.Throws<ArgumentNullException>(() => { ProprietaryEntry entry = new(login, password, app); });
+                return;
             }
+            Assert.False(throwSuccessExpected);
         }
+
+        #region Test constructor with Guid
+        [Theory]
+        [InlineData(true,false)]
+        [InlineData(false, true)]
+        public void Constructor_Guid_ShouldThrowArgumentNullException(bool throwSuccessExpected, bool useGuid)
+        {
+            if (throwSuccessExpected)
+            {
+                Assert.Throws<ArgumentNullException>(() => 
+                {
+                    if (useGuid)
+                    {
+                        ProprietaryEntry entry = new(Guid.NewGuid(), "login", "1234", "app");
+                    } else
+                    {
+                        ProprietaryEntry entry = new(Guid.Empty, "login", "1234", "app");
+                    }
+                });
+                return;
+            }
+            Assert.False(throwSuccessExpected);
+        }
+        #endregion
+
 
         /// <summary>
         /// Test if note is reassign when the parameter is not passed.
@@ -117,13 +140,6 @@ namespace Model_Tests.Business.Entries
             Assert.Equal("Discord - loremipsum@gmail.com", entry.Label);
         }
 
-        [Fact]
-        public void GetSharedWith_ShouldReturnAIReadOnlyList()
-        {
-            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
-            // Je ne sais pas comment faire ce test.
-        }
-
         /// <summary>
         /// Test if SharedToUser add user in the entry
         /// </summary>
@@ -150,6 +166,10 @@ namespace Model_Tests.Business.Entries
             };
         }
 
+        /// <summary>
+        /// Test if UnshareToUser work well.
+        /// </summary>
+        /// <param name="user"></param>
         [Theory]
         [MemberData(nameof(UnsharedToUser_ShouldUserUserFromSharedWith_Data))]
         public void UnsharedToUser_ShouldUserUserFromSharedWith(MailedUser user)
@@ -162,15 +182,19 @@ namespace Model_Tests.Business.Entries
 
         public static IEnumerable<Object[]> UnsharedToUser_ShouldUserUserFromSharedWith_Data()
         {
+            #region Test with ConnectedUser
             yield return new Object[]
             {
                 new ConnectedUser("loremipsum@gmail.com","1234")
             };
+            #endregion
 
+            #region Test with SharerUser
             yield return new Object[]
             {
                 new SharerUser("loremipsum@gmail.com","1234")
             };
+            #endregion
         }
     }
 }

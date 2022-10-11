@@ -2,7 +2,7 @@ using Encryption;
 using Encryption.AESEncryption;
 using Xunit;
 
-namespace Utils_Tests
+namespace Model_Tests.Utils
 {
     public class EncryptDecrypt_Tests
     {
@@ -64,7 +64,7 @@ namespace Utils_Tests
 
 
         [Theory]
-        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "password$withspécialchâracters:)", false,false)]
+        [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "password$withspécialchâracters:)", false, false)]
         [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "notthesamepassword°-°", true, false)]
         [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", null, true, false)]
         [InlineData("mysupersecretpassword", "password$withspécialchâracters:)", "password$withspécialchâracters:)", true, true)]

@@ -7,7 +7,5 @@ namespace EF_Model.Utils
     {
         public static LocalUser ToModel(this LocalUserEntity entity)
             => new LocalUser(entity.Password);
-        
-
     }
 }

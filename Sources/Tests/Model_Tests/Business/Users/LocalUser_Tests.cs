@@ -3,8 +3,6 @@ using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Model_Tests.Business.Users
@@ -61,7 +59,7 @@ namespace Model_Tests.Business.Users
             AbstractUser loUser = new LocalUser("1234");
 
             loUser.AddEntry(entry);
-            Assert.Equal(expected,loUser.Entries.Contains(entry));
+            Assert.Equal(expected, loUser.Entries.Contains(entry));
         }
 
         public static IEnumerable<Object[]> AddEntry_Tests_Data()

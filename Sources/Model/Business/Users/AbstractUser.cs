@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Mail;
-using Model.Business.Entries;
-using System.Collections.ObjectModel;
+﻿using Model.Business.Entries;
 
 namespace Model.Business.Users
 {
@@ -14,22 +7,43 @@ namespace Model.Business.Users
         /// <summary>
         /// The user's entries
         /// </summary>
-        private readonly List<Entry> _entries = new List<Entry>();
-        public IEnumerable<Entry> Entries;
+        private readonly List<Entry> _entries;
+        public IEnumerable<Entry> Entries { get { return _entries; } }
+
+        /// <summary>
+        /// Id for the user.
+        /// </summary>
+        public Guid Uid { get; protected set; }
 
         /// <summary>
         /// Master password of the user.
         /// </summary>
         public String Password { get; protected set; }
-        
-        protected AbstractUser(string password, List<Entry> entries)
+
+        protected AbstractUser(Guid uid, string password, List<Entry> entries)
         {
-            Password = password;
-            _entries = entries;
-            Entries = new ReadOnlyCollection<Entry>(_entries);
+            Uid = uid;
+            if (password != null)
+            {
+                Password = password;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(password));
+            }
+            if (entries != null)
+            {
+                _entries = entries;
+            }
+            else
+            {
+                _entries = new List<Entry>();
+            }
         }
 
-        protected AbstractUser(string password) : this(password, new List<Entry>()) { }
+        protected AbstractUser(string password, List<Entry> entries) : this(Guid.NewGuid(), password, entries) { }
+
+        protected AbstractUser(string password) : this(Guid.NewGuid(), password, new List<Entry>()) { }
 
 
         /// <summary>
@@ -38,10 +52,10 @@ namespace Model.Business.Users
         /// <param name="entry">Entry to add</param>
         public void AddEntry(Entry? entry)
         {
-            if(entry != null)
+            if (entry != null)
             {
                 _entries.Add(entry);
-            } 
+            }
         }
 
         /// <summary>
@@ -50,12 +64,10 @@ namespace Model.Business.Users
         /// <param name="entry">Entry to delete</param>
         public void RemoveEntry(Entry? entry)
         {
-            if(entry != null)
-            { 
+            if (entry != null)
+            {
                 _entries.Remove(entry);
             }
         }
-
-
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Model.Business.Users.UserDataUtilities
 {
@@ -26,11 +22,11 @@ namespace Model.Business.Users.UserDataUtilities
             if (input == null) return toreturn;
 
             String[] arr = input.Split('\t');
-            
-            foreach(string str in arr)
+
+            foreach (string str in arr)
             {
-                if(str != "" && str.Contains('@'))
-                    toreturn.Add(new MailedUser(str, ""));
+                if (str != "" && str.Contains('@'))
+                    toreturn.Add(new ConnectedUser(str, ""));
             }
 
             return toreturn;

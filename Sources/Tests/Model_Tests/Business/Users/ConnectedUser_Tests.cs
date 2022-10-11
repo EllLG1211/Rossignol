@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Xunit;
 using Model.Business.Users;
-using Model;
-using System.Net.Mail;
 using Model.Business.Entries;
+using System;
 
 namespace Model_Tests.Business.Users
 {
@@ -75,6 +70,41 @@ namespace Model_Tests.Business.Users
             ConnectedUser user = new("adresse@url.com", "1234");
             user.Password = password;
             Assert.Equal(password, user.Password);
+        }
+
+        [Theory]
+        [MemberData(nameof(Constructor_ShouldThrowArgumentNullException_Data))]
+        public void Constructor_ShouldThrowArgumentNullException(bool expected, Guid uid, String mail, String password)
+        {
+            if (expected)
+            {
+                Assert.Throws<ArgumentNullException>(() => { ConnectedUser user = new(uid, mail, password, new List<Entry>()); });
+                return;
+            }
+            Assert.False(expected);
+        }
+
+        public static IEnumerable<object[]> Constructor_ShouldThrowArgumentNullException_Data()
+        {
+            yield return new Object[]
+            {
+                false, Guid.NewGuid(), "test.test@test.com", "12345"
+            };
+
+            yield return new Object[]
+            {
+                true, Guid.NewGuid(), null, "12345"
+            };
+
+            yield return new Object[]
+            {
+                true, Guid.NewGuid(), "test.test@test.com", null
+            };
+
+            yield return new Object[]
+            {
+                true, Guid.NewGuid(), null, null
+            };
         }
     }
 }

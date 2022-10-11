@@ -1,12 +1,7 @@
 ﻿using Model.Business.Entries;
 using Model.Business.Entries.Serialized;
 using Model.Business.Managers;
-using Model.Business.Users;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Model_Tests.Business.Managers

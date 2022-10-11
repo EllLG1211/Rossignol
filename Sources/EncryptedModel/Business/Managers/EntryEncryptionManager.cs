@@ -2,13 +2,7 @@
 using Encryption.AESEncryption;
 using Model.Business.Entries;
 using Model.Business.Entries.Serialized;
-using Model.Business.Users;
 using Model.Business.Users.UserDataUtilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.Business.Managers
 {

@@ -82,18 +82,6 @@ namespace Model_Tests.Business.Entries
         }
         #endregion
 
-        /*public static IEnumerable<Object[]> Constructor_ShouldThrowArgumentNullException_data()
-        {
-            yield return new Object[]
-            {
-                true,
-                null,
-                "schtroumpf",
-                "Lorem ipsum",
-                "Avadra kevadra"
-            };
-
-        }*/
 
         /// <summary>
         /// Test if note is reassign when the parameter is not passed.

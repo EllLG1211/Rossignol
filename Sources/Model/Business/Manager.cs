@@ -127,7 +127,7 @@ namespace Model.Business
         /// <param name="note"></param>
         /// <remarks>Throws a NullReferenceException if ConnectedUser is null.</remarks>
         /// <exception cref="NullReferenceException">Throwed if ConnectedUser is null.</exception>
-        public void GiveEntryToConnectedUser(string login, string password, string app, string? note)
+        public void ShareEntryWithConnectedUser(string login, string password, string app, string? note)
         {
             if (ConnectedUser == null)
             {

@@ -220,7 +220,7 @@ namespace Model_Tests.Business
         {
             var manager = new Manager();
             manager.Login("1234");
-            manager.GiveEntryToConnectedUser("test", "1234", "discord", null);
+            manager.ShareEntryWithConnectedUser("test", "1234", "discord", null);
             if (manager.ConnectedUser?.Entries.Count() == 1)
             {
                 foreach (Entry entry in manager.ConnectedUser.Entries)
@@ -234,7 +234,7 @@ namespace Model_Tests.Business
         public void GiveEntryToConnectedUser_ShouldThrowNullReferenceException()
         {
             var manager = new Manager();
-            Assert.Throws<NullReferenceException>(() => { manager.GiveEntryToConnectedUser("login", "password", "app", "note"); });
+            Assert.Throws<NullReferenceException>(() => { manager.ShareEntryWithConnectedUser("login", "password", "app", "note"); });
         }
         #endregion
     }

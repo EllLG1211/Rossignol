@@ -5905,7 +5905,7 @@
 											"width": 601.25,
 											"height": 13,
 											"underline": true,
-											"text": "+EncryptedToSharedEntry(encrypted: EncryptedSharedEntry, password: string): SharedEntry",
+											"text": "+EncryptedToSharedEntry(encrypted, password: string): null",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5924,7 +5924,7 @@
 											"width": 601.25,
 											"height": 13,
 											"underline": true,
-											"text": "+SharedToEncryptedEntry(toEncrypt: SharedEntry, password: string): EncryptedSharedEntry",
+											"text": "+SharedToEncryptedEntry(toEncrypt, password: string): null",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5943,7 +5943,7 @@
 											"width": 601.25,
 											"height": 13,
 											"underline": true,
-											"text": "+EncryptedToProprietaryEntry(encrypted: EncryptedProprietaryEntry, password: string): ProprietaryEntry",
+											"text": "+EncryptedToProprietaryEntry(encrypted, password: string): null",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5962,7 +5962,7 @@
 											"width": 601.25,
 											"height": 13,
 											"underline": true,
-											"text": "+ProprietaryToEncryptedEntry(toEncrypt: ProprietaryEntry, password: string): EncryptedProprietaryEntry",
+											"text": "+ProprietaryToEncryptedEntry(toEncrypt, password: string): null",
 											"horizontalAlignment": 0
 										}
 									],
@@ -7824,7 +7824,8 @@
 										},
 										"reference": {
 											"$ref": "AAAAAAGDfuZi+Vjre2Y="
-										}
+										},
+										"navigable": false
 									},
 									"end2": {
 										"_type": "UMLAssociationEnd",
@@ -8023,7 +8024,8 @@
 										},
 										"reference": {
 											"$ref": "AAAAAAGDfueZZllDNj0="
-										}
+										},
+										"navigable": false
 									},
 									"end2": {
 										"_type": "UMLAssociationEnd",
@@ -8483,7 +8485,8 @@
 										},
 										"reference": {
 											"$ref": "AAAAAAGDfvUbh25xVvc="
-										}
+										},
+										"navigable": false
 									},
 									"end2": {
 										"_type": "UMLAssociationEnd",
@@ -8849,7 +8852,8 @@
 										},
 										"reference": {
 											"$ref": "AAAAAAGDfukpVlmW+k4="
-										}
+										},
+										"navigable": false
 									},
 									"end2": {
 										"_type": "UMLAssociationEnd",
@@ -9422,10 +9426,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGDyHWN8FvKCfY="
 											},
-											"name": "encrypted",
-											"type": {
-												"$ref": "AAAAAAGDyHWN9Vvl3tw="
-											}
+											"name": "encrypted"
 										},
 										{
 											"_type": "UMLParameter",
@@ -9441,9 +9442,6 @@
 											"_id": "AAAAAAGDyHWN8FvNmK8=",
 											"_parent": {
 												"$ref": "AAAAAAGDyHWN8FvKCfY="
-											},
-											"type": {
-												"$ref": "AAAAAAGDyHWN9VvmjgE="
 											},
 											"direction": "return"
 										}
@@ -9464,10 +9462,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGDyHWN8FvO9Gw="
 											},
-											"name": "toEncrypt",
-											"type": {
-												"$ref": "AAAAAAGDyHWN9VvmjgE="
-											}
+											"name": "toEncrypt"
 										},
 										{
 											"_type": "UMLParameter",
@@ -9483,9 +9478,6 @@
 											"_id": "AAAAAAGDyHWN8FvR2Cs=",
 											"_parent": {
 												"$ref": "AAAAAAGDyHWN8FvO9Gw="
-											},
-											"type": {
-												"$ref": "AAAAAAGDyHWN9Vvl3tw="
 											},
 											"direction": "return"
 										}
@@ -9506,10 +9498,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGDyHWN8FvSOjw="
 											},
-											"name": "encrypted",
-											"type": {
-												"$ref": "AAAAAAGDyHWN9lvnC0A="
-											}
+											"name": "encrypted"
 										},
 										{
 											"_type": "UMLParameter",
@@ -9525,9 +9514,6 @@
 											"_id": "AAAAAAGDyHWN8FvV5w4=",
 											"_parent": {
 												"$ref": "AAAAAAGDyHWN8FvSOjw="
-											},
-											"type": {
-												"$ref": "AAAAAAGDyHWN9lvopjQ="
 											},
 											"direction": "return"
 										}
@@ -9548,10 +9534,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGDyHWN8FvWaHA="
 											},
-											"name": "toEncrypt",
-											"type": {
-												"$ref": "AAAAAAGDyHWN9lvopjQ="
-											}
+											"name": "toEncrypt"
 										},
 										{
 											"_type": "UMLParameter",
@@ -9567,9 +9550,6 @@
 											"_id": "AAAAAAGDyHWN8FvZV8g=",
 											"_parent": {
 												"$ref": "AAAAAAGDyHWN8FvWaHA="
-											},
-											"type": {
-												"$ref": "AAAAAAGDyHWN9lvnC0A="
 											},
 											"direction": "return"
 										}

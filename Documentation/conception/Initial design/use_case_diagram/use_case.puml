@@ -33,6 +33,5 @@ luser -- USCP
 luser -- UCVE
 UC0 ..> UCVE : include
 UCP ..> UCVE : include
-UCE ..> UC0 : include
-UCAE ..> UPG : extends
+UCAE <.. UPG : extends
 ```

@@ -9,9 +9,6 @@ trigger:
 steps:
   - name: build
     image: mcr.microsoft.com/dotnet/sdk:6.0
-    volumes:
-      - name: docs
-        path: /docs
     commands:
       - cd Sources/
       - dotnet restore Console_Rossignol.sln
@@ -39,9 +36,7 @@ steps:
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
     secrets: [ SECRET_SONAR_LOGIN ]
     settings:
-      # accessible en ligne de commande par ${PLUGIN_SONAR_HOST}
       sonar_host: https://codefirst.iut.uca.fr/sonar/
-      # accessible en ligne de commande par ${PLUGIN_SONAR_TOKEN}
       sonar_token:
         from_secret: SECRET_SONAR_LOGIN
     depends_on: [build]

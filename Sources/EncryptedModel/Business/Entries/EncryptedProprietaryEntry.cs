@@ -8,8 +8,8 @@ namespace Model.Business.Entries.Serialized
 {
     public class EncryptedProprietaryEntry : EncryptedEntry{
         public byte[] EncryptedSharedWith { get; set; }
-        public EncryptedProprietaryEntry(string encryptionType, byte[] EncryptedUid, byte[] EncryptedLogin, byte[] EncryptedPassword, byte[] EncryptedApp, byte[] EncryptedNote, byte[] EncryptedSharedWith) 
-            : base(encryptionType, EncryptedUid, EncryptedLogin, EncryptedPassword, EncryptedApp, EncryptedNote)
+        public EncryptedProprietaryEntry(string encryptionType, string Uid, byte[] EncryptedLogin, byte[] EncryptedPassword, byte[] EncryptedApp, byte[] EncryptedNote, byte[] EncryptedSharedWith) 
+            : base(encryptionType, Uid, EncryptedLogin, EncryptedPassword, EncryptedApp, EncryptedNote)
         {
             this.EncryptedSharedWith = EncryptedSharedWith;
         }

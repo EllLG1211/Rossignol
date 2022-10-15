@@ -8,7 +8,7 @@ namespace Model.Business.Entries
         /// <summary>
         /// Unique identifier
         /// </summary>
-        protected Guid Uid { get; init; }
+        public Guid Uid { get; init; }
 
         /// <summary>
         /// Login's app

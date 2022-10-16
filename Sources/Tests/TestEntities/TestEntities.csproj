@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\EF_Model\EF_Model.csproj" />
+    <ProjectReference Include="..\..\EncryptedModel\EncryptedModel.csproj" />
   </ItemGroup>
 
 </Project>

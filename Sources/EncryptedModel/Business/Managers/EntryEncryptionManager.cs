@@ -27,7 +27,8 @@ namespace Model.Business.Managers
             if(encrypted.encryptionType != decrypter.EncryptionType()) throw new ArgumentException("Unexcpected Encryption type for this decrypter, excpected "+decrypter.EncryptionType()+
                                                                                                    " got " + encrypted.encryptionType);
 
-            SharedEntry toReturn = new SharedEntry(decrypter.Decrypt(password,encrypted.EncryptedLogin),
+            SharedEntry toReturn = new SharedEntry(new Guid(encrypted.Uid),
+                                                   decrypter.Decrypt(password,encrypted.EncryptedLogin),
                                                    decrypter.Decrypt(password, encrypted.EncryptedPassword),
                                                    decrypter.Decrypt(password, encrypted.EncryptedApp),
                                                    encrypted.EncryptedNote.Length <= 0 ? string.Empty : decrypter.Decrypt(password, encrypted.EncryptedNote));
@@ -50,7 +51,7 @@ namespace Model.Business.Managers
 
             IEncrypter encrypter = new AesEncrypter();
 
-            EncryptedSharedEntry toReturn = new EncryptedSharedEntry(encrypter.EncryptionType(), new byte[10], //TODO: fix placeholder for UID
+            EncryptedSharedEntry toReturn = new EncryptedSharedEntry(encrypter.EncryptionType(), toEncrypt.Uid.ToString(),
                                                                                          encrypter.Encrypt(password, toEncrypt.Login),
                                                                                          encrypter.Encrypt(password, toEncrypt.Password),
                                                                                          encrypter.Encrypt(password, toEncrypt.App),
@@ -75,11 +76,12 @@ namespace Model.Business.Managers
             if (encrypted.encryptionType != decrypter.EncryptionType()) throw new ArgumentException("Unexcpected Encryption type for this decrypter, excpected " + decrypter.EncryptionType() +
                                                                                                     " got " + encrypted.encryptionType);
 
-            ProprietaryEntry toReturn = new ProprietaryEntry(decrypter.Decrypt(password, encrypted.EncryptedLogin),
+            ProprietaryEntry toReturn = new ProprietaryEntry( new Guid(encrypted.Uid),
+                                                   decrypter.Decrypt(password, encrypted.EncryptedLogin),
                                                    decrypter.Decrypt(password, encrypted.EncryptedPassword),
                                                    decrypter.Decrypt(password, encrypted.EncryptedApp),
                                                    encrypted.EncryptedNote.Length <= 0 ? string.Empty : decrypter.Decrypt(password, encrypted.EncryptedNote));
-
+                
             if (encrypted.EncryptedSharedWith.Length > 0)
                 decrypter.Decrypt(password, encrypted.EncryptedSharedWith).ToMailedUserList().ForEach(user => toReturn.ShareToUser(user));
 
@@ -101,7 +103,7 @@ namespace Model.Business.Managers
 
             IEncrypter encrypter = new AesEncrypter();
 
-            EncryptedProprietaryEntry toReturn = new EncryptedProprietaryEntry(encrypter.EncryptionType(), new byte[10], //TODO: fix placeholder for UID
+            EncryptedProprietaryEntry toReturn = new EncryptedProprietaryEntry(encrypter.EncryptionType(), toEncrypt.Uid.ToString(), //TODO: fix placeholder for UID
                                                                                          encrypter.Encrypt(password, toEncrypt.Login),
                                                                                          encrypter.Encrypt(password, toEncrypt.Password),
                                                                                          encrypter.Encrypt(password, toEncrypt.App),

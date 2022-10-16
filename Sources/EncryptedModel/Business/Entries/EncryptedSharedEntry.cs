@@ -8,7 +8,7 @@ namespace Model.Business.Entries.Serialized
 {
     public class EncryptedSharedEntry : EncryptedEntry
     {
-        public EncryptedSharedEntry(string encryptionType, byte[] EncryptedUid, byte[] EncryptedLogin, byte[] EncryptedPassword, byte[] EncryptedApp, byte[] EncryptedNote)
-            : base(encryptionType, EncryptedUid, EncryptedLogin, EncryptedPassword, EncryptedApp, EncryptedNote) { }
+        public EncryptedSharedEntry(string encryptionType, string Uid, byte[] EncryptedLogin, byte[] EncryptedPassword, byte[] EncryptedApp, byte[] EncryptedNote)
+            : base(encryptionType, Uid, EncryptedLogin, EncryptedPassword, EncryptedApp, EncryptedNote) { }
     }
 }

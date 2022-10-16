@@ -51,9 +51,20 @@ This is a quick look of the **HomePage** & **MainPage** page of the application 
 * 1) Install [Visual Studio](https://visualstudio.microsoft.com/fr/) *vs code 22 is recommend since this project run with .NET6*
 * 2) With the **Visual Studio Installer** add this component:
   * .NET Desktop developpement *make sure it contains .NET6 runtime*
-* 3) Build the project solution
-* 4) Run ...
-* 5) EF ...
+* 3) Clean & Build the project solution
+ 
+---
+
+* EntityFramework
+  * To create some **migration**
+    * Delete `./Rossignol/Source/EF_Model/Migrations`
+    * With the terminal and with the `./Rossignol/Source/EF_Model` path, run the `dotnet tool install --global dotnet-ef` command.
+      * If an error occur, run this command: `dotnet tool install --global dotnet-ef`
+  * To create a **data base**
+    * With the same path run the `dotnet ef database update --startup-project ..\Tests\TestEntities\TestEntities.csproj` command.
+
+*Note that the `EF_Model` project needs the `EntityFrameworkCore` + `EntityFrameworkCore.Sqlite` + `EntityFrameworkCore.Tools` nugget package to work.*
+*Also note that the `TestEntiies` project needs the `EntityFrameworkCore.Design` nugget package to work.*
 
 ## Credits
 

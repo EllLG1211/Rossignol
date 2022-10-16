@@ -1,8 +1,8 @@
 ﻿using EF_Model.Entities;
 using EF_Model.Utils;
 using Model.Business.Entries;
-using Model.Business.Entries.Serialized;
-using Model.Business.Managers;
+using EncryptedModel.Business.Entries;
+using EncryptedModel.Business.Managers;
 
 namespace TestEntities
 {

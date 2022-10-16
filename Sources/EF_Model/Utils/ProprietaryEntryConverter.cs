@@ -1,5 +1,5 @@
 ﻿using EF_Model.Entities;
-using Model.Business.Entries.Serialized;
+using EncryptedModel.Business.Entries;
 
 namespace EF_Model.Utils
 {

@@ -1,6 +1,6 @@
 ﻿using Model.Business.Entries;
-using Model.Business.Entries.Serialized;
-using Model.Business.Managers;
+using EncryptedModel.Business.Entries;
+using EncryptedModel.Business.Managers;
 using System.Collections.Generic;
 using Xunit;
 

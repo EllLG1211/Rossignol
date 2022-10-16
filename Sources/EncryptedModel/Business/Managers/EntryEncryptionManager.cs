@@ -1,10 +1,10 @@
 ﻿using Encryption;
 using Encryption.AESEncryption;
 using Model.Business.Entries;
-using Model.Business.Entries.Serialized;
+using EncryptedModel.Business.Entries;
 using Model.Business.Users.UserDataUtilities;
 
-namespace Model.Business.Managers
+namespace EncryptedModel.Business.Managers
 {
     public static class EntryEncryptionManager
     {

@@ -1,4 +1,4 @@
-![Beta](https://img.shields.io/badge/Beta-v0.1-blueviolet)
+![Beta](https://img.shields.io/badge/Beta-v0.3-blueviolet)
 ![Language](https://img.shields.io/github/languages/top/HandyS11/Rossignol)
 [![Build Status](https://codefirst.iut.uca.fr/api/badges/valentin.clergue/Rossignol/status.svg)](https://codefirst.iut.uca.fr/valentin.clergue/Rossignol)
 [![Quality Gate Status](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=Rossignol&metric=alert_status&token=9e1f4645b86eb1abd678f85c330ad6047baebd85)](https://codefirst.iut.uca.fr/sonar/dashboard?id=Rossignol)
@@ -20,31 +20,51 @@ Rossignol is a mobile app for password management.
 
 ## Summary
 
-* **[Summary](##summary)**
+
+* **[Context](##context)**
 * **[Features](##features)**
-* **[Install](##install)**
-	* [P1](###p1)
-    * [P2](###p2)
+* **[Getting Started](##getting_started)**
 * **[Credits](#credits)**
+
+## Context
+
+**Rossignol** is a mobile application available on booth **IOS** and **Android**. It's main goal is to provide to they users the ability to **securly store** and **generate** their **passwords**.
+
+This is a quick look of the **HomePage** & **MainPage** page of the application *(while been connected with an online account)*.
+
+| LoginPage | MainPage |
+| :-- | :-- |
+| <img src=https://cdn.discordapp.com/attachments/715975451558019132/1030990408819421354/HomePage.png> | <img src=https://cdn.discordapp.com/attachments/715975451558019132/1030990921610825831/MainPage.png> |
 
 ## Features
 
-* 
-* 
-*  
+* Localy store & generate passwords
+* Edit and store informations about a password
+* Use the application throw multiples devices*
+* Share password to application users*
+* Be notify when someone shares you a password
+
+**with an online account*
 
 ## Getting Started
 
-### P1
+* 1) Install [Visual Studio](https://visualstudio.microsoft.com/fr/) *vs code 22 is recommend since this project run with .NET6*
+* 2) With the **Visual Studio Installer** add this component:
+  * .NET Desktop developpement *make sure it contains .NET6 runtime*
+* 3) Clean & Build the project solution
+ 
+---
 
-- 
--
+* EntityFramework
+  * To create some **migration**
+    * Delete `./Rossignol/Source/EF_Model/Migrations`
+    * With the terminal and with the `./Rossignol/Source/EF_Model` path, run the `dotnet tool install --global dotnet-ef` command.
+      * If an error occur, run this command: `dotnet tool install --global dotnet-ef`
+  * To create a **data base**
+    * With the same path run the `dotnet ef database update --startup-project ..\Tests\TestEntities\TestEntities.csproj` command.
 
-### P2
-
--
--
-
+*Note that the `EF_Model` project needs the `EntityFrameworkCore` + `EntityFrameworkCore.Sqlite` + `EntityFrameworkCore.Tools` nugget package to work.*
+*Also note that the `TestEntiies` project needs the `EntityFrameworkCore.Design` nugget package to work.*
 
 ## Credits
 

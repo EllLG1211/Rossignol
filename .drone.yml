@@ -53,6 +53,7 @@ steps:
     commands:
       - cd Documentation/doxygen
       - doxygen Doxyfile
+      - /entrypoint.sh
     depends_on: [ build ]
 
 volumes:

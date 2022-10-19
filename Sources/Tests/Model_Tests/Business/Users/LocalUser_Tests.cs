@@ -3,8 +3,6 @@ using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Model_Tests.Business.Users
@@ -32,6 +30,28 @@ namespace Model_Tests.Business.Users
             Assert.NotNull(loUser.Entries);
         }
 
+        [Fact]
+        public void Constructor_ShouldInstantiateEntries()
+        {
+            AbstractUser user = new LocalUser("1234");
+            Assert.NotNull(user.Entries);
+        }
+
+        [Fact]
+        public void Constructor_ShouldGiveListInstance()
+        {
+            List<Entry> entries = new List<Entry>();
+            Entry entry = new ProprietaryEntry("test", "1234", "app");
+            entries.Add(entry);
+            AbstractUser user = new LocalUser("1234", entries);
+            Assert.Contains(entry, user.Entries);
+        }
+
+        /// <summary>
+        /// Test if add Entry work well
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="entry"></param>
         [Theory]
         [MemberData(nameof(AddEntry_Tests_Data))]
         public void AddEntry_Tests(bool expected, Entry entry)
@@ -39,7 +59,7 @@ namespace Model_Tests.Business.Users
             AbstractUser loUser = new LocalUser("1234");
 
             loUser.AddEntry(entry);
-            Assert.Equal(expected,loUser.Entries.Contains(entry));
+            Assert.Equal(expected, loUser.Entries.Contains(entry));
         }
 
         public static IEnumerable<Object[]> AddEntry_Tests_Data()
@@ -48,7 +68,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 true,
-                new ProprietaryEntry("admin","1234","discord")
+                new SharedEntry("admin","1234","discord")
             };
             #endregion
 
@@ -56,11 +76,14 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 true,
-                new SharedEntry("admin","1234","discord")
+                new ProprietaryEntry("admin","1234","discord")
             };
             #endregion
         }
 
+        /// <summary>
+        /// AddEntry should not add null value.
+        /// </summary>
         [Fact]
         public void AddEntry_AddNullShouldNotWork()
         {
@@ -69,6 +92,11 @@ namespace Model_Tests.Business.Users
             Assert.Empty(loUser.Entries);
         }
 
+        /// <summary>
+        /// Test if RemoveEntry work well.
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="entry"></param>
         [Theory]
         [MemberData(nameof(RemoveEntry_Tests_Data))]
         public void RemoveEntry_Tests(bool expected, Entry entry)
@@ -86,7 +114,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 false,
-                new ProprietaryEntry("admin","1234","discord")
+                new SharedEntry("admin","1234","discord")
             };
             #endregion
 
@@ -94,7 +122,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 false,
-                new SharedEntry("admin","1234","discord")
+                new ProprietaryEntry("admin","1234","discord")
             };
             #endregion
         }

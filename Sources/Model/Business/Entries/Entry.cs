@@ -1,11 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Model.Business.Entries
 {
     public abstract class Entry : IEquatable<Entry>
@@ -16,7 +8,7 @@ namespace Model.Business.Entries
         /// <summary>
         /// Unique identifier
         /// </summary>
-        protected Guid Uid { get; init; }
+        public Guid Uid { get; init; }
 
         /// <summary>
         /// Login's app
@@ -56,32 +48,40 @@ namespace Model.Business.Entries
         /// <param name="app"></param>
         /// <param name="note"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected Entry(string login, string password, string app, string? note)
+        protected Entry(Guid uid, string login, string password, string app, string? note)
         {
-            if (String.IsNullOrEmpty(login))
+            if(uid == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(uid));
+            }
+            if (string.IsNullOrEmpty(login))
             {
                 throw new ArgumentNullException(nameof(login));
             }
-            if (String.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
             {
                 throw new ArgumentNullException(nameof(password));
             }
-            if (String.IsNullOrEmpty(app))
+            if (string.IsNullOrEmpty(app))
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            Uid = Guid.NewGuid();
+            Uid = uid;
             Login = login;
             Password = password;
             App = app;
             Note = note ?? string.Empty;
         }
 
+        protected Entry(string login, string password, string app, string? note): this(Guid.NewGuid(), login,password, app, note) { }
+
+        protected Entry(string login, string password, string app) : this(Guid.NewGuid(), login, password, app, null) { }
+
         public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 
         public override bool Equals(object? obj)
-            => obj is Entry entry && Equals(this, entry);
+            => obj is Entry entry && Comparer.Equals(this, entry);
 
         public override int GetHashCode() => Comparer.GetHashCode(this);
     }

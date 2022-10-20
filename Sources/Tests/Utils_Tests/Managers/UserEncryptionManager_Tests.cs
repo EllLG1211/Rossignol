@@ -19,6 +19,7 @@ namespace Utils_Tests.Managers
                 LocalUser lu = UserEncryptionManager.EncryptedToLocalUser(elu, password);
 
                 Assert.True(espectedResult);
+                //Assert.Equal(localUser, lu);
             } catch
             {
                 Assert.False(espectedResult);
@@ -53,14 +54,15 @@ namespace Utils_Tests.Managers
 
         [Theory]
         [MemberData(nameof(TryConnectedUserEncryptionDecryption_Data))]
-        public void TryConnectedUserEncryptionDecryption_Test(bool espectedResult, ConnectedUser connected, string password)
+        public void TryConnectedUserEncryptionDecryption_Test(bool espectedResult, ConnectedUser connectedUser, string password)
         {
             try
             {
-                EncryptedConnectedUser ecu = UserEncryptionManager.ConnectedToEncryptedUser(connected, password);
+                EncryptedConnectedUser ecu = UserEncryptionManager.ConnectedToEncryptedUser(connectedUser, password);
                 ConnectedUser cu = UserEncryptionManager.EncryptedToConnectedUser(ecu, password);
 
                 Assert.True(espectedResult);
+                //Assert.Equal(connectedUser, cu);
             } catch
             {
                 Assert.False(espectedResult);

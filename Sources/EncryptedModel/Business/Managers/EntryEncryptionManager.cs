@@ -3,6 +3,7 @@ using Encryption.AESEncryption;
 using Model.Business.Entries;
 using EncryptedModel.Business.Entries;
 using Model.Business.Users.UserDataUtilities;
+using Model.Business.Users;
 
 namespace EncryptedModel.Business.Managers
 {
@@ -110,9 +111,9 @@ namespace EncryptedModel.Business.Managers
                                                    decrypter.Decrypt(password, encrypted.EncryptedPassword),
                                                    decrypter.Decrypt(password, encrypted.EncryptedApp),
                                                    encrypted.EncryptedNote.Length <= 0 ? string.Empty : decrypter.Decrypt(password, encrypted.EncryptedNote));
-                
-            if (encrypted.EncryptedSharedWith.Length > 0)
-                decrypter.Decrypt(password, encrypted.EncryptedSharedWith).ToMailedUserList().ForEach(user => toReturn.ShareToUser(user));
+
+            if (encrypted.SharedWith.Count > 0)
+                encrypted.SharedWith.ForEach(user => toReturn.ShareToUser(user));
 
             return toReturn;
         }
@@ -148,7 +149,7 @@ namespace EncryptedModel.Business.Managers
                                                                                          encrypter.Encrypt(password, toEncrypt.Password),
                                                                                          encrypter.Encrypt(password, toEncrypt.App),
                                                                                          string.IsNullOrEmpty(toEncrypt.Note) ? Array.Empty<byte>() : encrypter.Encrypt(password, toEncrypt.Note),
-                                                                                         encrypter.Encrypt(password,toEncrypt.SharedWith.ConcatToString()));
+                                                                                         toEncrypt.SharedWith.ToList());
             return toReturn;
         }
     }

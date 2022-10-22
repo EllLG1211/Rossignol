@@ -38,10 +38,6 @@ namespace Model.Business.Users
             }
         }
 
-        protected AbstractUser(string password, List<Entry> entries) : this(Guid.NewGuid(), password, entries) { }
-
-        protected AbstractUser(string password) : this(Guid.NewGuid(), password, new List<Entry>()) { }
-
 
         /// <summary>
         /// Add an entry to the user.

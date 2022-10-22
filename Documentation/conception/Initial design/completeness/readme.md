@@ -17,7 +17,7 @@
 | :bangbang: | Build Job | 0,2 | [🟩 ]
 | :bangbang: | UT Job | 0,2 | [🟩 ]
 | :bangbang: | Sonar Job | 0,3 | [🟩 ]
-| | Doxygen job | 0,2 | [🟦]
+| | Doxygen job | 0,2 | [🟩]
 | :bangbang: | CI Passed | ☣️  🏁 | [🟩 ]
 | :bookmark: | **C# .NET / Fondamentaux** | 4 (2,2) | [🟨]
 | :bangbang: | Ecriture de classes | ☣️  🏁 | [ 🟩

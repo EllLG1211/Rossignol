@@ -26,8 +26,6 @@ namespace Model.Business.Entries
 
 
         public SharedEntry(Guid uid, string login, string password, string app) 
-            : this(uid, login, password, app, null)
-        {
-        }
+            : this(uid, login, password, app, null){}
     }
 }

@@ -32,7 +32,7 @@
 | :bangbang: | Test avec jeu de tests (Theory/InlineData) | 0,5 | [🟩]
 | :bangbang: | Test avec jeu de tests (Theory/MemberData) | 0,5 | [🟩]
 | :bangbang: | Tests Model/Stub | 0,25 | [🟩]
-| :bangbang: | Tests EF | 0,25 | [🟩]
+| :bangbang: | Tests EF | 0,25 | [🟥]
 |  | Tests Model/EF | 0,25 | [🟥]
 | :bangbang: | Tests fonctionnels (Appli Console) | 0,75 | [🟩]
 | :bookmark: | **Persistance** | 4,2 (1,2) | [🟨]

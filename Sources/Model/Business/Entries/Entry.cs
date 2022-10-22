@@ -18,7 +18,6 @@ namespace Model.Business.Entries
 
         /// <summary>
         /// Password used on the app.
-        /// This property will have to be redifined; encrypted, it will not be of type string. Probably a byte[]
         /// </summary>
         public string Password { get; protected set; }
 

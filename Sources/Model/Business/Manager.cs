@@ -135,5 +135,13 @@ namespace Model.Business
             }
             ConnectedUser.AddEntry(new SharedEntry(login, password, app, note));
         }
+
+        /// <summary>
+        /// Log out the user
+        /// </summary>
+        public void logOut()
+        {
+            ConnectedUser = null;
+        }
     }
 }

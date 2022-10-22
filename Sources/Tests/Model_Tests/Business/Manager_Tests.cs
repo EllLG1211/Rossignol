@@ -237,5 +237,16 @@ namespace Model_Tests.Business
             Assert.Throws<NullReferenceException>(() => { manager.ShareEntryWithConnectedUser("login", "password", "app", "note"); });
         }
         #endregion
+
+        #region Logout
+        [Fact]
+        public void Logout_ShouldUninstantiate()
+        {
+            var manager = new Manager();
+            manager.Login("login", "password");
+            manager.logOut();
+            Assert.Null(manager.ConnectedUser);
+        }
+        #endregion
     }
 }

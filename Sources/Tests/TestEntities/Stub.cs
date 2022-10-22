@@ -3,6 +3,7 @@ using EF_Model.Utils;
 using Model.Business.Entries;
 using EncryptedModel.Business.Entries;
 using EncryptedModel.Business.Managers;
+using Encryption.AESEncryption;
 
 namespace TestEntities
 {
@@ -15,7 +16,7 @@ namespace TestEntities
             return ProprietaryEntryConverter.ToEntity(encryptedSharedEntry);
         }
 
-        public List<EntryEntity> load()
+        public List<EntryEntity> loadEntities()
         {
             List<EntryEntity> list = new List<EntryEntity>();
             list.Add(CreateEntryEntity("login1", "password1", "app1", null));
@@ -25,5 +26,9 @@ namespace TestEntities
             list.Add(CreateEntryEntity("login5", "password5", "app5", "note4"));
             return list;
         }
+
+        public List<LocalUserEntity> loadUsers(string password)=>
+            new List<LocalUserEntity>() { new LocalUserEntity() { EncryptionType = "AES", Password =  new AesEncrypter().Encrypt(password, password), Uid=Guid.NewGuid().ToString()} };
+       
     }
 }

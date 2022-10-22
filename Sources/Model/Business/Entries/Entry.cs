@@ -74,9 +74,8 @@ namespace Model.Business.Entries
             Note = note ?? string.Empty;
         }
 
-        protected Entry(string login, string password, string app, string? note): this(Guid.NewGuid(), login,password, app, note) { }
-
-        protected Entry(string login, string password, string app) : this(Guid.NewGuid(), login, password, app, null) { }
+        protected Entry(string login, string password, string app, string? note)
+            : this(Guid.NewGuid(), login,password, app, note) { }
 
         public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 

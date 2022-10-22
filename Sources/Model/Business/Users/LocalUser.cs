@@ -7,14 +7,14 @@ namespace Model.Business.Users
     /// </summary>
     public class LocalUser : AbstractUser
     {
-        public LocalUser(Guid uid, string password, List<Entry> entries) 
+        public LocalUser(Guid uid, string password, List<Entry>? entries) 
             : base(uid, password, entries) { }
 
-        public LocalUser(string password, List<Entry> entries) 
-            : base(password, entries) { }
+        public LocalUser(string password, List<Entry>? entries) 
+            : this(Guid.NewGuid(), password, entries) { }
 
         public LocalUser(string password) 
-            : base(password) { }
+            : this(password, null) { }
 
         public LocalUser(Guid uid, string password) 
             : this(uid, password, null) { }

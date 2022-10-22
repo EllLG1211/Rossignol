@@ -1,4 +1,5 @@
 ﻿using Model.Business.Entries;
+using System.Collections.ObjectModel;
 
 namespace Model.Business.Users
 {
@@ -7,8 +8,8 @@ namespace Model.Business.Users
         /// <summary>
         /// The user's entries
         /// </summary>
-        private readonly List<Entry> _entries;
-        public IEnumerable<Entry> Entries { get { return _entries; } }
+        private readonly List<Entry> _entries = new List<Entry>();
+        public IEnumerable<Entry> Entries => new ReadOnlyCollection<Entry>(_entries);
 
         /// <summary>
         /// Id for the user.
@@ -20,7 +21,7 @@ namespace Model.Business.Users
         /// </summary>
         public String Password { get; protected set; }
 
-        protected AbstractUser(Guid uid, string password, List<Entry> entries)
+        protected AbstractUser(Guid uid, string password, IEnumerable<Entry>? entries)
         {
             Uid = uid;
             if (password != null)
@@ -33,11 +34,7 @@ namespace Model.Business.Users
             }
             if (entries != null)
             {
-                _entries = entries;
-            }
-            else
-            {
-                _entries = new List<Entry>();
+                _entries.AddRange(entries);
             }
         }
 

@@ -165,7 +165,7 @@ namespace Model_Tests.Business
             Entry entry = new ProprietaryEntry("test", "1234", "test");
             entries.Add(entry);
             manager.Login("test@test.com", "1234", entries);
-            Assert.Contains(entry, manager.ConnectedUser.Entries);
+            Assert.Contains(entry, manager.ConnectedUser?.Entries);
         }
         #endregion
 
@@ -186,7 +186,7 @@ namespace Model_Tests.Business
             Entry entry = new ProprietaryEntry("test", "1234", "test");
             entries.Add(entry);
             manager.Login("1234", entries);
-            Assert.Contains(entry, manager.ConnectedUser.Entries);
+            Assert.Contains(entry, manager.ConnectedUser?.Entries);
         }
         #endregion
 

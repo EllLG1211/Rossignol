@@ -55,15 +55,15 @@ namespace Model.Business
         {
             if(String.IsNullOrEmpty(mail))
             {
-                throw new ArgumentNullException("mail");
+                throw new ArgumentNullException(nameof(mail));
             }
             else if(String.IsNullOrEmpty(password))
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
             else if(String.IsNullOrEmpty(confirmPassword)) 
             { 
-                throw new ArgumentNullException("confirmPassword"); 
+                throw new ArgumentNullException(nameof(confirmPassword)); 
             }
             else if(!password.Equals(confirmPassword))
             {
@@ -86,11 +86,11 @@ namespace Model.Business
         {
             if (String.IsNullOrEmpty(password))
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
             else if (String.IsNullOrEmpty(confirmPassword))
             {
-                throw new ArgumentNullException("confirmPassword");
+                throw new ArgumentNullException(nameof(confirmPassword));
             }
             else if (!password.Equals(confirmPassword))
             {
@@ -111,10 +111,6 @@ namespace Model.Business
         /// <exception cref="NullReferenceException"></exception>
         public void CreateEntryToConnectedUser(string login, string password, string app, string? note)
         {
-            if(ConnectedUser == null)
-            {
-                throw new NullReferenceException("ConnectedUser is null.");
-            }
             ConnectedUser.AddEntry(new ProprietaryEntry(login, password, app, note));
         }
 
@@ -129,10 +125,6 @@ namespace Model.Business
         /// <exception cref="NullReferenceException">Throwed if ConnectedUser is null.</exception>
         public void ShareEntryWithConnectedUser(string login, string password, string app, string? note)
         {
-            if (ConnectedUser == null)
-            {
-                throw new NullReferenceException("ConnectedUser is null.");
-            }
             ConnectedUser.AddEntry(new SharedEntry(login, password, app, note));
         }
 

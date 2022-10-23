@@ -36,5 +36,25 @@ namespace EF_Tests
             }
             
         }
+
+        [Fact]
+        public void testConv()
+        {
+            try
+            {
+                string password = "pass";
+                ConnectedUser ls = new ConnectedUser(password, "pass", new List<Entry>());
+                EncryptedConnectedUser usr = UserEncryptionManager.ConnectedToEncryptedUser(ls, password);
+                List<EncryptedConnectedUser> users = new List<EncryptedConnectedUser>() { usr };
+
+                List<ConnectedUserEntity> lue = ConnectedUserConverter.ToEntities(users).ToList();
+                List<EncryptedConnectedUser> users2 = ConnectedUserConverter.ToModels(lue).ToList();
+                Assert.Equal(users.Count, users2.Count);
+            }
+            catch
+            {
+                Assert.True(false);
+            }
+        }
     }
 }

@@ -15,7 +15,6 @@ namespace TestEntities
         {
             Console.WriteLine("Test console for Entity Framework\n");
 
-
             EFManager efm = new EFManager();
 
             List<LocalUserEntity> users = Stub.loadUsers(MASTER_PASSWORD);
@@ -29,7 +28,7 @@ namespace TestEntities
             dbconstruct.Wait();
             dbconstruct.Dispose();
 
-            using (var context = new RossignolContext())
+            using (var context = new RossignolContextLocal())
             {
                 IEnumerable<EntryEntity> encryptedEntries = context.EncryptedEntriesSet;
                 IEnumerable<LocalUserEntity> usersNm = context.LocalUserSet;

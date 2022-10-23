@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EF_Model
 {
-    public class RossignolContext : DbContext
+    public class RossignolContextLocal : DbContext
     {
         public DbSet<LocalUserEntity> LocalUserSet { get; set; }
         public DbSet<EntryEntity> EncryptedEntriesSet { get; set; }

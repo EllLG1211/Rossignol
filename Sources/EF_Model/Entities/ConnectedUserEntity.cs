@@ -2,7 +2,7 @@
 
 namespace EF_Model.Entities
 {
-    public class LocalUserEntity
+    public class ConnectedUserEntity
     {
         public string EncryptionType { get; set; }
 
@@ -11,6 +11,8 @@ namespace EF_Model.Entities
 
         [MemberNotNullWhen(true, nameof(Password))]
         public byte[] Password { get; set; }
+
+        public byte[] Mail { get; set; }
 
         public virtual ICollection<EntryEntity> Entries { get; set; } //one to many
     }

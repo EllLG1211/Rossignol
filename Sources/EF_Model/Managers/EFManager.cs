@@ -1,9 +1,4 @@
 ﻿using EF_Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EF_Model.Managers
 {
@@ -12,11 +7,10 @@ namespace EF_Model.Managers
 
         public async Task ConstructDatabase(List<EntryEntity> entities, List<LocalUserEntity> users)
         {
-            using (var context = new RossignolContext())
+            using (var context = new RossignolContextLocal())
             {
-
                 context.EncryptedEntriesSet.AddRange(entities);
-                context.LocalUserSet.AddRange(users);
+                context.LocalUser.AddRange(users);
                 context.SaveChanges();
             }
         }

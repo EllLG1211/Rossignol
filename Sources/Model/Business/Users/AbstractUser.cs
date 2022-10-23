@@ -76,7 +76,7 @@ namespace Model.Business.Users
 
         public override bool Equals(object? obj)
             => obj is AbstractUser entry && Comparer.Equals(this, entry);
-
+        
         public override int GetHashCode() => Comparer.GetHashCode(this);
     }
 }

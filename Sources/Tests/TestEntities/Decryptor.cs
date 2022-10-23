@@ -8,10 +8,10 @@ namespace TestEntities
 {
     internal class Decryptor
     {
-        public SharedEntry Decrypt(EntryEntity entryEntity)
+        public ProprietaryEntry Decrypt(EntryEntity entryEntity)
         {
-            EncryptedSharedEntry encryptedSharedEntry = ProprietaryEntryConverter.ToModel(entryEntity);
-            return EntryEncryptionManager.EncryptedToSharedEntry(encryptedSharedEntry, Program.MASTER_PASSWORD);
+            EncryptedProprietaryEntry encryptedSharedEntry = ProprietaryEntryConverter.ToModel(entryEntity);
+            return EntryEncryptionManager.EncryptedToProprietaryEntry(encryptedSharedEntry, Program.MASTER_PASSWORD);
         }
     }
 }

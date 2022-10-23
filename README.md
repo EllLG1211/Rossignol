@@ -57,7 +57,7 @@ This is a quick look of the **HomePage** & **MainPage** page of the application 
 
 * EntityFramework
   * To create some **migration**
-    * Delete `./Rossignol/Source/EF_Model/Migrations`
+    * Delete `./Rossignol/Sources/EF_Model/Migrations`
     * With the terminal and with the `./Rossignol/Sources/EF_Model` path, run the `dotnet tool install --global dotnet-ef` command.
       * If an error occur, run this command: `dotnet tool install --global dotnet-ef`
   * To create a **data base**

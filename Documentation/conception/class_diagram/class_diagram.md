@@ -45,11 +45,16 @@ This manager handles logging in and signing in, listing, editing and sharing ent
 ### Encrypter and Decrypter interfaces
 These interfaces, as their name suggest, are used to provide and easy way to encrypt and decrypt data using various algorithm, here the only one that's implemented is the `AES-128` algorithm with the implementing classes `AesDecrypter` and `AesEncrypter`. We also have an interface that provides the name of the algorithm currently in use, `IEncryptionSpecifier`. This information should be used to ensure that no encrypted data is decrypted using the wrong algorithm.
 
+These are in separate assemblies as part of a strategy pattern. If we ever want to add a new encryption algorithm to our app, we can create a new assembly, two classes that implement respectively IEncrypter and IDecrypter, and release our project to depend on those instead of AES.
+
 ### Encrypted Entries
 The `Encrypted Entry` classes represent the same classes as the `Entry` classes but encrypted, with their data being stored as an array of bytes, at the exception of the `UID` which is kept clear for use in the database (non-critical information). It also stores the used encryption algorithm as a `string` which is retreived during encryption or decryption with the `IEncryptionSpecifier` interface.
 
-### Entry Encryption Manager
-The `EntryEncryptionManager` class manages the encryption and decryption of entries within the model.
+### Encrypted Users
+These classes represent the same data as `AbstractUser` classes but encrypted, with their data being stored as an array of bytes. As their email is now encrypted they gain a UID to distinguish them.
+
+### Encryption Managers
+The `EntryEncryptionManager` class manages the encryption and decryption of entries within the model. The `UserEncryptionManager` does the same for users. Both managers handle both encryption and decryption.
 
 ---
 

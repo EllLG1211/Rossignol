@@ -5,7 +5,7 @@ namespace EF_Model
 {
     public class RossignolContextLocal : DbContext
     {
-        public DbSet<LocalUserEntity> LocalUserSet { get; set; }
+        public DbSet<LocalUserEntity> LocalUser { get; set; }
         public DbSet<EntryEntity> EncryptedEntriesSet { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

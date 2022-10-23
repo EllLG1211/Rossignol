@@ -5,13 +5,13 @@ namespace EF_Model.Utils
 {
     public static class ProprietaryEntryConverter
     {
-        public static EncryptedSharedEntry ToModel(this EntryEntity entity)
-            => new EncryptedSharedEntry(entity.EncryptionType, entity.Uid.ToString(), entity.Login, entity.Password, entity.App, entity.Note);
+        public static EncryptedProprietaryEntry ToModel(this EntryEntity entity)
+            => new EncryptedProprietaryEntry(entity.EncryptionType, entity.Uid.ToString(), entity.Login, entity.Password, entity.App, entity.Note);
 
-        public static IEnumerable<EncryptedSharedEntry> ToModels(this IEnumerable<EntryEntity> entities)
+        public static IEnumerable<EncryptedProprietaryEntry> ToModels(this IEnumerable<EntryEntity> entities)
             => entities.Select(e => e.ToModel());
 
-        public static EntryEntity ToEntity(this EncryptedSharedEntry model)
+        public static EntryEntity ToEntity(this EncryptedProprietaryEntry model)
             => new EntryEntity
             {
                 EncryptionType = model.encryptionType,
@@ -22,7 +22,7 @@ namespace EF_Model.Utils
                 Note = model.EncryptedNote,
             };
 
-        public static IEnumerable<EntryEntity> ToEntities(this IEnumerable<EncryptedSharedEntry> models)
+        public static IEnumerable<EntryEntity> ToEntities(this IEnumerable<EncryptedProprietaryEntry> models)
             => models.Select(m => m.ToEntity());
     }
 }

@@ -4,6 +4,7 @@ namespace EF_Model.Entities
 {
     public class EntryEntity
     {
+        public LocalUserEntity Owner { get; set; }  //one to many
         public string EncryptionType { get; set; }
         [Key]
         public string Uid { get; set; }

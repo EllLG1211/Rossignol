@@ -11,7 +11,7 @@ namespace EF_Model.Managers
 {
     public class EntryEntityManager
     {
-        public async Task addEntry(EncryptedProprietaryEntry e, LocalUserEntity lue)
+        public static async Task addEntry(EncryptedProprietaryEntry e, LocalUserEntity lue)
         {
             using (var context = new RossignolContextLocal())
             {
@@ -20,7 +20,7 @@ namespace EF_Model.Managers
             }
         }
 
-        public async Task removeEntry(EncryptedProprietaryEntry e, LocalUserEntity lue)
+        public static async Task removeEntry(EncryptedProprietaryEntry e, LocalUserEntity lue)
         {
             using (var context = new RossignolContextLocal())
             {

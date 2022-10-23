@@ -68,7 +68,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 true,
-                new SharedEntry("admin","1234","discord")
+                new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "admin","1234","discord")
             };
             #endregion
 
@@ -114,7 +114,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 false,
-                new SharedEntry("admin","1234","discord")
+                new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "admin","1234","discord")
             };
             #endregion
 

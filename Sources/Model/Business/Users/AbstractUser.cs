@@ -1,6 +1,7 @@
 ﻿using Model.Business.Entries;
 using Model.Business.Users.Comparers;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 
 namespace Model.Business.Users
 {
@@ -66,11 +67,28 @@ namespace Model.Business.Users
             }
         }
 
-        public virtual bool Equals(AbstractUser? other) => Comparer.Equals(this, other);
+        //public virtual bool Equals(AbstractUser? other) => Comparer.Equals(this, other);
+        public virtual bool Equals(AbstractUser? other)
+        {
+            if (other == null) return false;
+            if (other.Uid != Uid) return false;
+            return true;
+        }
 
         public override bool Equals(object? obj)
-            => obj is AbstractUser entry && Comparer.Equals(this, entry);
-        
-        public override int GetHashCode() => Comparer.GetHashCode(this);
+        {
+            if (obj == null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj is not AbstractUser) return false;
+            return Uid.Equals((obj as AbstractUser)?.Uid);
+        }
+
+
+        public override int GetHashCode()
+        {
+            return Uid.GetHashCode() * 17
+             + Password.GetHashCode() * 17 ^ 2
+             + GetType().GetHashCode();
+        }
     }
 }

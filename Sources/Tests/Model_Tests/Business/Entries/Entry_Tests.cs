@@ -1,4 +1,5 @@
 ﻿using Model.Business.Entries;
+using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Model_Tests.Business.Entries
         }
 
         public static readonly object?[] Equals_TestData_Nullable
-            = new object?[] { false, new SharedEntry("Login", "1234", "Discord"), null };
+            = new object?[] { false, new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "Login", "1234", "Discord"), null };
 
         /// <summary>
         /// Test the GetHashCode method.
@@ -63,8 +64,8 @@ namespace Model_Tests.Business.Entries
         [Fact]
         public void Equals_ObjectCastedEntry_ShouldReturnTrue()
         {
-            Entry a = new SharedEntry("lorem", "ipsum", "dolore");
-            object b = new SharedEntry("lorem", "ipsum", "dolore");
+            Entry a = new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "lorem", "ipsum", "dolore");
+            object b = new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "lorem", "ipsum", "dolore");
             Assert.True(a.Equals(b));
         }
     }

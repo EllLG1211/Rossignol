@@ -61,7 +61,8 @@ This is a quick look of the **HomePage** & **MainPage** page of the application 
     * With the terminal and with the `./Rossignol/Sources/EF_Model` path, run the `dotnet tool install --global dotnet-ef` command.
       * If an error occur, run this command: `dotnet tool install --global dotnet-ef`
   * To create a **data base**
-    * With the same path run the `dotnet ef database update --startup-project ..\Tests\TestEntities\TestEntities.csproj` command.
+    * First, run `dotnet ef migrations add initDb` which will create the initial migration (run in `./Rossignol/Sources/EF_Model/`)
+    * With the same path run the `dotnet ef database update --startup-project ..\Tests\TestEntities\TestEntities.csproj` command, which will apply the migration to the project.
 
 *Note that the `EF_Model` project needs the `EntityFrameworkCore` + `EntityFrameworkCore.Sqlite` + `EntityFrameworkCore.Tools` nugget package to work.*
 *Also note that the `TestEntities` project needs the `EntityFrameworkCore.Design` nugget package to work.*

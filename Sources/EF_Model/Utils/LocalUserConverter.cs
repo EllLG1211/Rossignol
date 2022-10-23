@@ -6,7 +6,7 @@ namespace EF_Model.Utils
     public static class LocalUserConverter
     {
         public static EncryptedLocalUser LToModel(this LocalUserEntity entity)
-            =>  new EncryptedLocalUser(entity.EncryptionType, entity.Uid.ToString(), entity.Password, ProprietaryEntryConverter.ToModels(entity.OwnedEntries).ToList());
+            =>  new EncryptedLocalUser(entity.EncryptionType, entity.Uid.ToString(), entity.Password, ProprietaryEntryConverter.ToModels(entity.OwnedEntries ?? new List<EntryEntity>()).ToList());
 
         public static IEnumerable<EncryptedLocalUser> LToModels(this IEnumerable<LocalUserEntity> entities)
         => entities.Select(e => e.LToModel());

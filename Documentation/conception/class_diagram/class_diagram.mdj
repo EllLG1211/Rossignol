@@ -14250,7 +14250,7 @@
 											"top": 110,
 											"width": 671,
 											"height": 13,
-											"text": "Manager"
+											"text": "Managers"
 										},
 										{
 											"_type": "LabelView",
@@ -15561,9 +15561,9 @@
 											"font": "Arial;13;0",
 											"left": -992,
 											"top": -576,
-											"width": 89.578125,
+											"width": 96.078125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from Managers)"
 										},
 										{
 											"_type": "LabelView",
@@ -15766,9 +15766,9 @@
 											"font": "Arial;13;0",
 											"left": -1320,
 											"top": -608,
-											"width": 89.578125,
+											"width": 96.078125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from Managers)"
 										},
 										{
 											"_type": "LabelView",
@@ -17605,9 +17605,9 @@
 											"font": "Arial;13;0",
 											"left": -352,
 											"top": -88,
-											"width": 89.578125,
+											"width": 96.078125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from Managers)"
 										},
 										{
 											"_type": "LabelView",
@@ -17834,9 +17834,9 @@
 											"font": "Arial;13;0",
 											"left": -48,
 											"top": -16,
-											"width": 89.578125,
+											"width": 96.078125,
 											"height": 13,
-											"text": "(from Manager)"
+											"text": "(from Managers)"
 										},
 										{
 											"_type": "LabelView",
@@ -18353,7 +18353,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGEBc+e7EBNbr0="
 							},
-							"name": "Manager",
+							"name": "Managers",
 							"ownedElements": [
 								{
 									"_type": "UMLClass",

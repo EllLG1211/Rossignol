@@ -23,6 +23,7 @@ The `Entry` class represents one entry; meaning, one set of credentials the user
 Semantically speaking, an entry can only be modified by its owner.
 
 ### Users (green)
+
 The users also need a layer of abstraction, because we must differenciate between a `User` which can be edited, and a `Sharer` which only gives access to its mail.
 
 `LocalUser` is the user without an account on the server, and only local. It contains only a password.
@@ -32,6 +33,7 @@ The users also need a layer of abstraction, because we must differenciate betwee
 We also have a `UserExtensions` class which contains utility extension methods for an abstract user.
 
 ### Manager (blue)
+
 The manager is tasked with handling the application logic. It has knowledge of the currently connected user through its `LoggedInUser` property; and therefore also has access to the entries to display.
 
 This manager handles logging in and signing in, listing, editing and sharing entries.
@@ -43,17 +45,21 @@ This manager handles logging in and signing in, listing, editing and sharing ent
 <img src="./encryption.svg">
 
 ### Encrypter and Decrypter interfaces
+
 These interfaces, as their name suggest, are used to provide and easy way to encrypt and decrypt data using various algorithm, here the only one that's implemented is the `AES-128` algorithm with the implementing classes `AesDecrypter` and `AesEncrypter`. We also have an interface that provides the name of the algorithm currently in use, `IEncryptionSpecifier`. This information should be used to ensure that no encrypted data is decrypted using the wrong algorithm.
 
 These are in separate assemblies as part of a strategy pattern. If we ever want to add a new encryption algorithm to our app, we can create a new assembly, two classes that implement respectively IEncrypter and IDecrypter, and release our project to depend on those instead of AES.
 
 ### Encrypted Entries
+
 The `Encrypted Entry` classes represent the same classes as the `Entry` classes but encrypted, with their data being stored as an array of bytes, at the exception of the `UID` which is kept clear for use in the database (non-critical information). It also stores the used encryption algorithm as a `string` which is retreived during encryption or decryption with the `IEncryptionSpecifier` interface.
 
 ### Encrypted Users
+
 These classes represent the same data as `AbstractUser` classes but encrypted, with their data being stored as an array of bytes. As their email is now encrypted they gain a UID to distinguish them.
 
 ### Encryption Managers
+
 The `EntryEncryptionManager` class manages the encryption and decryption of entries within the model. The `UserEncryptionManager` does the same for users. Both managers handle both encryption and decryption.
 
 ---
@@ -61,3 +67,11 @@ The `EntryEncryptionManager` class manages the encryption and decryption of entr
 ## EntityFrameworkModel
 
 <img src="./ef_model.svg">
+
+### Entities
+
+### Utils
+
+Extensions methods to convert any `Entity` from **Entity Framework** to a model class. </br> *In our case, the model class came from the EncryptedModel.*
+
+### Managers

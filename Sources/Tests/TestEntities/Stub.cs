@@ -9,7 +9,7 @@ namespace TestEntities
 {
     internal class Stub
     {
-        private EntryEntity CreateEntryEntity(String login, String password, String app, String? note, LocalUserEntity owner)
+        private static EntryEntity CreateEntryEntity(String login, String password, String app, String? note, LocalUserEntity owner)
         {
             SharedEntry sharedEntry = new SharedEntry(login, password, app, note);
             EncryptedSharedEntry encryptedSharedEntry = EntryEncryptionManager.SharedToEncryptedEntry(sharedEntry, Program.MASTER_PASSWORD);
@@ -18,7 +18,7 @@ namespace TestEntities
             return toreturn;
         }
 
-        public List<EntryEntity> loadEntities(LocalUserEntity owner)
+        public static List<EntryEntity> loadEntities(LocalUserEntity owner)
         {
             List<EntryEntity> list = new List<EntryEntity>();
             list.Add(CreateEntryEntity("login1", "password1", "app1", null, owner));
@@ -29,7 +29,7 @@ namespace TestEntities
             return list;
         }
 
-        public List<LocalUserEntity> loadUsers(string password)=>
+        public static List<LocalUserEntity> loadUsers(string password)=>
             new List<LocalUserEntity>() { new LocalUserEntity() { EncryptionType = "AES", Password =  new AesEncrypter().Encrypt(password, password), Uid=Guid.NewGuid().ToString()} };
        
     }

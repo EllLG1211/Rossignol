@@ -15,12 +15,11 @@ namespace TestEntities
         {
             Console.WriteLine("Test console for Entity Framework\n");
 
-            Stub stub = new Stub();
 
             EFManager efm = new EFManager();
 
-            List<LocalUserEntity> users = stub.loadUsers(MASTER_PASSWORD);
-            List<EntryEntity> entries  = stub.loadEntities(users.First());
+            List<LocalUserEntity> users = Stub.loadUsers(MASTER_PASSWORD);
+            List<EntryEntity> entries  = Stub.loadEntities(users.First());
             users.First().Entries = entries;
 
             Task dbconstruct = efm.ConstructDatabase(entries, users);

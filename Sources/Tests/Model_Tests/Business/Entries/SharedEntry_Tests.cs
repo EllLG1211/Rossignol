@@ -26,7 +26,7 @@ namespace Model_Tests.Business.Entries
         [InlineData("korè@bidule", "Wikipédia", "abracadabra", true)]
         public void Constructor_ShouldAssignValues(string login, string app, string note, bool noteSuccessExpected)
         {
-            SharedEntry entry = new(new ReadOnlyUser("test@test.com", "1234"), login, "lorem ipsum", app, note);
+            SharedEntry entry = new(login, "lorem ipsum", app, note);
             Assert.Equal(login, entry.Login);
             Assert.Equal(app, entry.App);
             if (noteSuccessExpected) Assert.Equal(note, entry.Note);
@@ -57,11 +57,11 @@ namespace Model_Tests.Business.Entries
             }
         }
 
-        [Fact]
+        /*[Fact]
         public void Constructor_ShouldThrowArgumentNullExceptionIfOwnerNull()
         {
             Assert.Throws<ArgumentNullException>(() => { SharedEntry entry = new(null, "test", "1234", "discord"); });
-        }
+        }*/
 
         /// <summary>
         /// Test if note is reassign when the parameter is not passed.
@@ -85,11 +85,11 @@ namespace Model_Tests.Business.Entries
                 {
                     if (useGuid)
                     {
-                        SharedEntry entry = new(Guid.NewGuid(), new ReadOnlyUser("test@test.com", "1234"), "login", "1234", "app", null);
+                        SharedEntry entry = new(Guid.NewGuid(), "login", "1234", "app", null);
                     }
                     else
                     {
-                        SharedEntry entry = new(Guid.Empty, new ReadOnlyUser("test@test.com", "1234"), "login", "1234", "app", null);
+                        SharedEntry entry = new(Guid.Empty, "login", "1234", "app", null);
                     }
                 });
                 return;

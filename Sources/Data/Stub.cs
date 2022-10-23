@@ -40,7 +40,7 @@ namespace Data
             return user.Entries;
         }
 
-        public AbstractUser? GetUser(string? mail, string password)
+        public AbstractUser GetUser(string? mail, string password)
         {
             if(mail == null)
             {
@@ -61,10 +61,15 @@ namespace Data
 
         public void Register(AbstractUser user)
         {
-            
+            _users.Add(user);
         }
 
         public void RemoveEntry(AbstractUser user, Entry entry)
+        {
+            
+        }
+
+        public void save()
         {
             
         }

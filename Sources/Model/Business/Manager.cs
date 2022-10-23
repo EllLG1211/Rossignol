@@ -165,5 +165,10 @@ namespace Model.Business
             LoggedIn = null;
             _dataManager.clear();
         }
+
+        public void save()
+        {
+            DataManager.save();
+        }
     }
 }

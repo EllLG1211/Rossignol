@@ -29,5 +29,7 @@ namespace Model.Business
         /// </summary>
         void clear();
 
+        void save();
+
     }
 }

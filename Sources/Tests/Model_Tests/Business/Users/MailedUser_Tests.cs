@@ -63,5 +63,13 @@ namespace Model_Tests.Business.Users
                 new ReadOnlyUser("test", "1234")
             };
         }
+
+        [Fact]
+        public void GetHashCode_ShouldBeDifferentAccordingInstance()
+        {
+            AbstractUser user = new ConnectedUser("test", "1234");
+            AbstractUser user2 = new ConnectedUser("test", "1234");
+            Assert.NotEqual(user.GetHashCode(), user2.GetHashCode());
+        }
     }
 }

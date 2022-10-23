@@ -18,12 +18,20 @@ namespace Model.Business.Users
             }
         }
 
-        public override bool Equals(object? other)
+        public override bool Equals(object? obj)
         {
-            if (other == null) return false;
-            if (ReferenceEquals(this, other)) return true;
-            if (other is not MailedUser) return false;
-            return Mail.Equals((other as MailedUser).Mail);
+            if (obj == null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj is not MailedUser) return false;
+            return Mail.Equals((obj as MailedUser).Mail);
+        }
+
+        public override int GetHashCode()
+        {
+            return Uid.GetHashCode() * 17
+             + Password.GetHashCode() * 17 ^ 2
+             + Mail.GetHashCode() * 17 ^ 4
+             + GetType().GetHashCode();
         }
     }
 }

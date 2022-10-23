@@ -10,13 +10,6 @@ namespace Model_Tests.Business.Users
 {
     public class MailedUser_Tests
     {
-        [Fact]
-        public void Equals_ShouldReturnFalseIfOtherIsNull()
-        {
-            MailedUser user = new ReadOnlyUser("test", "1234");
-            Assert.False(user.Equals(null));
-        }
-
         [Theory]
         [MemberData(nameof(Equals_ShouldReturnTrue_Data))]
         public void Equals_ShouldReturnTrue(bool expected, MailedUser user, object other)
@@ -61,6 +54,13 @@ namespace Model_Tests.Business.Users
                 true,
                 user,
                 new ReadOnlyUser("test", "1234")
+            };
+
+            yield return new object[]
+            {
+                false,
+                user,
+                null
             };
         }
 

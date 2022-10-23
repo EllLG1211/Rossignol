@@ -80,7 +80,7 @@ namespace Model.Business.Users
             if (obj == null) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj is not AbstractUser) return false;
-            return Uid.Equals((obj as AbstractUser).Uid);
+            return Uid.Equals((obj as AbstractUser)?.Uid);
         }
 
 

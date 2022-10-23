@@ -23,7 +23,7 @@ namespace Model.Business.Users
             if (obj == null) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj is not MailedUser) return false;
-            return Mail.Equals((obj as MailedUser).Mail);
+            return Mail.Equals((obj as MailedUser)?.Mail);
         }
 
         public override int GetHashCode()

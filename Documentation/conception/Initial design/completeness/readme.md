@@ -42,7 +42,7 @@
 | :bangbang: | == local DB | | [🟦]
 | :bangbang: | == entities | | [🟦]
 |  | Extension Methods | 0,5 | [🟩]
-|  | EF One To Many | 0,7 | [🟥]
+|  | EF One To Many | 0,7 | [🟩]
 |  | EF Many To Many | 1 | [🟥]
 |  | Mapper | 0,8 | [🟥]
 | :bookmark: | Gestion de projets / Code#0 | 1 (0,9) | [🟩]

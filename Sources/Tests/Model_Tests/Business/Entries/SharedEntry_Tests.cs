@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Business.Entries;
+using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Model_Tests.Business.Entries
         [InlineData("korè@bidule", "Wikipédia", "abracadabra", true)]
         public void Constructor_ShouldAssignValues(string login, string app, string note, bool noteSuccessExpected)
         {
-            SharedEntry entry = new(login, "lorem ipsum", app, note);
+            SharedEntry entry = new(new ReadOnlyUser("test@test.com", "1234"), login, "lorem ipsum", app, note);
             Assert.Equal(login, entry.Login);
             Assert.Equal(app, entry.App);
             if (noteSuccessExpected) Assert.Equal(note, entry.Note);
@@ -47,15 +48,19 @@ namespace Model_Tests.Business.Entries
         [InlineData("schtroumpf", "Lorem ipsum", "Avadra kevadra", false)]
         public void Constructor_ShouldThrowArgumentNullException(string login, string password, string app, bool throwSuccessExpected)
         {
-            try
+            if (throwSuccessExpected)
             {
-                SharedEntry entry = new(login, password, app);
+                Assert.Throws<ArgumentNullException>(() => { SharedEntry entry = new(new ReadOnlyUser("test@test.com", "1234"), login, password, app); });
+            } else
+            {
                 Assert.False(throwSuccessExpected);
             }
-            catch
-            {
-                Assert.True(throwSuccessExpected);
-            }
+        }
+
+        [Fact]
+        public void Constructor_ShouldThrowArgumentNullExceptionIfOwnerNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => { SharedEntry entry = new(null, "test", "1234", "discord"); });
         }
 
         /// <summary>
@@ -64,7 +69,7 @@ namespace Model_Tests.Business.Entries
         [Fact]
         public void Constructor_ShouldReassignNote()
         {
-            SharedEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            SharedEntry entry = new(new ReadOnlyUser("test@test.com", "1234"), "loremipsum@gmail.com", "rickroll", "Discord");
             Assert.Equal(string.Empty, entry.Note);
         }
 
@@ -80,11 +85,11 @@ namespace Model_Tests.Business.Entries
                 {
                     if (useGuid)
                     {
-                        SharedEntry entry = new(Guid.NewGuid(), "login", "1234", "app", null);
+                        SharedEntry entry = new(Guid.NewGuid(), new ReadOnlyUser("test@test.com", "1234"), "login", "1234", "app", null);
                     }
                     else
                     {
-                        SharedEntry entry = new(Guid.Empty, "login", "1234", "app", null);
+                        SharedEntry entry = new(Guid.Empty, new ReadOnlyUser("test@test.com", "1234"), "login", "1234", "app", null);
                     }
                 });
                 return;

@@ -1,4 +1,5 @@
 ﻿using Model.Business.Entries;
+using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +34,8 @@ namespace Model_Tests.Business.Entries
             yield return new object?[]
             {
                 true,
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Discord")
+                new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "Login", "1234", "Discord"),
+                new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "Login", "1234", "Discord")
             };
             #endregion
 
@@ -112,7 +113,7 @@ namespace Model_Tests.Business.Entries
             {
                 false,
                 new ProprietaryEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Discord")
+                new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "Login", "1234", "Discord")
             };
             #endregion
         }
@@ -156,8 +157,8 @@ namespace Model_Tests.Business.Entries
             };
 
             yield return new Entry[] {
-                new SharedEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Discord")
+                new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "Login", "1234", "Discord"),
+                new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "Login", "1234", "Discord")
             };
             #endregion
 
@@ -171,7 +172,7 @@ namespace Model_Tests.Business.Entries
             #region Different types but same values
             yield return new Entry[] {
                 new ProprietaryEntry("Login", "1234", "Discord"),
-                new SharedEntry("Login", "1234", "Discord")
+                new SharedEntry(new ReadOnlyUser("test@test.com", "1234"), "Login", "1234", "Discord")
             };
             #endregion
         }

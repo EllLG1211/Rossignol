@@ -11,8 +11,8 @@ namespace EF_Model.Utils
         public static IEnumerable<EncryptedLocalUser> LToModels(this IEnumerable<LocalUserEntity> entities)
         => entities.Select(e => e.LToModel());
 
-        public static ConnectedUserEntity LToEntity(this EncryptedConnectedUser model)
-        =>  new ConnectedUserEntity
+        public static LocalUserEntity LToEntity(this EncryptedLocalUser model)
+        =>  new LocalUserEntity
         {
                 EncryptionType = model.EncryptionType,
                 Uid = model.Uid,
@@ -20,7 +20,7 @@ namespace EF_Model.Utils
                 //Entries = ProprietaryEntryConverter.ToEntities(model.ownedEncryptedEntries)
             };
 
-        public static IEnumerable<ConnectedUserEntity> LToEntities(this IEnumerable<EncryptedConnectedUser> users)
+        public static IEnumerable<LocalUserEntity> LToEntities(this IEnumerable<EncryptedLocalUser> users)
         => users.Select(m => m.LToEntity());
     }
 }

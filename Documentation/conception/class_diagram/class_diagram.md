@@ -1,13 +1,5 @@
 # Diagram explanation
 
-## Data diagram
-
-The model is based on the principle that a single password can be shared among multiple users. `Entry` classes belong to a `User`. The Entries know their owner. The other `User`(s), which know the password, won't be able to edit or re-share it.
-
-[MCD](./MCD/database_mcd.mermaid.md)
-
-----
-
 ## Class diagram   
 
 <img src="./class_diagram.svg">
@@ -39,5 +31,3 @@ The `Encrypted Entry` classes represent the same classes as the `Entry` classes 
 
 ### Entry Encryption Manager
 The `EntryEncryptionManager` class manages the encryption and decryption of entries within the model.
-
-[Class diagram](./class_diagram.mdj)

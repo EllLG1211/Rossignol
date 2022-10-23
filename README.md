@@ -52,6 +52,7 @@ This is a quick look of the **HomePage** & **MainPage** page of the application 
 * 2) With the **Visual Studio Installer** add this component:
   * .NET Desktop developpement *make sure it contains .NET6 runtime*
 * 3) Clean & Build the project solution
+  * Make sure the starting project is **ConsoleApp**
  
 ---
 

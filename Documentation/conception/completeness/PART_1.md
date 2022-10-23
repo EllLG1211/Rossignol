@@ -7,7 +7,7 @@
 | --- | --- | --- | --- |
 | :bookmark: | **Conception / Documentation** 3,3 (1,7) | 3,3 (1,7) | [🟨 ]
 |  | ReadMe | 0,2 | [🟩]
-|  | Wiki | 0,2 | [🟪]
+|  | Wiki | 0,2 | [🟨]
 |  | Sketchs | 0,6 | [🟩]
 |  | Diagramme de cas d’utilisation | 0,6 | [🟩]
 | :bangbang: | Diagramme de paquetage | 0,2 | [🟨]
@@ -33,7 +33,7 @@
 | :bangbang: | Test avec jeu de tests (Theory/MemberData) | 0,5 | [🟩]
 | :bangbang: | Tests Model/Stub | 0,25 | [🟩]
 | :bangbang: | Tests EF | 0,25 | [🟩]
-|  | Tests Model/EF | 0,25 | [🟥]
+|  | Tests Model/EF | 0,25 | [🟨]
 | :bangbang: | Tests fonctionnels (Appli Console) | 0,75 | [🟩]
 | :bookmark: | **Persistance** | 4,2 (1,2) | [🟨]
 | :bangbang: | Stub | 0,2 | [🟩]

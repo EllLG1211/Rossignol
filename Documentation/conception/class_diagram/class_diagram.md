@@ -66,12 +66,18 @@ The `EntryEncryptionManager` class manages the encryption and decryption of entr
 
 ## EntityFrameworkModel
 
+This package contains all classes used to handle Entity Framework, our database model.
+
 <img src="./ef_model.svg">
 
+### RossignolContextLocal
+This class allows us to create our database.
+
 ### Entities
+The classes in this package are a representation of our business classes, ready to be stored in our database.
 
 ### Utils
-
-Extensions methods to convert any `Entity` from **Entity Framework** to a model class. </br> *In our case, the model class came from the EncryptedModel.*
+Classes in this package contain extension methods to convert any `Entity` from **Entity Framework** to a model class, and the other way around. </br> *In our case, the model class came from the EncryptedModel.*
 
 ### Managers
+These handle the Entity Framework logic. They are manipulated by the DataManager, and regroup every authorized operation for the app.

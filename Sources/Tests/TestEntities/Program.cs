@@ -1,6 +1,7 @@
 ﻿using EF_Model;
 using EF_Model.Entities;
 using EF_Model.Managers;
+using Encryption.AESEncryption;
 using Model.Business.Entries;
 using Model.Business.Users;
 
@@ -18,7 +19,11 @@ namespace TestEntities
 
             EFManager efm = new EFManager();
 
-            Task dbconstruct = efm.ConstructDatabase(stub.loadEntities(), stub.loadUsers(MASTER_PASSWORD));
+            List<LocalUserEntity> users = stub.loadUsers(MASTER_PASSWORD);
+            List<EntryEntity> entries  = stub.loadEntities(users.First());
+            users.First().Entries = entries;
+
+            Task dbconstruct = efm.ConstructDatabase(entries, users);
 
             Decryptor decryptor = new Decryptor();
 
@@ -28,15 +33,16 @@ namespace TestEntities
             using (var context = new RossignolContext())
             {
                 IEnumerable<EntryEntity> encryptedEntries = context.EncryptedEntriesSet;
-                IEnumerable<LocalUserEntity> users = context.LocalUserSet;
+                IEnumerable<LocalUserEntity> usersNm = context.LocalUserSet;
                 foreach (EntryEntity entry in encryptedEntries)
                 {
                     SharedEntry p = decryptor.Decrypt(entry);
-                    Console.WriteLine($"{p.Uid} - {p.Login} - {p.Password} - {p.App} - {p.Label} - {p.Note}");
+                    Console.WriteLine($"{p.Uid} - {p.Login} - {p.Password} - {p.App} - {p.Label} - {p.Note} - {entry.Owner}|");
                 }
-                foreach (LocalUserEntity user in users)
+                Console.WriteLine("users:");
+                foreach (LocalUserEntity user in usersNm)
                 {
-
+                    Console.WriteLine($"{user.Uid} - {user.Password} - {new AesDecrypter().Decrypt(MASTER_PASSWORD, user.Password)} - {new AesDecrypter().Decrypt(MASTER_PASSWORD,user.Entries.First().App)}");
                 }
             }
         }

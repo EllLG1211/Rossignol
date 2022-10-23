@@ -5,7 +5,7 @@ The following file have for goal to explain the main part of the **Rossignol** p
 ## Sumary
 
 * [Model](##Model)
-* [Encryption](##EncryptedModel)
+* [Encryption](##Encryption)
 * [EF Model](##EntityFrameworkModel)
 
 ---
@@ -38,9 +38,9 @@ This manager handles logging in and signing in, listing, editing and sharing ent
 
 ---
 
-## EncryptedModel
+## Encryption
 
-<img src="./encrypted_model.svg">
+<img src="./encryption.svg">
 
 ### Encrypter and Decrypter interfaces
 These interfaces, as their name suggest, are used to provide and easy way to encrypt and decrypt data using various algorithm, here the only one that's implemented is the `AES-128` algorithm with the implementing classes `AesDecrypter` and `AesEncrypter`. We also have an interface that provides the name of the algorithm currently in use, `IEncryptionSpecifier`. This information should be used to ensure that no encrypted data is decrypted using the wrong algorithm.
@@ -53,6 +53,6 @@ The `EntryEncryptionManager` class manages the encryption and decryption of entr
 
 ---
 
-## Entity Framework Model
+## EntityFrameworkModel
 
 <img src="./ef_model.svg">

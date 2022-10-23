@@ -1,10 +1,13 @@
 ﻿using Model.Business.Entries;
+using Model.Business.Users.Comparers;
 using System.Collections.ObjectModel;
 
 namespace Model.Business.Users
 {
-    public abstract class AbstractUser
+    public abstract class AbstractUser : IEquatable<AbstractUser>
     {
+        private static UserComparer? _comparer;
+        private static UserComparer Comparer => _comparer ??= new UserComparer();
         /// <summary>
         /// The user's entries
         /// </summary>
@@ -62,5 +65,12 @@ namespace Model.Business.Users
                 _entries.Remove(entry);
             }
         }
+
+        public virtual bool Equals(AbstractUser? other) => Comparer.Equals(this, other);
+
+        public override bool Equals(object? obj)
+            => obj is AbstractUser entry && Comparer.Equals(this, entry);
+
+        public override int GetHashCode() => Comparer.GetHashCode(this);
     }
 }

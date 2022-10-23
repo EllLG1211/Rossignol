@@ -66,7 +66,13 @@ namespace Model.Business.Users
             }
         }
 
-        public virtual bool Equals(AbstractUser? other) => Comparer.Equals(this, other);
+        //public virtual bool Equals(AbstractUser? other) => Comparer.Equals(this, other);
+        public virtual bool Equals(AbstractUser? other)
+        {
+            if (other == null) return false;
+            if (other.Uid != Uid) return false;
+            return true;
+        }
 
         public override bool Equals(object? obj)
             => obj is AbstractUser entry && Comparer.Equals(this, entry);

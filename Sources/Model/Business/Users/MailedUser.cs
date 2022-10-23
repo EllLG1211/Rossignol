@@ -17,5 +17,13 @@ namespace Model.Business.Users
                 throw new ArgumentNullException(nameof(mail));
             }
         }
+
+        public bool Equals(Object? other)
+        {
+            if (other == null) return false;
+            if (ReferenceEquals(this, other)) return true;
+            if (other is not MailedUser) return false;
+            return Mail.Equals((other as MailedUser).Mail);
+        }
     }
 }

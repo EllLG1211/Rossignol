@@ -12,7 +12,7 @@ namespace Model_Tests.Business.Users
         public void Constructor_ShouldAssignEmail()
         {
             string mail = "test@test.com";
-            SharerUser user = new(mail, "1234");
+            ReadOnlyUser user = new(mail, "1234");
             Assert.True(mail.Equals(user.Mail));
         }
 
@@ -21,14 +21,14 @@ namespace Model_Tests.Business.Users
         {
             string mail = "test@test.com";
             string password = "1234";
-            SharerUser user = new(mail, password);
+            ReadOnlyUser user = new(mail, password);
             Assert.True(password.Equals(user.Password));
         }
 
         [Fact]
         public void Constructor_ShouldInstantiateEntries()
         {
-            AbstractUser user = new SharerUser("test@test.com", "1234");
+            AbstractUser user = new ReadOnlyUser("test@test.com", "1234");
             Assert.NotNull(user.Entries);
         }
 
@@ -39,7 +39,7 @@ namespace Model_Tests.Business.Users
             List<Entry> entries = new List<Entry>();
             Entry entry = new ProprietaryEntry("test", "1234", "app");
             entries.Add(entry);
-            SharerUser user = new(uid, "test@test.com", "1234", entries);
+            ReadOnlyUser user = new(uid, "test@test.com", "1234", entries);
             Assert.True(uid.Equals(user.Uid));
         }
 
@@ -49,14 +49,14 @@ namespace Model_Tests.Business.Users
             List<Entry> entries = new List<Entry>();
             Entry entry = new ProprietaryEntry("test", "1234", "app");
             entries.Add(entry);
-            AbstractUser user = new SharerUser("test@test.com", "1234", entries);
+            AbstractUser user = new ReadOnlyUser("test@test.com", "1234", entries);
             Assert.Contains(entry, user.Entries);
         }
 
         [Fact]
         public void Constructor_NullEntriesParamater_ShouldInstanciateNewList()
         {
-            AbstractUser user = new SharerUser("test@test.com", "1234", null);
+            AbstractUser user = new ReadOnlyUser("test@test.com", "1234", null);
             Assert.NotNull(user.Entries);
         }
     }

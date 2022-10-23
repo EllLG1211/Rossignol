@@ -217,5 +217,26 @@ namespace Model_Tests.Business
             Assert.Null(manager.LoggedIn);
         }
         #endregion
+
+        [Fact]
+        public void RemoveEntry_ShouldRemoveEntry()
+        {
+            var manager = new Manager(_dataManager);
+            manager.Login("test@test.com", "1234");
+            Entry entry = manager.LoggedIn.Entries.ToArray()[0];
+            manager.RemoveEntry(entry);
+            Assert.DoesNotContain(entry, manager.LoggedIn.Entries);
+        }
+
+        [Fact]
+        public void UnshareEntryTo()
+        {
+            var manager = new Manager(_dataManager);
+            manager.Login("test@test.com", "1234");
+            ProprietaryEntry entry = (ProprietaryEntry)manager.LoggedIn.Entries.ToArray()[0];
+            MailedUser user = entry.SharedWith.ToArray()[0];
+            entry.UnshareToUser(user);
+            Assert.DoesNotContain(user, entry.SharedWith);
+        }
     }
 }

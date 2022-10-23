@@ -3,6 +3,7 @@ using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Xunit;
 
 namespace Model_Tests.Business.Users
@@ -125,6 +126,60 @@ namespace Model_Tests.Business.Users
                 new ProprietaryEntry("admin","1234","discord")
             };
             #endregion
+        }
+
+        [Theory]
+        [MemberData(nameof(Equals_ShouldReturnTrue_Data))]
+        public void Equals_ShouldReturnTrue(bool expected, AbstractUser user, object other)
+        {
+            Assert.True(user.Equals(other) == expected);
+        }
+
+        public static IEnumerable<Object[]> Equals_ShouldReturnTrue_Data()
+        {
+            Guid uid = Guid.NewGuid();
+            AbstractUser user = new LocalUser(uid, "1234", null);
+            yield return new object[]
+            {
+                true,
+                user,
+                user
+            };
+
+            yield return new object[]
+            {
+                false,
+                user,
+                new LocalUser("12234")
+            };
+
+            yield return new object[]
+            {
+                true,
+                user,
+                new LocalUser(uid, "12234", null)
+            };
+
+            yield return new object[]
+            {
+                false,
+                user,
+                new ReadOnlyUser("test", "1234")
+            };
+
+            yield return new object[]
+            {
+                false,
+                user,
+                "test"
+            };
+
+            yield return new object[]
+            {
+                false,
+                user,
+                null
+            };
         }
     }
 }

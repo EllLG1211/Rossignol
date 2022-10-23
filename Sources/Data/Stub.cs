@@ -20,7 +20,7 @@ namespace Data
 
             MailedUser user2 = new ConnectedUser("moi@lui.com", "1234");
             Entry entry3 = new ProprietaryEntry("lorem", "ipsum", "discord");
-            user.AddEntry(entry2);
+            user.AddEntry(entry3);
             entry.ShareToUser(user2);
             this._users.Add(user2);
         }
@@ -56,7 +56,7 @@ namespace Data
             MailedUser? user = _users.Find(user => ((MailedUser)user).Mail.Equals(mail, StringComparison.Ordinal)) as MailedUser;
             if (user == null) throw new Exception("Unknown user");
             if (password.Equals(user.Password)) return user;
-            return null;
+            throw new Exception("Uncorrect password");
         }
 
         public void Register(AbstractUser user)

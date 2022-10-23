@@ -48,6 +48,20 @@ namespace Model_Tests.Business.Users
                 user,
                 new ConnectedUser("tedst", "12234")
             };
+
+            yield return new object[]
+            {
+                false,
+                user,
+                new LocalUser("1234")
+            };
+
+            yield return new object[]
+            {
+                true,
+                user,
+                new ReadOnlyUser("test", "1234")
+            };
         }
     }
 }

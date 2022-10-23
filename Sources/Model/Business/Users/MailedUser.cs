@@ -2,7 +2,7 @@
 
 namespace Model.Business.Users
 {
-    public abstract class MailedUser : AbstractUser
+    public abstract class MailedUser : AbstractUser, IEquatable<object>
     {
         public string Mail { get; protected set; }
 
@@ -18,7 +18,7 @@ namespace Model.Business.Users
             }
         }
 
-        public bool Equals(Object? other)
+        public override bool Equals(object? other)
         {
             if (other == null) return false;
             if (ReferenceEquals(this, other)) return true;

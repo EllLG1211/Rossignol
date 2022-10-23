@@ -46,6 +46,11 @@ namespace EF_Model.Managers
             throw new NotImplementedException();
         }
 
+        public void save()
+        {
+            throw new NotImplementedException();
+        }
+
         public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
         {
             throw new NotImplementedException();

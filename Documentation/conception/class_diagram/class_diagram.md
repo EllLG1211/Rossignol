@@ -14,25 +14,27 @@ The following file have for goal to explain the main part of the **Rossignol** p
 
 <img src="./model.svg">
 
-### Entries
+### Entries (red)
 
-The `Entry` class represents each entry in the app. It contains a *unique identifier*, the `Password` we save, a `Label`, the `Url` of the website that the password belongs to, and a `Note` for additionnal information.
+The `Entry` class represents one entry; meaning, one set of credentials the user has stored in the app. It contains a `unique identifier`, the `Password` we save, the `Url` of the website that the password belongs to, a `Login`, a `Label` which is just the combination of the previous two, and a `Note` for additional information. This class is abstract, and specialises into two separate classes with distinct behaviours:
+- *ProprietaryEntry* is an entry owned by the logged in user. While every field of `Entry` is read-only, this class allows modifications on its fields.
+- *SharedEntry* is an entry owned by another user that has shared it with the logged in user. In addition to the read-only fields, it knows its `Owner`.
 
-`Entry` is abstract because its inheriting classes `ProprietaryEntry` and `SharedEntry` will enable us to check if we possess said `Entry` or not, based on its type. An `Entry` cannot be shared or edited by anyone other than the owner.
+Semantically speaking, an entry can only be modified by its owner.
 
-*SharedEntry* is the immuable class for the entry someone share with us. It don't overload property setter to still immuable.
-
-*ProprietaryEntry* is the class for entries we own.
-
-### Users
+### Users (green)
 The users also need a layer of abstraction, because we must differenciate between a `User` which can be edited, and a `Sharer` which only gives access to its mail.
 
-*LocalUser* is the user without an account on the server, and only local. It contains only a password.
+`LocalUser` is the user without an account on the server, and only local. It contains only a password.
 
-*MailedUser* and his children is the class for a user registered on the server, with a mail and a password. *SharerUser* is the user who share a password with us, so we can edit it, and the *ConnectedUser* is the user logged in the app.
+`MailedUser` and his children are the classes for a user registered on the server, with a mail and a password. `SharerUser` is the user who share a password with us, so we can edit it, and the `ConnectedUser` is the user logged in the app.
 
-### Manager
-The manager will manage all the app model.
+We also have a `UserExtensions` class which contains utility extension methods for an abstract user.
+
+### Manager (blue)
+The manager is tasked with handling the application logic. It has knowledge of the currently connected user through its `LoggedInUser` property; and therefore also has access to the entries to display.
+
+This manager handles logging in and signing in, listing, editing and sharing entries.
 
 ---
 

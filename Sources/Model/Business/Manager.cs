@@ -10,7 +10,7 @@ namespace Model.Business
 {
     public class Manager
     {
-        public AbstractUser? ConnectedUser { get; private set; }
+        public AbstractUser? LoggedIn { get; private set; }
 
         private readonly IDataManager _dataManager;
         public IDataManager DataManager => _dataManager;
@@ -29,10 +29,10 @@ namespace Model.Business
         {
             if(mail == null)
             {
-                ConnectedUser = DataManager.GetUser(mail, password) as LocalUser;
+                LoggedIn = DataManager.GetUser(mail, password) as LocalUser;
             } else
             {
-                ConnectedUser = DataManager.GetUser(mail, password) as ConnectedUser;
+                LoggedIn = DataManager.GetUser(mail, password) as ConnectedUser;
             }
             
         }
@@ -125,14 +125,14 @@ namespace Model.Business
         public void CreateEntryToConnectedUser(string login, string password, string app, string? note)
         {
             ProprietaryEntry entry = new ProprietaryEntry(login, password, app, note);
-            ConnectedUser.AddEntry(entry);
-            DataManager.CreateEntryToConnectedUser(ConnectedUser, entry);
+            LoggedIn.AddEntry(entry);
+            DataManager.CreateEntryToConnectedUser(LoggedIn, entry);
         }
 
         public void RemoveEntry(Entry entry)
         {
-            ConnectedUser.RemoveEntry(entry);
-            DataManager.RemoveEntry(ConnectedUser, entry);
+            LoggedIn.RemoveEntry(entry);
+            DataManager.RemoveEntry(LoggedIn, entry);
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Model.Business
         /// </summary>
         public void logOut()
         {
-            ConnectedUser = null;
+            LoggedIn = null;
             _dataManager.clear();
         }
     }

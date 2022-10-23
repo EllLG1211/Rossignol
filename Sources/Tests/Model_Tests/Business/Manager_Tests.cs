@@ -157,12 +157,12 @@ namespace Model_Tests.Business
         {
             Manager manager = new Manager(_dataManager);
             manager.Login("test@test.com", "1234");
-            Assert.IsType<ConnectedUser>(manager.ConnectedUser);
+            Assert.IsType<ConnectedUser>(manager.LoggedIn);
         }
         #endregion
 
-        #region Login LocalUser
-        /*[Fact]
+        /*#region Login LocalUser
+        [Fact]
         public void Login_LocalUser_ShouldInstantiateALocalUserInManager()
         {
             Manager manager = new Manager(_dataManager);
@@ -176,11 +176,11 @@ namespace Model_Tests.Business
         public void CreateEntryToConnectedUser_ShouldAddProprietaryEntryToConnectedUser()
         {
             var manager = new Manager(_dataManager);
-            manager.Login("1234");
+            manager.Login("test@test.com", "1234");
             manager.CreateEntryToConnectedUser("test", "1234", "discord", null);
-            if (manager.ConnectedUser?.Entries.Count() == 1)
+            if (manager.LoggedIn?.Entries.Count() == 1)
             {
-                foreach (Entry entry in manager.ConnectedUser.Entries)
+                foreach (Entry entry in manager.LoggedIn.Entries)
                 {
                     Assert.IsType<ProprietaryEntry>(entry);
                 }
@@ -203,7 +203,7 @@ namespace Model_Tests.Business
             manager.Login("test@test.com", "1234");
             ProprietaryEntry entry = new ProprietaryEntry("test", "1234", "discord", null);
             manager.ShareEntryWith(entry, "test@test.com");
-            Assert.Contains(entry, _dataManager.GetEntries(manager.ConnectedUser));
+            Assert.Contains(entry, _dataManager.GetEntries(manager.LoggedIn));
         }
         #endregion
 
@@ -214,7 +214,7 @@ namespace Model_Tests.Business
             var manager = new Manager(_dataManager);
             manager.Login("test@test.com", "1234");
             manager.logOut();
-            Assert.Null(manager.ConnectedUser);
+            Assert.Null(manager.LoggedIn);
         }
         #endregion
     }

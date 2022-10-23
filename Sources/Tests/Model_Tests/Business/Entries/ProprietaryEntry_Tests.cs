@@ -71,10 +71,10 @@ namespace Model_Tests.Business.Entries
                 {
                     if (useGuid)
                     {
-                        ProprietaryEntry entry = new(Guid.NewGuid(), "login", "1234", "app");
+                        ProprietaryEntry entry = new(Guid.NewGuid(), "login", "1234", "app", null);
                     } else
                     {
-                        ProprietaryEntry entry = new(Guid.Empty, "login", "1234", "app");
+                        ProprietaryEntry entry = new(Guid.Empty, "login", "1234", "app", null);
                     }
                 });
                 return;
@@ -150,7 +150,7 @@ namespace Model_Tests.Business.Entries
         {
             ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
             entry.ShareToUser(user);
-            Assert.Contains(user, entry.GetSharedWith());
+            Assert.Contains(user, entry.SharedWith);
         }
 
         public static IEnumerable<Object[]> SharedToUser_ShouldAddUserToSharedWith_Data()
@@ -177,7 +177,7 @@ namespace Model_Tests.Business.Entries
             ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
             entry.ShareToUser(user);
             entry.UnshareToUser(user);
-            Assert.DoesNotContain(user, entry.GetSharedWith());
+            Assert.DoesNotContain(user, entry.SharedWith);
         }
 
         public static IEnumerable<Object[]> UnsharedToUser_ShouldUserUserFromSharedWith_Data()

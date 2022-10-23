@@ -44,15 +44,6 @@ namespace Model.Business.Entries
         public ProprietaryEntry(string login, string password, string app)
             : this(Guid.NewGuid(), login, password, app, string.Empty) { }
 
-
-        public ProprietaryEntry(Guid uid, string login, string password, string app) 
-            : this(uid, login, password, app, null){}
-
-        public IReadOnlyList<MailedUser> GetSharedWith()
-        {
-            return _sharedWith.AsReadOnly();
-        }
-
         public void ShareToUser(MailedUser user)
         {
             _sharedWith.Add(user);

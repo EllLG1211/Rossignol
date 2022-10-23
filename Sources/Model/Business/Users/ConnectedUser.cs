@@ -24,8 +24,5 @@ namespace Model.Business.Users
 
         public ConnectedUser(string mail, string password) 
             : this(Guid.NewGuid(), mail, password, null) { }
-
-        public ConnectedUser(Guid uid, string mail, string password)
-            : this(uid, mail, password, null) { }
     }
 }

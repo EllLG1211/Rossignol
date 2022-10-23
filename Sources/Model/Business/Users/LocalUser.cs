@@ -14,9 +14,6 @@ namespace Model.Business.Users
             : this(Guid.NewGuid(), password, entries) { }
 
         public LocalUser(string password) 
-            : this(password, null) { }
-
-        public LocalUser(Guid uid, string password) 
-            : this(uid, password, null) { }
+            : this(Guid.NewGuid(), password, null) { }
     }
 }

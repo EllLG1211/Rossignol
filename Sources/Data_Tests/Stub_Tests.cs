@@ -29,6 +29,27 @@ namespace Data_Tests
         }
 
         [Fact]
+        public void GetUser_ShouldThrowExceptionWithUnknownUser()
+        {
+            IDataManager stub = new Stub();
+            Assert.Throws<Exception>(() => stub.GetUser("unknown@gmail.com", "1234"));
+        }
+
+        [Fact]
+        public void GetUser_ShouldThrowExceptionIfPasswordIsIncorrect()
+        {
+            IDataManager stub = new Stub();
+            Assert.Throws<Exception>(() => stub.GetUser("test@test.com", "12345"));
+        }
+
+        [Fact]
+        public void GetUser_ShouldThrowExceptionIfPasswordIsIncorrectWithoutMail()
+        {
+            IDataManager stub = new Stub();
+            Assert.Throws<Exception>(() => stub.GetUser(null, "12345"));
+        }
+
+        [Fact]
         public void Register_ShouldAddUserToUserList()
         {
             string mail = "test";

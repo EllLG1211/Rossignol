@@ -12,6 +12,6 @@ namespace EF_Model.Entities
         [MemberNotNullWhen(true, nameof(Password))]
         public byte[] Password { get; set; }
 
-        public virtual ICollection<EntryEntity> Entries { get; set; } //one to many
+        public virtual ICollection<EntryEntity> OwnedEntries { get; set; } //one to many
     }
 }

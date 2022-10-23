@@ -15,6 +15,20 @@
 
         public byte[]? Note { get; set; }
 
-        public ICollection<ConnectedUserEntity>? SharedWith { get; set; }
+        public ICollection<ConnectedUserEntity>? SharedWith { get; set; }   //many to many
+
+        public override int GetHashCode()
+        {
+            return Uid.GetHashCode();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if(obj == null || obj is not EntryEntity) return false;
+
+            EntryEntity other = obj as EntryEntity;
+
+            return other.Uid == this.Uid;
+        }
     }
 }

@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EF_Model
 {
-    public class RossignolContext : DbContext
+    public class RossignolContextLocal : DbContext
     {
-        public DbSet<LocalUserEntity> LocalUserSet { get; set; }
+        public DbSet<LocalUserEntity> LocalUser { get; set; }
         public DbSet<EntryEntity> EncryptedEntriesSet { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -17,6 +17,7 @@ namespace EF_Model
         {
             modelBuilder.Entity<EntryEntity>().HasKey(n => n.Uid);
             modelBuilder.Entity<LocalUserEntity>().HasKey(n => n.Uid);
+            modelBuilder.Entity<ConnectedUserEntity>().HasKey(n => n.Uid);
             base.OnModelCreating(modelBuilder);
         }
     }

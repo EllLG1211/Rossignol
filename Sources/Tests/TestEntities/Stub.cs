@@ -11,8 +11,8 @@ namespace TestEntities
     {
         private static EntryEntity CreateEntryEntity(String login, String password, String app, String? note, LocalUserEntity owner)
         {
-            SharedEntry sharedEntry = new SharedEntry(login, password, app, note);
-            EncryptedSharedEntry encryptedSharedEntry = EntryEncryptionManager.SharedToEncryptedEntry(sharedEntry, Program.MASTER_PASSWORD);
+            ProprietaryEntry proprietaryEntry = new ProprietaryEntry(login, password, app, note);
+            EncryptedProprietaryEntry encryptedSharedEntry = EntryEncryptionManager.ProprietaryToEncryptedEntry(proprietaryEntry, Program.MASTER_PASSWORD);
             EntryEntity toreturn = ProprietaryEntryConverter.ToEntity(encryptedSharedEntry);
             toreturn.Owner = owner;
             return toreturn;

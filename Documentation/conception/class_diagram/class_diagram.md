@@ -1,5 +1,13 @@
 # Class diagram & explanations
 
+The following file have for goal to explain the main part of the **Rossignol** project!
+
+## Sumary
+
+
+
+---
+
 ## Model
 
 <img src="./model.svg">

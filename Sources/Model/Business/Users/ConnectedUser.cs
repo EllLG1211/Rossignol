@@ -16,16 +16,13 @@ namespace Model.Business.Users
             set => base.Password = value;
         }
 
-        public ConnectedUser(Guid uid, string mail, string password, List<Entry> entries) 
+        public ConnectedUser(Guid uid, string mail, string password, List<Entry>? entries) 
             : base(uid, mail, password, entries) { }
 
-        public ConnectedUser(string mail, string password, List<Entry> entries) 
-            : base(mail, password, entries) { }
+        public ConnectedUser(string mail, string password, List<Entry>? entries) 
+            : this(Guid.NewGuid(), mail, password, entries) { }
 
         public ConnectedUser(string mail, string password) 
-            : base(mail, password) { }
-
-        public ConnectedUser(Guid uid, string mail, string password)
-            : this(uid, mail, password, null) { }
+            : this(Guid.NewGuid(), mail, password, null) { }
     }
 }

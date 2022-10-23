@@ -18,7 +18,6 @@ namespace Model.Business.Entries
 
         /// <summary>
         /// Password used on the app.
-        /// This property will have to be redifined; encrypted, it will not be of type string. Probably a byte[]
         /// </summary>
         public string Password { get; protected set; }
 
@@ -73,10 +72,6 @@ namespace Model.Business.Entries
             App = app;
             Note = note ?? string.Empty;
         }
-
-        protected Entry(string login, string password, string app, string? note): this(Guid.NewGuid(), login,password, app, note) { }
-
-        protected Entry(string login, string password, string app) : this(Guid.NewGuid(), login, password, app, null) { }
 
         public virtual bool Equals(Entry? other) => Comparer.Equals(this, other);
 

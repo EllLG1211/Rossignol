@@ -165,7 +165,7 @@ namespace Model_Tests.Business
             Entry entry = new ProprietaryEntry("test", "1234", "test");
             entries.Add(entry);
             manager.Login("test@test.com", "1234", entries);
-            Assert.Contains(entry, manager.ConnectedUser.Entries);
+            Assert.Contains(entry, manager.ConnectedUser?.Entries);
         }
         #endregion
 
@@ -186,7 +186,7 @@ namespace Model_Tests.Business
             Entry entry = new ProprietaryEntry("test", "1234", "test");
             entries.Add(entry);
             manager.Login("1234", entries);
-            Assert.Contains(entry, manager.ConnectedUser.Entries);
+            Assert.Contains(entry, manager.ConnectedUser?.Entries);
         }
         #endregion
 
@@ -235,6 +235,17 @@ namespace Model_Tests.Business
         {
             var manager = new Manager();
             Assert.Throws<NullReferenceException>(() => { manager.ShareEntryWithConnectedUser("login", "password", "app", "note"); });
+        }
+        #endregion
+
+        #region Logout
+        [Fact]
+        public void Logout_ShouldUninstantiate()
+        {
+            var manager = new Manager();
+            manager.Login("login", "password");
+            manager.logOut();
+            Assert.Null(manager.ConnectedUser);
         }
         #endregion
     }

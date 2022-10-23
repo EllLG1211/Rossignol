@@ -35,25 +35,14 @@ namespace Model.Business.Entries
         private readonly List<MailedUser> _sharedWith = new List<MailedUser>();
         public IEnumerable<MailedUser> SharedWith => new ReadOnlyCollection<MailedUser>(_sharedWith);
 
-        public ProprietaryEntry(Guid uid, string login, string password, string app, string? note) : base(uid, login, password, app, note)
-        {
-        }
+        public ProprietaryEntry(Guid uid, string login, string password, string app, string? note) 
+            : base(uid, login, password, app, note){}
 
         public ProprietaryEntry(string login, string password, string app, string? note) 
-            : base(login, password, app, note){}
+            : this(Guid.NewGuid(), login, password, app, note){}
 
         public ProprietaryEntry(string login, string password, string app)
-            : base(login, password, app, string.Empty) { }
-
-
-        public ProprietaryEntry(Guid uid, string login, string password, string app) : this(uid, login, password, app, null)
-        {
-        }
-
-        public IReadOnlyList<MailedUser> GetSharedWith()
-        {
-            return _sharedWith.AsReadOnly();
-        }
+            : this(Guid.NewGuid(), login, password, app, string.Empty) { }
 
         public void ShareToUser(MailedUser user)
         {

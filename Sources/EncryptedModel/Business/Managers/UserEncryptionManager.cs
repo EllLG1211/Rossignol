@@ -35,7 +35,7 @@ namespace EncryptedModel.Business.Managers
                                                                                                    " got " + encrypted.EncryptionType);
 
             return new LocalUser(new Guid(encrypted.Uid),
-                                 decrypter.Decrypt(password, encrypted.EncryptedPassword));
+                                 decrypter.Decrypt(password, encrypted.EncryptedPassword), null);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace EncryptedModel.Business.Managers
                                                                                                    " got " + encrypted.EncryptionType);
             return new ConnectedUser(new Guid(encrypted.Uid),
                                      decrypter.Decrypt(password, encrypted.EncryptedMail),
-                                     decrypter.Decrypt(password, encrypted.EncryptedPassword));
+                                     decrypter.Decrypt(password, encrypted.EncryptedPassword), null);
         }
 
         /// <summary>

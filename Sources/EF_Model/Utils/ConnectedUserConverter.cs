@@ -11,15 +11,15 @@ namespace EF_Model.Utils
         public static IEnumerable<EncryptedConnectedUser> ToModels(this IEnumerable<ConnectedUserEntity> entities)
         => entities.Select(e => e.ToModel());
 
-        public static ConnectedUserEntity ToEntity(this EncryptedConnectedUser model) =>
+        public static ConnectedUserEntity ToEntity(this EncryptedConnectedUser user) =>
          new ConnectedUserEntity
             {
-                EncryptionType = model.EncryptionType,
-                Uid = model.Uid,
-                Password = model.EncryptedPassword,
-                Mail = model.EncryptedMail,
-                SharedWith = model.encryptedSharedWith.ToEntities(new ConnectedUserEntity()).ToList(),
-                OwnedEntries = model.ownedEncryptedEntries.ToEntities(new ConnectedUserEntity()).ToList()
+                EncryptionType = user.EncryptionType,
+                Uid = user.Uid,
+                Password = user.EncryptedPassword,
+                Mail = user.EncryptedMail,
+                SharedWith = user.encryptedSharedWith.ToEntities(new ConnectedUserEntity()).ToList(),
+                OwnedEntries = user.ownedEncryptedEntries.ToEntities(new ConnectedUserEntity()).ToList()
          };
         
         public static IEnumerable<ConnectedUserEntity> ToEntities(this IEnumerable<EncryptedConnectedUser> users)

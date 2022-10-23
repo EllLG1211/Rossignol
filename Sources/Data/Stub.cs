@@ -64,24 +64,12 @@ namespace Data
             _users.Add(user);
         }
 
-        public void RemoveEntry(AbstractUser user, Entry entry)
-        {
-            
-        }
+        public void RemoveEntry(AbstractUser user, Entry entry){}
 
-        public void save()
-        {
-            
-        }
+        public void save(){}
 
-        public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
-        {
-        
-        }
+        public void ShareEntryWith(ProprietaryEntry entry, MailedUser user){ }
 
-        public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
-        {
-        
-        }
+        public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user){}
     }
 }

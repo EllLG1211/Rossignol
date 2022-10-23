@@ -162,7 +162,7 @@ namespace Model_Tests.Business.Entries
 
             yield return new Object[]
             {
-                new SharerUser("loremipsum@gmail.com","1234")
+                new ReadOnlyUser("loremipsum@gmail.com","1234")
             };
         }
 
@@ -192,7 +192,7 @@ namespace Model_Tests.Business.Entries
             #region Test with SharerUser
             yield return new Object[]
             {
-                new SharerUser("loremipsum@gmail.com","1234")
+                new ReadOnlyUser("loremipsum@gmail.com","1234")
             };
             #endregion
         }

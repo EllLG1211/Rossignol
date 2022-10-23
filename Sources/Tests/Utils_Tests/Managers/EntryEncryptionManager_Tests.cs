@@ -58,7 +58,7 @@ namespace Model_Tests.Business.Managers
 
             yield return new object[]
             {
-                new SharedEntry("karm", "12345", "discord"),
+                new SharedEntry("karm", "12345", "discord", null),
                 null,
                 true
             };

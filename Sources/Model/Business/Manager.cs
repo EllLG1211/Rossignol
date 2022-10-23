@@ -10,35 +10,40 @@ namespace Model.Business
 {
     public class Manager
     {
-        public AbstractUser? ConnectedUser { get; private set; }
+        public AbstractUser? LoggedIn { get; private set; }
+
+        private readonly IDataManager _dataManager;
+        public IDataManager DataManager => _dataManager;
+
+        public Manager(IDataManager dataManager)
+        {
+            _dataManager = dataManager;
+        }
 
         /// <summary>
         /// Login a <i>ConnectedUser</i>.
         /// </summary>
         /// <param name="mail"></param>
         /// <param name="password"></param>
-        public void Login(string mail, string password, List<Entry> entries)
+        public void Login(string? mail, string password)
         {
-            ConnectedUser = new ConnectedUser(mail, password, entries);
-        }
-
-        public void Login(string mail, string password)
-        {
-            Login(mail, password, new List<Entry>());
+            if(mail == null)
+            {
+                LoggedIn = DataManager.GetUser(mail, password) as LocalUser;
+            } else
+            {
+                LoggedIn = DataManager.GetUser(mail, password) as ConnectedUser;
+            }
+            
         }
 
         /// <summary>
         /// Login a <i>LocalUser</i>.
         /// </summary>
         /// <param name="password"></param>
-        public void Login(string password, List<Entry> entries)
-        {
-            ConnectedUser = new LocalUser(password, entries);
-        }
-
         public void Login(string password)
         {
-            Login(password, new List<Entry>());
+            Login(null, password);
         }
 
         /// <summary>
@@ -70,7 +75,11 @@ namespace Model.Business
                 throw new ArgumentException("Password does not equal confirmPassword");
             }
 
-            return new ConnectedUser(mail, password);
+            ConnectedUser user = new ConnectedUser(mail, password);
+
+            DataManager.Register(user);
+
+            return user;
         }
 
         /// <summary>
@@ -97,7 +106,11 @@ namespace Model.Business
                 throw new ArgumentException("Password does not equal confirmPassword");
             }
 
-            return new LocalUser(password);
+            LocalUser user = new LocalUser(password);
+
+            DataManager.Register(user);
+
+            return user;
         }
 
         /// <summary>
@@ -111,7 +124,15 @@ namespace Model.Business
         /// <exception cref="NullReferenceException"></exception>
         public void CreateEntryToConnectedUser(string login, string password, string app, string? note)
         {
-            ConnectedUser.AddEntry(new ProprietaryEntry(login, password, app, note));
+            ProprietaryEntry entry = new ProprietaryEntry(login, password, app, note);
+            LoggedIn.AddEntry(entry);
+            DataManager.CreateEntryToConnectedUser(LoggedIn, entry);
+        }
+
+        public void RemoveEntry(Entry entry)
+        {
+            LoggedIn.RemoveEntry(entry);
+            DataManager.RemoveEntry(LoggedIn, entry);
         }
 
         /// <summary>
@@ -123,9 +144,17 @@ namespace Model.Business
         /// <param name="note"></param>
         /// <remarks>Throws a NullReferenceException if ConnectedUser is null.</remarks>
         /// <exception cref="NullReferenceException">Throwed if ConnectedUser is null.</exception>
-        public void ShareEntryWithConnectedUser(string login, string password, string app, string? note)
+        public void ShareEntryWith(ProprietaryEntry entry, string mailUserToShareWith)
         {
-            ConnectedUser.AddEntry(new SharedEntry(login, password, app, note));
+            MailedUser userToShareWith = new ReadOnlyUser(mailUserToShareWith, "");
+            entry.ShareToUser(userToShareWith);
+            DataManager.ShareEntryWith(entry, userToShareWith);
+        }
+
+        public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
+        {
+            entry.UnshareToUser(user);
+            DataManager.UnshareEntryTo(entry, user);
         }
 
         /// <summary>
@@ -133,7 +162,13 @@ namespace Model.Business
         /// </summary>
         public void logOut()
         {
-            ConnectedUser = null;
+            LoggedIn = null;
+            _dataManager.clear();
+        }
+
+        public void save()
+        {
+            DataManager.save();
         }
     }
 }

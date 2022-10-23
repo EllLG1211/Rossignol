@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.Business.Entries;
+using Model.Business.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,16 +48,20 @@ namespace Model_Tests.Business.Entries
         [InlineData("schtroumpf", "Lorem ipsum", "Avadra kevadra", false)]
         public void Constructor_ShouldThrowArgumentNullException(string login, string password, string app, bool throwSuccessExpected)
         {
-            try
+            if (throwSuccessExpected)
             {
-                SharedEntry entry = new(login, password, app);
+                Assert.Throws<ArgumentNullException>(() => { SharedEntry entry = new(new ReadOnlyUser("test@test.com", "1234"), login, password, app); });
+            } else
+            {
                 Assert.False(throwSuccessExpected);
             }
-            catch
-            {
-                Assert.True(throwSuccessExpected);
-            }
         }
+
+        /*[Fact]
+        public void Constructor_ShouldThrowArgumentNullExceptionIfOwnerNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => { SharedEntry entry = new(null, "test", "1234", "discord"); });
+        }*/
 
         /// <summary>
         /// Test if note is reassign when the parameter is not passed.
@@ -64,7 +69,7 @@ namespace Model_Tests.Business.Entries
         [Fact]
         public void Constructor_ShouldReassignNote()
         {
-            SharedEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            SharedEntry entry = new(new ReadOnlyUser("test@test.com", "1234"), "loremipsum@gmail.com", "rickroll", "Discord");
             Assert.Equal(string.Empty, entry.Note);
         }
 

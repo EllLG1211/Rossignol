@@ -13,8 +13,7 @@ namespace TestEntities
         {
             ProprietaryEntry proprietaryEntry = new ProprietaryEntry(login, password, app, note);
             EncryptedProprietaryEntry encryptedSharedEntry = EntryEncryptionManager.ProprietaryToEncryptedEntry(proprietaryEntry, Program.MASTER_PASSWORD);
-            EntryEntity toreturn = ProprietaryEntryConverter.ToEntity(encryptedSharedEntry);
-            toreturn.Owner = owner;
+            EntryEntity toreturn = ProprietaryEntryConverter.ToEntity(encryptedSharedEntry, owner);
             return toreturn;
         }
 

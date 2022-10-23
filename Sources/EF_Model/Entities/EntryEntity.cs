@@ -15,6 +15,6 @@
 
         public byte[]? Note { get; set; }
 
-        public ICollection<ConnectedUserEntity>? SharedWith { get; set; }
+        public ICollection<ConnectedUserEntity>? SharedWith { get; set; }   //many to many
     }
 }

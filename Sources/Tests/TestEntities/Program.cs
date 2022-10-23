@@ -19,7 +19,7 @@ namespace TestEntities
 
             List<LocalUserEntity> users = Stub.loadUsers(MASTER_PASSWORD);
             List<EntryEntity> entries  = Stub.loadEntities(users.First());
-            users.First().Entries = entries;
+            users.First().OwnedEntries = entries;
 
             Task dbconstruct = efm.ConstructDatabase(entries, users);
 
@@ -40,7 +40,7 @@ namespace TestEntities
                 Console.WriteLine("users:");
                 foreach (LocalUserEntity user in usersNm)
                 {
-                    Console.WriteLine($"{user.Uid} - {user.Password} - {new AesDecrypter().Decrypt(MASTER_PASSWORD, user.Password)} - {new AesDecrypter().Decrypt(MASTER_PASSWORD,user.Entries.First().App)}");
+                    Console.WriteLine($"{user.Uid} - {user.Password} - {new AesDecrypter().Decrypt(MASTER_PASSWORD, user.Password)} - {new AesDecrypter().Decrypt(MASTER_PASSWORD,user.OwnedEntries.First().App)}");
                 }
             }
         }

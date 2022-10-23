@@ -4,7 +4,9 @@ The following file have for goal to explain the main part of the **Rossignol** p
 
 ## Sumary
 
-
+* [Model](##Model)
+* [Encryption](##EncryptedModel)
+* [EF Model](##EntityFrameworkModel)
 
 ---
 
@@ -46,3 +48,9 @@ The `Encrypted Entry` classes represent the same classes as the `Entry` classes 
 
 ### Entry Encryption Manager
 The `EntryEncryptionManager` class manages the encryption and decryption of entries within the model.
+
+---
+
+## Entity Framework Model
+
+<img src="./ef_model.svg">

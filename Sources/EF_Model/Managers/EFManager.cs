@@ -10,7 +10,7 @@ namespace EF_Model.Managers
             using (var context = new RossignolContextLocal())
             {
                 context.EncryptedEntriesSet.AddRange(entities);
-                context.LocalUserSet.AddRange(users);
+                context.LocalUser.AddRange(users);
                 context.SaveChanges();
             }
         }

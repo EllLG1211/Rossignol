@@ -31,7 +31,7 @@ namespace TestEntities
             using (var context = new RossignolContextLocal())
             {
                 IEnumerable<EntryEntity> encryptedEntries = context.EncryptedEntriesSet;
-                IEnumerable<LocalUserEntity> usersNm = context.LocalUserSet;
+                IEnumerable<LocalUserEntity> usersNm = context.LocalUser;
                 foreach (EntryEntity entry in encryptedEntries)
                 {
                     SharedEntry p = decryptor.Decrypt(entry);

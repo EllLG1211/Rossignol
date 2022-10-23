@@ -3,7 +3,7 @@
 🟥 : Not done
 🟪 : Needs to be updated
 🟦 : Unknown
-| Obligatoire | Tâches | Points | Statut |
+| Indication | Tâches | Points | Statut |
 | --- | --- | --- | --- |
 | :bookmark: | **Conception / Documentation** 3,3 (1,7) | 3,3 (1,7) | [🟩 ]
 |  | ReadMe | 0,2 | [🟩]

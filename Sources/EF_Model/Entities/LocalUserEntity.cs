@@ -6,7 +6,7 @@ namespace EF_Model.Entities
     public class LocalUserEntity
     {
         public string? EncryptionType { get; set; }
-        [Key]
+
         [MemberNotNullWhen(true, nameof(Uid))]
         public string? Uid { get; set; }
 

@@ -6,7 +6,7 @@ namespace EF_Model.Entities
     {
         public LocalUserEntity? Owner { get; set; }  //one to many
         public string? EncryptionType { get; set; }
-        [Key]
+
         public string? Uid { get; set; }
 
         public byte[]? Login { get; set; }

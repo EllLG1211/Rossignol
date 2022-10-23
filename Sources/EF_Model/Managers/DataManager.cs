@@ -11,9 +11,14 @@ namespace EF_Model.Managers
 {
     public class DataManager : IDataManager
     {
+        public static readonly string serverPass = "1456485645864864fdz";
+
         public void clear()
         {
-            throw new NotImplementedException();
+            using (var context = new RossignolContextLocal())
+            {
+
+            }
         }
 
         public void CreateEntryToConnectedUser(AbstractUser user, Entry entry)

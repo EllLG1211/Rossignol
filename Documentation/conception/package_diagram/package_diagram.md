@@ -1,6 +1,6 @@
 # Package diagram
 
-![The package diagram](./package_diagram.svg)
+![The package diagram](./package_diagram_testless.svg)
 
 This diagram represents the structure of our project's packages, following UML conventions with a couple add-ons for clarity.
 It does not contain any launcher or temporary assembly that could have been created for testing reasons.
@@ -25,6 +25,9 @@ Same goes for the `Encryption` package.
 `AES_Encryption` is a such implementation.
 * It will be used through the abstraction of the abstract encryption interfaces, thanks to a dependancy injection into the model's `EncryptionManager`.
 
+</br>
+
+![The package diagram](./package_diagram.svg)
+
 Finally, the area at the bottom of the screen contains our tests suite.
 Tests are separated in different assemblies according to what they are testing.
-For example `Business_Tests` tests our business logic such as equality protocols, `Encryption_Tests` tests our encryption manager and different encryption algorithms, and `EF_Tests` tests our Entity Framework classes.

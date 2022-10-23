@@ -17,6 +17,7 @@ namespace EF_Model
         {
             modelBuilder.Entity<EntryEntity>().HasKey(n => n.Uid);
             modelBuilder.Entity<LocalUserEntity>().HasKey(n => n.Uid);
+            modelBuilder.Entity<ConnectedUserEntity>().HasKey(n => n.Uid);
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -34,7 +34,7 @@ namespace TestEntities
                 IEnumerable<LocalUserEntity> usersNm = context.LocalUser;
                 foreach (EntryEntity entry in encryptedEntries)
                 {
-                    SharedEntry p = decryptor.Decrypt(entry);
+                    ProprietaryEntry p = decryptor.Decrypt(entry);
                     Console.WriteLine($"{p.Uid} - {p.Login} - {p.Password} - {p.App} - {p.Label} - {p.Note} - {entry.Owner}|");
                 }
                 Console.WriteLine("users:");

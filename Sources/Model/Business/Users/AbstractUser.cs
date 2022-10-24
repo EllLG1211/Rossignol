@@ -5,10 +5,8 @@ using System.Runtime.CompilerServices;
 
 namespace Model.Business.Users
 {
-    public abstract class AbstractUser : IEquatable<AbstractUser>
+    public abstract class AbstractUser : IEquatable<object>
     {
-        private static UserComparer? _comparer;
-        private static UserComparer Comparer => _comparer ??= new UserComparer();
         /// <summary>
         /// The user's entries
         /// </summary>
@@ -68,12 +66,12 @@ namespace Model.Business.Users
         }
 
         //public virtual bool Equals(AbstractUser? other) => Comparer.Equals(this, other);
-        public virtual bool Equals(AbstractUser? other)
+        /*public virtual bool Equals(AbstractUser? other)
         {
             if (other == null) return false;
             if (other.Uid != Uid) return false;
             return true;
-        }
+        }*/
 
         public override bool Equals(object? obj)
         {

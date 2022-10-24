@@ -62,6 +62,13 @@ namespace Model_Tests.Business.Users
                 user,
                 null
             };
+
+            yield return new object[]
+            {
+                false,
+                user,
+                "test"
+            };
         }
 
         [Fact]

@@ -11,7 +11,7 @@ namespace Data
 
         public Stub()
         {
-            AbstractUser user = new ConnectedUser("test@test.com","1234");
+            AbstractUser user = new ConnectedUser("test@test.com", "1234");
             ProprietaryEntry entry = new ProprietaryEntry("test", "1234", "discord");
             user.AddEntry(entry);
             Entry entry2 = new ProprietaryEntry("essai", "1234", "facebook");
@@ -27,12 +27,12 @@ namespace Data
 
         public void clear()
         {
-            
+
         }
 
         public void CreateEntryToConnectedUser(AbstractUser user, Entry entry)
         {
-            
+
         }
 
         public IEnumerable<Entry> GetEntries(AbstractUser user)
@@ -42,12 +42,13 @@ namespace Data
 
         public AbstractUser GetUser(string? mail, string password)
         {
-            if(mail == null)
+            if (mail == null)
             {
                 if (password.Equals(_users.First().Password))
                 {
                     return _users.First();
-                } else
+                }
+                else
                 {
                     throw new Exception("Password is incorrect");
                 }
@@ -64,12 +65,24 @@ namespace Data
             _users.Add(user);
         }
 
-        public void RemoveEntry(AbstractUser user, Entry entry){}
+        public void RemoveEntry(AbstractUser user, Entry entry)
+        {
+            //The code here would be useless.
+        }
 
-        public void save(){}
+        public void save()
+        {
+            //The code here would be useless.
+        }
 
-        public void ShareEntryWith(ProprietaryEntry entry, MailedUser user){ }
+        public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
+        {
+            //The code here would be useless.
+        }
 
-        public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user){}
+        public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
+        {
+            //The code here would be useless.
+        }
     }
 }

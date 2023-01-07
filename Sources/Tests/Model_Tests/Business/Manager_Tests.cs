@@ -160,7 +160,7 @@ namespace Model_Tests.Business
             Assert.IsType<ConnectedUser>(manager.LoggedIn);
         }
         #endregion
-
+        //TODO: check if this one still needs to be commented out
         /*#region Login LocalUser
         [Fact]
         public void Login_LocalUser_ShouldInstantiateALocalUserInManager()

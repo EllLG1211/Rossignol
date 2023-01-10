@@ -7,7 +7,8 @@ namespace API_REST.Controllers.V1
     [Route("/api/v{version:apiVersion}/[controller]")]
     public class SharedEntriesController : ControllerBase
     {
-        public IActionResult Get(int page = 1)
+        [HttpGet]
+        public IActionResult List(int page = 1)
         {
             return StatusCode(501);
         }
@@ -18,11 +19,13 @@ namespace API_REST.Controllers.V1
             return StatusCode(501);
         }
 
+        [HttpPost]
         public IActionResult Post([FromBody] SharedEntryEntity sharedEntry)
         {
             return StatusCode(501);
         }
 
+        [HttpDelete]
         public IActionResult Delete([FromBody] SharedEntryEntity sharedEntry)
         {
             return StatusCode(501);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApiEntities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API_REST.Controllers.V1
 {
@@ -11,12 +12,12 @@ namespace API_REST.Controllers.V1
             return StatusCode(501);
         }
 
-        public IActionResult Post(string id /*params*/) //TODO add params
+        public IActionResult Post(string id, [FromBody] SharedEntryEntity entry)
         {
             return StatusCode(501);
         }
 
-        public IActionResult Delete(string id /*params*/) //TODO add params
+        public IActionResult Delete(string id, [FromBody] string userId)
         {
             return StatusCode(501);
         }

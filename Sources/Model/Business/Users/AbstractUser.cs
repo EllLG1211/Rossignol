@@ -64,7 +64,7 @@ namespace Model.Business.Users
                 _entries.Remove(entry);
             }
         }
-
+        //TODO: uncomment and fix (eliott)
         //public virtual bool Equals(AbstractUser? other) => Comparer.Equals(this, other);
         /*public virtual bool Equals(AbstractUser? other)
         {

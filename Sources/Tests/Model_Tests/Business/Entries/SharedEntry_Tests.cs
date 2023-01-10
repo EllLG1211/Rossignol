@@ -56,7 +56,7 @@ namespace Model_Tests.Business.Entries
                 Assert.False(throwSuccessExpected);
             }
         }
-
+        //TODO: check if should really be commented
         /*[Fact]
         public void Constructor_ShouldThrowArgumentNullExceptionIfOwnerNull()
         {

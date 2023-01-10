@@ -3,7 +3,6 @@ using EF_Model.Entities;
 using EF_Model.Managers;
 using Encryption.AESEncryption;
 using Model.Business.Entries;
-using Model.Business.Users;
 
 namespace TestEntities
 {
@@ -40,7 +39,7 @@ namespace TestEntities
                 Console.WriteLine("users:");
                 foreach (LocalUserEntity user in usersNm)
                 {
-                    Console.WriteLine($"{user.Uid} - {user.Password} - {new AesDecrypter().Decrypt(MASTER_PASSWORD, user.Password)} - {new AesDecrypter().Decrypt(MASTER_PASSWORD,user.OwnedEntries.First().App)}");
+                    Console.WriteLine($"{user.Uid} - {user.Password} - { new AesDecrypter().Decrypt(MASTER_PASSWORD, user.Password)} - {new AesDecrypter().Decrypt(MASTER_PASSWORD,user.OwnedEntries.First().App)}");
                 }
             }
         }

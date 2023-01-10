@@ -1,9 +1,7 @@
 ﻿using Encryption;
-using Encryption.AESEncryption;
 using Model.Business.Entries;
 using EncryptedModel.Business.Entries;
-using Model.Business.Users.UserDataUtilities;
-using Model.Business.Users;
+using Encryption.AESEncryption;
 
 namespace EncryptedModel.Business.Managers
 {

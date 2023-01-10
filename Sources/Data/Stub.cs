@@ -8,7 +8,9 @@ namespace Data
     public class Stub : IDataManager
     {
         private readonly List<AbstractUser> _users = new List<AbstractUser>();
-
+        //TODO: implement shared entries within the stub
+        //TODO: use EF within the stub for persistence
+        //TODO: complete the missing code in this interface
         public Stub()
         {
             AbstractUser user = new ConnectedUser("test@test.com", "1234");
@@ -27,12 +29,12 @@ namespace Data
 
         public void clear()
         {
-
+            //TODO: complete
         }
 
         public void CreateEntryToConnectedUser(AbstractUser user, Entry entry)
         {
-
+            //TODO: complete
         }
 
         public IEnumerable<Entry> GetEntries(AbstractUser user)
@@ -67,21 +69,25 @@ namespace Data
 
         public void RemoveEntry(AbstractUser user, Entry entry)
         {
+            //TODO: complete
             //The code here would be useless.
         }
 
         public void save()
         {
+            //TODO: complete
             //The code here would be useless.
         }
 
         public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
         {
+            //TODO: complete
             //The code here would be useless.
         }
 
         public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
         {
+            //TODO: complete
             //The code here would be useless.
         }
     }

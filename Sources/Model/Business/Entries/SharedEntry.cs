@@ -12,12 +12,12 @@ namespace Model.Business.Entries
     /// </summary>
     public class SharedEntry : Entry
     {
-        /*private ReadOnlyUser _owner;
-        public ReadOnlyUser Owner => _owner;*/
+        private ReadOnlyUser _owner;
+        public ReadOnlyUser Owner => _owner;
 
         public SharedEntry(Guid uid, string login, string password, string app, string? note) 
             : base(uid, login, password, app, note)
-        {
+        {   //TODO: uncomment and fix (yorick)
             /*if(owner == null) throw new ArgumentNullException(nameof(owner));
             _owner = owner;*/
         }

@@ -11,12 +11,12 @@ namespace API_REST.Controllers.V1
             return StatusCode(501);
         }
 
-        public IActionResult Post(string id /*params*/)
+        public IActionResult Post(string id /*params*/) //TODO add params
         {
             return StatusCode(501);
         }
 
-        public IActionResult Delete(string id /*params*/)
+        public IActionResult Delete(string id /*params*/) //TODO add params
         {
             return StatusCode(501);
         }

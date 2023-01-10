@@ -1,9 +1,9 @@
 ﻿using Encryption;
-using Encryption.AESEncryption;
 using EncryptedModel.Business.Users;
 using Model.Business.Users;
 using EncryptedModel.Business.Entries;
 using Model.Business.Entries;
+using Encryption.AESEncryption;
 
 namespace EncryptedModel.Business.Managers
 {

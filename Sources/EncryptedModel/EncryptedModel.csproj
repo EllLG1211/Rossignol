@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AESEncryption\AESEncryption.csproj" />
+    <ProjectReference Include="..\EncryptionAssemblies\AESEncryption\AESEncryption.csproj" />
+    <ProjectReference Include="..\EncryptionAssemblies\Encryption\Encryption.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
-    <ProjectReference Include="..\Utils\Encryption.csproj" />
   </ItemGroup>
 
 </Project>

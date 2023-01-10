@@ -22,9 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AESEncryption\AESEncryption.csproj" />
     <ProjectReference Include="..\..\EncryptedModel\EncryptedModel.csproj" />
-    <ProjectReference Include="..\..\Utils\Encryption.csproj" />
+    <ProjectReference Include="..\..\Model\Model.csproj" />
   </ItemGroup>
 
 </Project>

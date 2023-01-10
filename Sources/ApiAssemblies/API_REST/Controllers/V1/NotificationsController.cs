@@ -7,16 +7,19 @@ namespace API_REST.Controllers.V1
     [Route("/api/v{version:apiVersion}/[controller]")]
     public class NotificationsController : ControllerBase
     {
+        [HttpGet]
         public IActionResult Get()
         {
             return StatusCode(501);
         }
 
+        [HttpPut]
         public IActionResult Put(string id/*, params */) //TODO add params
         {
             return StatusCode(501);
         }
 
+        [HttpDelete]
         public IActionResult Delete(string id)
         {
             return StatusCode(501);

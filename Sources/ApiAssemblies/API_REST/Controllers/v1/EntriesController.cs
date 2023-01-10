@@ -7,7 +7,8 @@ namespace API_REST.Controllers.V1
     [Route("/api/v{version:apiVersion}/[controller]")]
     public class EntriesController : ControllerBase
     {
-        public IActionResult Get(int page = 1)
+        [HttpGet]
+        public IActionResult List(int page = 1)
         {
             return StatusCode(501);
         }
@@ -18,6 +19,7 @@ namespace API_REST.Controllers.V1
             return StatusCode(501);
         }
 
+        [HttpPost]
         public IActionResult Post([FromBody] EntryEntity entry)
         {
             return StatusCode(501);

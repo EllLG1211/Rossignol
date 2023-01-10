@@ -6,6 +6,7 @@ namespace API_REST.Controllers.V1
     [Route("/api/v{version:apiVersion}")]
     public class DocController : ControllerBase
     {
+        [HttpGet]
         public IActionResult Get()
         {
             return StatusCode(501);

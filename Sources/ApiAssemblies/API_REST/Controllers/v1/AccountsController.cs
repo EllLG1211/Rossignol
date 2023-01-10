@@ -13,6 +13,7 @@ namespace API_REST.Controllers.V1
             return StatusCode(501);
         }
 
+        [HttpPost]
         public IActionResult Post([FromBody] AccountEntity account)
         {
             return StatusCode(501);

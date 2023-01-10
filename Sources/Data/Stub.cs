@@ -29,7 +29,10 @@ namespace Data
 
         public void clear()
         {
-            //TODO: complete
+            for(int i = 0; i < this._users.Count; i++)
+            {
+                this._users[i].clearEntries();
+            }
         }
 
         public void CreateEntryToConnectedUser(AbstractUser user, Entry entry)

@@ -88,5 +88,10 @@ namespace Model.Business.Users
              + Password.GetHashCode() * 17 ^ 2
              + GetType().GetHashCode();
         }
+
+        public void clearEntries()
+        {
+            _entries.Clear();
+        }
     }
 }

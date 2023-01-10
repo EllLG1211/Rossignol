@@ -1,0 +1,25 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace API_REST.Controllers.V1
+{
+    //TODO fix this class
+    [ApiController]
+    [Route("/api/v{version:apiVersion}/[controller]")]
+    public class NotificationsController : ControllerBase
+    {
+        public IActionResult Get()
+        {
+            return StatusCode(501);
+        }
+
+        public IActionResult Put(string id/*, params */) //TODO add params
+        {
+            return StatusCode(501);
+        }
+
+        public IActionResult Delete(string id)
+        {
+            return StatusCode(501);
+        }
+    }
+}

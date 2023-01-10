@@ -12,16 +12,24 @@ namespace API_REST.Controllers.V1
             return StatusCode(501);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(string id)
+        {
+            return StatusCode(501);
+        }
+
         public IActionResult Post([FromBody] EntryEntity entry)
         {
             return StatusCode(501);
         }
 
+        [HttpPut("{id}")]
         public IActionResult Put(string id, [FromBody] EntryEntity entry)
         {
             return StatusCode(501);
         }
 
+        [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
             return StatusCode(501);

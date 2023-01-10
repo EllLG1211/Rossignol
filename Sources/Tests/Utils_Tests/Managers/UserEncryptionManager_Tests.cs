@@ -1,6 +1,6 @@
-﻿using Model.Business.Users;
+﻿using EncryptedModel.Business.Managers;
 using EncryptedModel.Business.Users;
-using EncryptedModel.Business.Managers;
+using Model.Business.Users;
 using System.Collections.Generic;
 using Xunit;
 

@@ -1,6 +1,7 @@
 ﻿using API_REST.Services;
 using ApiEntities;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace API_REST.Controllers.V1
 {

@@ -20,7 +20,7 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] SharedEntryEntity sharedEntry)
+        public IActionResult Add([FromBody] SharedEntryEntity sharedEntry)
         {
             return StatusCode(501);
         }

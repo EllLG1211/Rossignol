@@ -7,7 +7,7 @@ namespace API_REST.Controllers.V1
     public class AuthController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get(string email, string password)
+        public IActionResult GetAuthToken(string email, string password)
         {
             return StatusCode(501);
         }

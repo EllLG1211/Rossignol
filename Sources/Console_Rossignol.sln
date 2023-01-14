@@ -36,8 +36,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiAssemblies", "ApiAssemblies", "{0413795F-888C-4278-B79B-5CB4E02AA1D5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_REST", "ApiAssemblies\API_REST\API_REST.csproj", "{71E41A1F-40FB-4050-AF77-83AE70A719C2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF5EC0A1-B990-4D92-828D-BAA784B731E4} = {AF5EC0A1-B990-4D92-828D-BAA784B731E4}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiEntities", "Entities\ApiEntities.csproj", "{7E7D5F61-1E69-41A8-9E27-7E0D14ADE3D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEntities", "Entities\ApiEntities.csproj", "{7E7D5F61-1E69-41A8-9E27-7E0D14ADE3D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

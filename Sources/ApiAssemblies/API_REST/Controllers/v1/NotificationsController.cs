@@ -14,7 +14,7 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPut]
-        public IActionResult Put(string id/*, params */) //TODO add params
+        public IActionResult Put(string id/*, params */) //TODO wtf is this method supposed to do idk
         {
             return StatusCode(501);
         }

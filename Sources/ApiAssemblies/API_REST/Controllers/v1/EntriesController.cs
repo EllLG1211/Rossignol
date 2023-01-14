@@ -20,13 +20,13 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] EntryEntity entry)
+        public IActionResult Add([FromBody] EntryEntity entry)
         {
             return StatusCode(501);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] EntryEntity entry)
+        public IActionResult Modify(string id, [FromBody] EntryEntity entry)
         {
             return StatusCode(501);
         }

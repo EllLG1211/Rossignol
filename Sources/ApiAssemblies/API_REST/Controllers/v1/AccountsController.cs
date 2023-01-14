@@ -35,13 +35,19 @@ namespace API_REST.Controllers.V1
         [HttpPut("{id}")]
         public IActionResult ChangeUserInfo(string id, [FromBody] AccountEntity account)
         {
-            return StatusCode(501);
+            var user = services.GetUser(id);
+            if (user == null) return NotFound("Account does not exist");
+            user = services.GetUserByEmail(account.Email);
+            if (user != null) return Conflict("This email is already associated with another accout");
+            bool succeeded = services.UpdateUser(id, account);
+            return succeeded ? NoContent() : StatusCode(500);
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(string id)
         {
-            return StatusCode(501);
+            bool succeeded = services.DeleteUser(id);
+            return succeeded ? NoContent() : NotFound();
         }
     }
 }

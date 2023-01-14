@@ -4,8 +4,7 @@ namespace API_REST.Controllers.V1
 {
     //TODO fix this class
     [ApiController]
-    [Route("/api/v{version:apiVersion}/[controller]")]
-    public class NotificationsController : ControllerBase
+    public class NotificationsController : RossignolControllerBase
     {
         [HttpGet]
         public IActionResult Get()

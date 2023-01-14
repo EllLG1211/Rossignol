@@ -3,8 +3,7 @@
 namespace API_REST.Controllers.V1
 {
     [ApiController]
-    [Route("/api/v{version:apiVersion}/[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController : RossignolControllerBase
     {
         [HttpGet]
         public IActionResult GetAuthToken(string email, string password)

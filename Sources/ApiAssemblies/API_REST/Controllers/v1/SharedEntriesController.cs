@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API_REST.Controllers.V1
 {
     [ApiController]
-    [Route("/api/v{version:apiVersion}/[controller]")]
-    public class SharedEntriesController : ControllerBase
+    public class SharedEntriesController : RossignolControllerBase
     {
         [HttpGet]
         public IActionResult List(int page = 1)

@@ -1,11 +1,11 @@
 ﻿using ApiEntities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Web.Http;
 
 namespace API_REST.Controllers.V1
 {
     [ApiController]
-    [Route("/api/v{version:apiVersion}/[controller]")]
-    public class AccountsController : ControllerBase
+    public class AccountsController : RossignolControllerBase
     {
         [HttpGet("{id}")]
         public IActionResult GetUserInfo(string id)

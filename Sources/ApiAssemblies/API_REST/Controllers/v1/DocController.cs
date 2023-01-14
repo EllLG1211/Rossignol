@@ -3,8 +3,7 @@
 namespace API_REST.Controllers.V1
 {
     [ApiController]
-    [Route("/api/v{version:apiVersion}")]
-    public class DocController : ControllerBase
+    public class DocController : RossignolControllerBase
     {
         [HttpGet]
         public IActionResult Get()

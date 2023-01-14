@@ -1,4 +1,5 @@
-﻿using ApiEntities;
+﻿using API_REST.Services;
+using ApiEntities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_REST.Controllers.V1
@@ -7,10 +8,14 @@ namespace API_REST.Controllers.V1
     [Route("/api/v{version:apiVersion}/[controller]")]
     public class AccountsController : ControllerBase
     {
+        private IAccountServices services;
+
         [HttpGet("{id}")]
         public IActionResult GetUserInfo(string id)
         {
-            return StatusCode(501);
+            var user = services.GetUser(id);
+            if (user == null) return NotFound();
+            else return Ok(user);
         }
 
         [HttpPost]

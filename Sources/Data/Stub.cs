@@ -37,7 +37,7 @@ namespace Data
 
         public void CreateEntryToConnectedUser(AbstractUser user, Entry entry)
         {
-            //TODO: complete
+            user.AddEntry(entry);
         }
 
         public IEnumerable<Entry> GetEntries(AbstractUser user)
@@ -72,8 +72,7 @@ namespace Data
 
         public void RemoveEntry(AbstractUser user, Entry entry)
         {
-            //TODO: complete
-            //The code here would be useless.
+            user.RemoveEntry(entry);
         }
 
         public void save()
@@ -84,14 +83,12 @@ namespace Data
 
         public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
         {
-            //TODO: complete
-            //The code here would be useless.
+            user.AddEntry(entry);
         }
 
         public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
         {
-            //TODO: complete
-            //The code here would be useless.
+            user.RemoveEntry(entry);
         }
     }
 }

@@ -29,12 +29,12 @@ namespace Data
 
         public void clear()
         {
-            //TODO: complete
+            _users.Clear();
         }
 
         public void CreateEntryToConnectedUser(AbstractUser user, Entry entry)
         {
-            //TODO: complete
+            user.AddEntry(entry);
         }
 
         public IEnumerable<Entry> GetEntries(AbstractUser user)
@@ -69,26 +69,22 @@ namespace Data
 
         public void RemoveEntry(AbstractUser user, Entry entry)
         {
-            //TODO: complete
-            //The code here would be useless.
+            user.RemoveEntry(entry);
         }
 
         public void save()
         {
-            //TODO: complete
-            //The code here would be useless.
+           throw new NotImplementedException("saving is not supported in this stub");
         }
 
         public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
         {
-            //TODO: complete
-            //The code here would be useless.
+            user.AddEntry(entry);   //same as for a regualr entry
         }
 
         public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
         {
-            //TODO: complete
-            //The code here would be useless.
+            user.RemoveEntry(entry);
         }
     }
 }

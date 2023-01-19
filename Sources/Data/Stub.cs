@@ -80,6 +80,9 @@ namespace Data
         public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
         {
             user.AddEntry(entry);   //same as for a regualr entry
+            //The code here would be useless.
+            //The code here would be useless.
+            //The code here would be useless.
         }
 
         public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)

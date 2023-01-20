@@ -1,5 +1,7 @@
 ﻿using Data;
 using Model.Business;
+using Model.Business.Entries;
+using Model.Business.Users;
 
 namespace ConsoleApp
 {
@@ -72,8 +74,9 @@ namespace ConsoleApp
                     writer.WriteLine("Menu:" +
                         "\n\t1. Voir mes mots de passes" +
                         "\n\t2. Ajouter une entrée" +
-                        "\n\t3. Retirer une entrée" +
-                        "\n\t4. Se deconnecter" +
+                        "\n\t3. Partager une entrée" +
+                        "\n\t4. Retirer une entrée" +
+                        "\n\t5. Se deconnecter" +
                         "\n\t9. Quitter");
 
                     try
@@ -106,11 +109,20 @@ namespace ConsoleApp
                     else if (choix == 3)
                     {
                         writer.WriteEntries(manager.LoggedIn);
+                        writer.Write("Numéro de l'entrée à partager:");
+                        int numero = reader.ReadInt();
+                        writer.Write("\nEmail de l'utilisateur à qui partager l'entrée:");
+                        string mail = reader.ReadLine();
+                        manager.ShareEntryWith((ProprietaryEntry)manager.LoggedIn.Entries.ToArray()[numero],mail);
+                    }
+                    else if (choix == 4)
+                    {
+                        writer.WriteEntries(manager.LoggedIn);
                         writer.Write("Numéro de l'entrée à supprimer:");
                         int numero = reader.ReadInt();
                         manager.RemoveEntry(manager.LoggedIn.Entries.ToArray()[numero]);
                     }
-                    else if (choix == 4)
+                    else if (choix == 5)
                     {
                         manager.logOut();
                     }

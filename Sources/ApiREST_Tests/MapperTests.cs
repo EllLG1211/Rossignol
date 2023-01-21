@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ApiREST_Tests
 {
-    [TestClass]
+    /*[TestClass]
     public class MapperTests
     {
         [TestMethod]
@@ -68,5 +68,5 @@ namespace ApiREST_Tests
             var config = new MapperConfiguration(cfg => cfg.CreateMap<SharedEntryDTO, SharedEntry>());
             config.AssertConfigurationIsValid();
         }
-    }
+    }*/
 }

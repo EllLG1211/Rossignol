@@ -47,7 +47,21 @@ Overall, **WebSocket API** is a popular choice for building real-time applicatio
 ---
 ## Gateway
 
-...
+An **API Gateway** is a server that acts as an intermediary between an application and a set of microservices. The **API Gateway** is responsible for request routing, composition, and protocol translation, among other things.
+
+**API Gateways** are typically used to provide a single entry point for external consumers of a set of microservices. By routing requests through a single **API Gateway**, developers can simplify their application architecture and reduce the number of connections that need to be made to the underlying microservices.
+
+An **API Gateway** can also provide additional features such as authentication, authorization, rate limiting, caching, and request/response transformation. These features can be implemented in the **API Gateway**, rather than in each microservice, which can simplify development and make the system more secure and performant.
+
+**API Gateway** is preferred for many reasons, some of them are:
+
+- They provide a single entry point, **API Gateway** provides a single entry point for external consumers of a set of microservices, which makes the architecture simpler and reduces the number of connections
+- They provide security and rate limiting, **API Gateway** provides security features such as authentication, authorization and rate limiting which can make the system more secure
+- They provide caching exceptions, **API Gatewa**y provides caching exceptions which can improve the performance of the system and the maintability
+- They provide request/response transformation, **API Gateway** can transform the request and response which can make the system more flexible
+- They provide protocol translation, **API Gateway** can translate between different protocols which can make the system more flexible
+
+Overall, **API Gateway** is a popular choice for building microservices based architecture because it provide a single entry point for external consumers, security features, caching, request/response transformation, protocol translation and other features that can make the system more secure, performant and flexible.
 
 ---
 ## Architecture

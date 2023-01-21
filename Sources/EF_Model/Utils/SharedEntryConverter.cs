@@ -1,29 +1,28 @@
 ﻿using EF_Model.Entities;
-using EncryptedModel.Business.Entries;
+using Model.Business.Entries;
 
 namespace EF_Model.Utils
 {
     public static class SharedEntryConverter
     {
-        public static EncryptedSharedEntry SToModel(this EntryEntity entity)
-            => new EncryptedSharedEntry(entity.EncryptionType, entity.Uid.ToString(), entity.Login, entity.Password, entity.App, entity.Note);
+        public static SharedEntry SToModel(this EntryEntity entity)
+            => new SharedEntry(new Guid(entity.Uid), entity.Login, entity.Password, entity.App, entity.Note);
 
-        public static IEnumerable<EncryptedSharedEntry> SToModels(this IEnumerable<EntryEntity> entities)
+        public static IEnumerable<SharedEntry> SToModels(this IEnumerable<EntryEntity> entities)
             => entities.Select(e => e.SToModel());
 
-        public static EntryEntity ToEntity(this EncryptedSharedEntry model, LocalUserEntity owner)
+        public static EntryEntity ToEntity(this SharedEntry model, LocalUserEntity owner)
             => new EntryEntity
             {
-                EncryptionType = model.encryptionType,
-                Uid = model.Uid,
-                Login = model.EncryptedLogin,
-                Password = model.EncryptedPassword,
-                App = model.EncryptedApp,
-                Note = model.EncryptedNote,
+                Uid = model.Uid.ToString(),
+                Login = model.Login,
+                Password = model.Password,
+                App = model.App,
+                Note = model.Note,
                 Owner = owner
             };
 
-        public static IEnumerable<EntryEntity> ToEntities(this IEnumerable<EncryptedSharedEntry> models, LocalUserEntity owner)
+        public static IEnumerable<EntryEntity> ToEntities(this IEnumerable<SharedEntry> models, LocalUserEntity owner)
             => models.Select(m => m.ToEntity(owner));
     }
 }

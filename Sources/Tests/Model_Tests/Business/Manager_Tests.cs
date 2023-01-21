@@ -177,7 +177,7 @@ namespace Model_Tests.Business
         {
             var manager = new Manager(_dataManager);
             manager.Login("test@test.com", "1234");
-            manager.CreateEntryToConnectedUser("test", "1234", "discord", null);
+            manager.CreateEntryToConnectedUser("test@test.com","test", "1234", "discord", null);
             if (manager.LoggedIn?.Entries.Count() == 1)
             {
                 foreach (Entry entry in manager.LoggedIn.Entries)
@@ -191,7 +191,7 @@ namespace Model_Tests.Business
         public void CreateEntryToConnectedUser_ShouldThrowNullReferenceException()
         {
             var manager = new Manager(_dataManager);
-            Assert.Throws<NullReferenceException>(() => { manager.CreateEntryToConnectedUser("login", "password", "app", "note"); });
+            Assert.Throws<NullReferenceException>(() => { manager.CreateEntryToConnectedUser("mail@login.com", "mail@login.com", "password", "app", "note"); });
         }
         #endregion
 
@@ -201,7 +201,7 @@ namespace Model_Tests.Business
         {
             var manager = new Manager(_dataManager);
             manager.Login("test@test.com", "1234");
-            ProprietaryEntry entry = new ProprietaryEntry("test", "1234", "discord", null);
+            ProprietaryEntry entry = new ProprietaryEntry("test@test.com", "test", "1234", "discord", null);
             manager.ShareEntryWith(entry, "test@test.com");
             Assert.Contains(entry, _dataManager.GetEntries(manager.LoggedIn));
         }

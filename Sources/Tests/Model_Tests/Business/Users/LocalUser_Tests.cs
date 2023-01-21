@@ -42,7 +42,7 @@ namespace Model_Tests.Business.Users
         public void Constructor_ShouldGiveListInstance()
         {
             List<Entry> entries = new List<Entry>();
-            Entry entry = new ProprietaryEntry("test", "1234", "app");
+            Entry entry = new ProprietaryEntry("mail@a.com", "test", "1234", "app");
             entries.Add(entry);
             AbstractUser user = new LocalUser("1234", entries);
             Assert.Contains(entry, user.Entries);
@@ -77,7 +77,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 true,
-                new ProprietaryEntry("admin","1234","discord")
+                new ProprietaryEntry("mail@a.com","admin","1234","discord")
             };
             #endregion
         }
@@ -123,7 +123,7 @@ namespace Model_Tests.Business.Users
             yield return new Object[]
             {
                 false,
-                new ProprietaryEntry("admin","1234","discord")
+                new ProprietaryEntry("mail@a.com","admin","1234","discord")
             };
             #endregion
         }

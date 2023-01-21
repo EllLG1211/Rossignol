@@ -78,14 +78,14 @@ namespace Model_Tests.Business.Managers
         {
             yield return new object[]
             {
-                new ProprietaryEntry("karm", "12345", "discord", "none"),
+                new ProprietaryEntry("mail@a.com","karm", "12345", "discord", "none"),
                 "mysuperpassword",
                 false
             };
 
             yield return new object[]
             {
-                new ProprietaryEntry("karm", "12345", "discord"),
+                new ProprietaryEntry("mail@a.com","karm", "12345", "discord"),
                 null,
                 true
             };

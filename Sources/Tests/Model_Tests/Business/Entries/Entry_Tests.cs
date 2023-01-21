@@ -41,7 +41,7 @@ namespace Model_Tests.Business.Entries
             Assert.Equal(equals, hashEquals);
         }
 
-        private readonly Entry entry = new ProprietaryEntry("lorem", "ipsum", "dolore");
+        private readonly Entry entry = new ProprietaryEntry("mail@a.com", "lorem", "ipsum", "dolore");
 
         [Theory]
         [MemberData(nameof(NonEntryEquals_TestData))]

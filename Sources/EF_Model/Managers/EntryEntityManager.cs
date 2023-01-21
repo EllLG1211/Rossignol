@@ -1,6 +1,6 @@
 ﻿using EF_Model.Entities;
 using EF_Model.Utils;
-using EncryptedModel.Business.Entries;
+using Model.Business.Entries;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace EF_Model.Managers
     public class EntryEntityManager
     {
 
-        public static async Task addEntry(EncryptedProprietaryEntry e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
+        public static async Task addEntry(ProprietaryEntry e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
         {
             using (var context = new RossignolContextLocal(options))
             {
@@ -22,7 +22,7 @@ namespace EF_Model.Managers
             }
         }
 
-        public static async Task removeEntry(EncryptedProprietaryEntry e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
+        public static async Task removeEntry(ProprietaryEntry e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
         {
             using (var context = new RossignolContextLocal(options))
             {

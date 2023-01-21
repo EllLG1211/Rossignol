@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Entities\ApiEntities.csproj" />
+    <ProjectReference Include="..\..\Model\Model.csproj" />
   </ItemGroup>
 
 </Project>

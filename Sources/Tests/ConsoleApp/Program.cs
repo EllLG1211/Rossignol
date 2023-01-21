@@ -113,7 +113,14 @@ namespace ConsoleApp
                         int numero = reader.ReadInt();
                         writer.Write("\nEmail de l'utilisateur à qui partager l'entrée:");
                         string mail = reader.ReadLine();
-                        manager.ShareEntryWith((ProprietaryEntry)manager.LoggedIn.Entries.ToArray()[numero],mail);
+                        if (!manager.ShareEntryWith((ProprietaryEntry)manager.LoggedIn.Entries.ToArray()[numero], mail))
+                        {
+                            writer.Write($"\nEmail incorrect, {mail} n'est pas un utilisateur valide");
+                        }
+                        else
+                        {
+                            writer.Write($"\nEntrée partagée avec {mail}");
+                        }
                     }
                     else if (choix == 4)
                     {

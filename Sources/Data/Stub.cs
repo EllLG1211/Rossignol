@@ -25,6 +25,20 @@ namespace Data
             user.AddEntry(entry3);
             entry.ShareToUser(user2);
             this._users.Add(user2);
+
+            MailedUser user3 = new ConnectedUser("moi@them.com", "1234");
+            this._users.Add(user3);
+        }
+
+        public bool checkUserExists(string? mail)
+        {
+            if (mail == null)
+            {
+                throw new ArgumentNullException("mail argument was null");
+            }
+
+            MailedUser? user = getUserFromMail(mail);
+            return user != null;
         }
 
         public void clear()
@@ -56,7 +70,7 @@ namespace Data
                 }
             }
 
-            MailedUser? user = _users.Find(user => ((MailedUser)user).Mail.Equals(mail, StringComparison.Ordinal)) as MailedUser;
+            MailedUser? user = getUserFromMail(mail);
             if (user == null) throw new Exception("Unknown user");
             if (password.Equals(user.Password)) return user;
             throw new Exception("Uncorrect password");
@@ -74,20 +88,21 @@ namespace Data
 
         public void save()
         {
-           throw new NotImplementedException("saving is not supported in this stub");
+            throw new NotImplementedException("saving is not supported in this stub");
         }
 
         public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
         {
-            user.AddEntry(entry);   //same as for a regualr entry
-            //The code here would be useless.
-            //The code here would be useless.
-            //The code here would be useless.
+            MailedUser? mUser = getUserFromMail(user.Mail);
+            mUser.AddEntry(entry);
         }
 
         public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
         {
-            user.RemoveEntry(entry);
+            MailedUser? mUser = getUserFromMail(user.Mail);
+            mUser.RemoveEntry(entry);
         }
+
+        private MailedUser? getUserFromMail(string mail) => _users.Find(Luser => ((MailedUser)Luser).Mail.Equals(mail, StringComparison.Ordinal)) as MailedUser;
     }
 }

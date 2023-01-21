@@ -21,7 +21,7 @@ namespace Model.Business.Users
         /// <summary>
         /// Master password of the user.
         /// </summary>
-        public String Password { get; protected set; }
+        public string Password { get; protected set; }
 
         protected AbstractUser(Guid uid, string password, IEnumerable<Entry>? entries)
         {

@@ -6,6 +6,8 @@ namespace Model.Business.Users
     {
         public string Mail { get; protected set; }
 
+        public string getMail() => Mail;
+
         protected MailedUser(Guid uid, string mail, string password, List<Entry>? entries) : base(uid, password, entries)
         {
             if (mail != null)

@@ -14,6 +14,8 @@ namespace Model.Business
 
         AbstractUser GetUser(string? mail, string password);
 
+        bool checkUserExists(string? mail);
+
         void CreateEntryToConnectedUser(AbstractUser user, Entry entry);
         
         void RemoveEntry(AbstractUser user, Entry entry);

@@ -125,13 +125,13 @@ namespace Model.Business
         public void CreateEntryToConnectedUser(string login, string password, string app, string? note)
         {
             ProprietaryEntry entry = new ProprietaryEntry(login, password, app, note);
-            LoggedIn.AddEntry(entry);
+            //LoggedIn.AddEntry(entry); //this was adding two entries, bad
             DataManager.CreateEntryToConnectedUser(LoggedIn, entry);
         }
 
         public void RemoveEntry(Entry entry)
         {
-            LoggedIn.RemoveEntry(entry);
+            //LoggedIn.RemoveEntry(entry);
             DataManager.RemoveEntry(LoggedIn, entry);
         }
 
@@ -144,11 +144,16 @@ namespace Model.Business
         /// <param name="note"></param>
         /// <remarks>Throws a NullReferenceException if ConnectedUser is null.</remarks>
         /// <exception cref="NullReferenceException">Throwed if ConnectedUser is null.</exception>
-        public void ShareEntryWith(ProprietaryEntry entry, string mailUserToShareWith)
+        public bool ShareEntryWith(ProprietaryEntry entry, string mailUserToShareWith)
         {
+            if (!_dataManager.checkUserExists(mailUserToShareWith))
+            return false;
+            
             MailedUser userToShareWith = new ReadOnlyUser(mailUserToShareWith, "");
-            entry.ShareToUser(userToShareWith);
+            //entry.ShareToUser(userToShareWith);   //useless
             DataManager.ShareEntryWith(entry, userToShareWith);
+
+            return true;
         }
 
         public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
@@ -163,7 +168,7 @@ namespace Model.Business
         public void logOut()
         {
             LoggedIn = null;
-            _dataManager.clear();
+            //_dataManager.clear(); //this flushes everything! we don't want that!!! (this also erases all of our users)
         }
 
         public void save()

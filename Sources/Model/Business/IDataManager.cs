@@ -20,11 +20,12 @@ namespace Model.Business
         
         void RemoveEntry(AbstractUser user, Entry entry);
 
-        void ShareEntryWith(ProprietaryEntry entry, MailedUser user);
+        void ShareEntryWith(ProprietaryEntry entry, string password);
 
-        void UnshareEntryTo(ProprietaryEntry entry, MailedUser user);
+        void UnshareEntryTo(ProprietaryEntry entry, string password);
 
         IEnumerable<Entry> GetEntries(AbstractUser user);
+        IEnumerable<SharedEntry> GetSharedEntries(ConnectedUser user);
 
         /// <summary>
         /// Clear data of the dataManager;

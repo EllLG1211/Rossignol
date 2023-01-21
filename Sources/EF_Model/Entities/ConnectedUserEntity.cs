@@ -5,6 +5,6 @@ namespace EF_Model.Entities
     public class ConnectedUserEntity : LocalUserEntity
     {
         public virtual ICollection<EntryEntity> SharedWith { get; set; }    //many to many
-        public byte[] Mail { get; set; }
+        public string Mail { get; set; }
     }
 }

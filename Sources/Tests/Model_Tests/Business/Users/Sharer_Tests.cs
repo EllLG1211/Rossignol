@@ -37,7 +37,7 @@ namespace Model_Tests.Business.Users
         {
             Guid uid = Guid.NewGuid();
             List<Entry> entries = new List<Entry>();
-            Entry entry = new ProprietaryEntry("test", "1234", "app");
+            Entry entry = new ProprietaryEntry("mail@a.com", "test", "1234", "app");
             entries.Add(entry);
             ReadOnlyUser user = new(uid, "test@test.com", "1234", entries);
             Assert.True(uid.Equals(user.Uid));
@@ -47,7 +47,7 @@ namespace Model_Tests.Business.Users
         public void Constructor_ShouldGiveListInstance()
         {
             List<Entry> entries = new List<Entry>();
-            Entry entry = new ProprietaryEntry("test", "1234", "app");
+            Entry entry = new ProprietaryEntry("mail@a.com", "test", "1234", "app");
             entries.Add(entry);
             AbstractUser user = new ReadOnlyUser("test@test.com", "1234", entries);
             Assert.Contains(entry, user.Entries);

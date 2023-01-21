@@ -10,7 +10,7 @@ namespace Model.Business.Users
         /// <summary>
         /// The user's entries
         /// </summary>
-        private readonly List<Entry> _entries = new List<Entry>();
+        protected readonly List<Entry> _entries = new List<Entry>();
         public IEnumerable<Entry> Entries => new ReadOnlyCollection<Entry>(_entries);
 
         /// <summary>
@@ -93,5 +93,6 @@ namespace Model.Business.Users
         {
             _entries.Clear();
         }
+
     }
 }

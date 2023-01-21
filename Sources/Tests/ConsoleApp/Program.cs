@@ -104,7 +104,7 @@ namespace ConsoleApp
                         string app = reader.ReadLine();
                         writer.Write("Saisissez un commentaire: ");
                         string note = reader.ReadLine();
-                        manager.CreateEntryToConnectedUser(login, password, app, note);
+                        manager.CreateEntryToConnectedUser(login, login, password, app, note);
                     }
                     else if (choix == 3)
                     {

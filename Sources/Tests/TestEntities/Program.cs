@@ -39,7 +39,7 @@ namespace TestEntities
                 Console.WriteLine("users:");
                 foreach (LocalUserEntity user in usersNm)
                 {
-                    Console.WriteLine($"{user.Uid} - {user.Password} - { new AesDecrypter().Decrypt(MASTER_PASSWORD, user.Password)} - {new AesDecrypter().Decrypt(MASTER_PASSWORD,user.OwnedEntries.First().App)}");
+                    Console.WriteLine($"{user.Uid} - {user.Password} - { /*new AesDecrypter().Decrypt(MASTER_PASSWORD, user.Password)*/user.Password} - {/*new AesDecrypter().Decrypt(MASTER_PASSWORD,user.OwnedEntries.First().App)*/user.OwnedEntries.First().App}");
                 }
             }
         }

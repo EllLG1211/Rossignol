@@ -122,9 +122,9 @@ namespace Model.Business
         /// <param name="note"></param>
         /// <remarks>Throws a NullReferenceException if ConnectedUser is null.</remarks>
         /// <exception cref="NullReferenceException"></exception>
-        public void CreateEntryToConnectedUser(string login, string password, string app, string? note)
+        public void CreateEntryToConnectedUser(string mail,string login, string password, string app, string? note)
         {
-            ProprietaryEntry entry = new ProprietaryEntry(login, password, app, note);
+            ProprietaryEntry entry = new ProprietaryEntry(mail,login, password, app, note);
             //LoggedIn.AddEntry(entry); //this was adding two entries, bad
             DataManager.CreateEntryToConnectedUser(LoggedIn, entry);
         }
@@ -151,7 +151,7 @@ namespace Model.Business
             
             MailedUser userToShareWith = new ReadOnlyUser(mailUserToShareWith, "");
             //entry.ShareToUser(userToShareWith);   //useless
-            DataManager.ShareEntryWith(entry, userToShareWith);
+            DataManager.ShareEntryWith(entry, userToShareWith.Mail);
 
             return true;
         }
@@ -159,7 +159,7 @@ namespace Model.Business
         public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
         {
             entry.UnshareToUser(user);
-            DataManager.UnshareEntryTo(entry, user);
+            DataManager.UnshareEntryTo(entry, user.Mail);
         }
 
         /// <summary>

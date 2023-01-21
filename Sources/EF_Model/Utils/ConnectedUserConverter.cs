@@ -1,28 +1,29 @@
 ﻿using EF_Model.Entities;
 using EncryptedModel.Business.Users;
+using Model.Business.Users;
+using EF_Model.Utils;
 
 namespace EF_Model.Utils
 {
     public static class ConnectedUserConverter
     {
-        public static EncryptedConnectedUser ToModel(this ConnectedUserEntity entity)
-            =>  new EncryptedConnectedUser(entity.EncryptionType, entity.Uid.ToString(), entity.Mail, entity.Password, ProprietaryEntryConverter.ToModels(entity.OwnedEntries).ToList());
+        public static ConnectedUser ToModel(this ConnectedUserEntity entity)
+            =>  new ConnectedUser(new Guid(entity.Uid), entity.Mail, entity.Password, EF_Model.Utils.EntryConverter.ToModels(entity.OwnedEntries.ToList()).ToList());
 
-        public static IEnumerable<EncryptedConnectedUser> ToModels(this IEnumerable<ConnectedUserEntity> entities)
+        public static IEnumerable<ConnectedUser> ToModels(this IEnumerable<ConnectedUserEntity> entities)
         => entities.Select(e => e.ToModel());
 
-        public static ConnectedUserEntity ToEntity(this EncryptedConnectedUser user) =>
+        public static ConnectedUserEntity ToEntity(this ConnectedUser user) =>
          new ConnectedUserEntity
             {
-                EncryptionType = user.EncryptionType,
-                Uid = user.Uid,
-                Password = user.EncryptedPassword,
-                Mail = user.EncryptedMail,
-                SharedWith = user.encryptedSharedWith.ToEntities(new ConnectedUserEntity()).ToList(),
-                OwnedEntries = user.ownedEncryptedEntries.ToEntities(new ConnectedUserEntity()).ToList()
+                Uid = user.Uid.ToString(),
+                Password = user.Password,
+                Mail = user.Mail,
+                SharedWith = user.SharedEntries.ToEntities(new ConnectedUserEntity()).ToList(),
+                OwnedEntries = user.Entries.ToEntities(new ConnectedUserEntity()).ToList()
          };
         
-        public static IEnumerable<ConnectedUserEntity> ToEntities(this IEnumerable<EncryptedConnectedUser> users)
+        public static IEnumerable<ConnectedUserEntity> ToEntities(this IEnumerable<ConnectedUser> users)
         => users.Select(m => m.ToEntity());
     }
 }

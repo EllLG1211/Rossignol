@@ -19,11 +19,11 @@ namespace EF_Tests
     public class Test_EF_BD
     {
         private static readonly string MASTER_PASSWORD = "masterPassword";
-        private static EntryEntity CreateEntryEntity(String login, String password, String app, String? note, LocalUserEntity owner)
+        private static EntryEntity CreateEntryEntity(string mail,String login, String password, String app, String? note, LocalUserEntity owner)
         {
-            ProprietaryEntry proprietaryEntry = new ProprietaryEntry(login, password, app, note);
-            EncryptedProprietaryEntry encryptedSharedEntry = EntryEncryptionManager.ProprietaryToEncryptedEntry(proprietaryEntry, MASTER_PASSWORD);
-            EntryEntity toreturn = ProprietaryEntryConverter.ToEntity(encryptedSharedEntry, owner);
+            ProprietaryEntry proprietaryEntry = new ProprietaryEntry(mail,login, password, app, note);
+            //EncryptedProprietaryEntry encryptedSharedEntry = EntryEncryptionManager.ProprietaryToEncryptedEntry(proprietaryEntry, MASTER_PASSWORD);
+            EntryEntity toreturn = EntryConverter.ToEntity(proprietaryEntry, owner);
             return toreturn;
         }
 
@@ -43,15 +43,15 @@ namespace EF_Tests
 
             List<LocalUserEntity> users = new List<LocalUserEntity>();
 
-            LocalUserEntity lu = new LocalUserEntity() { EncryptionType = "AES", Password = new AesEncrypter().Encrypt(MASTER_PASSWORD, MASTER_PASSWORD), Uid = Guid.NewGuid().ToString() };
+            LocalUserEntity lu = new LocalUserEntity() { /*EncryptionType = "AES",*/ Password = /*new AesEncrypter().Encrypt(MASTER_PASSWORD, MASTER_PASSWORD)*/MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
             users.Add(lu);
 
             List<EntryEntity> entries = new List<EntryEntity>();
-            entries.Add(CreateEntryEntity("login1", "password1", "app1", null, lu));
-            entries.Add(CreateEntryEntity("login2", "password2", "app2", "note2", lu));
-            entries.Add(CreateEntryEntity("login3", "password3", "app3", "note3", lu));
-            entries.Add(CreateEntryEntity("login4", "password4", "app4", null, lu));
-            entries.Add(CreateEntryEntity("login5", "password5", "app5", "note4", lu));
+            entries.Add(CreateEntryEntity("lg@a.com","login1", "password1", "app1", null, lu));
+            entries.Add(CreateEntryEntity("lg@a.com", "login2", "password2", "app2", "note2", lu));
+            entries.Add(CreateEntryEntity("lg@a.com", "login3", "password3", "app3", "note3", lu));
+            entries.Add(CreateEntryEntity("lg@a.com", "login4", "password4", "app4", null, lu));
+            entries.Add(CreateEntryEntity("lg@a.com", "login5", "password5", "app5", "note4", lu));
 
             lu.OwnedEntries = entries;
 
@@ -73,8 +73,9 @@ namespace EF_Tests
                 foreach (EntryEntity entry in encryptedEntries)
                 {
                     Assert.True(entries.Contains(entry));
-                    EncryptedProprietaryEntry encryptedSharedEntry = ProprietaryEntryConverter.ToModel(entry);
-                    ProprietaryEntry pl = EntryEncryptionManager.EncryptedToProprietaryEntry(encryptedSharedEntry, MASTER_PASSWORD);
+                    //EncryptedProprietaryEntry encryptedSharedEntry = EntryConverter.ToModel(entry);
+                    //ProprietaryEntry pl = EntryEncryptionManager.EncryptedToProprietaryEntry(encryptedSharedEntry, MASTER_PASSWORD);
+                    Entry e = entry.ToModel();
                 }
                 Task p = EntryEntityManager.clearDB(options);
             }

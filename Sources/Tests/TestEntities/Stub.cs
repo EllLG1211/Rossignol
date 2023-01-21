@@ -12,8 +12,8 @@ namespace TestEntities
         private static EntryEntity CreateEntryEntity(String login, String password, String app, String? note, LocalUserEntity owner)
         {
             ProprietaryEntry proprietaryEntry = new ProprietaryEntry(login, password, app, note);
-            EncryptedProprietaryEntry encryptedSharedEntry = EntryEncryptionManager.ProprietaryToEncryptedEntry(proprietaryEntry, Program.MASTER_PASSWORD);
-            EntryEntity toreturn = ProprietaryEntryConverter.ToEntity(encryptedSharedEntry, owner);
+            //EncryptedProprietaryEntry encryptedSharedEntry = EntryEncryptionManager.ProprietaryToEncryptedEntry(proprietaryEntry, Program.MASTER_PASSWORD);
+            EntryEntity toreturn = EntryConverter.ToEntity(proprietaryEntry, owner);
             return toreturn;
         }
 
@@ -29,7 +29,7 @@ namespace TestEntities
         }
 
         public static List<LocalUserEntity> loadUsers(string password)=>
-            new List<LocalUserEntity>() { new LocalUserEntity() { EncryptionType = "AES", Password =  new AesEncrypter().Encrypt(password, password), Uid=Guid.NewGuid().ToString()} };
+            new List<LocalUserEntity>() { new LocalUserEntity() { /*EncryptionType = "AES",*/ Password =  /*new AesEncrypter().Encrypt(password, password)*/password, Uid=Guid.NewGuid().ToString()} };
        
     }
 }

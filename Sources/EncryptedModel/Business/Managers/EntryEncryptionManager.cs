@@ -104,7 +104,8 @@ namespace EncryptedModel.Business.Managers
             if (encrypted.encryptionType != decrypter.EncryptionType()) throw new ArgumentException("Unexcpected Encryption type for this decrypter, excpected " + decrypter.EncryptionType() +
                                                                                                     " got " + encrypted.encryptionType);
 
-            ProprietaryEntry toReturn = new ProprietaryEntry( new Guid(encrypted.Uid),
+            ProprietaryEntry toReturn = new ProprietaryEntry( "shoudl not be called", 
+                                                   new Guid(encrypted.Uid),
                                                    decrypter.Decrypt(password, encrypted.EncryptedLogin),
                                                    decrypter.Decrypt(password, encrypted.EncryptedPassword),
                                                    decrypter.Decrypt(password, encrypted.EncryptedApp),

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApiAssemblies\API_REST\API_REST.csproj" />
+    <ProjectReference Include="..\..\ApiAssemblies\API_REST\API_REST.csproj" />
   </ItemGroup>
 
 </Project>

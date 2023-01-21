@@ -1,12 +1,16 @@
-﻿using ApiEntities;
+﻿using API_REST.DTOs;
+using AutoMapper;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Web.Http;
 
 namespace API_REST.Controllers.V1
 {
     [ApiController]
     public class AccountsController : RossignolControllerBase
     {
+        [Inject]
+        public IMapper Mapper { get; init; }
+
         [HttpGet("{id}")]
         public IActionResult GetUserInfo(string id)
         {
@@ -14,13 +18,13 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPost]
-        public IActionResult AddUser([FromBody] AccountEntity account)
+        public IActionResult AddUser([FromBody] AccountDTO account)
         {
             return StatusCode(501);
         }
 
         [HttpPut("{id}")]
-        public IActionResult ChangeUserInfo(string id, [FromBody] AccountEntity account)
+        public IActionResult ChangeUserInfo(string id, [FromBody] AccountDTO account)
         {
             return StatusCode(501);
         }

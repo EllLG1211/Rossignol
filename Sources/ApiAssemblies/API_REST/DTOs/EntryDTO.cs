@@ -2,7 +2,7 @@
 {
     public class EntryDTO
     {
-        public Guid Id { get; set; }
+        public Guid Uid { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public string App { get; set; }

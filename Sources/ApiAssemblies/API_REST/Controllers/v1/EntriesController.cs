@@ -1,4 +1,6 @@
 ﻿using API_REST.DTOs;
+using AutoMapper;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_REST.Controllers.V1
@@ -6,6 +8,9 @@ namespace API_REST.Controllers.V1
     [ApiController]
     public class EntriesController : RossignolControllerBase
     {
+        [Inject]
+        public IMapper Mapper { get; init; }
+
         [HttpGet]
         public IActionResult List(int page = 1)
         {

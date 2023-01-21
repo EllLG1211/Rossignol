@@ -1,4 +1,4 @@
-﻿using ApiEntities;
+﻿using API_REST.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_REST.Controllers.V1
@@ -13,13 +13,13 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPost]
-        public IActionResult AddUser([FromBody] AccountEntity account)
+        public IActionResult AddUser([FromBody] AccountDTO account)
         {
             return StatusCode(501);
         }
 
         [HttpPut("{id}")]
-        public IActionResult ChangeUserInfo(string id, [FromBody] AccountEntity account)
+        public IActionResult ChangeUserInfo(string id, [FromBody] AccountDTO account)
         {
             return StatusCode(501);
         }

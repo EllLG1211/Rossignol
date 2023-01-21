@@ -1,4 +1,4 @@
-﻿using ApiEntities;
+﻿using API_REST.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_REST.Controllers.V1
@@ -19,13 +19,13 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] SharedEntryEntity sharedEntry)
+        public IActionResult Add([FromBody] SharedEntryDTO sharedEntry)
         {
             return StatusCode(501);
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromBody] SharedEntryEntity sharedEntry)
+        public IActionResult Delete([FromBody] SharedEntryDTO sharedEntry)
         {
             return StatusCode(501);
         }

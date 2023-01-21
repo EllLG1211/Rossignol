@@ -18,4 +18,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Model\Model.csproj" />
+  </ItemGroup>
+
 </Project>

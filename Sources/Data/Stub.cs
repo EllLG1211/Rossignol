@@ -8,7 +8,7 @@ namespace Data
     public class Stub : IDataManager
     {
         private readonly List<AbstractUser> _users = new List<AbstractUser>();
-        //TODO: use EF within the stub for persistence
+
         public Stub()
         {
             ConnectedUser user = new ConnectedUser("test@test.com", "1234");

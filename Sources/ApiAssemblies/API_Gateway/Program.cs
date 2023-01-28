@@ -23,9 +23,8 @@ builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, "IdentityApiKey", x =>
+            .AddJwtBearer("IdentityApiKey", x =>
             {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
@@ -62,10 +61,9 @@ app.UseCors(x => x
 app.UseRouting();
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
 
-//await app.UseOcelot();
+await app.UseOcelot();
 
 app.UseEndpoints(endpoints =>
 {

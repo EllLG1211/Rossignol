@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EF_Local\EF_Local.csproj" />
     <ProjectReference Include="..\..\EF_Model\EF_Model.csproj" />
     <ProjectReference Include="..\..\EncryptionAssemblies\AESEncryption\AESEncryption.csproj" />
   </ItemGroup>

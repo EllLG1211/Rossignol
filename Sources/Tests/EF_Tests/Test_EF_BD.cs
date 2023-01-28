@@ -1,3 +1,4 @@
+using EF_Local.Managers;
 using EF_Model;
 using EF_Model.Entities;
 using EF_Model.Managers;
@@ -9,6 +10,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Model.Business.Entries;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ using Xunit;
 
 namespace EF_Tests
 {
-    public class Test_EF_BD
+    public class Test_EF_BD_Local
     {
         private static readonly string MASTER_PASSWORD = "masterPassword";
         private static EntryEntity CreateEntryEntity(string mail,String login, String password, String app, String? note, LocalUserEntity owner)
@@ -38,13 +40,20 @@ namespace EF_Tests
             .Options;
 
 
-
             EFManager efm = new EFManager();
 
-            List<LocalUserEntity> users = new List<LocalUserEntity>();
+            UserEntityManager.RAZ(options).Wait();
+            EntryEntityManager.RAZ(options).Wait();
 
             LocalUserEntity lu = new LocalUserEntity() { /*EncryptionType = "AES",*/ Password = /*new AesEncrypter().Encrypt(MASTER_PASSWORD, MASTER_PASSWORD)*/MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
-            users.Add(lu);
+            LocalUserEntity la = new LocalUserEntity() {Password = MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
+
+            //UserEntityManager.addUser(lu, options).Wait();
+            //UserEntityManager.addUser(la, options).Wait();
+
+            List<LocalUserEntity> ls = new List<LocalUserEntity>();
+            ls.Add(la);
+            ls.Add(lu);
 
             List<EntryEntity> entries = new List<EntryEntity>();
             entries.Add(CreateEntryEntity("lg@a.com","login1", "password1", "app1", null, lu));
@@ -55,21 +64,13 @@ namespace EF_Tests
 
             lu.OwnedEntries = entries;
 
-            using (var context = new RossignolContextLocal(options))
-            {
-                context.Database.EnsureCreated();
-
-
-
-                context.EncryptedEntriesSet.AddRange(entries);
-                context.SaveChanges();
-            }
+            efm.ConstructDatabase(ls, options).Wait();  //entries are included with the users
 
 
             using (var context = new RossignolContextLocal(options))
             {
                 context.Database.EnsureCreated();
-                IEnumerable<EntryEntity> encryptedEntries = context.EncryptedEntriesSet;
+                IEnumerable<EntryEntity> encryptedEntries = context.EntriesSet;
                 foreach (EntryEntity entry in encryptedEntries)
                 {
                     Assert.True(entries.Contains(entry));
@@ -77,17 +78,23 @@ namespace EF_Tests
                     //ProprietaryEntry pl = EntryEncryptionManager.EncryptedToProprietaryEntry(encryptedSharedEntry, MASTER_PASSWORD);
                     Entry e = entry.ToModel();
                 }
-                Task p = EntryEntityManager.clearDB(options);
+                //Task p = EntryEntityManager.clearDB(options);
             }
-
+            /*
             using (var context = new RossignolContextLocal(options))
             {
-                var entities = context.EncryptedEntriesSet.Select(e=> context.EncryptedEntriesSet.Remove(e));
+                var entities = context.EntriesSet.Select(e=> context.EntriesSet.Remove(e));
              
                 context.SaveChanges();
 
-                Assert.True(context.EncryptedEntriesSet.Count() == 0);
+                Assert.True(context.EntriesSet.Count() == 0);
             }
+            */
+            Assert.Equal(2, UserEntityManager.returnUserCount(options));
+            UserEntityManager.removeUser(lu, options).Wait();
+            Assert.Equal(1, UserEntityManager.returnUserCount(options));
+            UserEntityManager.removeUser(new Guid(la.Uid), options).Wait();
+            Assert.Equal(0, UserEntityManager.returnUserCount(options));
         }
     }
 }

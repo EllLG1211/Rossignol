@@ -3,22 +3,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EF_Model
 {
-    public class RossignolContextLocal : DbContext
+    public class RossignolContextOnline : DbContext
     {
-        public DbSet<LocalUserEntity> LocalUser { get; set; }
-        public DbSet<EntryEntity> EncryptedEntriesSet { get; set; }
+        public DbSet<ConnectedUserEntity> OnlinesUsers { get; set; }
+        public DbSet<EntryEntity> EntriesSet { get; set; }
 
-        public RossignolContextLocal()
+        public RossignolContextOnline()
         { }
 
-        public RossignolContextLocal(DbContextOptions<RossignolContextLocal> options) : base(options)
+        public RossignolContextOnline(DbContextOptions<RossignolContextOnline> options) : base(options)
         { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite($"Data Source=Rossignol.bd");
+                optionsBuilder.UseSqlite($"Data Source=OnlineRossignol.bd");
             }
         }
 
@@ -27,7 +27,7 @@ namespace EF_Model
             modelBuilder.Entity<EntryEntity>().HasKey(n => n.Uid);
             modelBuilder.Entity<LocalUserEntity>().HasKey(n => n.Uid);
             //modelBuilder.Entity<ConnectedUserEntity>().HasKey(n => n.Uid);
-            modelBuilder.Entity<ConnectedUserEntity>().HasBaseType(typeof(LocalUserEntity));    //Entity tyoe hierarchy mapping
+            modelBuilder.Entity<ConnectedUserEntity>().HasBaseType(typeof(ConnectedUserEntity));    //Entity tyoe hierarchy mapping
             base.OnModelCreating(modelBuilder);
         }
     }

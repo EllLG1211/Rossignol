@@ -1,4 +1,5 @@
-﻿using EF_Model;
+﻿using EF_Local.Managers;
+using EF_Model;
 using EF_Model.Entities;
 using EF_Model.Managers;
 using Encryption.AESEncryption;
@@ -29,8 +30,8 @@ namespace TestEntities
 
             using (var context = new RossignolContextLocal())
             {
-                IEnumerable<EntryEntity> encryptedEntries = context.EncryptedEntriesSet;
-                IEnumerable<LocalUserEntity> usersNm = context.LocalUser;
+                IEnumerable<EntryEntity> encryptedEntries = context.EntriesSet;
+                IEnumerable<LocalUserEntity> usersNm = context.LocalUsers;
                 foreach (EntryEntity entry in encryptedEntries)
                 {
                     ProprietaryEntry p = decryptor.Decrypt(entry);

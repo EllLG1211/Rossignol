@@ -25,6 +25,15 @@ namespace EF_Model.Managers
             }
         }
 
+        public static async Task updateUser(LocalUserEntity cue, DbContextOptions<RossignolContextLocal> options = null)
+        {
+            using (var context = (options == null) ? new RossignolContextLocal() : new RossignolContextLocal(options))
+            {
+                context.LocalUsers.Update(cue);
+                context.SaveChanges();
+            }
+        }
+
         public static async Task removeUser(Guid uid, DbContextOptions<RossignolContextLocal> options = null)
         {
             using (var context = (options == null) ? new RossignolContextLocal() : new RossignolContextLocal(options))

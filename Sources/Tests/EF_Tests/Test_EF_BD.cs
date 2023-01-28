@@ -39,17 +39,8 @@ namespace EF_Tests
             .UseSqlite(connection)
             .Options;
 
-
-            EFManager efm = new EFManager();
-
-            UserEntityManager.RAZ(options).Wait();
-            EntryEntityManager.RAZ(options).Wait();
-
             LocalUserEntity lu = new LocalUserEntity() { /*EncryptionType = "AES",*/ Password = /*new AesEncrypter().Encrypt(MASTER_PASSWORD, MASTER_PASSWORD)*/MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
             LocalUserEntity la = new LocalUserEntity() {Password = MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
-
-            //UserEntityManager.addUser(lu, options).Wait();
-            //UserEntityManager.addUser(la, options).Wait();
 
             List<LocalUserEntity> ls = new List<LocalUserEntity>();
             ls.Add(la);
@@ -64,7 +55,10 @@ namespace EF_Tests
 
             lu.OwnedEntries = entries;
 
-            efm.ConstructDatabase(ls, options).Wait();  //entries are included with the users
+
+            UserEntityManager.RAZ(options).Wait();
+            EntryEntityManager.RAZ(options).Wait(); //may not be necessary in other cases, here needed because we use a raw sql command for cleanup
+            EFManager.ConstructDatabase(ls, options).Wait();  //entries are included with the users
 
 
             using (var context = new RossignolContextLocal(options))
@@ -74,22 +68,27 @@ namespace EF_Tests
                 foreach (EntryEntity entry in encryptedEntries)
                 {
                     Assert.True(entries.Contains(entry));
-                    //EncryptedProprietaryEntry encryptedSharedEntry = EntryConverter.ToModel(entry);
-                    //ProprietaryEntry pl = EntryEncryptionManager.EncryptedToProprietaryEntry(encryptedSharedEntry, MASTER_PASSWORD);
                     Entry e = entry.ToModel();
                 }
-                //Task p = EntryEntityManager.clearDB(options);
             }
-            /*
+
+            lu.Password = "new password";
+            UserEntityManager.updateUser(lu, options).Wait();
+
             using (var context = new RossignolContextLocal(options))
             {
-                var entities = context.EntriesSet.Select(e=> context.EntriesSet.Remove(e));
-             
-                context.SaveChanges();
-
-                Assert.True(context.EntriesSet.Count() == 0);
+                Assert.Equal("new password", context.LocalUsers.First(s => s.Uid == lu.Uid).Password);
             }
-            */
+
+            lu.OwnedEntries.First().App = "Discord";
+            EntryEntityManager.updateEntry(lu.OwnedEntries.First(), lu, options).Wait();
+
+            using (var context = new RossignolContextLocal(options))
+            {
+                string sr = context.EntriesSet.First(s => s.Uid == lu.OwnedEntries.First().Uid)?.App;
+                Assert.Equal("Discord", sr);
+            }
+
             Assert.Equal(2, UserEntityManager.returnUserCount(options));
             UserEntityManager.removeUser(lu, options).Wait();
             Assert.Equal(1, UserEntityManager.returnUserCount(options));

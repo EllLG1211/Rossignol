@@ -7,7 +7,7 @@ namespace EF_Local.Managers
     public class EFManager
     {
 
-        public async Task ConstructDatabase(List<LocalUserEntity> users, DbContextOptions<RossignolContextLocal> options = null)
+        public static async Task ConstructDatabase(List<LocalUserEntity> users, DbContextOptions<RossignolContextLocal> options = null)
         {
             using (var context = (options == null ? new RossignolContextLocal() : new RossignolContextLocal(options)))
             {

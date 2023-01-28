@@ -31,6 +31,24 @@ namespace EF_Model.Managers
             }
         }
 
+        public static async Task updateEntry(ProprietaryEntry e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
+        {
+            using (var context = new RossignolContextLocal(options))
+            {
+                context.EntriesSet.Update(e.ToEntity(lue));
+                context.SaveChanges();
+            }
+        }
+
+        public static async Task updateEntry(EntryEntity e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
+        {
+            using (var context = new RossignolContextLocal(options))
+            {
+                context.EntriesSet.Update(e);
+                context.SaveChanges();
+            }
+        }
+
         public static async Task removeEntry(EntryEntity e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
         {
             using (var context = new RossignolContextLocal(options))

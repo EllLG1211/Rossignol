@@ -1,26 +1,23 @@
-using BCryptNet = BCrypt.Net.BCrypt;
-using API_Gateway.Authorization;
 using API_Gateway.Helpers;
 using API_Gateway.Services;
-using Model.Api.Entities;
 using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Text.Json.Serialization;
+using Ocelot.Middleware;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<DataContext>();
+builder.Services.AddOcelot();
+
 builder.Services.AddCors();
-builder.Services.AddControllers().AddJsonOptions(x =>
-{
-    x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-});
+builder.Services.AddControllers();
 
 IConfigurationSection appSettingsSection = builder.Configuration.GetSection("AppSettings");
 builder.Services.Configure<AppSettings>(appSettingsSection);
+
+var appSettings = appSettingsSection.Get<AppSettings>();
+var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
 builder.Services.AddAuthentication(x =>
 {
@@ -35,52 +32,44 @@ builder.Services.AddAuthentication(x =>
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.ASCII.GetBytes(appSettingsSection.Get<AppSettings>().Secret)),
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
             });
 
-builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Configuration.AddJsonFile("routes.json");
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddOcelot();
 
+
+// APP
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-app.UseAuthorization();
+app.UseCors(x => x
+   .AllowAnyOrigin()
+   .AllowAnyMethod()
+   .AllowAnyHeader());
 
-app.UseMiddleware<ErrorHandlerMiddleware>();
-app.UseMiddleware<JwtMiddleware>();
+app.UseRouting();
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+app.UseAuthentication();
 
 //await app.UseOcelot();
-app.MapControllers();
 
-
-// TODO: Only for test, don't forget to remove
+app.UseEndpoints(endpoints =>
 {
-    List<User> testUsers = new()
-    {
-        new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
-        new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User }
-    };
-    using IServiceScope scope = app.Services.CreateScope();
-    DataContext dataContext = scope.ServiceProvider.GetRequiredService<DataContext>();
-    dataContext.Users.AddRange(testUsers);
-    dataContext.SaveChanges();
-}
+    endpoints.MapControllers();
+});
 
-app.Run();
+app.Run("https://localhost:7037");

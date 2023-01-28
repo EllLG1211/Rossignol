@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Model.Api.Entities
+﻿namespace Model.Api.Entities
 {
     public class User
     {
@@ -8,9 +6,8 @@ namespace Model.Api.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
-        public Role Role { get; set; }
-
-        [JsonIgnore]
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
+        public string Token { get; set; }
     }
 }

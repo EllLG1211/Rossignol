@@ -1,5 +1,5 @@
-﻿using API_Gateway.Authorization;
-using API_Gateway.Services;
+﻿using API_Gateway.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model.Api.Entities;
 using Model.Api.Users;
@@ -11,7 +11,7 @@ namespace API_Gateway.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public UsersController(IUserService userService)
         {
@@ -19,14 +19,19 @@ namespace API_Gateway.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("[action]")]
-        public IActionResult Authenticate(AuthenticateRequest model)
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]AuthenticateModel model)
         {
-            var response = _userService.Authenticate(model);
-            return Ok(response);
+            var user = _userService.Authenticate(model.Username, model.Password);
+
+            if (user == null)
+            {
+                return BadRequest(new { message = "Username or password is incorrect" });
+            }
+            return Ok(user);
         }
 
-        [Authorize(Role.Admin)]
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -34,16 +39,21 @@ namespace API_Gateway.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            // only admins can access other user records
-            var currentUser = (User)HttpContext.Items["User"];
-            if (id != currentUser.Id && currentUser.Role != Role.Admin)
+            var currentUserId = int.Parse(User.Identity.Name);
+            if (id != currentUserId && !User.IsInRole(Role.Admin))
             {
-                return Unauthorized(new { message = "Unauthorized" });
-            }
+                return Forbid();
+            }       
+
             var user = _userService.GetById(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
             return Ok(user);
         }
     }

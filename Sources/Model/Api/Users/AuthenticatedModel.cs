@@ -2,7 +2,7 @@
 
 namespace Model.Api.Users
 {
-    public class AuthenticateRequest
+    public class AuthenticateModel
     {
         [Required]
         public string Username { get; set; }

@@ -1,42 +1,60 @@
 ﻿using EF_Model.Entities;
 using EncryptedModel.Business.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace EF_Model.Managers
 {
     public class UserEntityManager
     {
-        public static async Task addUser(ConnectedUserEntity cue)
+        public static async Task addUser(ConnectedUserEntity lue, DbContextOptions<RossignolContextOnline> options = null)
         {
-            using (var context = new RossignolContextOnline())
+            using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
             {
-                context.OnlinesUsers.Add(cue);
+                context.OnlinesUsers.Add(lue);
                 context.SaveChanges();
             }
         }
 
-        public static async Task removeUser(ConnectedUserEntity cue)
+        public static async Task removeUser(ConnectedUserEntity cue, DbContextOptions<RossignolContextOnline> options = null)
         {
-            using (var context = new RossignolContextOnline())
+            using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
             {
                 context.OnlinesUsers.Remove(cue);
                 context.SaveChanges();
             }
         }
 
-        public static async Task removeUser(string mail)
+        public static async Task updateUser(ConnectedUserEntity cue, DbContextOptions<RossignolContextOnline> options = null)
         {
-            using (var context = new RossignolContextOnline())
+            using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
             {
-                context.OnlinesUsers.First(s => s.Mail == mail);
+                context.OnlinesUsers.Update(cue);
                 context.SaveChanges();
             }
         }
 
-        public static async Task removeUser(Guid uid)
+        public static async Task removeUser(Guid uid, DbContextOptions<RossignolContextOnline> options = null)
         {
-            using (var context = new RossignolContextOnline())
+            using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
             {
-                context.OnlinesUsers.First(s => s.Uid == uid.ToString());
+                context.OnlinesUsers.Remove(context.OnlinesUsers.First(s => s.Uid == uid.ToString()));
+                context.SaveChanges();
+            }
+        }
+
+        public static int returnUserCount(DbContextOptions<RossignolContextOnline> options = null)
+        {
+            using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
+            {
+                return context.OnlinesUsers.Count();
+            }
+        }
+
+        public static async Task RAZ(DbContextOptions<RossignolContextOnline> options = null)
+        {
+            using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
+            {
+                context.Database.ExecuteSqlRaw("delete from OnlinesUsers");
                 context.SaveChanges();
             }
         }

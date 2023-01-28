@@ -72,4 +72,4 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
-app.Run("https://localhost:7037");
+app.Run();

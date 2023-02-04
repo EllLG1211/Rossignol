@@ -70,17 +70,17 @@ steps:
          from_secret: SECRET_REGISTRY_PASSWORD
     depends_on: [ build ]
 
-    - name: docker-build-restapi
+  - name: docker-build-restapi
     image: plugins/docker
     settings:
-       dockerfile: Sources/ApiAssemblies/API_REST/Dockerfile
-       context: .
-       registry: hub.codefirst.iut.uca.fr
-       repo: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.restapi
-       username:
-         from_secret: SECRET_REGISTRY_USERNAME
-       password:
-         from_secret: SECRET_REGISTRY_PASSWORD
+      dockerfile: Sources/ApiAssemblies/API_REST/Dockerfile
+      context: .
+      registry: hub.codefirst.iut.uca.fr
+      repo: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.restapi
+      username:
+        from_secret: SECRET_REGISTRY_USERNAME
+      password:
+        from_secret: SECRET_REGISTRY_PASSWORD
     depends_on: [ build ]
 
 volumes:

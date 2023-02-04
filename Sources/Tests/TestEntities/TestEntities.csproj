@@ -20,6 +20,7 @@
     <ProjectReference Include="..\..\EF_Model\EF_Model.csproj" />
     <ProjectReference Include="..\..\EncryptedModel\EncryptedModel.csproj" />
     <ProjectReference Include="..\..\EncryptionAssemblies\AESEncryption\AESEncryption.csproj" />
+    <ProjectReference Include="..\..\EncryptionAssemblies\EncryptedModel\EncryptedModel.csproj" />
   </ItemGroup>
 
 </Project>

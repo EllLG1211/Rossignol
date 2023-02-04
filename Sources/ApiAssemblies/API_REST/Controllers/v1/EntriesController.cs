@@ -1,4 +1,6 @@
-﻿using ApiEntities;
+﻿using API_REST.DTOs;
+using AutoMapper;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_REST.Controllers.V1
@@ -6,6 +8,9 @@ namespace API_REST.Controllers.V1
     [ApiController]
     public class EntriesController : RossignolControllerBase
     {
+        [Inject]
+        public IMapper Mapper { get; init; }
+
         [HttpGet]
         public IActionResult List(int page = 1)
         {
@@ -19,13 +24,13 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] EntryEntity entry)
+        public IActionResult Add([FromBody] EntryDTO entry)
         {
             return StatusCode(501);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Modify(string id, [FromBody] EntryEntity entry)
+        public IActionResult Modify(string id, [FromBody] EntryDTO entry)
         {
             return StatusCode(501);
         }

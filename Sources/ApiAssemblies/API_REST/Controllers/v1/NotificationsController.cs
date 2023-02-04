@@ -2,7 +2,6 @@
 
 namespace API_REST.Controllers.V1
 {
-    //TODO fix this class
     [ApiController]
     public class NotificationsController : RossignolControllerBase
     {
@@ -13,7 +12,7 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPut]
-        public IActionResult Put(string id/*, params */) //TODO wtf is this method supposed to do idk
+        public IActionResult Put(string id, bool status)
         {
             return StatusCode(501);
         }

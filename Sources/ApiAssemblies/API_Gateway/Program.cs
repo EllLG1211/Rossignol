@@ -38,7 +38,8 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddOcelot();
 builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Configuration.AddJsonFile("routes.json");
+builder.Configuration.AddJsonFile($"routes.{builder.Environment}.json", true, true);
+
 builder.Services.AddSwaggerGen();
 
 

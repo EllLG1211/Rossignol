@@ -6,5 +6,5 @@ namespace API_REST.Controllers.V1;
 [Route("/api/[controller]")]
 public class RossignolControllerBase : ControllerBase
 {
-    
+    public const String LOG_FORMAT = "{0}() > {1}";
 }

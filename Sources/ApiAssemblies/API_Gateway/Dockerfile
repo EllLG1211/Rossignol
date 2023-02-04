@@ -7,7 +7,6 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Sources/ApiAssemblies/API_Gateway.csproj", "ApiAssemblies/API_Gateway/"]
 COPY ["Sources/Model/Model.csproj", "Model/"]
-COPY ["Sources/ApiAssemblies/API_Gateway/appsettings.json", "ApiAssemblies/API_Gateway/"]
 RUN dotnet restore "ApiAssemblies/API_Gateway/API_Gateway.csproj"
 COPY . .
 WORKDIR "Sources/ApiAssemblies/API_Gateway"

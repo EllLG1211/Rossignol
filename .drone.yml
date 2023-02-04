@@ -68,6 +68,9 @@ steps:
          from_secret: SECRET_REGISTRY_USERNAME
        password:
          from_secret: SECRET_REGISTRY_PASSWORD
+    when:
+      branch:
+        - 126_docker
     depends_on: [ build ]
 
   - name: docker-build-restapi
@@ -81,6 +84,9 @@ steps:
         from_secret: SECRET_REGISTRY_USERNAME
       password:
         from_secret: SECRET_REGISTRY_PASSWORD
+    when:
+      branch:
+        - 126_docker
     depends_on: [ build ]
 
 volumes:

@@ -12,8 +12,7 @@
       "UpstreamPathTemplate": "/api/{version}/accounts/",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
+        "AuthenticationProviderKey": "Bearer"
       }
     },
     {
@@ -28,8 +27,7 @@
       "UpstreamPathTemplate": "/api/{version}/entries/",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
+        "AuthenticationProviderKey": "Bearer"
       }
     }
   ],

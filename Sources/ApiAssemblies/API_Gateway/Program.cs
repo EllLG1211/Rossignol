@@ -8,8 +8,6 @@ using Ocelot.Middleware;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOcelot();
-
 builder.Services.AddCors();
 builder.Services.AddControllers();
 
@@ -24,7 +22,7 @@ builder.Services.AddAuthentication(x =>
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-            .AddJwtBearer("IdentityApiKey", x =>
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
             {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
@@ -37,10 +35,10 @@ builder.Services.AddAuthentication(x =>
                 };
             });
 
+builder.Services.AddOcelot();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Configuration.AddJsonFile("routes.json");
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
@@ -62,12 +60,13 @@ app.UseRouting();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
-
-await app.UseOcelot();
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
+
+await app.UseOcelot();
 
 app.Run();

@@ -4,6 +4,8 @@ using Ocelot.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Data;
+using Model.Business;
 using Ocelot.Middleware;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -37,6 +39,7 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddOcelot();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDataManager, Stub>();
 
 builder.Configuration.AddJsonFile("routes.json");
 builder.Services.AddSwaggerGen();

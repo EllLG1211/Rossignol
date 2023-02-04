@@ -30,31 +30,5 @@ namespace API_Gateway.Controllers
             }
             return Ok(user);
         }
-
-        [Authorize(Roles = Role.Admin)]
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _userService.GetAll();
-            return Ok(users);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var currentUserId = int.Parse(User.Identity.Name);
-            if (id != currentUserId && !User.IsInRole(Role.Admin))
-            {
-                return Forbid();
-            }       
-
-            var user = _userService.GetById(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
-        }
     }
 }

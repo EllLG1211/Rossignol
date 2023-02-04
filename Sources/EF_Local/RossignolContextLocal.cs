@@ -1,7 +1,7 @@
 ﻿using EF_Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EF_Model
+namespace EF_Local
 {
     public class RossignolContextLocal : DbContext
     {

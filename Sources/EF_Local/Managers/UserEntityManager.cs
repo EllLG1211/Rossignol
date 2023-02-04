@@ -3,7 +3,7 @@ using EncryptedModel.Business.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace EF_Model.Managers
+namespace EF_Local.Managers
 {
     public class UserEntityManager
     {

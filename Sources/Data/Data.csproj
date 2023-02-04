@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.9" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EF_Local\EF_Local.csproj" />
     <ProjectReference Include="..\EF_Model\EF_Model.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />

@@ -2,7 +2,7 @@
 using EncryptedModel.Business.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace EF_Model.Managers
+namespace EF_Online.Managers
 {
     public class UserEntityManager
     {

@@ -1,11 +1,12 @@
 ﻿using EF_Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EF_Model
+namespace EF_Online
 {
     public class RossignolContextOnline : DbContext
     {
         public DbSet<ConnectedUserEntity> OnlinesUsers { get; set; }
+        public DbSet<LocalUserEntity> ReferencedUsers { get; set; }
         public DbSet<EntryEntity> EntriesSet { get; set; }
 
         public RossignolContextOnline()
@@ -27,7 +28,7 @@ namespace EF_Model
             modelBuilder.Entity<EntryEntity>().HasKey(n => n.Uid);
             modelBuilder.Entity<LocalUserEntity>().HasKey(n => n.Uid);
             //modelBuilder.Entity<ConnectedUserEntity>().HasKey(n => n.Uid);
-            modelBuilder.Entity<ConnectedUserEntity>().HasBaseType(typeof(ConnectedUserEntity));    //Entity tyoe hierarchy mapping
+            modelBuilder.Entity<ConnectedUserEntity>().HasBaseType(typeof(LocalUserEntity));    //Entity tyoe hierarchy mapping
             base.OnModelCreating(modelBuilder);
         }
     }

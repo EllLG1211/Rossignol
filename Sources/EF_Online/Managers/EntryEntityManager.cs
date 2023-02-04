@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EF_Model.Managers
+namespace EF_Online.Managers
 {
     public class EntryEntityManager
     {

@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEntities", "Tests\TestE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{AF5EC0A1-B990-4D92-828D-BAA784B731E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Tests_local", "Tests\EF_Tests\EF_Tests_local.csproj", "{9FB42B40-02D7-4478-9EA5-4F0C3A4613A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Tests", "Tests\EF_Tests\EF_Tests.csproj", "{9FB42B40-02D7-4478-9EA5-4F0C3A4613A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data_Tests", "Tests\Data_Tests\Data_Tests.csproj", "{DC9C0DD4-5C48-47F6-B675-2A1B2D3372AF}"
 EndProject

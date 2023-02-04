@@ -93,7 +93,7 @@ steps:
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
       IMAGENAME: mysql:latest
-      CONTAINERNAME: mysql
+      CONTAINERNAME: rossignol-database
       COMMAND: create
       # OVERWRITE: true
       PRIVATE: true

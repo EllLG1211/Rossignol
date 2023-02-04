@@ -115,7 +115,7 @@ steps:
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
         IMAGENAME: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.gateway:latest
-        CONTAINERNAME: valentinclergue-rossignolgateway
+        CONTAINERNAME: rossignolgateway
         COMMAND: create
         OVERWRITE: true
         ADMINS: valentinclergue,yorickgeoffre,mathisribemont,eliottle_guehennec
@@ -128,7 +128,7 @@ steps:
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
         IMAGENAME: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.restapi:latest
-        CONTAINERNAME: valentinclergue-rossignolrestapi
+        CONTAINERNAME: rossignolrestapi
         COMMAND: create
         OVERWRITE: true
         CODEFIRST_CLIENTDRONE_ENV_DB_SERVER:

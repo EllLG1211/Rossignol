@@ -70,7 +70,7 @@ steps:
         from_secret: SECRET_REGISTRY_PASSWORD
     when:
       branch:
-        - 126_docker
+        - master
     depends_on: [ build ]
 
   - name: docker-build-restapi
@@ -86,7 +86,7 @@ steps:
         from_secret: SECRET_REGISTRY_PASSWORD
     when:
       branch:
-        - 126_docker
+        - master
     depends_on: [ build ]
 
   - name: deploy-container-database
@@ -108,7 +108,7 @@ steps:
       ADMINS: valentinclergue,yorickgeoffre,mathisribemont,eliottle_guehennec
     when:
       branch:
-        - 126_docker
+        - master
     depends_on: [ build ]
 
   - name: deploy-container-gateway
@@ -121,7 +121,7 @@ steps:
         ADMINS: valentinclergue,yorickgeoffre,mathisribemont,eliottle_guehennec
     when:
       branch:
-        - 126_docker
+        - master
     depends_on: [ docker-build-gateway ]
 
   - name: deploy-container-restapi
@@ -142,7 +142,7 @@ steps:
         ADMINS: valentinclergue,yorickgeoffre,mathisribemont,eliottle_guehennec
     when:
       branch:
-        - 126_docker
+        - master
     depends_on: [ docker-build-restapi ]
 
 volumes:

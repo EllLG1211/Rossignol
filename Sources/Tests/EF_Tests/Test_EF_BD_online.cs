@@ -1,5 +1,4 @@
-using EF_Local;
-using EF_Local.Managers;
+using EF_Online.Managers;
 using EF_Model;
 using EF_Model.Entities;
 using EF_Model.Managers;
@@ -16,13 +15,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using EntryEntityManager = EF_Online.Managers.EntryEntityManager;
+using EF_Online;
 
 namespace EF_Tests
 {
-    public class Test_EF_BD_Local
+    public class Test_EF_BD_Online
     {
         private static readonly string MASTER_PASSWORD = "masterPassword";
-        private static EntryEntity CreateEntryEntity(string mail,String login, String password, String app, String? note, LocalUserEntity owner)
+        private static EntryEntity CreateEntryEntity(string mail,String login, String password, String app, String? note, ConnectedUserEntity owner)
         {
             ProprietaryEntry proprietaryEntry = new ProprietaryEntry(mail,login, password, app, note);
             //EncryptedProprietaryEntry encryptedSharedEntry = EntryEncryptionManager.ProprietaryToEncryptedEntry(proprietaryEntry, MASTER_PASSWORD);
@@ -36,14 +37,17 @@ namespace EF_Tests
             var connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
 
-            var options = new DbContextOptionsBuilder<RossignolContextLocal>()
+
+            var options = new DbContextOptionsBuilder<RossignolContextOnline>()
             .UseSqlite(connection)
             .Options;
 
-            LocalUserEntity lu = new LocalUserEntity() { /*EncryptionType = "AES",*/ Password = /*new AesEncrypter().Encrypt(MASTER_PASSWORD, MASTER_PASSWORD)*/MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
-            LocalUserEntity la = new LocalUserEntity() {Password = MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
+            //int count = UserEntityManager.returnUserCount(options);
+            
+            ConnectedUserEntity lu = new ConnectedUserEntity() { /*EncryptionType = "AES",*/ Password = /*new AesEncrypter().Encrypt(MASTER_PASSWORD, MASTER_PASSWORD)*/MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
+            ConnectedUserEntity la = new ConnectedUserEntity() {Password = MASTER_PASSWORD, Uid = Guid.NewGuid().ToString() };
 
-            List<LocalUserEntity> ls = new List<LocalUserEntity>();
+            List<ConnectedUserEntity> ls = new List<ConnectedUserEntity>();
             ls.Add(la);
             ls.Add(lu);
 
@@ -57,12 +61,12 @@ namespace EF_Tests
             lu.OwnedEntries = entries;
 
 
-            UserEntityManager.RAZ(options).Wait();
-            EntryEntityManager.RAZ(options).Wait(); //may not be necessary in other cases, here needed because we use a raw sql command for cleanup
+            //UserEntityManager.RAZ(options).Wait();
+            //EntryEntityManager.RAZ(options).Wait(); //may not be necessary in other cases, here needed because we use a raw sql command for cleanup
             EFManager.ConstructDatabase(ls, options).Wait();  //entries are included with the users
 
 
-            using (var context = new RossignolContextLocal(options))
+            using (var context = new RossignolContextOnline(options))
             {
                 context.Database.EnsureCreated();
                 IEnumerable<EntryEntity> encryptedEntries = context.EntriesSet;
@@ -76,15 +80,15 @@ namespace EF_Tests
             lu.Password = "new password";
             UserEntityManager.updateUser(lu, options).Wait();
 
-            using (var context = new RossignolContextLocal(options))
+            using (var context = new RossignolContextOnline(options))
             {
-                Assert.Equal("new password", context.LocalUsers.First(s => s.Uid == lu.Uid).Password);
+                Assert.Equal("new password", context.OnlinesUsers.First(s => s.Uid == lu.Uid).Password);
             }
 
             lu.OwnedEntries.First().App = "Discord";
             EntryEntityManager.updateEntry(lu.OwnedEntries.First(), lu, options).Wait();
 
-            using (var context = new RossignolContextLocal(options))
+            using (var context = new RossignolContextOnline(options))
             {
                 string sr = context.EntriesSet.First(s => s.Uid == lu.OwnedEntries.First().Uid)?.App;
                 Assert.Equal("Discord", sr);

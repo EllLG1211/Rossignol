@@ -1,5 +1,5 @@
-﻿using API_REST.DTOs;
-using AutoMapper;
+﻿using AutoMapper;
+using DTOs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 

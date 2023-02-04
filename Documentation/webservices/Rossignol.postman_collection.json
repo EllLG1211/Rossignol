@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "b243d40d-a238-4299-bf35-abfde4357deb",
+		"name": "Rossignol",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20633048"
+	},
+	"item": [
+		{
+			"name": "Get Bearer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7037/api/users/authenticate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7037",
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUsersAdmin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE2NzQ5MjI4NTcsImV4cCI6MTY3NjEzMjQ1NywiaWF0IjoxNjc0OTIyODU3fQ.flVCDLVy4QvAVozWCTUjRD85ZE7kfMlVELqU7d30-i4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7037/api/users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7037",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFirstUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE2NzQ5MjI4NTcsImV4cCI6MTY3NjEzMjQ1NywiaWF0IjoxNjc0OTIyODU3fQ.flVCDLVy4QvAVozWCTUjRD85ZE7kfMlVELqU7d30-i4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7037/api/users/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7037",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Config",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE2NzQ5MjI4NTcsImV4cCI6MTY3NjEzMjQ1NywiaWF0IjoxNjc0OTIyODU3fQ.flVCDLVy4QvAVozWCTUjRD85ZE7kfMlVELqU7d30-i4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5263/configuration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5263",
+					"path": [
+						"configuration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7037/api/1/accounts",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7037",
+					"path": [
+						"api",
+						"1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

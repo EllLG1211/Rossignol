@@ -1,4 +1,4 @@
-﻿namespace API_REST.DTOs
+﻿namespace DTOs
 {
     public class AccountDTO
     {

@@ -10,19 +10,19 @@ namespace Model.Business
 {
     public interface IDataManager
     {
-        void Register(AbstractUser user);
+        bool Register(AbstractUser user, string Mail);
 
         AbstractUser GetUser(string? mail, string password);
 
         bool checkUserExists(string? mail);
 
-        void CreateEntryToConnectedUser(AbstractUser user, Entry entry);
-        
-        void RemoveEntry(AbstractUser user, Entry entry);
+        bool CreateEntryToConnectedUser(AbstractUser user, Entry entry);
 
-        void ShareEntryWith(ProprietaryEntry entry, string password);
+        bool RemoveEntry(AbstractUser user, Entry entry);
 
-        void UnshareEntryTo(ProprietaryEntry entry, string password);
+        bool ShareEntryWith(ProprietaryEntry entry, string Mail, string password);
+
+        bool UnshareEntryTo(ProprietaryEntry entry, string Mail);
 
         IEnumerable<Entry> GetEntries(AbstractUser user);
         IEnumerable<SharedEntry> GetSharedEntries(ConnectedUser user);

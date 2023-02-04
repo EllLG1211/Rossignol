@@ -38,10 +38,12 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddOcelot();
 builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Configuration.AddJsonFile($"routes.{builder.Environment}.json", true, true);
+builder.Configuration.AddJsonFile($"routes.{builder.Environment.EnvironmentName}.json", true, true);
 
-builder.Services.AddSwaggerGen();
-
+if (builder.Environment.EnvironmentName == "Development") 
+{
+    builder.Services.AddSwaggerGen();
+}
 
 // APP
 WebApplication app = builder.Build();

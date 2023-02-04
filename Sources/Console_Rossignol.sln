@@ -44,7 +44,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Local", "EF_Local\EF_Loc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Online", "EF_Online\EF_Online.csproj", "{8407BD83-6603-4254-9389-11F8FD3B6B38}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF", "EF", "{2DDE3B56-FAB6-4DD0-BBDE-6B090F217007}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF_Assemblies", "EF_Assemblies", "{2DDE3B56-FAB6-4DD0-BBDE-6B090F217007}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncryptedModel", "EncryptionAssemblies\EncryptedModel\EncryptedModel.csproj", "{FDEF8B36-BF62-4897-9F6D-3D364E272FD5}"
 EndProject

@@ -89,6 +89,18 @@ steps:
         - 126_docker
     depends_on: [ build ]
 
+  - name: deploy-container-gateway
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+        IMAGENAME: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.gateway:latest
+        CONTAINERNAME: valentinclergue-rossignolgateway
+        COMMAND: create
+        OVERWRITE: true
+    when:
+      branch:
+        - 126_docker
+    depends_on: [ docker-build-gateway, docker-build-restapi ]
+
 volumes:
 - name: docs
   temp: {}

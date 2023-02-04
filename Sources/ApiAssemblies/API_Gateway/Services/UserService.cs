@@ -57,5 +57,15 @@ namespace API_Gateway.Services
                 return null;
             }
         }
+
+        public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException("We can't get all users in IDataManager");
+        }
+
+        public User GetById(int id)
+        {
+            throw new NotImplementedException("We can't get a user by his id in IDataManager");
+        }
     }
 }

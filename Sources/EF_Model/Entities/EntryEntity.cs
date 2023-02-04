@@ -1,6 +1,8 @@
-﻿namespace EF_Model.Entities
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace EF_Model.Entities
 {
-    public class EntryEntity
+    public class EntryEntity : IEquatable<EntryEntity>
     {
         public LocalUserEntity Owner { get; set; }  //one to many
         //public string EncryptionType { get; set; }
@@ -28,6 +30,11 @@
             EntryEntity other = obj as EntryEntity;
 
             return other.Uid == this.Uid;
+        }
+
+        public bool Equals(EntryEntity? other)
+        {
+            return other != null && other.Uid == this.Uid;
         }
     }
 }

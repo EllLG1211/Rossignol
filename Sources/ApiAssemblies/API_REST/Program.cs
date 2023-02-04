@@ -1,5 +1,4 @@
-using API_REST.DTOs;
-using AutoMapper;
+using DTOs;
 using Model.Business.Entries;
 using Model.Business.Users;
 
@@ -34,4 +33,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run("https://localhost:7114");

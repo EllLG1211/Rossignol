@@ -1,15 +1,11 @@
-﻿namespace ApiEntities
+﻿namespace DTOs
 {
-    public class EntryEntity
+    public class EntryDTO
     {
-        public string Uid { get; set; }
-
+        public Guid Uid { get; set; }
         public string Login { get; set; }
-
         public string Password { get; set; }
-
         public string App { get; set; }
-
-        public string Note { get; set; }
+        public string? Note { get; set; }
     }
 }

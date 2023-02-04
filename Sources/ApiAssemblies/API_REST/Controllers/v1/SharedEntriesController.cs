@@ -1,7 +1,6 @@
-﻿using System.Reflection;
-using API_REST.DTOs;
+using System.Reflection;
 using AutoMapper;
-using Microsoft.AspNetCore.Components;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_REST.Controllers.V1
@@ -9,7 +8,7 @@ namespace API_REST.Controllers.V1
     [ApiController]
     public class SharedEntriesController : RossignolControllerBase
     {
-        private ILogger<SharedEntriesController> _logger;
+        private readonly ILogger<SharedEntriesController> _logger;
         private IMapper _mapper;
 
         public SharedEntriesController(ILogger<SharedEntriesController> logger, IMapper mapper)

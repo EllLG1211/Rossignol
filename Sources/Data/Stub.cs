@@ -44,7 +44,7 @@ namespace Data
             _users.Clear();
         }
 
-        public bool CreateEntryToConnectedUser(AbstractUser user, Entry entry)
+        public bool AddEntryToUser(AbstractUser user, Entry entry)
         {
             user.AddEntry(entry);
             return true;
@@ -114,5 +114,19 @@ namespace Data
         }
 
         private ConnectedUser? getUserFromMail(string mail) => _users.Find(Luser => ((ConnectedUser)Luser).Mail.Equals(mail, StringComparison.Ordinal)) as ConnectedUser;
+
+        public bool UpdateUser(AbstractUser user)
+        {
+            if(!_users.Contains(user)) return false;
+            _users.Remove(user);
+            _users.Add(user);
+            return true;
+        }
+
+        public bool DeleteUser(AbstractUser user)
+        {
+            if (!_users.Contains(user)) return false;
+            return true;
+        }
     }
 }

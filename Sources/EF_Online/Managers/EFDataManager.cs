@@ -21,6 +21,10 @@ namespace EF_Local.Managers
     {
         SqliteConnection connection;
         DbContextOptions<RossignolContextOnline> options;
+        /// <summary>
+        /// This is the main constructor of the EFDataManager
+        /// </summary>
+        /// <param name="dataSource">the data source of the EF database, defaults to memory for testing only!</param>
         public EFDataManager(string dataSource = ":memory:")
         {
             connection = new SqliteConnection($"DataSource={dataSource}");
@@ -41,25 +45,27 @@ namespace EF_Local.Managers
             UserEntityManager.RAZ().RunSynchronously();
         }
 
-        public bool CreateEntryToConnectedUser(AbstractUser user, Entry entry)
+        public bool AddEntryToUser(AbstractUser user, Entry entry)
         {
             using (var context = new RossignolContextOnline(options))
             {
-                var e = entry.ToEntity(context.OnlinesUsers.First(u => new Guid(u.Uid) == user.Uid));
-                if (e != null)
-                {
-                    context.OnlinesUsers.First(u => new Guid(u.Uid) == user.Uid).OwnedEntries.Add(e);
-                    return true;
-                }
+                ConnectedUserEntity usr = context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString());
+                var e = entry.ToEntity(usr);
+                if (e == null) return false;
+
+                usr.OwnedEntries.Add(e);
+
+                context.OnlinesUsers.Update(usr);
+                context.SaveChanges();
+                return true;
             }
-            return false;
         }
 
         public IEnumerable<Entry> GetEntries(AbstractUser user)
         {
             using (var context = new RossignolContextOnline(options))
             {
-                return context.OnlinesUsers.First(u => new Guid(u.Uid) == user.Uid).OwnedEntries.ToModels();
+                return context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString()).OwnedEntries.ToModels();
             }
         }
 
@@ -67,7 +73,7 @@ namespace EF_Local.Managers
         {
             using (var context = new RossignolContextOnline(options))
             {
-                return context.OnlinesUsers.First(u => new Guid(u.Uid) == user.Uid).SharedWith.ToModelShareds();
+                return context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString()).SharedWith.ToModelShareds();
             }
         }
 
@@ -86,6 +92,7 @@ namespace EF_Local.Managers
             {
                 if (context.OnlinesUsers.Any(u => u.Mail == Mail)) return false;
                 context.OnlinesUsers.Add(cu.ToEntity());
+                context.SaveChanges();
                 return true;
             }
         }
@@ -138,6 +145,43 @@ namespace EF_Local.Managers
                     return true;
                 }
                 return false;
+            }
+        }
+
+        public bool UpdateUser(AbstractUser user)
+        {
+            if(user is ConnectedUser) {
+                ConnectedUser usr = (ConnectedUser)user;
+                if (!checkUserExists(usr.Mail)) return false;
+                using (var context = new RossignolContextOnline(options))
+                {
+                    context.OnlinesUsers.Update(usr.ToEntity());
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            else
+            {
+                return false; //unapplicable to this implementation
+            }
+        }
+
+        public bool DeleteUser(AbstractUser user)
+        {
+            if (user is ConnectedUser)
+            {
+                ConnectedUser usr = (ConnectedUser)user;
+                if (!checkUserExists(usr.Mail)) return false;
+                using (var context = new RossignolContextOnline(options))
+                {
+                    context.OnlinesUsers.Remove(usr.ToEntity());
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            else
+            {
+                return false; //unapplicable to this implementation
             }
         }
     }

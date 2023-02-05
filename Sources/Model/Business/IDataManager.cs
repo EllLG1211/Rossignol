@@ -14,9 +14,11 @@ namespace Model.Business
 
         AbstractUser GetUser(string? mail, string password);
 
+        bool UpdateUser(AbstractUser user);
+
         bool checkUserExists(string? mail);
 
-        bool CreateEntryToConnectedUser(AbstractUser user, Entry entry);
+        bool AddEntryToUser(AbstractUser user, Entry entry);
 
         bool RemoveEntry(AbstractUser user, Entry entry);
 
@@ -27,11 +29,16 @@ namespace Model.Business
         IEnumerable<Entry> GetEntries(AbstractUser user);
         IEnumerable<SharedEntry> GetSharedEntries(ConnectedUser user);
 
+        bool DeleteUser(AbstractUser user);
+
         /// <summary>
         /// Clear data of the dataManager;
         /// </summary>
         void clear();
 
+        /// <deprecated>
+        ///     this isn't useful in this context...
+        /// </deprecated>
         void save();
 
     }

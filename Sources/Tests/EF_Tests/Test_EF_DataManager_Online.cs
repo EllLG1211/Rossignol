@@ -19,15 +19,17 @@ namespace EF_Tests
         {
             IDataManager manager = new EFDataManager();
             ConnectedUser cu = new ConnectedUser("testman@dodo.com", "testpass");
-            manager.Register(cu, cu.Mail);
 
             Entry e = new ProprietaryEntry(cu.Mail, "mako", "pask", "raidforums");
-            Entry e2 = new ProprietaryEntry(cu.Mail, "drake", "nk@aaa", "ter.gov");
 
             cu.AddEntry(e);
+
+            manager.Register(cu, cu.Mail);
+
+            Entry e2 = new ProprietaryEntry(cu.Mail, "drake", "nk@aaa", "ter.gov");
+
             cu.AddEntry(e2);
 
-            manager.AddEntryToUser(cu, e);
             manager.AddEntryToUser(cu, e2);
 
             Assert.Equal(2,manager.GetEntries(cu).Count());
@@ -38,7 +40,7 @@ namespace EF_Tests
             manager.RemoveEntry(cu, e2);
             Assert.Empty(manager.GetEntries(cu));
 
-            manager.DeleteUser(cu);
+            Assert.True(manager.DeleteUser(cu));
             Assert.False(manager.checkUserExists(cu.Mail));
         }
     }

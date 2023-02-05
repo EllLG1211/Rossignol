@@ -22,8 +22,8 @@ namespace EF_Model.Utils
                 Mail = user.Mail,
             };
 
-            userEntity.SharedWith = user.SharedEntries.ToEntities(userEntity).ToList();
-            userEntity.OwnedEntries = user.Entries.ToEntities(userEntity).ToList();
+            userEntity.SharedWith = user.SharedEntries.ToEntities(userEntity).ToList() ?? new List<EntryEntity>();
+            userEntity.OwnedEntries = user.Entries.ToEntities(userEntity).ToList() ?? new List<EntryEntity>();
             return userEntity;
         }
         

@@ -53,7 +53,10 @@ namespace EF_Local.Managers
                 var e = entry.ToEntity(usr);
                 if (e == null) return false;
 
-                usr.OwnedEntries.Add(e);
+                //usr.OwnedEntries.Add(e);  //incorrect
+                e.Owner = usr;
+
+                context.EntriesSet.Add(e);
 
                 context.OnlinesUsers.Update(usr);
                 context.SaveChanges();
@@ -65,7 +68,10 @@ namespace EF_Local.Managers
         {
             using (var context = new RossignolContextOnline(options))
             {
-                return context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString()).OwnedEntries.ToModels();
+                ConnectedUserEntity k = context.OnlinesUsers.Include(u => u.OwnedEntries).First(usr => usr.Uid == user.Uid.ToString());
+                return k.OwnedEntries.ToModels();
+                //return context.EntriesSet.Where(entry => entry.Owner.Uid == user.Uid.ToString()).ToList().ToModels();
+                //return context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString()).OwnedEntries.ToModels();
             }
         }
 
@@ -170,11 +176,11 @@ namespace EF_Local.Managers
         {
             if (user is ConnectedUser)
             {
-                ConnectedUser usr = (ConnectedUser)user;
+                ConnectedUserEntity usr = ((ConnectedUser)user).ToEntity();
                 if (!checkUserExists(usr.Mail)) return false;
                 using (var context = new RossignolContextOnline(options))
                 {
-                    context.OnlinesUsers.Remove(usr.ToEntity());
+                    context.OnlinesUsers.Where(uxr=> uxr.Uid == usr.Uid).ExecuteDelete();
                     context.SaveChanges();
                 }
                 return true;

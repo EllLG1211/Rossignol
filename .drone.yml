@@ -57,6 +57,102 @@ steps:
       - /entrypoint.sh
     depends_on: [ build ]
 
+  - name: docker-build-gateway
+    image: plugins/docker
+    settings:
+      dockerfile: Sources/ApiAssemblies/API_Gateway/Dockerfile
+      context: .
+      registry: hub.codefirst.iut.uca.fr
+      repo: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.gateway
+      username:
+        from_secret: SECRET_REGISTRY_USERNAME
+      password:
+        from_secret: SECRET_REGISTRY_PASSWORD
+    when:
+      branch:
+        - master
+    depends_on: [ build ]
+
+  - name: docker-build-restapi
+    image: plugins/docker
+    settings:
+      dockerfile: Sources/ApiAssemblies/API_REST/Dockerfile
+      context: .
+      registry: hub.codefirst.iut.uca.fr
+      repo: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.restapi
+      username:
+        from_secret: SECRET_REGISTRY_USERNAME
+      password:
+        from_secret: SECRET_REGISTRY_PASSWORD
+    when:
+      branch:
+        - master
+    depends_on: [ build ]
+
+  - name: deploy-container-database
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+      IMAGENAME: mysql:latest
+      CONTAINERNAME: rossignol-database
+      COMMAND: create
+      # OVERWRITE: true
+      PRIVATE: true
+      CODEFIRST_CLIENTDRONE_ENV_MYSQL_ROOT_PASSWORD  :
+        from_secret: db_root_password
+      CODEFIRST_CLIENTDRONE_ENV_MYSQL_DATABASE:
+        from_secret: db_database
+      CODEFIRST_CLIENTDRONE_ENV_MYSQL_USER:
+        from_secret: db_user
+      CODEFIRST_CLIENTDRONE_ENV_MYSQL_PASSWORD:
+        from_secret: db_password
+      ADMINS: valentinclergue,yorickgeoffre,mathisribemont,eliottle_guehennec
+    when:
+      branch:
+        - master
+    depends_on: [ build ]
+
+  - name: deploy-container-gateway
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+        IMAGENAME: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.gateway:latest
+        CONTAINERNAME: rossignolgateway
+        COMMAND: create
+        OVERWRITE: true
+        CODEFIRST_CLIENTDRONE_ENV_DB_SERVER:
+          from_secret: db_server
+        CODEFIRST_CLIENTDRONE_ENV_DB_USER:
+          from_secret: db_user
+        CODEFIRST_CLIENTDRONE_ENV_DB_PASSWORD:
+          from_secret: db_password
+        CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
+          from_secret: db_database
+        ADMINS: valentinclergue,yorickgeoffre,mathisribemont,eliottle_guehennec
+    when:
+      branch:
+        - master
+    depends_on: [ docker-build-gateway ]
+
+  - name: deploy-container-restapi
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+        IMAGENAME: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.restapi:latest
+        CONTAINERNAME: rossignolrestapi
+        COMMAND: create
+        OVERWRITE: true
+        CODEFIRST_CLIENTDRONE_ENV_DB_SERVER:
+          from_secret: db_server
+        CODEFIRST_CLIENTDRONE_ENV_DB_USER:
+          from_secret: db_user
+        CODEFIRST_CLIENTDRONE_ENV_DB_PASSWORD:
+          from_secret: db_password
+        CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
+          from_secret: db_database
+        ADMINS: valentinclergue,yorickgeoffre,mathisribemont,eliottle_guehennec
+    when:
+      branch:
+        - master
+    depends_on: [ docker-build-restapi ]
+
 volumes:
 - name: docs
   temp: {}

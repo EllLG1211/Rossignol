@@ -43,6 +43,11 @@ namespace Model.Business.Entries
             OwnerMail = ownerMail; 
         }
 
+        public ProprietaryEntry(ConnectedUser owner, Entry e) : base (e.Uid, e.Login, e.Password, e.App, e.Note)
+        {
+            OwnerMail = owner.Mail;
+        }
+
         public ProprietaryEntry(string ownerMail, string login, string password, string app, string? note) 
             : this(ownerMail, Guid.NewGuid(), login, password, app, note){
             if (ownerMail == null)

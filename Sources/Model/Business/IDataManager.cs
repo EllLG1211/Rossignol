@@ -22,7 +22,7 @@ namespace Model.Business
 
         bool RemoveEntry(AbstractUser user, Entry entry);
 
-        bool ShareEntryWith(ProprietaryEntry entry, string Mail, string password);
+        bool ShareEntryWith(ProprietaryEntry entry, string Mail);
 
         bool UnshareEntryTo(ProprietaryEntry entry, string Mail);
 

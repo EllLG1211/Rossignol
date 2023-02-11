@@ -151,7 +151,7 @@ namespace Model.Business
             
             MailedUser userToShareWith = new ReadOnlyUser(mailUserToShareWith, "");
             //entry.ShareToUser(userToShareWith);   //useless
-            DataManager.ShareEntryWith(entry, userToShareWith.Mail, password);
+            DataManager.ShareEntryWith(entry, userToShareWith.Mail);
 
             return true;
         }

@@ -68,16 +68,14 @@ namespace Data
                 {
                     return _users.First();
                 }
-                else
-                {
-                    throw new Exception("Password is incorrect");
-                }
+
+                throw new ArgumentException("Password is incorrect");
             }
 
             ConnectedUser? user = getUserFromMail(mail);
-            if (user == null) throw new Exception("Unknown user");
+            if (user == null) throw new ArgumentException("Unknown user");
             if (password.Equals(user.Password)) return user;
-            throw new Exception("Uncorrect password");
+            throw new ArgumentException("Uncorrect password");
         }
 
         public bool Register(AbstractUser user, string mail)
@@ -127,6 +125,11 @@ namespace Data
         {
             if (!_users.Contains(user)) return false;
             return true;
+        }
+
+        public bool ShareEntryWith(ProprietaryEntry entry, string Mail)
+        {
+            return ShareEntryWith(entry, Mail, "");
         }
     }
 }

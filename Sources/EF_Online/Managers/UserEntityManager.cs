@@ -6,6 +6,7 @@ namespace EF_Online.Managers
 {
     public class UserEntityManager
     {
+        /*
         public static async Task addUser(ConnectedUserEntity lue, DbContextOptions<RossignolContextOnline> options = null)
         {
             using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
@@ -13,7 +14,7 @@ namespace EF_Online.Managers
                 context.OnlinesUsers.Add(lue);
                 context.SaveChanges();
             }
-        }
+        }*/
 
         public static async Task removeUser(ConnectedUserEntity cue, DbContextOptions<RossignolContextOnline> options = null)
         {

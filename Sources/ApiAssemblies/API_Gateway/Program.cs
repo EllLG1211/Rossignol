@@ -1,9 +1,13 @@
+using System.Reflection;
 using API_Gateway.Helpers;
 using API_Gateway.Services;
 using Ocelot.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Data;
+using Microsoft.OpenApi.Models;
+using Model.Business;
 using Ocelot.Middleware;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -37,12 +41,43 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddOcelot();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDataManager, Stub>();
 
 builder.Configuration.AddJsonFile($"routes.{builder.Environment.EnvironmentName}.json", true, true);
 
 if (builder.Environment.EnvironmentName == "Development") 
 {
-    builder.Services.AddSwaggerGen();
+    builder.Services.AddSwaggerGen(options =>
+    {
+        options.AddSecurityDefinition(name: "Bearer", securityScheme: new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Description = "Enter the Bearer Authorization string as following: `Bearer Generated-JWT-Token`",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.ApiKey,
+            Scheme = "Bearer"
+        });
+        options.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Name = "Bearer",
+                    In = ParameterLocation.Header,
+                    Reference = new OpenApiReference
+                    {
+                        Id = "Bearer",
+                        Type = ReferenceType.SecurityScheme
+                    }
+                },
+                new List<string>()
+            }
+        });
+
+        
+        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    });
 }
 
 // APP

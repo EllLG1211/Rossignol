@@ -18,6 +18,11 @@ namespace API_Gateway.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Return a user with data and the JWT.
+        /// </summary>
+        /// <param name="model">Connexion informations.</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]AuthenticateModel model)

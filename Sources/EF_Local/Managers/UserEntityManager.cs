@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 namespace EF_Local.Managers
 {
     public class UserEntityManager
-    {
+    {/*
         public static async Task addUser(LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options = null)
         {
             using (var context = (options == null) ? new RossignolContextLocal() : new RossignolContextLocal(options))
@@ -14,7 +14,7 @@ namespace EF_Local.Managers
                 context.LocalUsers.Add(lue);
                 context.SaveChanges();
             }
-        }
+        }*/
 
         public static async Task removeUser(LocalUserEntity cue, DbContextOptions<RossignolContextLocal> options = null)
         {

@@ -98,6 +98,8 @@ namespace EF_Tests
             Assert.Equal(1, UserEntityManager.returnUserCount(options));
             UserEntityManager.removeUser(new Guid(la.Uid), options).Wait();
             Assert.Equal(0, UserEntityManager.returnUserCount(options));
+
+            
         }
     }
 }

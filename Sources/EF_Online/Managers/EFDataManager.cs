@@ -25,7 +25,7 @@ namespace EF_Local.Managers
         /// This is the main constructor of the EFDataManager
         /// </summary>
         /// <param name="dataSource">the data source of the EF database, defaults to memory for testing only!</param>
-        public EFDataManager(string dataSource = ":memory:")
+        public EFDataManager(string dataSource = ":mysql:")
         {
             connection = new SqliteConnection($"DataSource={dataSource}");
             connection.Open();
@@ -42,7 +42,7 @@ namespace EF_Local.Managers
 
         public void clear()
         {
-            UserEntityManager.RAZ().RunSynchronously();
+            UserEntityManager.RAZ();
         }
 
         public bool AddEntryToUser(AbstractUser user, Entry entry)
@@ -79,7 +79,10 @@ namespace EF_Local.Managers
         {
             using (var context = new RossignolContextOnline(options))
             {
-                return context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString()).SharedWith.ToModelShareds();
+                ConnectedUserEntity cu = context.OnlinesUsers.Include(u => u.SharedWith).First(u => u.Uid == user.Uid.ToString());
+                if (cu == null || cu.SharedWith == null)
+                    return new List<EntryEntity>().ToModelShareds();
+                return cu.SharedWith.ToModelShareds();
             }
         }
 
@@ -122,15 +125,20 @@ namespace EF_Local.Managers
             throw new NotImplementedException("no");
         }
 
-        public bool ShareEntryWith(ProprietaryEntry entry,string Mail, string password)
+        public bool ShareEntryWith(ProprietaryEntry entry,string Mail)
         {
             using (var context = new RossignolContextOnline(options))
             {
-                ConnectedUser user = context.OnlinesUsers.First(u=> u.Mail == Mail && u.Password == password).ToModel();
-                if (user != null)
+                    ConnectedUserEntity usr = context.OnlinesUsers.Include(u => u.OwnedEntries).First(u => u.Mail == entry.OwnerMail);
+                    ConnectedUserEntity usrToShareTo = context.OnlinesUsers.Include(u => u.SharedWith).First(u => u.Mail == Mail);
+
+                if (usr != null && usrToShareTo != null)
                 {
-                    context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString()).SharedWith
-                        .Add(new SharedEntry(new ReadOnlyUser(user),entry.Login, entry.Password,entry.App).ToEntity(user.ToEntity()));
+                    //usr.OwnedEntries.First(f => f.Uid == entry.Uid.ToString()).SharedWith.Add(usrToShareTo);
+                    usrToShareTo.SharedWith.Add(usr.OwnedEntries.First(f => f.Uid == entry.Uid.ToString()));
+
+                    //context.OnlinesUsers.Update(usr);
+                    context.OnlinesUsers.Update(usrToShareTo);
                     context.SaveChanges();
                     return true;
                 }
@@ -145,8 +153,9 @@ namespace EF_Local.Managers
                 ConnectedUser user = context.OnlinesUsers.First(u => u.Mail == Mail).ToModel();
                 if (user != null)
                 {
-                    context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString()).SharedWith
-                        .Remove(new SharedEntry(new ReadOnlyUser(user), entry.Login, entry.Password, entry.App).ToEntity(user.ToEntity()));
+                    ConnectedUserEntity usr = context.OnlinesUsers.Include(u => u.SharedWith).First(u => u.Uid == user.Uid.ToString());
+                    usr.SharedWith.Remove(usr.SharedWith.First(e => e.Uid == entry.Uid.ToString()));
+                    context.OnlinesUsers.Update(usr);
                     context.SaveChanges();
                     return true;
                 }

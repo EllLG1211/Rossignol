@@ -28,7 +28,7 @@ steps:
     commands:
       - cd Sources/
       - dotnet restore Console_Rossignol.sln
-      - dotnet sonarscanner begin /k:Rossignol /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.exclusions="Tests/**" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
+      - dotnet sonarscanner begin /k:Rossignol /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.exclusions="Tests/** , EF_Online/Migrations/** , " /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
       - dotnet build Console_Rossignol.sln -c Release --no-restore
       - dotnet test Console_Rossignol.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"

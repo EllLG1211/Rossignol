@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "3258ca99-2a46-4698-8918-9cedcd26d087",
-		"name": "Rossignol",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25225203"
+		"_postman_id": "b6001c2b-63bd-41f0-a312-4a7f33a412ad",
+		"name": "API_Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -16,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+					"raw": "{\r\n  \"username\": \"test@test.com\",\r\n  \"password\": \"1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -24,12 +23,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:7037/api/users/authenticate",
-					"protocol": "https",
+					"raw": "{{gatewayBaseUrl}}/api/users/authenticate",
 					"host": [
-						"localhost"
+						"{{gatewayBaseUrl}}"
 					],
-					"port": "7037",
 					"path": [
 						"api",
 						"users",
@@ -45,12 +42,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:7037/api/users",
-					"protocol": "https",
+					"raw": "{{gatewayBaseUrl}}/api/users",
 					"host": [
-						"localhost"
+						"{{gatewayBaseUrl}}"
 					],
-					"port": "7037",
 					"path": [
 						"api",
 						"users"
@@ -77,12 +72,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:7037/api/users/1",
-					"protocol": "https",
+					"raw": "{{gatewayBaseUrl}}/api/users/1",
 					"host": [
-						"localhost"
+						"{{gatewayBaseUrl}}"
 					],
-					"port": "7037",
 					"path": [
 						"api",
 						"users",
@@ -98,12 +91,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:7037/api/1/accounts",
-					"protocol": "https",
+					"raw": "{{baseUrl}}/api/1/accounts",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "7037",
 					"path": [
 						"api",
 						"1",
@@ -142,6 +133,13 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "gatewayBaseUrl",
+			"value": "https://localhost:7037",
+			"type": "default"
 		}
 	]
 }

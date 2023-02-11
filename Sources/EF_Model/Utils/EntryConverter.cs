@@ -33,7 +33,10 @@ namespace EF_Model.Utils
         }
 
         public static IEnumerable<Entry> ToModels(this IEnumerable<EntryEntity> entities)
-            => entities.Select(e => e.ToModel());
+        {
+           if(entities == null) return Enumerable.Empty<Entry>();
+           return entities.Select(e => e.ToModel());
+        }
 
         public static EntryEntity ToEntity(this Entry model, LocalUserEntity owner)
             => new EntryEntity

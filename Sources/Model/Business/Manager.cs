@@ -126,7 +126,7 @@ namespace Model.Business
         {
             ProprietaryEntry entry = new ProprietaryEntry(mail,login, password, app, note);
             //LoggedIn.AddEntry(entry); //this was adding two entries, bad
-            DataManager.CreateEntryToConnectedUser(LoggedIn, entry);
+            DataManager.AddEntryToUser(LoggedIn, entry);
         }
 
         public void RemoveEntry(Entry entry)

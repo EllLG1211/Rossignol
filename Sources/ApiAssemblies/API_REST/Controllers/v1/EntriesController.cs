@@ -12,6 +12,8 @@ namespace API_REST.Controllers.V1
     [ApiController]
     public class EntriesController : RossignolControllerBase
     {
+        private const int MAX_AMOUNT = 30;
+
         private readonly ILogger<EntriesController> _logger;
         private IMapper _mapper;
         private readonly IDataManager data = new EFDataManager();
@@ -24,17 +26,33 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpGet]
-        public IActionResult List(int page = 1)
+        public IActionResult List([FromBody] AccountDTO user, int amount = 10, int startingAt = 0)
         {
-            _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{page:{page}}}");
-            return StatusCode(501);
+            _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{amount:{amount}, startingAt{startingAt}}}");
+            if (amount > MAX_AMOUNT || amount < 1 || startingAt < 0) return StatusCode(403);
+
+            var userModel = data.GetUser(user.Mail, user.Password);
+            if (userModel == null) return Unauthorized();
+
+            var entries = data.GetEntries(userModel).Skip(startingAt).Take(amount);
+            if(!entries.Any()) return NotFound();
+            return Ok(entries);
         }
 
         [HttpGet("/shared")]
-        public IActionResult ListShared(int page = 1)
+        public IActionResult ListShared([FromBody] AccountDTO user, int amount = 10, int startingAt = 0)
         {
-            _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{page:{page}}}");
-            return StatusCode(501);
+            _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{amount:{amount}, startingAt{startingAt}}}");
+            if (amount > MAX_AMOUNT) return StatusCode(403);
+
+            var userModel = data.GetUser(user.Mail, user.Password);
+            if (userModel == null) return Unauthorized();
+
+            if (!(userModel is ConnectedUser)) return InternalSeverError();
+
+            var entries = data.GetSharedEntries((ConnectedUser)userModel).Skip(startingAt).Take(amount);
+            if (!entries.Any()) return NotFound();
+            return Ok(entries);
         }
 
         [HttpGet("{id}")]
@@ -47,12 +65,31 @@ namespace API_REST.Controllers.V1
             if (userModel == null) return Unauthorized();
 
             entryModel = data.GetEntries(userModel).First(e => e.Uid.ToString() == id);
-            if (entryModel == null)
+            if (entryModel == null) return NotFound();
+
+            EntryDTO entryDto = new()
             {
-                if (userModel is ConnectedUser connectedUserModel) 
-                    entryModel = data.GetSharedEntries(connectedUserModel).First(e => e.Uid.ToString() == id);
-                else return NotFound();
-            }
+                Uid = entryModel.Uid,
+                Login = entryModel.Login,
+                Password = entryModel.Password,
+                App = entryModel.App,
+                Note = entryModel.App
+            };
+
+            return Ok(entryDto);
+        }
+
+        [HttpGet("/shared/{id}")]
+        public IActionResult GetShared(string id, [FromBody] AccountDTO user)
+        {
+            Entry? entryModel = null;
+            _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{id:{id}}}");
+
+            var userModel = data.GetUser(user.Mail, user.Password);
+            if (userModel == null) return Unauthorized();
+
+            if (!(userModel is ConnectedUser)) return InternalSeverError();
+            entryModel = data.GetSharedEntries((ConnectedUser)userModel).First(e => e.Uid.ToString() == id);
             if (entryModel == null) return NotFound();
 
             EntryDTO entryDto = new()

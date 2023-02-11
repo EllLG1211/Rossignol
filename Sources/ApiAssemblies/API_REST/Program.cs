@@ -1,5 +1,7 @@
 using System.Reflection;
+using Data;
 using DTOs;
+using Model.Business;
 using Model.Business.Entries;
 using Model.Business.Users;
 
@@ -15,6 +17,9 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
+
+
+builder.Services.AddScoped<IDataManager, Stub>();
 
 builder.Services
     .AddAutoMapper(cfg => cfg.CreateMap<AccountDTO, ConnectedUser>())

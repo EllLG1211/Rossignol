@@ -14,12 +14,13 @@ namespace API_REST.Controllers.V1
 
         private readonly ILogger<AccountsController> _logger;
 
-        private readonly IDataManager data = new EFDataManager();
+        private readonly IDataManager _data;
 
-        public AccountsController(ILogger<AccountsController> logger, IMapper mapper)
+        public AccountsController(ILogger<AccountsController> logger, IMapper mapper, IDataManager data)
         {
             _logger = logger;
             _mapper = mapper;
+            _data = data;
         }
 
         [HttpGet("{id}")]

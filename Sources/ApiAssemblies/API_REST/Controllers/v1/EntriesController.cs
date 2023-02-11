@@ -16,13 +16,14 @@ namespace API_REST.Controllers.V1
 
         private readonly ILogger<EntriesController> _logger;
         private IMapper _mapper;
-        private readonly IDataManager data = new EFDataManager();
+        private readonly IDataManager _data = new EFDataManager();
 
 
-        public EntriesController(ILogger<EntriesController> logger, IMapper mapper)
+        public EntriesController(ILogger<EntriesController> logger, IMapper mapper, IDataManager data)
         {
             _logger = logger;
             _mapper = mapper;
+            _data = data;
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace API_REST.Controllers.V1
         /// <param name="startingAt">The index you wish to start at.</param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult List([FromBody] AccountDTO user, int amount = 10, int startingAt = 0)
+        public IActionResult List(string token, int amount = 10, int startingAt = 0)
         {
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{amount:{amount}, startingAt{startingAt}}}");
             if (amount > MAX_AMOUNT || amount < 1 || startingAt < 0)
@@ -42,14 +43,14 @@ namespace API_REST.Controllers.V1
                 return StatusCode(403);
             }
 
-            var userModel = data.GetUser(user.Mail, user.Password);
+            var userModel = _data.GetUser(token);
             if (userModel == null)
             {
-                _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {user.Mail} was not found");
+                _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {token} was not found");
                 return Unauthorized();
             }
 
-            var entries = data.GetEntries(userModel).Skip(startingAt).Take(amount);
+            var entries = _data.GetEntries(userModel).Skip(startingAt).Take(amount);
             if(!entries.Any()) return NotFound();
             return Ok(entries);
         }
@@ -67,7 +68,7 @@ namespace API_REST.Controllers.V1
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{amount:{amount}, startingAt{startingAt}}}");
             if (amount > MAX_AMOUNT) return StatusCode(403);
 
-            var userModel = data.GetUser(user.Mail, user.Password);
+            var userModel = _data.GetUser(user.Mail, user.Password);
             if (userModel == null)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {user.Mail} was not found");
@@ -80,7 +81,7 @@ namespace API_REST.Controllers.V1
                 return InternalSeverError();
             }
 
-            var entries = data.GetSharedEntries((ConnectedUser)userModel).Skip(startingAt).Take(amount);
+            var entries = _data.GetSharedEntries((ConnectedUser)userModel).Skip(startingAt).Take(amount);
             if (!entries.Any()) return NotFound();
             return Ok(entries);
         }
@@ -92,19 +93,19 @@ namespace API_REST.Controllers.V1
         /// <param name="user">Your user data</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public IActionResult Get(string id, [FromBody] AccountDTO user)
+        public IActionResult Get(string id, [FromBody] ConnectedUserDTO user)
         {
             Entry? entryModel = null;
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{id:{id}}}");
 
-            var userModel = data.GetUser(user.Mail, user.Password);
+            var userModel = _data.GetUser(user.Mail, user.Password);
             if (userModel == null)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {user.Mail} was not found");
                 return Unauthorized();
             }
 
-            entryModel = data.GetEntries(userModel).First(e => e.Uid.ToString() == id);
+            entryModel = _data.GetEntries(userModel).First(e => e.Uid.ToString() == id);
             if (entryModel == null) return NotFound();
 
             EntryDTO entryDto = new()
@@ -126,12 +127,12 @@ namespace API_REST.Controllers.V1
         /// <param name="user">Your user data</param>
         /// <returns></returns>
         [HttpGet("shared/{id}")]
-        public IActionResult GetShared(string id, [FromBody] AccountDTO user)
+        public IActionResult GetShared(string id, [FromBody] ConnectedUserDTO user)
         {
             Entry? entryModel = null;
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{id:{id}}}");
 
-            var userModel = data.GetUser(user.Mail, user.Password);
+            var userModel = _data.GetUser(user.Mail, user.Password);
             if (userModel == null)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {user.Mail} was not found");
@@ -143,7 +144,7 @@ namespace API_REST.Controllers.V1
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, "DataManager did not return a ConnectedUser");
                 return InternalSeverError();
             }
-            entryModel = data.GetSharedEntries((ConnectedUser)userModel).First(e => e.Uid.ToString() == id);
+            entryModel = _data.GetSharedEntries((ConnectedUser)userModel).First(e => e.Uid.ToString() == id);
             if (entryModel == null) return NotFound();
 
             EntryDTO entryDto = new()
@@ -170,7 +171,7 @@ namespace API_REST.Controllers.V1
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{entry:{entry}}}");
 
             //check the user is correct
-            var userModel = data.GetUser(entry.Owner.Mail, entry.Owner.Password);
+            var userModel = _data.GetUser(entry.Owner.Mail, entry.Owner.Password);
             if (userModel == null)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {entry.Owner.Mail} was not found");
@@ -179,8 +180,8 @@ namespace API_REST.Controllers.V1
 
             //create entry and update user
             Entry entryModel = new ProprietaryEntry(entry.Owner.Mail, entry.Login, entry.Password, entry.App, entry.Note);
-            var creationSucceeded = data.AddEntryToUser(userModel, entryModel);
-            data.UpdateUser(userModel);
+            var creationSucceeded = _data.AddEntryToUser(userModel, entryModel);
+            _data.UpdateUser(userModel);
             if (!creationSucceeded)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"resource creation failed");
@@ -188,7 +189,7 @@ namespace API_REST.Controllers.V1
             }
 
             //get created resource
-            var createdResource = data.GetEntries(userModel).First(e => e == entryModel);
+            var createdResource = _data.GetEntries(userModel).First(e => e == entryModel);
             if (createdResource == null)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"AddEntryToUser returned true but resource could not be retrieved");
@@ -211,17 +212,17 @@ namespace API_REST.Controllers.V1
         {
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{id:{id}, entry: {entry}}}");
 
-            var userModel = data.GetUser(entry.Owner.Mail, entry.Owner.Password);
+            var userModel = _data.GetUser(entry.Owner.Mail, entry.Owner.Password);
             if (userModel == null)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {entry.Owner.Mail} was not found");
                 return Unauthorized();
             }
 
-            var oldEntry = data.GetEntries(userModel).First(e => e.Uid.ToString() == id);
+            var oldEntry = _data.GetEntries(userModel).First(e => e.Uid.ToString() == id);
             if (oldEntry == null) return NotFound();
 
-            bool removalSucceeded = data.RemoveEntry(userModel, oldEntry);
+            bool removalSucceeded = _data.RemoveEntry(userModel, oldEntry);
             if (!removalSucceeded)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"entry was found in database but could not be removed");
@@ -229,7 +230,7 @@ namespace API_REST.Controllers.V1
             }
 
             var newEntry = new ProprietaryEntry(entry.Owner.Mail, oldEntry.Uid, entry.Login, entry.Password, entry.App, entry.Note);
-            bool readdSucceeded = data.AddEntryToUser(userModel, newEntry);
+            bool readdSucceeded = _data.AddEntryToUser(userModel, newEntry);
             if (readdSucceeded) return NoContent();
             else
             {
@@ -245,21 +246,21 @@ namespace API_REST.Controllers.V1
         /// <param name="owner">Your user data</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id, [FromBody] AccountDTO owner)
+        public IActionResult Delete(string id, [FromBody] ConnectedUserDTO owner)
         {
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{id:{id}}}");
 
-            var userModel = data.GetUser(owner.Mail, owner.Password);
+            var userModel = _data.GetUser(owner.Mail, owner.Password);
             if (userModel == null)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {owner.Mail} was not found");
                 return Unauthorized();
             }
 
-            var entryModel = data.GetEntries(userModel).First(e => e.Uid.ToString() == id);
+            var entryModel = _data.GetEntries(userModel).First(e => e.Uid.ToString() == id);
             if (entryModel == null) return NotFound();
 
-            bool removalSucceeded = data.RemoveEntry(userModel, entryModel);
+            bool removalSucceeded = _data.RemoveEntry(userModel, entryModel);
             if (!removalSucceeded)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"entry was found in database but could not be removed");

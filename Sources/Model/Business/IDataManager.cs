@@ -12,7 +12,7 @@ namespace Model.Business
     {
         bool Register(AbstractUser user, string Mail);
 
-        AbstractUser GetUser(string? mail, string password);
+        AbstractUser GetUser(string mail, string password = "");
 
         bool UpdateUser(AbstractUser user);
 

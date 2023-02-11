@@ -7,6 +7,6 @@
         public string Password { get; set; }
         public string App { get; set; }
         public string? Note { get; set; }
-        public AccountDTO Owner { get; set; }
+        public ConnectedUserDTO Owner { get; set; }
     }
 }

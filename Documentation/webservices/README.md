@@ -66,7 +66,17 @@ Overall, **API Gateway** is a popular choice for building microservices based ar
 ---
 ## Architecture
 
-... explainations (more than 500 words)
+The architecture of the **Rossignol App** is really simple.
+
+It's composed as follow:
+
+- The clients (mobile principaly) ask a **Gateway**.
+- The **Gateway** use authentication to ensure the client is legit. (It also give the option to get credentials.)
+- The **Gateway** root the request the the **API** that handle it. (In our case we have 2 APIs.)
+    - The **Rest API** has the ability to `GET, POST, PUT & DELETE` data with our working model.
+    - The **Websocket** has the ability to sends `notifications` to the clients.
+
+*Note that all the APIs + the gateway talks with the same databse at this was simplier for us.*
 
 **Schemas:**
 

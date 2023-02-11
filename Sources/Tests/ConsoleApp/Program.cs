@@ -1,5 +1,7 @@
 ﻿using Data;
 using Model.Business;
+using Model.Business.Entries;
+using Model.Business.Users;
 
 namespace ConsoleApp
 {
@@ -14,6 +16,7 @@ namespace ConsoleApp
 
             bool quit = false;
             int choix = -1;
+            string password = "";
             while(!quit)
             {
                 if (manager.LoggedIn == null)
@@ -35,7 +38,7 @@ namespace ConsoleApp
                         writer.Write("Login: ");
                         string login = reader.ReadLine();
                         writer.Write("Password: ");
-                        string password = reader.ReadLine();
+                        password = reader.ReadLine();
                         try
                         {
                             manager.Login(login, password);
@@ -50,7 +53,7 @@ namespace ConsoleApp
                         writer.Write("Entrez un email: ");
                         string mail = reader.ReadLine();
                         writer.Write("Entrez un mot de passe: ");
-                        string password = reader.ReadLine();
+                        password = reader.ReadLine();
                         writer.Write("Confirmez le mot de passe: ");
                         string confirmPassword = reader.ReadLine();
                         try
@@ -72,8 +75,9 @@ namespace ConsoleApp
                     writer.WriteLine("Menu:" +
                         "\n\t1. Voir mes mots de passes" +
                         "\n\t2. Ajouter une entrée" +
-                        "\n\t3. Retirer une entrée" +
-                        "\n\t4. Se deconnecter" +
+                        "\n\t3. Partager une entrée" +
+                        "\n\t4. Retirer une entrée" +
+                        "\n\t5. Se deconnecter" +
                         "\n\t9. Quitter");
 
                     try
@@ -96,21 +100,37 @@ namespace ConsoleApp
                         writer.Write("Saisissez le login: ");
                         string login = reader.ReadLine();
                         writer.Write("Saisissez le mot de passe: ");
-                        string password = reader.ReadLine();
+                        password = reader.ReadLine();
                         writer.Write("Saisissez le nom de l'application: ");
                         string app = reader.ReadLine();
                         writer.Write("Saisissez un commentaire: ");
                         string note = reader.ReadLine();
-                        manager.CreateEntryToConnectedUser(login, password, app, note);
+                        manager.CreateEntryToConnectedUser(login, login, password, app, note);
                     }
                     else if (choix == 3)
+                    {
+                        writer.WriteEntries(manager.LoggedIn);
+                        writer.Write("Numéro de l'entrée à partager:");
+                        int numero = reader.ReadInt();
+                        writer.Write("\nEmail de l'utilisateur à qui partager l'entrée:");
+                        string mail = reader.ReadLine();
+                        if (!manager.ShareEntryWith((ProprietaryEntry)manager.LoggedIn.Entries.ToArray()[numero], mail, password))
+                        {
+                            writer.Write($"\nEmail incorrect, {mail} n'est pas un utilisateur valide");
+                        }
+                        else
+                        {
+                            writer.Write($"\nEntrée partagée avec {mail}");
+                        }
+                    }
+                    else if (choix == 4)
                     {
                         writer.WriteEntries(manager.LoggedIn);
                         writer.Write("Numéro de l'entrée à supprimer:");
                         int numero = reader.ReadInt();
                         manager.RemoveEntry(manager.LoggedIn.Entries.ToArray()[numero]);
                     }
-                    else if (choix == 4)
+                    else if (choix == 5)
                     {
                         manager.logOut();
                     }

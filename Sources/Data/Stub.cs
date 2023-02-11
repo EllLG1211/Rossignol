@@ -8,38 +8,56 @@ namespace Data
     public class Stub : IDataManager
     {
         private readonly List<AbstractUser> _users = new List<AbstractUser>();
-        //TODO: implement shared entries within the stub
-        //TODO: use EF within the stub for persistence
-        //TODO: complete the missing code in this interface
+
         public Stub()
         {
-            AbstractUser user = new ConnectedUser("test@test.com", "1234");
-            ProprietaryEntry entry = new ProprietaryEntry("test", "1234", "discord");
+            ConnectedUser user = new ConnectedUser("test@test.com", "1234");
+            ProprietaryEntry entry = new ProprietaryEntry(user.Mail,"test", "1234", "discord");
             user.AddEntry(entry);
-            Entry entry2 = new ProprietaryEntry("essai", "1234", "facebook");
+            Entry entry2 = new ProprietaryEntry(user.Mail,"essai", "1234", "facebook");
             user.AddEntry(entry2);
             this._users.Add(user);
 
-            MailedUser user2 = new ConnectedUser("moi@lui.com", "1234");
-            Entry entry3 = new ProprietaryEntry("lorem", "ipsum", "discord");
+            ConnectedUser user2 = new ConnectedUser("moi@lui.com", "1234");
+            Entry entry3 = new ProprietaryEntry(user2.Mail,"lorem", "ipsum", "discord");
             user.AddEntry(entry3);
             entry.ShareToUser(user2);
             this._users.Add(user2);
+
+            ConnectedUser user3 = new ConnectedUser("moi@them.com", "1234");
+            this._users.Add(user3);
+        }
+
+        public bool checkUserExists(string? mail)
+        {
+            if (mail == null)
+            {
+                throw new ArgumentNullException("mail argument was null");
+            }
+
+            ConnectedUser? user = getUserFromMail(mail);
+            return user != null;
         }
 
         public void clear()
         {
-            //TODO: complete
+            _users.Clear();
         }
 
-        public void CreateEntryToConnectedUser(AbstractUser user, Entry entry)
+        public bool AddEntryToUser(AbstractUser user, Entry entry)
         {
-            //TODO: complete
+            user.AddEntry(entry);
+            return true;
         }
 
         public IEnumerable<Entry> GetEntries(AbstractUser user)
         {
             return user.Entries;
+        }
+
+        public IEnumerable<SharedEntry> GetSharedEntries(ConnectedUser user)
+        {
+            return user.SharedEntries;
         }
 
         public AbstractUser GetUser(string? mail, string password)
@@ -50,45 +68,68 @@ namespace Data
                 {
                     return _users.First();
                 }
-                else
-                {
-                    throw new Exception("Password is incorrect");
-                }
+
+                throw new ArgumentException("Password is incorrect");
             }
 
-            MailedUser? user = _users.Find(user => ((MailedUser)user).Mail.Equals(mail, StringComparison.Ordinal)) as MailedUser;
-            if (user == null) throw new Exception("Unknown user");
+            ConnectedUser? user = getUserFromMail(mail);
+            if (user == null) throw new ArgumentException("Unknown user");
             if (password.Equals(user.Password)) return user;
-            throw new Exception("Uncorrect password");
+            throw new ArgumentException("Uncorrect password");
         }
 
-        public void Register(AbstractUser user)
+        public bool Register(AbstractUser user, string mail)
         {
             _users.Add(user);
+            return true;
         }
 
-        public void RemoveEntry(AbstractUser user, Entry entry)
+        public bool RemoveEntry(AbstractUser user, Entry entry)
         {
-            //TODO: complete
-            //The code here would be useless.
+            user.RemoveEntry(entry);
+            return true;
         }
 
         public void save()
         {
-            //TODO: complete
-            //The code here would be useless.
+            throw new NotImplementedException("saving is not supported in this stub");
         }
 
-        public void ShareEntryWith(ProprietaryEntry entry, MailedUser user)
+        public bool ShareEntryWith(ProprietaryEntry entry, string mail, string password)
         {
-            //TODO: complete
-            //The code here would be useless.
+            ConnectedUser? mUser = getUserFromMail(mail);
+            entry.ShareToUser(mUser);
+            mUser.AddShared(entry.ShareToUser(mUser));
+            return true;
         }
 
-        public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
+        public bool UnshareEntryTo(ProprietaryEntry entry, string mail)
         {
-            //TODO: complete
-            //The code here would be useless.
+            ConnectedUser? mUser = getUserFromMail(mail);
+            mUser.RemoveEntry(entry);
+            getUserFromMail(entry.OwnerMail).ApplyUnshareToOriginalEntry(entry.Uid, mUser);
+            return true;
+        }
+
+        private ConnectedUser? getUserFromMail(string mail) => _users.Find(Luser => ((ConnectedUser)Luser).Mail.Equals(mail, StringComparison.Ordinal)) as ConnectedUser;
+
+        public bool UpdateUser(AbstractUser user)
+        {
+            if(!_users.Contains(user)) return false;
+            _users.Remove(user);
+            _users.Add(user);
+            return true;
+        }
+
+        public bool DeleteUser(AbstractUser user)
+        {
+            if (!_users.Contains(user)) return false;
+            return true;
+        }
+
+        public bool ShareEntryWith(ProprietaryEntry entry, string Mail)
+        {
+            return ShareEntryWith(entry, Mail, "");
         }
     }
 }

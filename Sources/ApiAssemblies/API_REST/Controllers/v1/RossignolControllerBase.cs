@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Web.Http;
 
 namespace API_REST.Controllers.V1;
 
 [ApiVersion("1.0")]
-[Route("/api/[controller]")]
+[Route("/api/{version}/[controller]")]
 public class RossignolControllerBase : ControllerBase
 {
-    
+    public const String LOG_FORMAT = "{0}() > {1}";
 }

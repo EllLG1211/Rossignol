@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "b6001c2b-63bd-41f0-a312-4a7f33a412ad",
+		"name": "API_Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Bearer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"test@test.com\",\r\n  \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gatewayBaseUrl}}/api/users/authenticate",
+					"host": [
+						"{{gatewayBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUsersAdmin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gatewayBaseUrl}}/api/users",
+					"host": [
+						"{{gatewayBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFirstUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gatewayBaseUrl}}/api/users/1",
+					"host": [
+						"{{gatewayBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/1/accounts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE2NzU0OTY5MDgsImV4cCI6MTY3NjcwNjUwOCwiaWF0IjoxNjc1NDk2OTA4fQ.D1pDynvuSw6nEkL3FLBSK38QX_mGEo_hRM1yPeHCzhw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "gatewayBaseUrl",
+			"value": "https://localhost:7037",
+			"type": "default"
+		}
+	]
+}

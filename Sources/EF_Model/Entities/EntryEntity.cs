@@ -1,19 +1,20 @@
-﻿namespace EF_Model.Entities
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace EF_Model.Entities
 {
-    public class EntryEntity
+    public class EntryEntity : IEquatable<EntryEntity>
     {
         public LocalUserEntity Owner { get; set; }  //one to many
-        public string EncryptionType { get; set; }
-
+        //public string EncryptionType { get; set; }
         public string Uid { get; set; }
 
-        public byte[] Login { get; set; }
+        public string Login { get; set; }
 
-        public byte[] Password { get; set; }
+        public string Password { get; set; }
 
-        public byte[] App { get; set; }
+        public string App { get; set; }
 
-        public byte[]? Note { get; set; }
+        public string? Note { get; set; }
 
         public ICollection<ConnectedUserEntity>? SharedWith { get; set; }   //many to many
 
@@ -29,6 +30,11 @@
             EntryEntity other = obj as EntryEntity;
 
             return other.Uid == this.Uid;
+        }
+
+        public bool Equals(EntryEntity? other)
+        {
+            return other != null && other.Uid == this.Uid;
         }
     }
 }

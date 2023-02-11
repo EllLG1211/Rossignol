@@ -29,7 +29,7 @@ namespace Model_Tests.Business.Entries
         [InlineData(true, "korè@bidule", "Wikipédia", "abracadabra")]
         public void Constructor_ShouldAssignValues(bool noteSuccessExpected, string login, string app, string note)
         {
-            ProprietaryEntry entry = new(login, "lorem ipsum", app, note);
+            ProprietaryEntry entry = new(login, login, "lorem ipsum", app, note);
             Assert.Equal(login, entry.Login);
             Assert.Equal(app, entry.App);
             if (noteSuccessExpected) Assert.Equal(note, entry.Note);
@@ -53,7 +53,7 @@ namespace Model_Tests.Business.Entries
         {
             if (throwSuccessExpected)
             {
-                Assert.Throws<ArgumentNullException>(() => { ProprietaryEntry entry = new(login, password, app); });
+                Assert.Throws<ArgumentNullException>(() => { ProprietaryEntry entry = new("mail@a.com", login, password, app); });
                 return;
             }
             Assert.False(throwSuccessExpected);
@@ -71,10 +71,10 @@ namespace Model_Tests.Business.Entries
                 {
                     if (useGuid)
                     {
-                        ProprietaryEntry entry = new(Guid.NewGuid(), "login", "1234", "app", null);
+                        ProprietaryEntry entry = new("mail@a.com", Guid.NewGuid(), "login", "1234", "app", null);
                     } else
                     {
-                        ProprietaryEntry entry = new(Guid.Empty, "login", "1234", "app", null);
+                        ProprietaryEntry entry = new("mail@a.com", Guid.Empty, "login", "1234", "app", null);
                     }
                 });
                 return;
@@ -90,7 +90,7 @@ namespace Model_Tests.Business.Entries
         [Fact]
         public void Constructor_ShouldReassignNote()
         {
-            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            ProprietaryEntry entry = new("mail@a.com", "loremipsum@gmail.com", "rickroll", "Discord");
             Assert.Equal(string.Empty, entry.Note);
         }
 
@@ -136,7 +136,7 @@ namespace Model_Tests.Business.Entries
         [Fact]
         public void Label_ShouldReturnLoginAndApp()
         {
-            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            ProprietaryEntry entry = new("mail@a.com", "loremipsum@gmail.com", "rickroll", "Discord");
             Assert.Equal("Discord - loremipsum@gmail.com", entry.Label);
         }
 
@@ -148,7 +148,7 @@ namespace Model_Tests.Business.Entries
         [MemberData(nameof(SharedToUser_ShouldAddUserToSharedWith_Data))]
         public void SharedToUser_ShouldAddUserToSharedWith(MailedUser user)
         {
-            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            ProprietaryEntry entry = new("loremipsum@gmail.com", "loremipsum@gmail.com", "rickroll", "Discord");
             entry.ShareToUser(user);
             Assert.Contains(user, entry.SharedWith);
         }
@@ -174,7 +174,7 @@ namespace Model_Tests.Business.Entries
         [MemberData(nameof(UnsharedToUser_ShouldUserUserFromSharedWith_Data))]
         public void UnsharedToUser_ShouldUserUserFromSharedWith(MailedUser user)
         {
-            ProprietaryEntry entry = new("loremipsum@gmail.com", "rickroll", "Discord");
+            ProprietaryEntry entry = new("mail@a.com", "loremipsum@gmail.com", "rickroll", "Discord");
             entry.ShareToUser(user);
             entry.UnshareToUser(user);
             Assert.DoesNotContain(user, entry.SharedWith);

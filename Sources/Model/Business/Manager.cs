@@ -77,7 +77,7 @@ namespace Model.Business
 
             ConnectedUser user = new ConnectedUser(mail, password);
 
-            DataManager.Register(user);
+            DataManager.Register(user, mail);
 
             return user;
         }
@@ -108,7 +108,7 @@ namespace Model.Business
 
             LocalUser user = new LocalUser(password);
 
-            DataManager.Register(user);
+            DataManager.Register(user, "test@test.com");
 
             return user;
         }
@@ -122,16 +122,16 @@ namespace Model.Business
         /// <param name="note"></param>
         /// <remarks>Throws a NullReferenceException if ConnectedUser is null.</remarks>
         /// <exception cref="NullReferenceException"></exception>
-        public void CreateEntryToConnectedUser(string login, string password, string app, string? note)
+        public void CreateEntryToConnectedUser(string mail,string login, string password, string app, string? note)
         {
-            ProprietaryEntry entry = new ProprietaryEntry(login, password, app, note);
-            LoggedIn.AddEntry(entry);
-            DataManager.CreateEntryToConnectedUser(LoggedIn, entry);
+            ProprietaryEntry entry = new ProprietaryEntry(mail,login, password, app, note);
+            //LoggedIn.AddEntry(entry); //this was adding two entries, bad
+            DataManager.AddEntryToUser(LoggedIn, entry);
         }
 
         public void RemoveEntry(Entry entry)
         {
-            LoggedIn.RemoveEntry(entry);
+            //LoggedIn.RemoveEntry(entry);
             DataManager.RemoveEntry(LoggedIn, entry);
         }
 
@@ -144,17 +144,22 @@ namespace Model.Business
         /// <param name="note"></param>
         /// <remarks>Throws a NullReferenceException if ConnectedUser is null.</remarks>
         /// <exception cref="NullReferenceException">Throwed if ConnectedUser is null.</exception>
-        public void ShareEntryWith(ProprietaryEntry entry, string mailUserToShareWith)
+        public bool ShareEntryWith(ProprietaryEntry entry, string mailUserToShareWith, string password)
         {
+            if (!_dataManager.checkUserExists(mailUserToShareWith))
+            return false;
+            
             MailedUser userToShareWith = new ReadOnlyUser(mailUserToShareWith, "");
-            entry.ShareToUser(userToShareWith);
-            DataManager.ShareEntryWith(entry, userToShareWith);
+            //entry.ShareToUser(userToShareWith);   //useless
+            DataManager.ShareEntryWith(entry, userToShareWith.Mail);
+
+            return true;
         }
 
         public void UnshareEntryTo(ProprietaryEntry entry, MailedUser user)
         {
             entry.UnshareToUser(user);
-            DataManager.UnshareEntryTo(entry, user);
+            DataManager.UnshareEntryTo(entry, user.Mail);
         }
 
         /// <summary>
@@ -163,7 +168,7 @@ namespace Model.Business
         public void logOut()
         {
             LoggedIn = null;
-            _dataManager.clear();
+            //_dataManager.clear(); //this flushes everything! we don't want that!!! (this also erases all of our users)
         }
 
         public void save()

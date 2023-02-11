@@ -15,7 +15,14 @@ namespace ConsoleApp
 
         public int ReadInt()
         {
-            return Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                return Convert.ToInt32(Console.ReadLine());
+            }
+            catch(Exception e)
+            {
+                return -1;
+            }
         }
     }
 }

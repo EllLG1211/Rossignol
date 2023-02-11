@@ -10,7 +10,7 @@ namespace Model.Business.Users
         /// <summary>
         /// The user's entries
         /// </summary>
-        private readonly List<Entry> _entries = new List<Entry>();
+        protected readonly List<Entry> _entries = new List<Entry>();
         public IEnumerable<Entry> Entries => new ReadOnlyCollection<Entry>(_entries);
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Model.Business.Users
         /// <summary>
         /// Master password of the user.
         /// </summary>
-        public String Password { get; protected set; }
+        public string Password { get; protected set; }
 
         protected AbstractUser(Guid uid, string password, IEnumerable<Entry>? entries)
         {
@@ -88,5 +88,11 @@ namespace Model.Business.Users
              + Password.GetHashCode() * 17 ^ 2
              + GetType().GetHashCode();
         }
+
+        public void clearEntries()
+        {
+            _entries.Clear();
+        }
+
     }
 }

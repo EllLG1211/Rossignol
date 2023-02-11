@@ -10,25 +10,35 @@ namespace Model.Business
 {
     public interface IDataManager
     {
-        void Register(AbstractUser user);
+        bool Register(AbstractUser user, string Mail);
 
         AbstractUser GetUser(string? mail, string password);
 
-        void CreateEntryToConnectedUser(AbstractUser user, Entry entry);
-        
-        void RemoveEntry(AbstractUser user, Entry entry);
+        bool UpdateUser(AbstractUser user);
 
-        void ShareEntryWith(ProprietaryEntry entry, MailedUser user);
+        bool checkUserExists(string? mail);
 
-        void UnshareEntryTo(ProprietaryEntry entry, MailedUser user);
+        bool AddEntryToUser(AbstractUser user, Entry entry);
+
+        bool RemoveEntry(AbstractUser user, Entry entry);
+
+        bool ShareEntryWith(ProprietaryEntry entry, string Mail);
+
+        bool UnshareEntryTo(ProprietaryEntry entry, string Mail);
 
         IEnumerable<Entry> GetEntries(AbstractUser user);
+        IEnumerable<SharedEntry> GetSharedEntries(ConnectedUser user);
+
+        bool DeleteUser(AbstractUser user);
 
         /// <summary>
         /// Clear data of the dataManager;
         /// </summary>
         void clear();
 
+        /// <deprecated>
+        ///     this isn't useful in this context...
+        /// </deprecated>
         void save();
 
     }

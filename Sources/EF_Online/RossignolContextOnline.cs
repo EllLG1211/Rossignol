@@ -1,5 +1,6 @@
 ﻿using EF_Model.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace EF_Online
 {
@@ -24,6 +25,8 @@ namespace EF_Online
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlite($"Data Source=OnlineRossignol.bd");
+                optionsBuilder.EnableDetailedErrors();
+                optionsBuilder.EnableSensitiveDataLogging();
             }
         }
 

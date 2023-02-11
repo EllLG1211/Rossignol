@@ -8,7 +8,10 @@ namespace EF_Model.Utils
     public static class ConnectedUserConverter
     {
         public static ConnectedUser ToModel(this ConnectedUserEntity entity)
-            =>  new ConnectedUser(new Guid(entity.Uid), entity.Mail, entity.Password, EF_Model.Utils.EntryConverter.ToModels(entity.OwnedEntries.ToList()).ToList());
+        {
+            if (entity == null) return null;
+            return new ConnectedUser(new Guid(entity.Uid), entity.Mail, entity.Password, EF_Model.Utils.EntryConverter.ToModels(entity.OwnedEntries ?? new List<EntryEntity>()).ToList());
+        }
 
         public static IEnumerable<ConnectedUser> ToModels(this IEnumerable<ConnectedUserEntity> entities)
         => entities.Select(e => e.ToModel());

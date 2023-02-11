@@ -9,7 +9,6 @@ using Data;
 using Microsoft.OpenApi.Models;
 using Model.Business;
 using Ocelot.Middleware;
-using API_REST.Utils;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

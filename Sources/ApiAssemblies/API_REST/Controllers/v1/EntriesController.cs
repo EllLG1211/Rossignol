@@ -42,7 +42,14 @@ namespace API_REST.Controllers.V1
         [HttpGet]
         public IActionResult List([FromHeader] string Authorization, int amount = 10, int startingAt = 0)
         {
-            var email = _jwtUtils.ValidateJwtToken(Authorization);
+            var token = _jwtUtils.ExtractToken(Authorization);
+            if(token == null)
+            {
+                _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, "bearer token had wrong format");
+                return Unauthorized();
+            }
+
+            var email = _jwtUtils.ValidateJwtToken(token);
             if (email == null)
             {
                 _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, "Could not find email in bearer token");

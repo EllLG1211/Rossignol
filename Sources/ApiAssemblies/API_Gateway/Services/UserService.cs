@@ -7,7 +7,6 @@ using System.Security.Claims;
 using System.Text;
 using Model.Business;
 using Model.Business.Users;
-using API_REST.Utils;
 
 namespace API_Gateway.Services
 {

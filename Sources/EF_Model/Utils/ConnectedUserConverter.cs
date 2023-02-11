@@ -13,15 +13,19 @@ namespace EF_Model.Utils
         public static IEnumerable<ConnectedUser> ToModels(this IEnumerable<ConnectedUserEntity> entities)
         => entities.Select(e => e.ToModel());
 
-        public static ConnectedUserEntity ToEntity(this ConnectedUser user) =>
-         new ConnectedUserEntity
+        public static ConnectedUserEntity ToEntity(this ConnectedUser user)
+        {
+            var userEntity = new ConnectedUserEntity
             {
                 Uid = user.Uid.ToString(),
                 Password = user.Password,
                 Mail = user.Mail,
-                SharedWith = user.SharedEntries.ToEntities(new ConnectedUserEntity()).ToList(),
-                OwnedEntries = user.Entries.ToEntities(new ConnectedUserEntity()).ToList()
-         };
+            };
+
+            userEntity.SharedWith = user.SharedEntries.ToEntities(userEntity).ToList() ?? new List<EntryEntity>();
+            userEntity.OwnedEntries = user.Entries.ToEntities(userEntity).ToList() ?? new List<EntryEntity>();
+            return userEntity;
+        }
         
         public static IEnumerable<ConnectedUserEntity> ToEntities(this IEnumerable<ConnectedUser> users)
         => users.Select(m => m.ToEntity());

@@ -56,7 +56,7 @@ namespace Data_Tests
             string password = "1234";
             IDataManager stub = new Stub();
             AbstractUser user = new ConnectedUser(mail, password);
-            stub.Register(user);
+            stub.Register(user, "test@test.com");
             Assert.NotNull(stub.GetUser(mail, password));
         }
     }

@@ -42,13 +42,16 @@ builder.Services.AddOcelot();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDataManager, Stub>();
 
-builder.Configuration.AddJsonFile("routes.json");
-builder.Services.AddSwaggerGen(options =>
-{
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-});
+builder.Configuration.AddJsonFile($"routes.{builder.Environment.EnvironmentName}.json", true, true);
 
+if (builder.Environment.EnvironmentName == "Development") 
+{
+    builder.Services.AddSwaggerGen(options =>
+    {
+        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    });
+}
 
 // APP
 WebApplication app = builder.Build();

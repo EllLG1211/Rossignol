@@ -77,7 +77,7 @@ namespace Model.Business
 
             ConnectedUser user = new ConnectedUser(mail, password);
 
-            DataManager.Register(user);
+            DataManager.Register(user, mail);
 
             return user;
         }
@@ -108,7 +108,7 @@ namespace Model.Business
 
             LocalUser user = new LocalUser(password);
 
-            DataManager.Register(user);
+            DataManager.Register(user, "test@test.com");
 
             return user;
         }
@@ -126,7 +126,7 @@ namespace Model.Business
         {
             ProprietaryEntry entry = new ProprietaryEntry(mail,login, password, app, note);
             //LoggedIn.AddEntry(entry); //this was adding two entries, bad
-            DataManager.CreateEntryToConnectedUser(LoggedIn, entry);
+            DataManager.AddEntryToUser(LoggedIn, entry);
         }
 
         public void RemoveEntry(Entry entry)
@@ -144,14 +144,14 @@ namespace Model.Business
         /// <param name="note"></param>
         /// <remarks>Throws a NullReferenceException if ConnectedUser is null.</remarks>
         /// <exception cref="NullReferenceException">Throwed if ConnectedUser is null.</exception>
-        public bool ShareEntryWith(ProprietaryEntry entry, string mailUserToShareWith)
+        public bool ShareEntryWith(ProprietaryEntry entry, string mailUserToShareWith, string password)
         {
             if (!_dataManager.checkUserExists(mailUserToShareWith))
             return false;
             
             MailedUser userToShareWith = new ReadOnlyUser(mailUserToShareWith, "");
             //entry.ShareToUser(userToShareWith);   //useless
-            DataManager.ShareEntryWith(entry, userToShareWith.Mail);
+            DataManager.ShareEntryWith(entry, userToShareWith.Mail, password);
 
             return true;
         }

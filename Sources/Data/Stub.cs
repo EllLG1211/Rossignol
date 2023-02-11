@@ -44,9 +44,10 @@ namespace Data
             _users.Clear();
         }
 
-        public void CreateEntryToConnectedUser(AbstractUser user, Entry entry)
+        public bool AddEntryToUser(AbstractUser user, Entry entry)
         {
             user.AddEntry(entry);
+            return true;
         }
 
         public IEnumerable<Entry> GetEntries(AbstractUser user)
@@ -77,14 +78,16 @@ namespace Data
             throw new ArgumentException("Uncorrect password");
         }
 
-        public void Register(AbstractUser user)
+        public bool Register(AbstractUser user, string mail)
         {
             _users.Add(user);
+            return true;
         }
 
-        public void RemoveEntry(AbstractUser user, Entry entry)
+        public bool RemoveEntry(AbstractUser user, Entry entry)
         {
             user.RemoveEntry(entry);
+            return true;
         }
 
         public void save()
@@ -92,20 +95,36 @@ namespace Data
             throw new NotImplementedException("saving is not supported in this stub");
         }
 
-        public void ShareEntryWith(ProprietaryEntry entry, string mail)
+        public bool ShareEntryWith(ProprietaryEntry entry, string mail, string password)
         {
             ConnectedUser? mUser = getUserFromMail(mail);
             entry.ShareToUser(mUser);
             mUser.AddShared(entry.ShareToUser(mUser));
+            return true;
         }
 
-        public void UnshareEntryTo(ProprietaryEntry entry, string mail)
+        public bool UnshareEntryTo(ProprietaryEntry entry, string mail)
         {
             ConnectedUser? mUser = getUserFromMail(mail);
             mUser.RemoveEntry(entry);
             getUserFromMail(entry.OwnerMail).ApplyUnshareToOriginalEntry(entry.Uid, mUser);
+            return true;
         }
 
         private ConnectedUser? getUserFromMail(string mail) => _users.Find(Luser => ((ConnectedUser)Luser).Mail.Equals(mail, StringComparison.Ordinal)) as ConnectedUser;
+
+        public bool UpdateUser(AbstractUser user)
+        {
+            if(!_users.Contains(user)) return false;
+            _users.Remove(user);
+            _users.Add(user);
+            return true;
+        }
+
+        public bool DeleteUser(AbstractUser user)
+        {
+            if (!_users.Contains(user)) return false;
+            return true;
+        }
     }
 }

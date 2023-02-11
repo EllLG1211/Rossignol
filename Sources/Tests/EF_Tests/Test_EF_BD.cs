@@ -1,20 +1,14 @@
 using EF_Local;
 using EF_Local.Managers;
-using EF_Model;
 using EF_Model.Entities;
 using EF_Model.Managers;
 using EF_Model.Utils;
-using EncryptedModel.Business.Entries;
-using EncryptedModel.Business.Managers;
-using Encryption.AESEncryption;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Model.Business.Entries;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace EF_Tests

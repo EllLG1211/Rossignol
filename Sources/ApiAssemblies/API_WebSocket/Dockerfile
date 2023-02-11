@@ -9,7 +9,7 @@ COPY ["Sources/ApiAssemblies/API_WebSocket/API_WebSocket.csproj", "ApiAssemblies
 COPY ["Sources/Model/Model.csproj", "Model/"]
 RUN dotnet restore "ApiAssemblies/API_WebSocket/API_WebSocket.csproj"
 COPY . .
-WORKDIR "/Sources/ApiAssemblies/API_WebSocket"
+WORKDIR "Sources/ApiAssemblies/API_WebSocket"
 RUN dotnet build "API_WebSocket.csproj" -c Release -o /app/build
 
 FROM build AS publish

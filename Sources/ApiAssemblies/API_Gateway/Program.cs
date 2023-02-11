@@ -1,3 +1,4 @@
+using System.Reflection;
 using API_Gateway.Helpers;
 using API_Gateway.Services;
 using Ocelot.DependencyInjection;
@@ -42,7 +43,11 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDataManager, Stub>();
 
 builder.Configuration.AddJsonFile("routes.json");
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
 
 
 // APP

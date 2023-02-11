@@ -89,6 +89,22 @@ steps:
         - master
     depends_on: [ build ]
 
+  - name: docker-build-websocket
+    image: plugins/docker
+    settings:
+      dockerfile: Sources/ApiAssemblies/API_WebSocket/Dockerfile
+      context: .
+      registry: hub.codefirst.iut.uca.fr
+      repo: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.websocket
+      username:
+        from_secret: SECRET_REGISTRY_USERNAME
+      password:
+        from_secret: SECRET_REGISTRY_PASSWORD
+    when:
+      branch:
+        - master
+    depends_on: [ build ]
+
   - name: deploy-container-database
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
@@ -152,6 +168,27 @@ steps:
       branch:
         - master
     depends_on: [ docker-build-restapi ]
+
+  - name: deploy-container-websocket
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+        IMAGENAME: hub.codefirst.iut.uca.fr/valentin.clergue/rossignol.websocket:latest
+        CONTAINERNAME: rossignolwebsocket
+        COMMAND: create
+        OVERWRITE: true
+        CODEFIRST_CLIENTDRONE_ENV_DB_SERVER:
+          from_secret: db_server
+        CODEFIRST_CLIENTDRONE_ENV_DB_USER:
+          from_secret: db_user
+        CODEFIRST_CLIENTDRONE_ENV_DB_PASSWORD:
+          from_secret: db_password
+        CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
+          from_secret: db_database
+        ADMINS: valentinclergue,yorickgeoffre,mathisribemont,eliottle_guehennec
+    when:
+      branch:
+        - master
+    depends_on: [ docker-build-websocket ]
 
 volumes:
 - name: docs

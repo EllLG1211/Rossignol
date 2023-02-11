@@ -1,7 +1,6 @@
 using EF_Online.Managers;
 using EF_Model;
 using EF_Model.Entities;
-using EF_Model.Managers;
 using EF_Model.Utils;
 using EncryptedModel.Business.Entries;
 using EncryptedModel.Business.Managers;

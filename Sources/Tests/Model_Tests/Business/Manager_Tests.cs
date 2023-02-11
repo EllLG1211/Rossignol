@@ -202,7 +202,7 @@ namespace Model_Tests.Business
             var manager = new Manager(_dataManager);
             manager.Login("test@test.com", "1234");
             ProprietaryEntry entry = new ProprietaryEntry("test@test.com", "test", "1234", "discord", null);
-            manager.ShareEntryWith(entry, "test@test.com");
+            manager.ShareEntryWith(entry, "test@test.com", "1234");
             Assert.Contains(entry, _dataManager.GetEntries(manager.LoggedIn));
         }
         #endregion

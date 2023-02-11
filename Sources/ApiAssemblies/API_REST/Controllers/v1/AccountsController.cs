@@ -1,7 +1,9 @@
 using System.Reflection;
 using AutoMapper;
 using DTOs;
+using EF_Local.Managers;
 using Microsoft.AspNetCore.Mvc;
+using Model.Business;
 
 namespace API_REST.Controllers.V1
 {
@@ -12,10 +14,13 @@ namespace API_REST.Controllers.V1
 
         private readonly ILogger<AccountsController> _logger;
 
-        public AccountsController(ILogger<AccountsController> logger, IMapper mapper)
+        private readonly IDataManager _data;
+
+        public AccountsController(ILogger<AccountsController> logger, IMapper mapper, IDataManager data)
         {
             _logger = logger;
             _mapper = mapper;
+            _data = data;
         }
 
         [HttpGet("{id}")]

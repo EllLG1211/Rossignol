@@ -86,11 +86,11 @@ namespace EF_Local.Managers
             }
         }
 
-        public AbstractUser GetUser(string? mail, string password)
+        public AbstractUser GetUser(string mail, string password = "")
         {
             using (var context = new RossignolContextOnline(options))
             {
-                return context.OnlinesUsers.First(u => u.Mail == mail && u.Password == password).ToModel();
+                return context.OnlinesUsers.First(u => u.Mail == mail).ToModel();
             }
         }
 

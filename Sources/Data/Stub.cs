@@ -126,5 +126,10 @@ namespace Data
             if (!_users.Contains(user)) return false;
             return true;
         }
+
+        public bool ShareEntryWith(ProprietaryEntry entry, string Mail)
+        {
+            return ShareEntryWith(entry, Mail, "");
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace EF_Model.Managers
 {
     public class EntryEntityManager
     {
-
+        /*
         public static async Task addEntry(ProprietaryEntry e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
         {
             using (var context = new RossignolContextLocal(options))
@@ -39,7 +39,7 @@ namespace EF_Model.Managers
                 context.EntriesSet.Update(e.ToEntity(lue));
                 context.SaveChanges();
             }
-        }
+        }*/
 
         public static async Task updateEntry(EntryEntity e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
         {
@@ -49,7 +49,7 @@ namespace EF_Model.Managers
                 context.SaveChanges();
             }
         }
-
+        /*
         public static async Task removeEntry(EntryEntity e, LocalUserEntity lue, DbContextOptions<RossignolContextLocal> options)
         {
             using (var context = new RossignolContextLocal(options))
@@ -75,7 +75,7 @@ namespace EF_Model.Managers
                 context.EntriesSet.RemoveRange(context.EntriesSet);
                 context.SaveChanges();
             }
-        }
+        }*/
         public static async Task RAZ(DbContextOptions<RossignolContextLocal> options = null)
         {
             using (var context = (options == null) ? new RossignolContextLocal() : new RossignolContextLocal(options))

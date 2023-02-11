@@ -12,7 +12,7 @@ namespace EF_Online.Managers
 {
     public class EntryEntityManager
     {
-
+        /*
         public static async Task addEntry(ProprietaryEntry e, ConnectedUserEntity lue, DbContextOptions<RossignolContextOnline> options)
         {
             using (var context = new RossignolContextOnline(options))
@@ -39,7 +39,7 @@ namespace EF_Online.Managers
                 context.SaveChanges();
             }
         }
-
+        */
         public static async Task updateEntry(EntryEntity e, ConnectedUserEntity lue, DbContextOptions<RossignolContextOnline> options)
         {
             using (var context = new RossignolContextOnline(options))
@@ -48,7 +48,7 @@ namespace EF_Online.Managers
                 context.SaveChanges();
             }
         }
-
+        /*
         public static async Task removeEntry(EntryEntity e, ConnectedUserEntity lue, DbContextOptions<RossignolContextOnline> options)
         {
             using (var context = new RossignolContextOnline(options))
@@ -83,6 +83,6 @@ namespace EF_Online.Managers
                 context.SaveChanges();
             }
         }
-
+        */
     }
 }

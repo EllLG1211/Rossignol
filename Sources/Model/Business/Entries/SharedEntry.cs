@@ -12,8 +12,8 @@ namespace Model.Business.Entries
     /// </summary>
     public class SharedEntry : Entry
     {
-        private ReadOnlyUser _owner;
-        public ReadOnlyUser Owner => _owner;
+        private string _ownerMail;
+        public string OwnerMail => _ownerMail;
 
         public SharedEntry(Guid uid, string login, string password, string app, string? note) 
             : base(uid, login, password, app, note) {}
@@ -24,7 +24,7 @@ namespace Model.Business.Entries
         public SharedEntry(ReadOnlyUser owner, string login, string password, string app)
             : this(login, password, app, string.Empty) {
             if (owner == null) throw new ArgumentNullException(nameof(owner));
-            _owner = owner;
+            _ownerMail = owner.Mail;
         }
     }
 }

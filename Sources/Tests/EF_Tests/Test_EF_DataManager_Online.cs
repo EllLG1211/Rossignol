@@ -1,4 +1,5 @@
 ﻿using EF_Local.Managers;
+using Model.Api.Entities;
 using Model.Business;
 using Model.Business.Entries;
 using Model.Business.Users;
@@ -17,7 +18,7 @@ namespace EF_Tests
         ///Here we're testing the "descriptive" approach to using the EFDataManager
         public void TestDataManagerDescriptiveMode()
         {
-            IDataManager manager = new EFDataManager();
+            IDataManager manager = new EFDataManager(":memory:");
             ConnectedUser cu = new ConnectedUser("testman@dodo.com", "testpass");
 
             Entry e = new ProprietaryEntry(cu.Mail, "mako", "pask", "raidforums");
@@ -32,6 +33,26 @@ namespace EF_Tests
 
             manager.AddEntryToUser(cu, e2);
 
+            Assert.Empty(manager.GetSharedEntries(cu));
+
+            Assert.Equal(cu, manager.GetUser(cu.Mail, cu.Password));
+
+            try { manager.save(); }
+            catch(NotImplementedException ne) { }
+            catch(Exception xe) { Assert.Fail("failed save except\n"+xe.Message); }
+
+            ConnectedUser cu2 = new ConnectedUser("duoduo@duo.com", "pspspsps");
+
+            manager.Register(cu2, cu2.Mail);
+
+            manager.ShareEntryWith(new ProprietaryEntry(cu,cu.Entries.First()), cu2.Mail);
+
+            Assert.Single(manager.GetSharedEntries(cu2));
+
+            manager.UnshareEntryTo(new ProprietaryEntry(cu, cu.Entries.First()), cu2.Mail);
+
+            Assert.Empty(manager.GetSharedEntries(cu2));
+
             Assert.Equal(2,manager.GetEntries(cu).Count());
 
             manager.RemoveEntry(cu, e);
@@ -42,6 +63,8 @@ namespace EF_Tests
 
             Assert.True(manager.DeleteUser(cu));
             Assert.False(manager.checkUserExists(cu.Mail));
+
+            manager.clear();
         }
     }
 }

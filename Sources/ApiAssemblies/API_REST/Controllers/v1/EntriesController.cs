@@ -25,6 +25,13 @@ namespace API_REST.Controllers.V1
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get a list of your entries
+        /// </summary>
+        /// <param name="user">Your user data</param>
+        /// <param name="amount">How many entries you want. Enter a number between 1 and 30. Default is 10.</param>
+        /// <param name="startingAt">The index you wish to start at.</param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult List([FromBody] AccountDTO user, int amount = 10, int startingAt = 0)
         {
@@ -105,17 +112,17 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] EntryDTO entry, [FromBody] AccountDTO owner)
+        public IActionResult Add([FromBody] EntryDTO entry)
         {
             //log
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{entry:{entry}}}");
 
             //check the user is correct
-            var userModel = data.GetUser(owner.Mail, owner.Password);
+            var userModel = data.GetUser(entry.Owner.Mail, entry.Owner.Password);
             if (userModel == null) return Unauthorized();
 
             //create entry and update user
-            Entry entryModel = new ProprietaryEntry(owner.Mail, entry.Login, entry.Password, entry.App, entry.Note);
+            Entry entryModel = new ProprietaryEntry(entry.Owner.Mail, entry.Login, entry.Password, entry.App, entry.Note);
             var creationSucceeded = data.AddEntryToUser(userModel, entryModel);
             data.UpdateUser(userModel);
             if (!creationSucceeded) return BadRequest();
@@ -130,11 +137,11 @@ namespace API_REST.Controllers.V1
         }
 
         [HttpPut("{id}")]
-        public IActionResult Modify(string id, [FromBody] EntryDTO entry, [FromBody] AccountDTO owner)
+        public IActionResult Modify(string id, [FromBody] EntryDTO entry)
         {
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{id:{id}, entry: {entry}}}");
 
-            var userModel = data.GetUser(owner.Mail, owner.Password);
+            var userModel = data.GetUser(entry.Owner.Mail, entry.Owner.Password);
             if (userModel == null) return Unauthorized();
             var oldEntry = data.GetEntries(userModel).First(e => e.Uid.ToString() == id);
             if (oldEntry == null) return NotFound();
@@ -142,7 +149,7 @@ namespace API_REST.Controllers.V1
             bool removalSucceeded = data.RemoveEntry(userModel, oldEntry);
             if (!removalSucceeded) return InternalSeverError();
 
-            var newEntry = new ProprietaryEntry(owner.Mail, oldEntry.Uid, entry.Login, entry.Password, entry.App, entry.Note);
+            var newEntry = new ProprietaryEntry(entry.Owner.Mail, oldEntry.Uid, entry.Login, entry.Password, entry.App, entry.Note);
             bool readdSucceeded = data.AddEntryToUser(userModel, newEntry);
             if (readdSucceeded) return NoContent();
             else return InternalSeverError();

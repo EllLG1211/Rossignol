@@ -190,5 +190,10 @@ namespace EF_Local.Managers
                 return false; //unapplicable to this implementation
             }
         }
+
+        public bool CreateEntryToConnectedUser(AbstractUser user, Entry entry)
+        {
+            return AddEntryToUser(user, entry);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EF_Model.Entities;
 using EncryptedModel.Business.Users;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EF_Online.Managers
 {
@@ -55,9 +56,19 @@ namespace EF_Online.Managers
         {
             using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
             {
-                context.Database.ExecuteSqlRaw("delete from OnlinesUsers");
+                context.OnlinesUsers.RemoveRange(context.OnlinesUsers);
+                context.EntriesSet.RemoveRange(context.EntriesSet);
+                context.ReferencedUsers.RemoveRange(context.ReferencedUsers);
+                context.SaveChanges();
+            }
+            using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
+            {
+                context.OnlinesUsers.RemoveRange(context.OnlinesUsers);
+                context.EntriesSet.RemoveRange(context.EntriesSet);
+                context.ReferencedUsers.RemoveRange(context.ReferencedUsers);
                 context.SaveChanges();
             }
         }
+
     }
 }

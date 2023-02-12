@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiAssemblies\API_Gateway\API_Gateway.csproj" />
+    <ProjectReference Include="..\ApiAssemblies\API_REST\API_REST.csproj" />
   </ItemGroup>
 
 </Project>

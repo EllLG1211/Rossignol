@@ -1,6 +1,7 @@
 using API_Gateway.Controllers;
 using API_Gateway.Helpers;
 using API_Gateway.Services;
+using API_REST.Controllers.V1;
 using EF_Local.Managers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ namespace API_tests
 {
     public class UnitTest1
     {
-        class blendLogger : ILogger<JwtUtils>, IDisposable
+        class blendLogger<T> : ILogger<T>, IDisposable
         {
             public IDisposable? BeginScope<TState>(TState state) where TState : notnull
             {
@@ -40,7 +41,7 @@ namespace API_tests
         public void testGateway()
         {
             IDataManager idm = new EFDataManager(":memory:");
-            ILogger<JwtUtils> il = new blendLogger();
+            ILogger<JwtUtils> il = new blendLogger<JwtUtils>();
             var appset = new AppSettings()
             {
                 Secret = "Test Project"
@@ -56,6 +57,22 @@ namespace API_tests
             am.Username = users.First().Mail;
             am.Password = users.First().Password;
             Assert.True(uc.Authenticate(am) is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void testREST()
+        {
+            IDataManager idm = new EFDataManager(":memory:");
+            ILogger<EntriesController> il = new blendLogger<EntriesController>();
+            ILogger<JwtUtils> ilj = new blendLogger<JwtUtils>();
+            var appset = new AppSettings()
+            {
+                Secret = "Test Project"
+            };
+            IOptions<AppSettings> ioa = Options.Create(appset);
+            IJwtUtils jwt = new JwtUtils(ioa, ilj);
+            AutoMapper.IMapper ima = null;
+            EntriesController ec = new EntriesController(il,ima, idm, jwt);
         }
 
         private List<ConnectedUser> makeTestUsers()

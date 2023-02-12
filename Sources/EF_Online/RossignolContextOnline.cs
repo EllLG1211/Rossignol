@@ -13,11 +13,13 @@ namespace EF_Online
         public RossignolContextOnline()
         {
             Database.EnsureCreated();
+            //Database.Migrate();
         }
 
         public RossignolContextOnline(DbContextOptions<RossignolContextOnline> options) : base(options)
         {
             Database.EnsureCreated();
+            //Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -33,6 +35,7 @@ namespace EF_Online
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EntryEntity>().HasKey(n => n.Uid);
+            //modelBuilder.Entity<EntryEntity>().HasKey(n => n.SharedWith);
             modelBuilder.Entity<LocalUserEntity>().HasKey(n => n.Uid);
             //modelBuilder.Entity<ConnectedUserEntity>().HasKey(n => n.Uid);
             modelBuilder.Entity<ConnectedUserEntity>().HasBaseType(typeof(LocalUserEntity));    //Entity type hierarchy mapping

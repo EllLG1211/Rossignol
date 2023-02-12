@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/{version}/accounts/",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7114
+          "Host": "codefirst.iut.uca.fr/containers/valentinclergue-rossignolrestapi",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/accounts/",
@@ -17,11 +17,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/entries/",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7114
+          "Host": "codefirst.iut.uca.fr/containers/valentinclergue-rossignolrestapi",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/entries/",
@@ -32,6 +32,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://codefirst.iut.uca.fr/containers/valentinclergue-valentinclergue-rossignolgateway:80"
+    "BaseUrl": "http://codefirst.iut.uca.fr/containers/valentinclergue-rossignolgateway:80"
   }
 }

@@ -3,6 +3,7 @@ using System.Text;
 using API_Gateway.Helpers;
 using Data;
 using DTOs;
+using EF_Local.Managers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Model.Business;
@@ -48,7 +49,7 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 
-builder.Services.AddScoped<IDataManager, Stub>();
+builder.Services.AddScoped<IDataManager, EFDataManager>();
 
 builder.Services
     .AddAutoMapper(cfg => cfg.CreateMap<AccountDTO, ConnectedUser>())

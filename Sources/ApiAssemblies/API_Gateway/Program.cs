@@ -9,6 +9,7 @@ using Data;
 using Microsoft.OpenApi.Models;
 using Model.Business;
 using Ocelot.Middleware;
+using EF_Local.Managers;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +44,7 @@ builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 
 builder.Services.AddOcelot();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IDataManager, Stub>();
+builder.Services.AddScoped<IDataManager, EFDataManager>();
 
 builder.Configuration.AddJsonFile($"routes.{builder.Environment.EnvironmentName}.json", true, true);
 

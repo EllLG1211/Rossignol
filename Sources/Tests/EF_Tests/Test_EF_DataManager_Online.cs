@@ -5,6 +5,7 @@ using Model.Business.Entries;
 using Model.Business.Users;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,7 +71,7 @@ namespace EF_Tests
         [Fact]
         public void simpleLitetest()
         {
-            IDataManager manager = new EFDataManager("C:\\Users\\Onyxa\\AppData\\Local\\Temp\\OnlineRossignol.bd");
+            IDataManager manager = new EFDataManager(Path.GetTempPath()+"\\OnlineRossignol.bd");
 
             manager.clear();
 

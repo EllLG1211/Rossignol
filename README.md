@@ -53,6 +53,8 @@ This is a quick look of the **HomePage** & **MainPage** page of the application 
 
 with the newest versions of our IDataManager this procedure is no longer required to use this project, as the code veries that the database already exists or creates it whenever needed. This is applicable for :memory: and sqlite databases. The sqlite database file is created at the root of the temporary windows system folder.
 
+This project does not yet support server style databases like mysql.
+
   * To create some **migration**
     * Delete `./Rossignol/Sources/EF_Model/Migrations`
     * With the terminal and with the `./Rossignol/Sources/EF_Model` path, run the `dotnet ef migrations add <whatever>` command.

@@ -43,6 +43,10 @@ namespace API_Gateway.Services
             {
                 return null;
             }
+            catch(InvalidOperationException se)
+            {
+                return null;
+            }
         }
 
         public IEnumerable<User> GetAll()

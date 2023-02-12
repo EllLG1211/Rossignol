@@ -1,7 +1,10 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
+using API_Gateway.Helpers;
 using AutoMapper;
 using DTOs;
 using EF_Local.Managers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model.Business;
 using Model.Business.Entries;
@@ -9,6 +12,7 @@ using Model.Business.Users;
 
 namespace API_REST.Controllers.V1
 {
+    [Authorize]
     [ApiController]
     public class EntriesController : RossignolControllerBase
     {
@@ -16,14 +20,16 @@ namespace API_REST.Controllers.V1
 
         private readonly ILogger<EntriesController> _logger;
         private IMapper _mapper;
-        private readonly IDataManager _data = new EFDataManager();
+        private readonly IJwtUtils _jwtUtils;
+        private readonly IDataManager _data;
 
 
-        public EntriesController(ILogger<EntriesController> logger, IMapper mapper, IDataManager data)
+        public EntriesController(ILogger<EntriesController> logger, IMapper mapper, IDataManager data, IJwtUtils jwtUtils)
         {
             _logger = logger;
             _mapper = mapper;
             _data = data;
+            _jwtUtils = jwtUtils;
         }
 
         /// <summary>
@@ -34,8 +40,22 @@ namespace API_REST.Controllers.V1
         /// <param name="startingAt">The index you wish to start at.</param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult List(string token, int amount = 10, int startingAt = 0)
+        public IActionResult List([FromHeader] string Authorization, int amount = 10, int startingAt = 0)
         {
+            var token = _jwtUtils.ExtractToken(Authorization);
+            if(token == null)
+            {
+                _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, "bearer token had wrong format");
+                return Unauthorized();
+            }
+
+            var email = _jwtUtils.ValidateJwtToken(token);
+            if (email == null)
+            {
+                _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, "Could not find email in bearer token");
+                return Unauthorized();
+            }
+
             _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{amount:{amount}, startingAt{startingAt}}}");
             if (amount > MAX_AMOUNT || amount < 1 || startingAt < 0)
             {
@@ -43,10 +63,10 @@ namespace API_REST.Controllers.V1
                 return StatusCode(403);
             }
 
-            var userModel = _data.GetUser(token);
+            var userModel = _data.GetUser(email);
             if (userModel == null)
             {
-                _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {token} was not found");
+                _logger.LogError(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"user {email} was not found");
                 return Unauthorized();
             }
 

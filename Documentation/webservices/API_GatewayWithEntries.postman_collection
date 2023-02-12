@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "1bb3a82f-d401-42bf-bf49-c9d890fd45b0",
+		"name": "API_Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25236046"
+	},
+	"item": [
+		{
+			"name": "Get Bearer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"test@test.com\",\r\n  \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gatewayBaseUrl}}/api/users/authenticate",
+					"host": [
+						"{{gatewayBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUsersAdmin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gatewayBaseUrl}}/api/users",
+					"host": [
+						"{{gatewayBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFirstUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gatewayBaseUrl}}/api/users/1",
+					"host": [
+						"{{gatewayBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/1/accounts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEntries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{routesBaseUrl}}/api/1.0/entries",
+					"host": [
+						"{{routesBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"1.0",
+						"entries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{",
+					"host": [
+						"{{"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiJhMGZkNjliNi01MjgzLTRjYjMtYWRiYi1mNjA1ODA3M2Y0MzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYmYiOjE2NzYyMzgzNjgsImV4cCI6MTY3Njg0MzE2OCwiaWF0IjoxNjc2MjM4MzY4fQ.i2dfHug-auygU4tOSbJg4M3tpabhKcs5_rrTB2dAiXw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "gatewayBaseUrl",
+			"value": "https://localhost:7037",
+			"type": "default"
+		},
+		{
+			"key": "routesBaseUrl",
+			"value": "https://localhost:7114"
+		}
+	]
+}

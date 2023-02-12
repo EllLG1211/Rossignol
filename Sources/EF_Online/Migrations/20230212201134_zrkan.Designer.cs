@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFOnline.Migrations
 {
     [DbContext(typeof(RossignolContextOnline))]
-    [Migration("20230204064146_ftc")]
-    partial class ftc
+    [Migration("20230212201134_zrkan")]
+    partial class zrkan
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

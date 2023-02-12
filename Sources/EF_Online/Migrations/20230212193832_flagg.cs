@@ -5,7 +5,7 @@
 namespace EFOnline.Migrations
 {
     /// <inheritdoc />
-    public partial class ftc : Migration
+    public partial class flagg : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

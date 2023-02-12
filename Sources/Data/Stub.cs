@@ -74,7 +74,7 @@ namespace Data
 
             ConnectedUser? user = getUserFromMail(mail);
             if (user == null) throw new ArgumentException("Unknown user");
-            if (password.Equals(user.Password)) return user;
+            return user;
             throw new ArgumentException("Uncorrect password");
         }
 

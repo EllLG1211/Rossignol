@@ -21,13 +21,15 @@ namespace EF_Local.Managers
     {
         SqliteConnection connection;
         DbContextOptions<RossignolContextOnline> options;
+        private string source;
         /// <summary>
         /// This is the main constructor of the EFDataManager
         /// </summary>
         /// <param name="dataSource">the data source of the EF database, defaults to memory for testing only!</param>
-        public EFDataManager(string dataSource = ":mysql:")
+        public EFDataManager(string dataSource = ":memory:")
         {
             connection = new SqliteConnection($"DataSource={dataSource}");
+            source = dataSource;
             connection.Open();
             options = new DbContextOptionsBuilder<RossignolContextOnline>().UseSqlite(connection).Options;
         }
@@ -42,25 +44,38 @@ namespace EF_Local.Managers
 
         public void clear()
         {
-            UserEntityManager.RAZ();
+            using (var context = (options == null) ? new RossignolContextOnline() : new RossignolContextOnline(options))
+            {
+                context.OnlinesUsers.RemoveRange(context.OnlinesUsers.Include(u => u.OwnedEntries).Include(u => u.SharedWith));
+                context.EntriesSet.RemoveRange(context.EntriesSet);
+                context.ReferencedUsers.RemoveRange(context.ReferencedUsers);
+                context.SaveChanges();
+            }
         }
 
         public bool AddEntryToUser(AbstractUser user, Entry entry)
         {
-            using (var context = new RossignolContextOnline(options))
+            try
             {
-                ConnectedUserEntity usr = context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString());
-                var e = entry.ToEntity(usr);
-                if (e == null) return false;
+                using (var context = new RossignolContextOnline(options))
+                {
+                    ConnectedUserEntity usr = context.OnlinesUsers.First(u => u.Uid == user.Uid.ToString());
+                    var e = entry.ToEntity(usr);
+                    if (e == null) return false;
 
-                //usr.OwnedEntries.Add(e);  //incorrect
-                e.Owner = usr;
+                    //usr.OwnedEntries.Add(e);  //incorrect
+                    e.Owner = usr;
 
-                context.EntriesSet.Add(e);
+                    context.EntriesSet.Add(e);
 
-                context.OnlinesUsers.Update(usr);
-                context.SaveChanges();
-                return true;
+                    context.OnlinesUsers.Update(usr);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (System.InvalidOperationException se) //nothing
+            {
+                return false;
             }
         }
 
@@ -79,10 +94,16 @@ namespace EF_Local.Managers
         {
             using (var context = new RossignolContextOnline(options))
             {
-                ConnectedUserEntity cu = context.OnlinesUsers.Include(u => u.SharedWith).First(u => u.Uid == user.Uid.ToString());
-                if (cu == null || cu.SharedWith == null)
-                    return new List<EntryEntity>().ToModelShareds();
-                return cu.SharedWith.ToModelShareds();
+                try
+                {
+                    ConnectedUserEntity cu = context.OnlinesUsers.Include(u => u.SharedWith).First(u => u.Uid == user.Uid.ToString());
+                    if (cu == null || cu.SharedWith == null)
+                        return new List<EntryEntity>().ToModelShareds();
+                    return cu.SharedWith.ToModelShareds();
+                }catch(System.InvalidOperationException se) //nothing
+                {
+                    return new List<SharedEntry>();
+                }
             }
         }
 
@@ -127,21 +148,28 @@ namespace EF_Local.Managers
 
         public bool ShareEntryWith(ProprietaryEntry entry,string Mail)
         {
-            using (var context = new RossignolContextOnline(options))
+            try
             {
+                using (var context = new RossignolContextOnline(options))
+                {
                     ConnectedUserEntity usr = context.OnlinesUsers.Include(u => u.OwnedEntries).First(u => u.Mail == entry.OwnerMail);
                     ConnectedUserEntity usrToShareTo = context.OnlinesUsers.Include(u => u.SharedWith).First(u => u.Mail == Mail);
 
-                if (usr != null && usrToShareTo != null)
-                {
-                    //usr.OwnedEntries.First(f => f.Uid == entry.Uid.ToString()).SharedWith.Add(usrToShareTo);
-                    usrToShareTo.SharedWith.Add(usr.OwnedEntries.First(f => f.Uid == entry.Uid.ToString()));
+                    if (usr != null && usrToShareTo != null)
+                    {
+                        //usr.OwnedEntries.First(f => f.Uid == entry.Uid.ToString()).SharedWith.Add(usrToShareTo);
+                        usrToShareTo.SharedWith.Add(usr.OwnedEntries.First(f => f.Uid == entry.Uid.ToString()));
 
-                    //context.OnlinesUsers.Update(usr);
-                    context.OnlinesUsers.Update(usrToShareTo);
-                    context.SaveChanges();
-                    return true;
+                        //context.OnlinesUsers.Update(usr);
+                        context.OnlinesUsers.Update(usrToShareTo);
+                        context.SaveChanges();
+                        return true;
+                    }
+                    return false;
                 }
+            }
+            catch (System.InvalidOperationException se) //nothing
+            {
                 return false;
             }
         }
@@ -203,6 +231,20 @@ namespace EF_Local.Managers
         public bool CreateEntryToConnectedUser(AbstractUser user, Entry entry)
         {
             return AddEntryToUser(user, entry);
+        }
+
+        private void Exterminatus()
+        {
+            try
+            {
+                connection.Dispose();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.Delete(source);
+            }
+            catch (Exception ex) 
+            { 
+            }
         }
     }
 }

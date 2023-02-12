@@ -38,9 +38,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_REST", "ApiAssemblies\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Gateway", "ApiAssemblies\API_Gateway\API_Gateway.csproj", "{CBCACF56-0716-42A5-976D-2C9B2D6BBFA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_WebSocket", "ApiAssemblies\API_WebSocket\API_WebSocket.csproj", "{D9DF0C81-43A6-45EF-99FE-474056EF5D52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_WebSocket", "ApiAssemblies\API_WebSocket\API_WebSocket.csproj", "{D9DF0C81-43A6-45EF-99FE-474056EF5D52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketClient", "Tests\WebSocketClient\WebSocketClient.csproj", "{E4CAB1C5-C337-42C2-B001-BD6CFA5CA085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketClient", "Tests\WebSocketClient\WebSocketClient.csproj", "{E4CAB1C5-C337-42C2-B001-BD6CFA5CA085}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncryptedModel", "EncryptionAssemblies\EncryptedModel\EncryptedModel.csproj", "{E2D60460-ADCE-49DE-8AE1-D2837FEB83A3}"
 EndProject
@@ -53,6 +53,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Online", "EF_Online\EF_Online.csproj", "{67D2C836-2722-45AF-9FA4-63B548ECE38D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Local", "EF_Local\EF_Local.csproj", "{E6F1C0FA-787F-4F4B-8944-6A0BD0E6CF02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_tests", "API_tests\API_tests.csproj", "{D5754AE1-B331-4551-A6C4-A0220AC484E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,6 +142,10 @@ Global
 		{E6F1C0FA-787F-4F4B-8944-6A0BD0E6CF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6F1C0FA-787F-4F4B-8944-6A0BD0E6CF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6F1C0FA-787F-4F4B-8944-6A0BD0E6CF02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5754AE1-B331-4551-A6C4-A0220AC484E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5754AE1-B331-4551-A6C4-A0220AC484E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5754AE1-B331-4551-A6C4-A0220AC484E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5754AE1-B331-4551-A6C4-A0220AC484E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,6 +169,7 @@ Global
 		{51A94EF4-926C-47D1-8AC3-D118024FAF2F} = {A0FA0BE4-DFFF-44A3-A03A-40B03CA6EEDA}
 		{67D2C836-2722-45AF-9FA4-63B548ECE38D} = {A0FA0BE4-DFFF-44A3-A03A-40B03CA6EEDA}
 		{E6F1C0FA-787F-4F4B-8944-6A0BD0E6CF02} = {A0FA0BE4-DFFF-44A3-A03A-40B03CA6EEDA}
+		{D5754AE1-B331-4551-A6C4-A0220AC484E5} = {E7E1D41B-D495-442A-A1F2-6D7E9ECC4ADD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E754B2B-EE04-418A-B8C9-A8D1842AE309}

@@ -1,6 +1,11 @@
 using System.Reflection;
+using System.Text;
+using API_Gateway.Helpers;
 using Data;
 using DTOs;
+using EF_Local.Managers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Model.Business;
 using Model.Business.Entries;
 using Model.Business.Users;
@@ -18,8 +23,33 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+IConfigurationSection appSettingsSection = builder.Configuration.GetSection("AppSettings");
+builder.Services.Configure<AppSettings>(appSettingsSection);
 
-builder.Services.AddScoped<IDataManager, Stub>();
+var appSettings = appSettingsSection.Get<AppSettings>();
+var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+builder.Services.AddScoped<IJwtUtils, JwtUtils>();
+
+builder.Services.AddSingleton<IDataManager>(_ => new EFDataManager("C:\\Users\\ellio\\AppData\\Local\\Temp\\OnlineRossignol.bd"));
 
 builder.Services
     .AddAutoMapper(cfg => cfg.CreateMap<AccountDTO, ConnectedUser>())

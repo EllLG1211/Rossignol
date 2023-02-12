@@ -12,13 +12,13 @@ namespace API_Gateway.Services
 {
     public class UserService : IUserService
     {
-        private readonly AppSettings _appSettings;
         private readonly IDataManager _dataManager;
+        private readonly IJwtUtils _jwtUtils;
 
-        public UserService(IOptions<AppSettings> appSettings, IDataManager dataManager)
+        public UserService(IDataManager dataManager, IJwtUtils jwtUtils)
         {
             _dataManager = dataManager;
-            _appSettings = appSettings.Value;
+            _jwtUtils= jwtUtils;
         }
 
         public User? Authenticate(string email, string password)
@@ -34,25 +34,16 @@ namespace API_Gateway.Services
 
                 User user = new User(userEntity.Uid, userEntity.Mail);
 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.Sid, user.Id.ToString()),
-                        new Claim(ClaimTypes.Email, user.Mail),
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(14),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature)
-                };
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                user.Token = tokenHandler.WriteToken(token);
+
+                user.Token = _jwtUtils.GenerateJwtToken(user);
 
                 return user.WithoutPassword();
             }
             catch (ArgumentException e)
+            {
+                return null;
+            }
+            catch(InvalidOperationException se)
             {
                 return null;
             }

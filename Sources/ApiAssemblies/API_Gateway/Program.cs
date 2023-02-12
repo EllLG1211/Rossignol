@@ -44,7 +44,7 @@ builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 
 builder.Services.AddOcelot();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IDataManager, EFDataManager>();
+builder.Services.AddSingleton<IDataManager>(_ => new EFDataManager("C:\\Users\\ellio\\AppData\\Local\\Temp\\OnlineRossignol.bd"));
 
 builder.Configuration.AddJsonFile($"routes.{builder.Environment.EnvironmentName}.json", true, true);
 

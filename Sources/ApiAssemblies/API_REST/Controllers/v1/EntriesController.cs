@@ -12,7 +12,7 @@ using Model.Business.Users;
 
 namespace API_REST.Controllers.V1
 {
- //   [Authorize]
+    [Authorize]
     [ApiController]
     public class EntriesController : RossignolControllerBase
     {

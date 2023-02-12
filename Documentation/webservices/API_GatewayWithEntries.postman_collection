@@ -123,6 +123,20 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{",
+					"host": [
+						"{{"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -130,7 +144,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJjODIxYzhkLTkzOGMtNGRkYS05YjE1LWNkYjMxZDFkNmEyZSIsIm5iZiI6MTY3NjE0MTAzMywiZXhwIjoxNjc2NzQ1ODMzLCJpYXQiOjE2NzYxNDEwMzN9.qBQC-Jg09-9K2YHnumf7Vbmonibqi1J8-CyA5OGuRBs",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiJhMGZkNjliNi01MjgzLTRjYjMtYWRiYi1mNjA1ODA3M2Y0MzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYmYiOjE2NzYyMzgzNjgsImV4cCI6MTY3Njg0MzE2OCwiaWF0IjoxNjc2MjM4MzY4fQ.i2dfHug-auygU4tOSbJg4M3tpabhKcs5_rrTB2dAiXw",
 				"type": "string"
 			}
 		]

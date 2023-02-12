@@ -49,7 +49,7 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 
-builder.Services.AddScoped<IDataManager, EFDataManager>();
+builder.Services.AddSingleton<IDataManager>(_ => new EFDataManager("C:\\Users\\ellio\\AppData\\Local\\Temp\\OnlineRossignol.bd"));
 
 builder.Services
     .AddAutoMapper(cfg => cfg.CreateMap<AccountDTO, ConnectedUser>())

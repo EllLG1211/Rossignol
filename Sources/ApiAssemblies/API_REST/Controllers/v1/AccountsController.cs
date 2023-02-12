@@ -4,6 +4,7 @@ using DTOs;
 using EF_Local.Managers;
 using Microsoft.AspNetCore.Mvc;
 using Model.Business;
+using Model.Business.Users;
 
 namespace API_REST.Controllers.V1
 {
@@ -33,8 +34,16 @@ namespace API_REST.Controllers.V1
         [HttpPost]
         public IActionResult AddUser([FromBody] AccountDTO account)
         {
-            _logger.LogInformation(LOG_FORMAT, MethodBase.GetCurrentMethod()?.Name, $"input {{account:{account}}}");
-            return StatusCode(501);
+            var user = new ConnectedUser(account.Mail, account.Password);
+            bool succeeded = _data.Register(user, user.Mail);
+            if (!succeeded) return BadRequest();
+
+            var createdResource = _data.GetUser(account.Mail);
+            if (createdResource == null) return InternalSeverError();
+
+            //var actionName = nameof(GetUserInfo);
+            //return CreatedAtAction(actionName, ((MailedUser)createdResource).Mail);
+            return NoContent();
         }
 
         [HttpPut("{id}")]

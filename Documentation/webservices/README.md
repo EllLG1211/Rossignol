@@ -1,16 +1,16 @@
 # Webservices
 
-This file contains all the explainations of the webservices architectures used in the Rossignol project.
+This file contains all  of the explainations on the webservice architectures used in the Rossignol project.
 
 ## API Description
 
-To be able to interact with our model and database, we choose to use 2 diferents APIs to feet with our needs.
-> The REST API will be used to interract with the datas themself.
-> The WebSocket will be used to send notifications to clients.
+To be able to interact with our model and database, we choose to use 2 diferents APIs to meet our needs.
+> The REST API will be used to interact with the data itself.
+> The WebSocket will be used to send notifications to the clients.
 
 ### REST
 
-A **REST** *(Representational State Transfer)* **API** is a type of `web architecture` and a set of constraints that are usually applied to web services. The goal of a **RESTful API** is to provide a simple and consistent interface for interacting with a service.
+A **REST** *(Representational State Transfer)* **API** is a type of `web architecture` and represents a set of constraints that are usually applied to web services. The goal of a **RESTful API** is to provide a simple and consistent interface for interacting with a service.
 
 **RESTful APIs** use HTTP requests to POST *(create)*, PUT *(update)*, GET *(read)*, and DELETE data. A **RESTful API** is typically made up of a number of endpoints, each representing a specific resource or collection of resources.
 
@@ -66,7 +66,17 @@ Overall, **API Gateway** is a popular choice for building microservices based ar
 ---
 ## Architecture
 
-... explainations (more than 500 words)
+The architecture of the **Rossignol App** is quite simple.
+
+It's structured as follow:
+
+- The clients (mostly mobile) query a **Gateway**.
+- The **Gateway** uses authentication to ensure that the client is legit. (It also give the option to query credentials [GET])
+- The **Gateway** routes the request to the **API** that handles it. (In our case we have 2 APIs.)
+    - The **Rest API** has the ability to `GET, POST, PUT & DELETE` data within our working model.
+    - The **Websocket** has the ability to send `notifications` to the clients.
+
+*Note that all the APIs + the gateway talks to the same databse as this was easier for us.*
 
 **Schemas:**
 
